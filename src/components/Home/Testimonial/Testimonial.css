@@ -1,0 +1,13 @@
+.testimonial .container{
+    background-image: url('../../../images/message.png');
+    background-repeat: no-repeat;
+    background-size: 150px;
+    background-position:top right;
+}
+.testimonial .card{
+    border-color:transparent;
+}
+.testimonial .card .card-footer{
+    background: transparent;
+    border: 0;
+}

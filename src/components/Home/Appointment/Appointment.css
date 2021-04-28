@@ -1,0 +1,24 @@
+.appointment{
+    background-image: url('../../../images/appointBg.png');
+    background-repeat: no-repeat;
+    height:420px;
+    background-position: center;
+    position: relative;
+    z-index:1;
+}
+.appointment::after{
+    position:absolute;
+    content:'';
+    top:0;
+    background: #242949;
+    display:block;
+    opacity: .8;
+    height:100%;
+    width:100%;
+    z-index: -1;
+    
+}
+.appointment img{
+    height:550px;
+    transform: translateY(-129px)
+}

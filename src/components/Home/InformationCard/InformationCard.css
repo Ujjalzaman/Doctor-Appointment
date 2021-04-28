@@ -1,0 +1,16 @@
+.info-icon{
+    font-size: 3em;
+}
+.info-primary{
+    background-color: #1CC7C1;
+}
+.info-dark{
+    background-color:#3A4256;
+}
+.info-card{
+    padding:5px 5px;
+}
+.info-container{
+    height:100px;
+    padding:30px;
+}
