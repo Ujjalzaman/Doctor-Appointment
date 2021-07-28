@@ -14,3 +14,9 @@
     opacity: .9;
     z-index: -1;
 }
+
+@media screen and (max-width: 600px) {
+    form{
+        padding:2rem 5rem;
+    }
+  }

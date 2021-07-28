@@ -1,0 +1,11 @@
+.doctor-content{
+    transition: 0.6s ease-in;
+    padding:5px;
+    width: 25rem;
+}
+.blog-card img{
+    margin-right: 1.5rem;
+}
+.doctor-content:hover{
+    transform: scale(1.1);
+}

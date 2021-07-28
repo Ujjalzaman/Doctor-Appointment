@@ -3,6 +3,8 @@
 }
 *{
   box-sizing: border-box;
+  margin:0;
+  padding: 0;
 }
 .brand-bg{
   background-color:#1CC7C1;
