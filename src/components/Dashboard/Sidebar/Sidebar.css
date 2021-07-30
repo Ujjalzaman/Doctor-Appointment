@@ -1,5 +1,6 @@
 .sidebar{
-    background-image: linear-gradient(40deg, #19d3ae, #0fcfec);
+    /* background-image: linear-gradient(40deg, #19d3ae, #0fcfec); */
+    background-image: linear-gradient(40deg, #1944d3, #1e06f5);
     position: fixed;
 }
 .sidebar li{

@@ -16,3 +16,8 @@
     background-color: #6ACECE ;
     color:white;
 }
+@media screen and (max-width: 600px) {
+    footer{
+
+    }
+  }

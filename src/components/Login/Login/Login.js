@@ -7,6 +7,8 @@ import { useHistory, useLocation } from 'react-router-dom';
 import LoginBg from '../../../images/loginBg.png';
 import './Login.css';
 
+import { FaBeer } from 'react-icons/fa';
+
 
 const Login = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
@@ -45,7 +47,7 @@ const Login = () => {
 
   return (
     <div className="login-page container">
-      {/* <h2>logged in ass {loggedInUser.name}</h2> */}
+      <h2>logged in ass {loggedInUser.name}</h2>
       <div className="row align-items-center" style={{ height: "100vh" }}>
         <div className="col-md-6 col-sm-6 shadow p-5">
           <div className="form-group">
@@ -62,7 +64,7 @@ const Login = () => {
           <br />
           <p>Or <br /> Sign In With Google</p>
           <div className="from-group mt-5">
-            <button className="btn btn-danger btn-lg btn-block" onClick={handleGoogleSignIn}>Google Sign in</button>
+            <button className="btn btn-danger btn-lg btn-block" onClick={handleGoogleSignIn}> Google Sign in</button>
           </div>
         </div>
 

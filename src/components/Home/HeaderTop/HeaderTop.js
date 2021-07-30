@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import chair from '../../../images/doc/doc1.jpg';
 const HeaderTop = () => {
     return (
-        <container style={{ height: "600px", 'width': '100%' }} className="row d-flex align-items-center">
-            <div className="col-md-4 col-sm-6 col-12 offset-md-1 mx-5">
+        <container style={{ height: "600px", 'width': '100%' }} className="row d-flex align-items-center container">
+            <div className="col-md-4 col-sm-6 col-12 offset-md-1 md-mx-5">
                 <h1>Your New Smile <br />Starts From Here</h1>
                 <p className="text-secondary">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore eveniet necessitatibus et iusto corrupti minima
                 </p>

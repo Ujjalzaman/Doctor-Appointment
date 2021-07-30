@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
 .brand-color{
   color:#1CC7C1;
 }
@@ -5,6 +7,7 @@
   box-sizing: border-box;
   margin:0;
   padding: 0;
+  font-family:sans-serif;
 }
 .brand-bg{
   background-color:#1CC7C1;

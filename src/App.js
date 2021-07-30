@@ -15,11 +15,12 @@ import AllPatients from './components/AppointMent/AllPatients/AllPatients';
 import Login from './components/Login/Login/Login';
 import { useFormContext } from 'react-hook-form';
 import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
+import SignUp from './components/Login/SignUp/SignUp';
 
 export const UserContext = createContext();
 
 function App() {
-const [loggedInUser, setLoggedInUser] = useState({})
+  const [loggedInUser, setLoggedInUser] = useState({})
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
@@ -36,9 +37,15 @@ const [loggedInUser, setLoggedInUser] = useState({})
             <Login></Login>
           </Route>
 
-          <PrivateRoute path="/AllPatients">
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+
+          {/* <PrivateRoute path="/AllPatients"> */}
+          <Route path="/allpatient">
             <AllPatients />
-          </PrivateRoute>
+          </Route>
+          {/* </PrivateRoute> */}
 
           <PrivateRoute path="/dashboard">
             <Dashboard></Dashboard>
