@@ -12,11 +12,8 @@ import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import AddDoctor from './components/Dashboard/AddDoctor/AddDoctor';
 import AppointMent from './components/AppointMent/AppointMent/AppointMent';
 import AllPatients from './components/AppointMent/AllPatients/AllPatients';
-import Login from './components/Login/Login/Login';
-import { useFormContext } from 'react-hook-form';
 import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
-import SignUp from './components/Login/SignUp/SignUp';
-
+import LoginValidation from './components/Login/LoginValidation/LoginValidation.jsx'
 export const UserContext = createContext();
 
 function App() {
@@ -33,13 +30,12 @@ function App() {
           <Route path="/home">
             <Home />
           </Route>
+
           <Route path="/login">
-            <Login></Login>
+            <LoginValidation />
           </Route>
 
-          <Route path="/signup">
-            <SignUp />
-          </Route>
+
 
           {/* <PrivateRoute path="/AllPatients"> */}
           <Route path="/allpatient">
