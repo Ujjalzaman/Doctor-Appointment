@@ -3,7 +3,7 @@ import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
 
 const SocialSignUp = () => {
     return (
-        <div class="social-media">
+        <div className="social-media">
             <div className="social-icon">
                 <FaGoogle />
             </div>

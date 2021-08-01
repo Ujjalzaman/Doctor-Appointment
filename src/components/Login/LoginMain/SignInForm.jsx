@@ -9,6 +9,7 @@ import SignUp from './SignUp';
 
 const SignInForm = () => {
     const [isSignUp, setSignUp] = useState(false);
+
     return (
         <div className={`${isSignUp ? "signin-signup-container sign-up-mode" : "signin-signup-container"}`}>
             <Link to="/">

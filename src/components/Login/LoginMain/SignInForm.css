@@ -292,7 +292,13 @@
     z-index: 2;
     opacity: 1;
   }
-  
+.password-validatity p{
+  line-height: 1px;
+  margin-bottom: 2px;
+  font-size: 0.9rem;
+  font-family:sans-serif;
+  font-weight: 500;
+}
   @media (max-width: 870px) {
     .signin-signup-container {
       min-height: 800px;
