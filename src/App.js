@@ -14,6 +14,8 @@ import AppointMent from './components/AppointMent/AppointMent/AppointMent';
 import AllPatients from './components/AppointMent/AllPatients/AllPatients';
 import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
 import LoginValidation from './components/Login/LoginValidation/LoginValidation.jsx'
+import SignUpLogin from './components/Login/SignUp/SignUpLogin';
+import SignInForm from './components/Login/LoginMain/SignInForm';
 export const UserContext = createContext();
 
 function App() {
@@ -33,6 +35,14 @@ function App() {
 
           <Route path="/login">
             <LoginValidation />
+          </Route>
+
+          <Route path="/login-main">
+            <SignUpLogin />
+          </Route>
+
+          <Route path="/sign-in">
+            <SignInForm />
           </Route>
 
 
