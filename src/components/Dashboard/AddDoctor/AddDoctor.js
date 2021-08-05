@@ -5,17 +5,17 @@ const AddDoctor = () => {
     const [info, setInfo] = useState({});
     const [file, setFile] = useState(null);
 
-    const handleBlur = e =>{
-        const newInfo = {...info};
+    const handleBlur = e => {
+        const newInfo = { ...info };
         newInfo[e.target.name] = e.target.value;
         setInfo(newInfo);
     }
-    const handleFileChange = (e) =>{
+    const handleFileChange = (e) => {
         const newFile = e.target.files[0];
-        setFile(newFile);    
+        setFile(newFile);
     }
 
-    const handleSubmit = () =>{
+    const handleSubmit = () => {
 
         const formData = new FormData()
         formData.append('file', file);
@@ -24,18 +24,12 @@ const AddDoctor = () => {
         // console.log("form data",formData)
 
         fetch('https://sleepy-tundra-72379.herokuapp.com/addDoctor', {
-            method:'POST',
-            body:formData
+            method: 'POST',
+            body: formData
         })
-        .then(response => response.json())
-        .then(data => console.log(data))
-   
-
-
+            .then(response => response.json())
+            .then(data => console.log(data))
     }
-    
-    
-
 
     return (
         <div className="row">

@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { FaCheck, FaEnvelope, FaLock, FaTimes, FaUser } from 'react-icons/fa';
 import SocialSignUp from './SocialSignUp';
+import { createAccountWithEmail } from './LoginManager';
 
+// password regex
 // ^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$
 // At least one upper case English letter, (?=.*?[A-Z])
 // At least one lower case English letter, (?=.*?[a-z])
 // At least one digit, (?=.*?[0-9])
 // At least one special character, (?=.*?[#?!@$%^&*-])
 // Minimum eight in length .{8,} (with the anchors)
-const SignUp = () => {
-    const [password, setPassword] = useState({})
+const SignUp = ({ handleResponse }) => {
+    // const [newUser, setNewUser] = useState(false)
+    const [user, setUser] = useState({})
     const [passwordValidation, setPasswordValidation] = useState({
         carLength: false,
         specailChar: false,
@@ -54,23 +57,28 @@ const SignUp = () => {
                 && /^(?=.*\d)/.test(value))
         }
         if (isPassValid) {
-            const newPass = { ...password };
+            const newPass = { ...user };
             newPass[name] = value
-            setPassword(newPass)
+            setUser(newPass)
         }
     }
-
     const hanldeOnSubmit = (e) => {
-        console.log(password)
-        console.log(passwordValidation)
-        e.preventDefault()
+        createAccountWithEmail(user.displayName, user.email, user.password)
+            .then(res => {
+                handleResponse(res)
+                alert("Signed Up")
+            }).catch(error => {
+                console.log(error)
+            })
+
+        e.preventDefault();
     }
     return (
         <form className="sign-up-form" onSubmit={hanldeOnSubmit}>
             <h2 className="title">Sign Up</h2>
             <div className="input-field">
                 <span className="fIcon"><FaUser /></span>
-                <input placeholder="Name" name="firstName" type="text" onChange={(e) => hanldeOnChange(e)} />
+                <input placeholder="Name" name="displayName" type="text" onChange={(e) => hanldeOnChange(e)} />
             </div>
             <div className="input-field">
                 <span className="fIcon"><FaEnvelope /></span>
@@ -84,7 +92,7 @@ const SignUp = () => {
             <button type="submit"
                 className="btn btn-primary btn-block mt-2 iBtn"
                 disabled={
-                    passwordValidation.carLength && passwordValidation.numeric && passwordValidation.upperLowerCase && passwordValidation.specailChar && emailError.emailError ? "" : "true"
+                    passwordValidation.carLength && passwordValidation.numeric && passwordValidation.upperLowerCase && passwordValidation.specailChar && emailError.emailError ? "" : true
                 }
             >
                 Submit

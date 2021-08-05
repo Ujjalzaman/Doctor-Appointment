@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useContext } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { UserContext } from '../../../App';
 import log from '../../../images/doc/info.svg';
 import register from '../../../images/doc/register.svg';
 import SignIn from './SignIn';
@@ -9,6 +11,18 @@ import SignUp from './SignUp';
 
 const SignInForm = () => {
     const [isSignUp, setSignUp] = useState(false);
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+    const history = useHistory();
+    const location = useLocation();
+    let { from } = location.state || { from: { pathname: "/" } };
+
+    const handleResponse = (res) => {
+        setLoggedInUser(res);
+        if (!res.error) {
+            alert("successfully logged in",)
+            history.replace(from)
+        }
+    }
 
     return (
         <div className={`${isSignUp ? "signin-signup-container sign-up-mode" : "signin-signup-container"}`}>
@@ -17,8 +31,8 @@ const SignInForm = () => {
             </Link>
             <div className="forms-container">
                 <div className="signIn-singUp">
-                    <SignIn />
-                    <SignUp />
+                    <SignIn handleResponse={handleResponse} />
+                    <SignUp handleResponse={handleResponse} />
                 </div>
             </div>
 
