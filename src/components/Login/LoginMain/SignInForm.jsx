@@ -8,6 +8,8 @@ import register from '../../../images/doc/register.svg';
 import SignIn from './SignIn';
 import './SignInForm.css';
 import SignUp from './SignUp';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const SignInForm = () => {
     const [isSignUp, setSignUp] = useState(false);
@@ -19,7 +21,7 @@ const SignInForm = () => {
     const handleResponse = (res) => {
         setLoggedInUser(res);
         if (!res.error) {
-            alert("successfully logged in",)
+            toast.success("Successfully Sign in")
             history.replace(from)
         }
     }

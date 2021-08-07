@@ -18,7 +18,7 @@ const PatientList = ({ patient }) => {
             <tbody>
                 {
                     patient.map((patient, index) =>
-                        <tr className="pateint-table-data">
+                        <tr className="pateint-table-data" key={index + 1}>
                             <th className="text-center">{index + 1}</th>
                             <td>{patient.name}</td>
                             <td>{patient.gender}</td>

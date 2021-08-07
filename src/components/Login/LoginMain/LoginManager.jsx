@@ -25,7 +25,6 @@ const hanldeResponse = (res) => {
     return userInfo;
 }
 export const createAccountWithEmail = (displayName, email, password) => {
-    // console.log(email, password, displayName)
     return firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(res => {
             storeAuthToken(res);
@@ -61,7 +60,7 @@ export const hanldeSignInWithEmailAndPass = (email, password) => {
         })
         .catch((error) => {
             const message = {
-                error: error.message
+                error: error.message,
             }
             return message;
         });

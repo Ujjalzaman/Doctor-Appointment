@@ -4,21 +4,29 @@ import { UserContext } from '../../../App';
 import { hanldeSignOut } from '../../Login/LoginMain/LoginManager';
 import Pop from '../Pop/Pop';
 import './Navbar.css';
+import toast, { Toaster } from 'react-hot-toast';
+import { useState } from 'react';
+
 
 const Navbar = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    console.log("user is", loggedInUser)
+    const [loading, setLoading] = useState(false);
 
     const signOut = () => {
+        setLoading(true)
         hanldeSignOut()
             .then(res => {
                 setLoggedInUser(res)
-                alert("logged out")
+                toast("Successfully logged out")
+                if (res.error) {
+                    setLoading(false)
+                }
             })
     }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light ">
+            <Toaster />
             <div className="container-fluid">
                 <div className="navbar-heading">
                     <h3>
@@ -43,22 +51,21 @@ const Navbar = () => {
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link me-3 text-white" href="!#">DENTAL SERVICE</a>
+                            <a className="nav-link me-3 text-white" href="!#" >DENTAL SERVICE</a>
                         </li>
 
                         <li className="nav-item">
                             <a className="nav-link me-2 text-white" href="!#">REVIEWS</a>
                         </li>
 
-
                         <div className="dropdown">
 
                             <li className="nav-item">
                                 {loggedInUser.email ?
-                                    <Pop user={loggedInUser} hanldeSignOut={signOut} />
+                                    <Pop user={loggedInUser} hanldeSignOut={signOut} loading={loading} setLoading={setLoading} />
                                     :
                                     <span>
-                                        <Link className="nav-link dropdown-item" to="/login">Login</Link>
+                                        <Link className="nav-link dropdown-item" to="/login">LOGIN</Link>
                                     </span>
                                 }
                             </li>

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { FaCheck, FaEnvelope, FaLock, FaTimes, FaUser } from 'react-icons/fa';
 import SocialSignUp from './SocialSignUp';
 import { createAccountWithEmail } from './LoginManager';
+import Spinner from 'react-bootstrap/Spinner'
+import swal from 'sweetalert';
+
 
 // password regex
 // ^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$
@@ -10,8 +13,11 @@ import { createAccountWithEmail } from './LoginManager';
 // At least one digit, (?=.*?[0-9])
 // At least one special character, (?=.*?[#?!@$%^&*-])
 // Minimum eight in length .{8,} (with the anchors)
+
+
 const SignUp = ({ handleResponse }) => {
-    // const [newUser, setNewUser] = useState(false)
+    const [error, setError] = useState({})
+    const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({})
     const [passwordValidation, setPasswordValidation] = useState({
         carLength: false,
@@ -63,12 +69,23 @@ const SignUp = ({ handleResponse }) => {
         }
     }
     const hanldeOnSubmit = (e) => {
+        setLoading(true)
         createAccountWithEmail(user.displayName, user.email, user.password)
             .then(res => {
                 handleResponse(res)
-                alert("Signed Up")
-            }).catch(error => {
-                console.log(error)
+                setLoading(false)
+                if (!res.error) {
+                    swal({
+                        icon: "success",
+                        text: "Successfully Sign Up",
+                        timer: 2000
+                    });
+                }
+                if (res.error) {
+                    setLoading(false)
+                    setError(res.error)
+                    console.log(res.error)
+                }
             })
 
         e.preventDefault();
@@ -88,14 +105,14 @@ const SignUp = ({ handleResponse }) => {
                 <span className="fIcon"><FaLock /></span>
                 <input type="password" name="password" placeholder="password" onChange={(e) => hanldeOnChange(e)} />
             </div>
-            {/* <input className="iBtn" type="submit" value="sign Up" /> */}
+            {error.length && <h6 className="text-danger text-center">{error}</h6>}
             <button type="submit"
                 className="btn btn-primary btn-block mt-2 iBtn"
                 disabled={
                     passwordValidation.carLength && passwordValidation.numeric && passwordValidation.upperLowerCase && passwordValidation.specailChar && emailError.emailError ? "" : true
                 }
             >
-                Submit
+                {loading ? <Spinner animation="border" variant="info" /> : "Sign Up"}
             </button>
 
             <div className="password-validatity mx-auto">

@@ -18,9 +18,7 @@ const AllPatients = () => {
                 <div className="row">
                     <div className="col-md-10 p-5 pr-4 m-0 patient-container">
                         <div className="deshboard-activity">
-
                             <DeshActivity />
-
                         </div>
                         <h6 className="brand-color text-start">Recent Appointments</h6>
                         <PatientList patient={patient}></PatientList>

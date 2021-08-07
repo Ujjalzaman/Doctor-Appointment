@@ -1,13 +1,17 @@
-import { faCalendar, faCog, faFile, faFileAlt, faGripHorizontal, faHome, faSignOutAlt, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faCog, faGripHorizontal, faHome, faSignOutAlt, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../App';
+import { hanldeSignOut } from '../../Login/LoginMain/LoginManager';
 import './Sidebar.css';
+import Spinner from 'react-bootstrap/Spinner'
+import toast from 'react-hot-toast';
 
 const Sidebar = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [doctor, setDoctor] = useState({});
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         fetch("https://sleepy-tundra-72379.herokuapp.com/isDoctor", {
@@ -18,17 +22,26 @@ const Sidebar = () => {
             .then(res => res.json())
             .then(data => setDoctor(data))
     }, [])
+
+    const signOut = () => {
+        setLoading(true)
+        hanldeSignOut()
+            .then(res => {
+                setLoggedInUser(res)
+                toast("Successfully logged out")
+                if (res.error) {
+                    setLoading(false)
+                }
+            })
+    }
     return (
         <div className="sidebar d-flex flex-column justify-content-between col-md-2 py-5">
             <ul className="list-unstyled">
-
-                {loggedInUser.email &&
-                    <li>
-                        <Link to="/" className="text-white text-decoration-none"><FontAwesomeIcon icon={faUser} />
-                            <span>{loggedInUser.name}</span>
-                        </Link>
-                    </li>
-                }
+                <li>
+                    <Link to="/" className="text-white text-decoration-none"><FontAwesomeIcon icon={faUser} />
+                        <span>{loggedInUser.name}</span>
+                    </Link>
+                </li>
                 <li>
                     <Link to="/" className="text-white text-decoration-none"><FontAwesomeIcon icon={faHome} />
                         <span>Home</span>
@@ -42,7 +55,8 @@ const Sidebar = () => {
                 </li>
 
 
-                {doctor.length &&
+                {doctor === true &&
+
                     <div>
                         <li>
                             <Link to="/get-appointment" className="text-white text-decoration-none"><FontAwesomeIcon icon={faCalendar} />
@@ -72,7 +86,9 @@ const Sidebar = () => {
                 }
             </ul>
             <div className="desh-logout">
-                <Link to="#" className="text-white text-decoration-none"><FontAwesomeIcon icon={faSignOutAlt} /><span>LogOut</span></Link>
+                <Link to="/" className="text-white text-decoration-none" onClick={signOut}><FontAwesomeIcon icon={faSignOutAlt} /><span>
+                    {loading ? <Spinner animation="border" variant="info" /> : "LogOut"}
+                </span></Link>
             </div>
         </div>
     );

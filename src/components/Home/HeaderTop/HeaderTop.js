@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import chair from '../../../images/chair.png';
 import chair from '../../../images/doc/doc1.jpg';
 const HeaderTop = () => {
     return (
@@ -9,7 +8,7 @@ const HeaderTop = () => {
                 <h1>Your New Smile <br />Starts From Here</h1>
                 <p className="text-secondary">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore eveniet necessitatibus et iusto corrupti minima
                 </p>
-                <Link to="/appointment" className="btn btn-primary btn-lg shadow rounded"> GET STARTED</Link>
+                <Link to="/get-appointment" className="btn btn-primary btn-lg shadow rounded"> GET STARTED</Link>
 
             </div>
             <div className="col-md-6 col-sm-6 col-12">
