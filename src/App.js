@@ -6,7 +6,6 @@ import {
   Route,
 } from "react-router-dom";
 import Home from './components/Home/Home/Home';
-import Appointment from './components/Home/Appointment/Appointment';
 import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import AddDoctor from './components/Dashboard/AddDoctor/AddDoctor';
 import AppointMent from './components/AppointMent/AppointMent/AppointMent';
@@ -14,7 +13,6 @@ import AllPatients from './components/AppointMent/AllPatients/AllPatients';
 import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
 import SignInForm from './components/Login/LoginMain/SignInForm';
 import { getDecodeUser } from './components/Login/LoginMain/LoginManager';
-
 export const UserContext = createContext();
 
 function App() {
@@ -36,24 +34,20 @@ function App() {
             <SignInForm />
           </Route>
 
-
-
-          {/* <PrivateRoute path="/AllPatients"> */}
-          <Route path="/allpatient">
-            <AllPatients />
-          </Route>
-          {/* </PrivateRoute> */}
+          <PrivateRoute path="/allpatient">
+            <Dashboard />
+          </PrivateRoute>
 
           <PrivateRoute path="/dashboard">
-            <Dashboard></Dashboard>
+            <AllPatients />
           </PrivateRoute>
 
           <PrivateRoute path="/addDoctor">
             <AddDoctor></AddDoctor>
           </PrivateRoute>
 
-          <PrivateRoute path="/appointment">
-            <AppointMent></AppointMent>
+          <PrivateRoute path="/get-appointment">
+            <AppointMent />
           </PrivateRoute>
 
         </Switch>

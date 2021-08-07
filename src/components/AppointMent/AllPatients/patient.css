@@ -1,8 +1,16 @@
 .all-patient{
-
+    background-color: #525252 !important;
 }
 .patient-container{
     position: absolute;
     right: 0;
-    background-color: #F4FDFB;
+    background-color: #d0effcc2;
+}
+.thead-dark{
+    background-color: rgb(48, 48, 119);
+    color: white !important;
+}
+.pateint-table-data{
+    color: black;
+    font-weight: 400;
 }

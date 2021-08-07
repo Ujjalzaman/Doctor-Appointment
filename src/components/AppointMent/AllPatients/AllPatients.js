@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../../Dashboard/Sidebar/Sidebar';
 import PatientList from './PatientList';
 import './patient.css';
+import DeshActivity from './DeshActivity';
 
 const AllPatients = () => {
     const [patient, setPatients] = useState([]);
@@ -11,15 +12,24 @@ const AllPatients = () => {
             .then(data => setPatients(data))
     }, [])
     return (
-        <div className="row all-patient">
+        <div className="all-patient">
             <Sidebar></Sidebar>
-            <div className="col-md-10 p-5 pr-4 patient-container">
-                <h5 className="brand-color text-center">All Patients</h5>
-                <PatientList patient={patient}></PatientList>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-10 p-5 pr-4 m-0 patient-container">
+                        <div className="deshboard-activity">
+
+                            <DeshActivity />
+
+                        </div>
+                        <h6 className="brand-color text-start">Recent Appointments</h6>
+                        <PatientList patient={patient}></PatientList>
+                    </div>
+                </div>
             </div>
         </div>
     );
 };
 
-
 export default AllPatients;
+

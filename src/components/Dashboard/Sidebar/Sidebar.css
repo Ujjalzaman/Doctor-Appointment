@@ -1,15 +1,29 @@
 .sidebar{
-    /* background-image: linear-gradient(40deg, #19d3ae, #0fcfec); */
-    background-image: linear-gradient(40deg, #1944d3, #1e06f5);
+    background-image: linear-gradient(45deg, #00c0b0, #1CC7C1);
     position: fixed;
+    height: 100vh;
+    font-family: sans-serif;
+    font-weight: 500;
 }
 .sidebar li{
-    margin-bottom: 2em;
+    padding:0.5rem;
+    margin-left: 1rem;
+    font-size: 1rem;
+    transition: 0.3s ease-in-out;
 }
 .sidebar li:hover span{
     display:inline-block;
-    transform: translateX(5px);
+    font-size: 1.1rem;
 }
 .sidebar li svg{
-    margin-right: 15px;
+    margin-right: 18px;
 }
+.desh-logout{
+    padding:0.5rem;
+    margin-left: 1rem;
+    transition: 0.3s ease-in-out;
+}
+.desh-logout:hover{
+    font-size: 1.1rem;
+}
+/* https://bootsnipp.com/ */

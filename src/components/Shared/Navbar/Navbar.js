@@ -16,6 +16,7 @@ const Navbar = () => {
                 alert("logged out")
             })
     }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light ">
             <div className="container-fluid">
@@ -49,26 +50,20 @@ const Navbar = () => {
                             <a className="nav-link me-2 text-white" href="!#">REVIEWS</a>
                         </li>
 
-                        {/* { */}
-                        {/* // loggedInUser.email ? */}
-                        <li className="nav-item">
-                            <a className="nav-link text-white" href="/dashboard">DashBoard</a>
-                        </li>
-                        :
+
                         <div className="dropdown">
-                            {/* <button className="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> */}
 
                             <li className="nav-item">
                                 {loggedInUser.email ?
-                                    <Pop user={loggedInUser} hanldeSignOut={hanldeSignOut} />
+                                    <Pop user={loggedInUser} hanldeSignOut={signOut} />
                                     :
                                     <span>
-                                        <Link className=" dropdown-item" to="/login">Login</Link>
+                                        <Link className="nav-link dropdown-item" to="/login">Login</Link>
                                     </span>
                                 }
                             </li>
 
-                        </div>
+                        </div>)
                     </ul>
                 </div>
             </div>

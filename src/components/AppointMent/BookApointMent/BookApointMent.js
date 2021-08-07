@@ -49,10 +49,10 @@ const bookingData = [
 const BookApointMent = ({ selectDate }) => {
     return (
         <section>
-                <h1 className="text-center brand-color text-uppercase">your selected date {selectDate.toDateString()}</h1>
+            <h1 className="text-center brand-color text-uppercase">your selected date {selectDate.toDateString()}</h1>
             <div className="row">
                 {
-                    bookingData.map(booking =><BookingDate booking={booking} date={selectDate} key={booking._id}></BookingDate>)
+                    bookingData.map(booking => <BookingDate booking={booking} date={selectDate} key={booking._id}></BookingDate>)
                 }
             </div>
         </section>

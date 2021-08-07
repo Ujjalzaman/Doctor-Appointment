@@ -1,18 +1,20 @@
 import React from 'react';
 import AppointMentShorList from '../AppointMentShortList/AppointMentShorList';
 
-const AppointByDate = ({appopintMent}) => {
+const AppointByDate = ({ appopintMent, selectedDate }) => {
     return (
         <div>
-            <h2 className="brand-color text-center">
-            AppointMent</h2>
+            <div className="appointment-head d-flex justify-content-between p-2">
+                <p className="brand-color text-center">Appointment</p>
+                <p>{selectedDate.toDateString()}</p>
+            </div>
             {
                 appopintMent.length ?
-                <AppointMentShorList appointment={appopintMent}></AppointMentShorList>
-                :
-                <div className="p-5">
-                    <h4 className="lead text-center">No AppointMent For this date</h4>
-                </div>
+                    <div className="p-5">
+                        <h4 className="lead text-center no-appointment">No AppointMent For this date</h4>
+                    </div>
+                    :
+                    <AppointMentShorList appointment={appopintMent}></AppointMentShorList>
             }
         </div>
     );
