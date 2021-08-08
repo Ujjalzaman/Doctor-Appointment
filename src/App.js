@@ -1,18 +1,33 @@
-import { createContext, useState } from 'react';
+import { createContext, lazy, useState } from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import Home from './components/Home/Home/Home';
-import Dashboard from './components/Dashboard/Dashboard/Dashboard';
+import { Suspense } from 'react';
+
+//previous imported component
+// import Home from './components/Home/Home/Home';
+// import Dashboard from './components/Dashboard/Dashboard/Dashboard';
+// import AppointMent from './components/AppointMent/AppointMent/AppointMent';
+// import AllPatients from './components/AppointMent/AllPatients/AllPatients';
+// import SignInForm from './components/Login/LoginMain/SignInForm';
+
+
 import AddDoctor from './components/Dashboard/AddDoctor/AddDoctor';
-import AppointMent from './components/AppointMent/AppointMent/AppointMent';
-import AllPatients from './components/AppointMent/AllPatients/AllPatients';
 import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
-import SignInForm from './components/Login/LoginMain/SignInForm';
 import { getDecodeUser } from './components/Login/LoginMain/LoginManager';
+import PageNotFound from './components/Shared/PageNotFound/PageNotFound.jsx';
+import PreLoad from './components/Shared/Preload/PreLoad';
+
+const Home = lazy(() => import('./components/Home/Home/Home'))
+const Dashboard = lazy(() => import('./components/Dashboard/Dashboard/Dashboard'))
+const AppointMent = lazy(() => import('./components/AppointMent/AppointMent/AppointMent'))
+const AllPatients = lazy(() => import('./components/AppointMent/AllPatients/AllPatients'))
+const SignInForm = lazy(() => import('./components/Login/LoginMain/SignInForm'))
+
+
 export const UserContext = createContext();
 
 function App() {
@@ -20,37 +35,44 @@ function App() {
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
-        <Switch>
 
-          <Route exact path="/">
-            <Home />
-          </Route>
+        <Suspense fallback={<PreLoad />}>
+          <Switch>
 
-          <Route path="/home">
-            <Home />
-          </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
 
-          <Route path="/login">
-            <SignInForm />
-          </Route>
+            <Route path="/home">
+              <Home />
+            </Route>
 
-          <PrivateRoute path="/allpatient">
-            <Dashboard />
-          </PrivateRoute>
+            <Route path="/login">
+              <SignInForm />
+            </Route>
 
-          <PrivateRoute path="/dashboard">
-            <AllPatients />
-          </PrivateRoute>
+            <PrivateRoute path="/allpatient">
+              <Dashboard />
+            </PrivateRoute>
 
-          <PrivateRoute path="/addDoctor">
-            <AddDoctor></AddDoctor>
-          </PrivateRoute>
+            <PrivateRoute path="/dashboard">
+              <AllPatients />
+            </PrivateRoute>
 
-          <PrivateRoute path="/get-appointment">
-            <AppointMent />
-          </PrivateRoute>
+            <PrivateRoute path="/addDoctor">
+              <AddDoctor></AddDoctor>
+            </PrivateRoute>
 
-        </Switch>
+            <PrivateRoute path="/get-appointment">
+              <AppointMent />
+            </PrivateRoute>
+
+            <Route exact path="*">
+              <PageNotFound />
+            </Route>
+
+          </Switch>
+        </Suspense>
       </Router>
     </UserContext.Provider>
 

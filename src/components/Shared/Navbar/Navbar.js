@@ -1,16 +1,28 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { UserContext } from '../../../App';
 import { hanldeSignOut } from '../../Login/LoginMain/LoginManager';
 import Pop from '../Pop/Pop';
 import './Navbar.css';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 
 const Navbar = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [loading, setLoading] = useState(false);
+    const [isSticky, setSticky] = useState(false)
+
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                setSticky(true)
+            } else {
+                setSticky(false)
+            }
+        })
+    }, [])
 
     const signOut = () => {
         setLoading(true)
@@ -25,7 +37,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light ">
+        <nav className={`navbar navbar-expand-lg navbar-light ${isSticky ? "stickynav" : "normalnav"}`} expand="lg">
             <Toaster />
             <div className="container-fluid">
                 <div className="navbar-heading">
@@ -47,15 +59,21 @@ const Navbar = () => {
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link me-3" href="!#">CONTACT</a>
+                            <NavLink activeClassName="ContactPage" className="nav-link me-3" to="#ContactPage">CONTACT</NavLink>
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link me-3 text-white" href="!#" >DENTAL SERVICE</a>
+                            <a className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} href="!#">BLOG</a>
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link me-2 text-white" href="!#">REVIEWS</a>
+                            <a
+                                className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`}
+                                href="!#" >DENTAL SERVICE</a>
+                        </li>
+
+                        <li className="nav-item">
+                            <a className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} href="!#">REVIEWS</a>
                         </li>
 
                         <div className="dropdown">
@@ -65,7 +83,7 @@ const Navbar = () => {
                                     <Pop user={loggedInUser} hanldeSignOut={signOut} loading={loading} setLoading={setLoading} />
                                     :
                                     <span>
-                                        <Link className="nav-link dropdown-item" to="/login">LOGIN</Link>
+                                        <Link className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} to="/login">LOGIN</Link>
                                     </span>
                                 }
                             </li>

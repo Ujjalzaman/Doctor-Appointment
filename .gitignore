@@ -11,6 +11,9 @@
 # production
 /build
 
+helloworl.jsx
+/src/Firebase.config.jsx
+
 # misc
 .DS_Store
 .env.local
