@@ -4,6 +4,7 @@ import cors from 'cors';
 import fileUpload from 'express-fileupload';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import doctorRoutes from './routes/doctor.js'
 
 const port = 5000;
 
@@ -27,10 +28,9 @@ const connect = async () =>{
     }catch(err){
         console.log(err)
     }
-
 }
 
-
+app.use('/', doctorRoutes)
 
 //mongo connection//
 
@@ -121,7 +121,4 @@ const connect = async () =>{
 app.get('/', (req, res) => {
     res.send("hello it/s running")
 })
-app.listen(process.env.PORT || port , ()=>{
-    console.log("Started")
-    connect();
-})
+app.listen(process.env.PORT || port , ()=>{connect(); console.log("Started")})

@@ -3,7 +3,7 @@ import { AddAppointMentCollection, AddDoctor, AllPatientsList, appointMentByDate
 
 const router = express.Router();
 
-router.post('/appointByDate', appointMentByDate);
+// router.post('/appointByDate', appointMentByDate);
 router.post('/addDoctor', AddDoctor);
 router.get('/doctors', DoctorList);
 router.post('/addAppointMent', AddAppointMentCollection);
