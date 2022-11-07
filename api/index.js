@@ -1,110 +1,127 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const MongoClient = require('mongodb').MongoClient;
+import express from 'express'
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import fileUpload from 'express-fileupload';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
 const port = 5000;
+
 const app = express();
-const fileUpload = require('express-fileupload');
+dotenv.config();
 
-
+app.use(express.json())
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('doctors'));
 app.use(fileUpload());
 
+mongoose.connection.on("disconnected", () =>{
+    console.log("Disconnected")
+})
+
+const connect = async () =>{
+    try{
+        mongoose.connect(process.env.MONGO)
+        console.log("Conntected to Mongodb")
+    }catch(err){
+        console.log(err)
+    }
+
+}
+
+
 
 //mongo connection//
 
-const uri = "mongodb+srv://organicUser:RJOc223KT616G33M@cluster0.htf6k.mongodb.net/onlineDoctor?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-    const doctorCollection = client.db("onlineDoctor").collection("doctors");
-    const doctorAppointMentCollection = client.db("onlineDoctor").collection("doctorAppointMenet");
+// mongoose
 
-    //appointByDate
-    app.post('/appointByDate', (req, res) => {
-        const date = req.body;
-        const email = req.body.email;
-        console.log(date.date);
-        doctorCollection.find({ email: email })
-            .toArray((err, doctor) => {
-                const filter = { date: date.date }
-                if (doctor.length === 0) {
-                    filter.email = email;
-                }
-                doctorAppointMentCollection.find(filter)
-                    .toArray((err, documents) => {
-                        res.send(documents);
-                    })
-            })
-    })
+// const uri = "mongodb+srv://organicUser:RJOc223KT616G33M@cluster0.htf6k.mongodb.net/onlineDoctor?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// client.connect(err => {
+//     const doctorCollection = client.db("onlineDoctor").collection("doctors");
+//     const doctorAppointMentCollection = client.db("onlineDoctor").collection("doctorAppointMenet");
+
+    // //appointByDate
+    // app.post('/appointByDate', (req, res) => {
+    //     const date = req.body;
+    //     const email = req.body.email;
+    //     console.log(date.date);
+    //     doctorCollection.find({ email: email })
+    //         .toArray((err, doctor) => {
+    //             const filter = { date: date.date }
+    //             if (doctor.length === 0) {
+    //                 filter.email = email;
+    //             }
+    //             doctorAppointMentCollection.find(filter)
+    //                 .toArray((err, documents) => {
+    //                     res.send(documents);
+    //                 })
+    //         })
+    // })
     //   add Doctor
-    app.post('/addDoctor', (req, res) => {
-        const file = req.files.file;
-        const name = req.body.name;
-        const email = req.body.email
-        console.log(file, name, email);
-        file.mv(`${__dirname}/doctors/${file.name}`, err => {
-            if (err) {
-                console.log(err)
-                return res.status(500).send({ msg: "Faliled to upload" })
-            }
-            doctorCollection.insertOne({ name, email, file })
-                .then(result => {
-                    return res.send({ name: file.name, path: `/${file.name}` })
-                })
-        })
+    // app.post('/addDoctor', (req, res) => {
+    //     const file = req.files.file;
+    //     const name = req.body.name;
+    //     const email = req.body.email
+    //     console.log(file, name, email);
+    //     file.mv(`${__dirname}/doctors/${file.name}`, err => {
+    //         if (err) {
+    //             console.log(err)
+    //             return res.status(500).send({ msg: "Faliled to upload" })
+    //         }
+    //         doctorCollection.insertOne({ name, email, file })
+    //             .then(result => {
+    //                 return res.send({ name: file.name, path: `/${file.name}` })
+    //             })
+    //     })
 
-    })
+    // })
 
 
 
 
     //doctor list
-    app.get('/doctors', (req, res) => {
-        doctorCollection.find({})
-            .toArray((err, documents) => {
-                res.send(documents)
-            })
-    })
+    // app.get('/doctors', (req, res) => {
+    //     doctorCollection.find({})
+    //         .toArray((err, documents) => {
+    //             res.send(documents)
+    //         })
+    // })
 
     //AddAppointMent
-    app.post('/addAppointMent', (req, res) => {
-        const AppointMent = req.body;
-        doctorAppointMentCollection.insertOne(AppointMent)
-            .then(result => {
-                res.send(result.insertedCount > 0);
-            })
-    })
+    // app.post('/addAppointMent', (req, res) => {
+    //     const AppointMent = req.body;
+    //     doctorAppointMentCollection.insertOne(AppointMent)
+    //         .then(result => {
+    //             res.send(result.insertedCount > 0);
+    //         })
+    // })
     //all Appointented Patients
-    app.get('/allPatients', (req, res) => {
-        doctorAppointMentCollection.find({})
-            .toArray((err, documents) => {
-                res.send(documents);
-            })
-    })
+    // app.get('/allPatients', (req, res) => {
+    //     doctorAppointMentCollection.find({})
+    //         .toArray((err, documents) => {
+    //             res.send(documents);
+    //         })
+    // })
 
     //if Admin or not
-    app.post('/isDoctor', (req, res) =>{
-        const email = req.body.email;
-        doctorCollection.find({email:email})
-        .toArray((err, doctor) =>{
-            res.send(doctor.length > 0);
-        })
-    })
+    // app.post('/isDoctor', (req, res) =>{
+    //     const email = req.body.email;
+    //     doctorCollection.find({email:email})
+    //     .toArray((err, doctor) =>{
+    //         res.send(doctor.length > 0);
+    //     })
+    // })
 
-
-
-
-
-
-
-
-});
+// });
 
 //end mongo connection//
 
 app.get('/', (req, res) => {
     res.send("hello it/s running")
 })
-app.listen(process.env.PORT || port)
+app.listen(process.env.PORT || port , ()=>{
+    console.log("Started")
+    connect();
+})
