@@ -1,27 +1,17 @@
 import Doctors from "../models/Doctors.js";
-import DoctorAppointMent from "../models/DoctorAppointMent.js";
-// import DoctorAppointMenet from '../models/DoctorAppointMenet.js';
+import appointMentSchema from "../models/DoctorAppointMent.js";
 
-export const appointMentByDate = (req, res) => {
-    const date = req.body;
-    const email = req.body.email;
-    console.log(date.date);
-    doctorCollection.find({ email: email })
-        .toArray((err, doctor) => {
-            const filter = { date: date.date }
-            if (doctor.length === 0) {
-                filter.email = email;
-            }
-            doctorAppointMentCollection.find(filter)
-                .toArray((err, documents) => {
-                    res.send(documents);
-                })
-        })
+export const appointMentByDate = async(req, res) => {
+    try{
+        const appointmentDate = await appointMentSchema.find({date: req.body.date})
+        res.status(200).json(appointmentDate);
+    }catch(err){
+        console.log(err)
+    }
 }
 
-
 export const AddDoctor = async(req, res) => {
-    const file = req.files.file;
+    // const file = req.files.file;
     const {name, email} = req.body;
     const docObj = new Doctors(req.body)
     try{
@@ -54,7 +44,7 @@ export const DoctorList = async(req, res) => {
 }
 
 export const AddAppointMentCollection = async(req, res) => {
-    const saveAppoint = new DoctorAppointMent(req.body)
+    const saveAppoint = new appointMentSchema(req.body)
     try{
         const addpointment = await saveAppoint.save();
         res.status(200).json(addpointment)
@@ -64,10 +54,11 @@ export const AddAppointMentCollection = async(req, res) => {
     }
 }
 
-export const AllPatientsList = async(req, res) => {
+//Appopintment PatientList
+export const AppointmentPatientsList = async(req, res) => {
     try{
-        const allPatients = await DoctorAppointMent.find();
-        res.status(200).json(allPatients);
+        const appointmentPatients = await appointMentSchema.find({});
+        res.status(200).json(appointmentPatients);
     }
     catch(err){
         console.log(err)
@@ -75,16 +66,12 @@ export const AllPatientsList = async(req, res) => {
 }
 
 export const IsDoctor = async(req, res) => {
+    const doctorEmail = req.body.email;
     try{
-        const isDoc = await Doctors.findOne({email: req.body.email})
+        const isDoc = await Doctors.findOne({email:require.body.email})
         res.status(200).json(isDoc)
     }
     catch(err){
         console.log(err)
     }
-    // const email = req.body.email;
-    //     doctorCollection.find({email:email})
-    //     .toArray((err, doctor) =>{
-    //         res.send(doctor.length > 0);
-    //     })
 }

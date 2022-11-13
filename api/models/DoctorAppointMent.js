@@ -1,32 +1,35 @@
 import mongoose from 'mongoose';
-const appoinMentSchema = new mongoose.Schema({
+const appointMentSchema = new mongoose.Schema({
     name:{
-        type: 'String',
+        type: String,
         required:true,
     }, 
     phone:{
-        type: 'String',
+        type: String,
     },
     email:{
-        type: 'String',
+        type: String,
         required:true,
     }, 
     gender:{
-        type: 'String',
+        type: String,
     },
     age:{
-        type: 'Number'
+        type: Number
     },
     weight:{
-        type: 'Number',
+        type: Number,
     },
     service:{
-        type: 'String'
+        type: String
     },
     date:{
-        type: 'string'
+        type: String
     },
+    created:{
+        type: String
+    }
     
 }, {timestamps: true})
 
-export default mongoose.model('appointMent', appoinMentSchema)
+export default mongoose.model('Appointments', appointMentSchema)
