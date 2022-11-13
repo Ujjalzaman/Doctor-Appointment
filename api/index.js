@@ -32,4 +32,15 @@ app.use('/', doctorRoutes)
 app.get('/', (req, res) => {
     res.send("hello it/s running")
 })
+
+app.use((err, req, res, next) =>{
+    const status = res.status || 500;
+    const msg = res.message || "Something Went Wrong";
+    return res.status(status).json({
+        success: false,
+        message: msg,
+        status: status,
+        stack : err.stack,
+    })
+})
 app.listen(process.env.PORT || port , ()=>{connect(); console.log("Started")})
