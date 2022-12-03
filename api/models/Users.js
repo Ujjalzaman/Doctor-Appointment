@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema({
     },
     image:{
         type: String,
+        default: null
     },
     isAdmin:{
         type: String,
@@ -25,4 +26,5 @@ const UserSchema = new mongoose.Schema({
     },
     
 }, {timestamps: true})
-export default mongoose.modelNames('User', UserSchema);
+
+export default mongoose.model('User', UserSchema);
