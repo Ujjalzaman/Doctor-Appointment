@@ -5,20 +5,27 @@ import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import axios from 'axios';
+import { useContext } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
 
 
 const SignIn = ({ handleResponse }) => {
-    const [loading, setLoading] = useState(false);
+    const {user, loading, error, dispatch} = useContext(AuthContext);
+    // const [loading, setLoading] = useState(false);
     const [err, setErr] = useState({})
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const onSubmit = async(event) => {
-        setLoading(true)
+        console.log(user)
+        // setLoading(true)
+        dispatch({type: "LOGIN_START"})
         try{
-            const data = await axios.post('http://localhost:5000/auth/login', event)
-            setLoading(false);
+            const res = await axios.post('http://localhost:5000/auth/login', event);
+        dispatch({type: "LOGIN_SUCCESS", payload: res.data})
+        console.log(user)
+            // setLoading(false);
         }catch(err){
-            setLoading(false)
+            // setLoading(false)
             setErr(err);
         }
 
@@ -51,8 +58,8 @@ const SignIn = ({ handleResponse }) => {
             {errors.password && <span className="text-warning">This field is required</span>}
             {err.length && <p className="text-danger">{err}</p>}
             <button className="iBtn" type="submit" value="sign In" >
-                {loading ? <Spinner animation="border" variant="info" /> : "Sign In"
-                }
+                {/* {loading ? <Spinner animation="border" variant="info" /> : "Sign In"
+                } */}
             </button>
             <p className="social-text">Or Sign in with social platforms</p>
             <SocialSignUp handleResponse={handleResponse} />
