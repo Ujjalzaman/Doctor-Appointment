@@ -4,6 +4,7 @@ import SocialSignUp from './SocialSignUp';
 import { createAccountWithEmail } from './LoginManager';
 import Spinner from 'react-bootstrap/Spinner'
 import swal from 'sweetalert';
+import axios from 'axios';
 
 
 // password regex
@@ -68,28 +69,51 @@ const SignUp = ({ handleResponse }) => {
             setUser(newPass)
         }
     }
-    const hanldeOnSubmit = (e) => {
-        setLoading(true)
-        createAccountWithEmail(user.displayName, user.email, user.password)
-            .then(res => {
-                handleResponse(res)
-                setLoading(false)
-                if (!res.error) {
-                    swal({
-                        icon: "success",
-                        text: "Successfully Sign Up",
-                        timer: 2000
-                    });
-                }
-                if (res.error) {
-                    setLoading(false)
-                    setError(res.error)
-                    console.log(res.error)
-                }
-            })
-
+    const hanldeOnSubmit = async(e) => {
         e.preventDefault();
+        setLoading(true);
+        const registerInfo = {
+            username : user.displayName,
+            email: user.email,
+            password: user.password
+        }
+        try{
+            // Register With node-server & mongodb
+            const data = await axios.post('http://localhost:5000/auth/register', registerInfo)
+            setLoading(false);
+            swal({
+                icon:'success',
+                text:'Successfully Sign Up',
+                timer: 2000
+            })
+        }
+        catch(err){
+            setLoading(false);
+            setError(res.error);
+        }
     }
+    
+    // Remove Firebase Authentication 
+    // ================================================================
+        // createAccountWithEmail(user.displayName, user.email, user.password)
+        //     .then(res => {
+        //         handleResponse(res)
+        //         setLoading(false)
+        //         if (!res.error) {
+        //             swal({
+        //                 icon: "success",
+        //                 text: "Successfully Sign Up",
+        //                 timer: 2000
+        //             });
+        //         }
+        //         if (res.error) {
+        //             setLoading(false)
+        //             setError(res.error)
+        //             console.log(res.error)
+        //         }
+        //     })
+
+
     return (
         <form className="sign-up-form" onSubmit={hanldeOnSubmit}>
             <h2 className="title">Sign Up</h2>
