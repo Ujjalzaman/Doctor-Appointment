@@ -89,7 +89,7 @@ const SignUp = ({ handleResponse }) => {
         }
         catch(err){
             setLoading(false);
-            setError(res.error);
+            setError(err);
         }
     }
     
