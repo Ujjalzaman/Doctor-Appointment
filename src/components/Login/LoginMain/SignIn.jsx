@@ -2,7 +2,6 @@ import React from 'react';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import SocialSignUp from './SocialSignUp';
 import { useForm } from "react-hook-form";
-import { useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import axios from 'axios';
 import { useContext } from 'react';
@@ -11,8 +10,6 @@ import { AuthContext } from '../../Context/AuthContext';
 
 const SignIn = ({ handleResponse }) => {
     const {user, loading, error, dispatch} = useContext(AuthContext);
-    // const [loading, setLoading] = useState(false);
-    const [err, setErr] = useState({})
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const onSubmit = async(event) => {
@@ -22,9 +19,6 @@ const SignIn = ({ handleResponse }) => {
             dispatch({type: "LOGIN_SUCCESS", payload: res.data.details})
         }catch(err){
             dispatch({type: "LOGIN_FAILURE", payload: err.response.data})
-            // setLoading(false)
-            console.log(err)
-            setErr(err);
         }
 
         //REMOVE ONLY ==>  Sign In code --- Authentication with firebase
@@ -38,9 +32,6 @@ const SignIn = ({ handleResponse }) => {
         //             setErr(res.error)
         //         }
         //     })
-
-        console.log(user, loading, error);
-
     }
 
     return (
@@ -56,7 +47,7 @@ const SignIn = ({ handleResponse }) => {
                 <input {...register("password", { required: true })} type="password" placeholder="Enter Your Password" />
             </div>
             {errors.password && <span className="text-warning">This field is required</span>}
-            {error && <p className="text-danger">{error}</p>}
+            {error && <p className="text-danger">{error.message}</p>}
             <button className="iBtn" type="submit" value="sign In" >
                 {loading ? <Spinner animation="border" variant="info" /> : "Sign In"}
             </button>
