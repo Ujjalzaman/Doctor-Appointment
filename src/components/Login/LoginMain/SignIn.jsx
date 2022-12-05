@@ -16,16 +16,14 @@ const SignIn = ({ handleResponse }) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const onSubmit = async(event) => {
-        console.log(user)
-        // setLoading(true)
         dispatch({type: "LOGIN_START"})
         try{
             const res = await axios.post('http://localhost:5000/auth/login', event);
-        dispatch({type: "LOGIN_SUCCESS", payload: res.data})
-        console.log(user)
-            // setLoading(false);
+            dispatch({type: "LOGIN_SUCCESS", payload: res.data.details})
         }catch(err){
+            dispatch({type: "LOGIN_FAILURE", payload: err.response.data})
             // setLoading(false)
+            console.log(err)
             setErr(err);
         }
 
@@ -40,6 +38,8 @@ const SignIn = ({ handleResponse }) => {
         //             setErr(res.error)
         //         }
         //     })
+
+        console.log(user, loading, error);
 
     }
 
@@ -56,10 +56,9 @@ const SignIn = ({ handleResponse }) => {
                 <input {...register("password", { required: true })} type="password" placeholder="Enter Your Password" />
             </div>
             {errors.password && <span className="text-warning">This field is required</span>}
-            {err.length && <p className="text-danger">{err}</p>}
+            {error && <p className="text-danger">{error}</p>}
             <button className="iBtn" type="submit" value="sign In" >
-                {/* {loading ? <Spinner animation="border" variant="info" /> : "Sign In"
-                } */}
+                {loading ? <Spinner animation="border" variant="info" /> : "Sign In"}
             </button>
             <p className="social-text">Or Sign in with social platforms</p>
             <SocialSignUp handleResponse={handleResponse} />

@@ -8,18 +8,8 @@ import doctorRoutes from './routes/doctor.js'
 
 const port = 5000;
 
-const app = express();
-dotenv.config();
+mongoose.connection.on("disconnected", () =>{console.log("Disconnected")})
 
-app.use(express.json())
-app.use(bodyParser.json());
-app.use(cors());
-app.use(express.static('doctors'));
-app.use(fileUpload());
-
-mongoose.connection.on("disconnected", () =>{
-    console.log("Disconnected")
-})
 const connect = async () =>{
     try{
         mongoose.connect(process.env.MONGO)
@@ -28,18 +18,27 @@ const connect = async () =>{
         console.log(err)
     }
 }
+
+const app = express();
+dotenv.config();
+
+app.use(express.json())
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.static('doctors'));
+app.use(fileUpload());
 app.use('/', doctorRoutes)
 app.get('/', (req, res) => {
     res.send("hello it/s running")
 })
 
 app.use((err, req, res, next) =>{
-    const status = res.status || 500;
-    const msg = res.message || "Something Went Wrong";
-    return res.status(status).json({
+    const errorStatus = err.status || 500;
+    const errorMessage = err.message || "Something Went Wrong";
+    return res.status(errorStatus).json({
         success: false,
-        message: msg,
-        status: status,
+        message: errorMessage,
+        status: errorStatus,
         stack : err.stack,
     })
 })

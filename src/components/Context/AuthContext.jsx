@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 
 export const AuthContext = createContext(INITIAL_STATE);
 
-export const AuthReducer = (state, action) =>{
+const AuthReducer = (state, action) =>{
     switch (action.type) {
         case "LOGIN_START":
             return {
@@ -46,7 +46,7 @@ export const AuthContextProvider = ({children}) =>{
 
     useEffect(()=>{
         localStorage.setItem('user', JSON.stringify(state.user));
-    },[])
+    },[state.user])
 
     return (
         <AuthContext.Provider
