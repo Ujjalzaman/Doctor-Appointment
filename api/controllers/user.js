@@ -14,7 +14,9 @@ export const register = async (req, res, next)=>{
         const userData = new Users({
             username: req.body.username,
             email: req.body.email,
-            password: hash
+            password: hash,
+            isAdmin:req.body.isAdmin,
+            isDoctor: req.body.isDoctor
         })
         const newUser = await userData.save();
         res.status(200).json(newUser);
@@ -42,6 +44,16 @@ export const login = async(req, res, next) =>{
         })
         .status(200)
         .json({details: {...others}, isAdmin});
+    }
+    catch(err){
+        next(err)
+    }
+}
+export const viewUser = async (req, res, next) =>{
+    try{
+        const user = await Users.find();
+        const {password, ...others} = user;
+        res.status(200).json(user);
     }
     catch(err){
         next(err)

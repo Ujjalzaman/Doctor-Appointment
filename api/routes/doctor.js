@@ -1,18 +1,18 @@
 import express from 'express';
-import { AddAppointMentCollection, AddDoctor, AppointmentPatientsList, appointMentByDate, DoctorList, IsDoctor } from '../controllers/doctor.js';
-import { login, register } from '../controllers/user.js';
+import { AddAppointMentCollection, AppointmentPatientsList, appointMentByDate, DoctorList, IsDoctor } from '../controllers/doctor.js';
+import { login, register, viewUser } from '../controllers/user.js';
 
 const router = express.Router();
 
 router.post('/appointByDate', appointMentByDate);
-router.post('/addDoctor', AddDoctor);
-router.get('/doctors', DoctorList);
 router.post('/addAppointMent', AddAppointMentCollection);
 router.get('/allPatients', AppointmentPatientsList);
-router.post('/isDoctor', IsDoctor);
+
+router.post('/auth/isDoctor', IsDoctor);
+router.get('/auth/users', viewUser);
+router.get('/auth/doctors', DoctorList);
 
 //auth
 router.post('/auth/register', register);
 router.post('/auth/login', login);
-
 export default router;

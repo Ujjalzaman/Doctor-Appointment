@@ -1,5 +1,7 @@
 import Doctors from "../models/Doctors.js";
 import appointMentSchema from "../models/DoctorAppointMent.js";
+import Users from "../models/Users.js";
+import { createError } from "../utils/error.js";
 
 export const appointMentByDate = async(req, res, next) => {
     try{
@@ -10,30 +12,9 @@ export const appointMentByDate = async(req, res, next) => {
     }
 }
 
-export const AddDoctor = async(req, res, next) => {
-    const docObj = new Doctors(req.body)
-    try{
-        const savedData = await docObj.save();
-        res.status(200).json(savedData)
-    }
-    catch(err){
-        next(err);
-    }
-    // file.mv(`${__dirname}/doctors/${file.name}`, err => {
-    //     if (err) {
-    //         console.log(err)
-    //         return res.status(500).send({ msg: "Faliled to upload" })
-    //     }
-    //     doctorCollection.insertOne({ name, email, file })
-    //         .then(result => {
-    //             return res.send({ name: file.name, path: `/${file.name}` })
-    //         })
-    // })
-}
-
 export const DoctorList = async(req, res, next) => {
     try{
-        const doctorList = await Doctors.find()
+        const doctorList = await Users.find({isDoctor:true})
         res.status(200).json(doctorList)
     }
     catch(err){
@@ -64,10 +45,16 @@ export const AppointmentPatientsList = async(req, res, next) => {
 }
 
 export const IsDoctor = async(req, res, next) => {
-    const doctorEmail = req.body.email;
+    const docEmail = req.body.email;
     try{
-        const isDoc = await Doctors.findOne({email:require.body.email})
-        res.status(200).json(isDoc)
+        const isDoc = await Users.findOne({email:docEmail})
+        if(isDoc.isDoctor=true){
+            const {password, ...others} = isDoc._doc;
+            res.status(200).json({...others})
+        }
+        else{
+            res.status(200).json(false)
+        }
     }
     catch(err){
         next(err);
