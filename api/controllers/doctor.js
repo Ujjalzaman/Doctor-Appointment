@@ -1,8 +1,5 @@
-import Doctors from "../models/Doctors.js";
 import appointMentSchema from "../models/DoctorAppointMent.js";
 import Users from "../models/Users.js";
-import { createError } from "../utils/error.js";
-
 export const appointMentByDate = async(req, res, next) => {
     try{
         const appointmentDate = await appointMentSchema.find({date: req.body.date})

@@ -26,9 +26,6 @@ const appointMentSchema = new mongoose.Schema({
     date:{
         type: String
     },
-    created:{
-        type: String
-    }
     
 }, {timestamps: true})
 
