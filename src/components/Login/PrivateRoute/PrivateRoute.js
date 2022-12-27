@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../../../App';
 import jwt_decode from "jwt-decode";
@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
 const PrivateRoute = ({ children, ...rest }) => {
   const [loggedInUser] = useContext(UserContext);
 
-
+  const navigate = useNavigate();
   const isLoggedIn = () => {
     const token = sessionStorage.getItem('token');
     if (!token) {
@@ -25,7 +25,7 @@ const PrivateRoute = ({ children, ...rest }) => {
         (loggedInUser.email || isLoggedIn()) ? (
           children
         ) : (
-          <Redirect
+          <navigate
             to={{
               pathname: "/login",
               state: { from: location }

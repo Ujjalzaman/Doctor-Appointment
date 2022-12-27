@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 
 
 const Navbar = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    // const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [loading, setLoading] = useState(false);
     const [isSticky, setSticky] = useState(false)
 
@@ -25,15 +25,15 @@ const Navbar = () => {
     }, [])
 
     const signOut = () => {
-        setLoading(true)
-        hanldeSignOut()
-            .then(res => {
-                setLoggedInUser(res)
-                toast("Successfully logged out")
-                if (res.error) {
-                    setLoading(false)
-                }
-            })
+        // setLoading(true)
+        // hanldeSignOut()
+        //     .then(res => {
+        //         setLoggedInUser(res)
+        //         toast("Successfully logged out")
+        //         if (res.error) {
+        //             setLoading(false)
+        //         }
+        //     })
     }
 
     return (
@@ -79,16 +79,16 @@ const Navbar = () => {
                         <div className="dropdown">
 
                             <li className="nav-item">
-                                {loggedInUser.email ?
+                                {/* {loggedInUser.email ?
                                     <Pop user={loggedInUser} hanldeSignOut={signOut} loading={loading} setLoading={setLoading} />
                                     :
                                     <span>
                                         <Link className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} to="/login">LOGIN</Link>
                                     </span>
-                                }
+                                } */}
                             </li>
 
-                        </div>)
+                        </div>
                     </ul>
                 </div>
             </div>

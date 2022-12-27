@@ -4,8 +4,14 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Outlet,
+  createBrowserRouter,
+  RouterProvider,
 } from "react-router-dom";
 import { Suspense } from 'react';
+import Header from './components/Home/Header/Header';
+import Footer from './components/Shared/Footer/Footer';
+import Home from './components/Home/Home/Home';
 
 //previous imported component
 // import Home from './components/Home/Home/Home';
@@ -15,66 +21,90 @@ import { Suspense } from 'react';
 // import SignInForm from './components/Login/LoginMain/SignInForm';
 
 
-import AddDoctor from './components/Dashboard/AddDoctor/AddDoctor';
-import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
-import { getDecodeUser } from './components/Login/LoginMain/LoginManager';
-import PageNotFound from './components/Shared/PageNotFound/PageNotFound.jsx';
-import PreLoad from './components/Shared/Preload/PreLoad';
+// import AddDoctor from './components/Dashboard/AddDoctor/AddDoctor';
+// import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
+// import { getDecodeUser } from './components/Login/LoginMain/LoginManager';
+// import PageNotFound from './components/Shared/PageNotFound/PageNotFound.jsx';
+// import PreLoad from './components/Shared/Preload/PreLoad';
 
-const Home = lazy(() => import('./components/Home/Home/Home'))
-const Dashboard = lazy(() => import('./components/Dashboard/Dashboard/Dashboard'))
-const AppointMent = lazy(() => import('./components/AppointMent/AppointMent/AppointMent'))
-const AllPatients = lazy(() => import('./components/AppointMent/AllPatients/AllPatients'))
-const SignInForm = lazy(() => import('./components/Login/LoginMain/SignInForm'))
+// const Home = lazy(() => import('./components/Home/Home/Home'))
+// const Dashboard = lazy(() => import('./components/Dashboard/Dashboard/Dashboard'))
+// const AppointMent = lazy(() => import('./components/AppointMent/AppointMent/AppointMent'))
+// const AllPatients = lazy(() => import('./components/AppointMent/AllPatients/AllPatients'))
+// const SignInForm = lazy(() => import('./components/Login/LoginMain/SignInForm'))
 
 
 export const UserContext = createContext();
 
-function App() {
-  const [loggedInUser, setLoggedInUser] = useState(getDecodeUser)
+const Layout = () =>{
   return (
-    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-      <Router>
+    <>
+      <Header/>
+      <Outlet/>
+      <Footer/>
+    </>
+  )
+}
 
-        <Suspense fallback={<PreLoad />}>
-          <Switch>
+const router = createBrowserRouter([
+  // {
+  //   path: '/',
+  //   element: <Layout/>,
+  //   children: [
+  //     {path:'/', element: <Home/>}
+  //   ]
+  // },
+  {path: '/', element:<Home/>}
+])
 
-            <Route exact path="/">
-              <Home />
-            </Route>
+function App() {
+  // const [loggedInUser, setLoggedInUser] = useState(getDecodeUser)
+  return (
+    <div>
+      <RouterProvider router={router}/>
+    </div>
+    // <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+    //   <Router>
 
-            <Route path="/home">
-              <Home />
-            </Route>
+    //     <Suspense fallback={<PreLoad />}>
+    //       <Switch>
 
-            <Route path="/login">
-              <SignInForm />
-            </Route>
+    //         <Route exact path="/">
+    //           <Home />
+    //         </Route>
 
-            <PrivateRoute path="/allpatient">
-              <Dashboard />
-            </PrivateRoute>
+    //         <Route path="/home">
+    //           <Home />
+    //         </Route>
 
-            <PrivateRoute path="/dashboard">
-              <AllPatients />
-            </PrivateRoute>
+    //         <Route path="/login">
+    //           <SignInForm />
+    //         </Route>
 
-            <PrivateRoute path="/addDoctor">
-              <AddDoctor></AddDoctor>
-            </PrivateRoute>
+    //         <PrivateRoute path="/allpatient">
+    //           <Dashboard />
+    //         </PrivateRoute>
 
-            <PrivateRoute path="/get-appointment">
-              <AppointMent />
-            </PrivateRoute>
+    //         <PrivateRoute path="/dashboard">
+    //           <AllPatients />
+    //         </PrivateRoute>
 
-            <Route exact path="*">
-              <PageNotFound />
-            </Route>
+    //         <PrivateRoute path="/addDoctor">
+    //           <AddDoctor></AddDoctor>
+    //         </PrivateRoute>
 
-          </Switch>
-        </Suspense>
-      </Router>
-    </UserContext.Provider>
+    //         <PrivateRoute path="/get-appointment">
+    //           <AppointMent />
+    //         </PrivateRoute>
+
+    //         <Route exact path="*">
+    //           <PageNotFound />
+    //         </Route>
+
+    //       </Switch>
+    //     </Suspense>
+    //   </Router>
+    // </UserContext.Provider>
 
   );
 }
