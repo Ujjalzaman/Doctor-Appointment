@@ -55,25 +55,25 @@ const Navbar = () => {
                             <a className="nav-link active me-3" aria-current="page" href="/">HOME</a>
                         </li>
                         <li className="nav-item active">
-                            <a className="nav-link me-3" href="!#">ABOUT</a>
+                            <a className="nav-link me-3" href="#doctorContaints">ABOUT</a>
                         </li>
 
                         <li className="nav-item">
-                            <NavLink activeClassName="ContactPage" className="nav-link me-3" to="#ContactPage">CONTACT</NavLink>
+                            <a href='#ContactPage' className="nav-link me-3">CONTACT</a>
+                            {/* <NavLink activeClassName="ContactPage" className="nav-link me-3" to="#ContactPage">CONTACT</NavLink> */}
                         </li>
 
                         <li className="nav-item">
-                            <a className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} href="!#">BLOG</a>
+                            {/* <a className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} href="#BlogContaint">BLOG</a> */}
+                            <a className="nav-link me-3 textDark" href="#BlogContaint">BLOG</a>
                         </li>
 
                         <li className="nav-item">
-                            <a
-                                className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`}
-                                href="!#" >DENTAL SERVICE</a>
+                            <a className="nav-link me-3 textDark" href="#serviceContaint" >DENTAL SERVICE</a>
                         </li>
 
                         <li className="nav-item">
-                            <a className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} href="!#">REVIEWS</a>
+                            <a className="nav-link me-3 textDark" href="#reviewsContaints">REVIEWS</a>
                         </li>
 
                         <div className="dropdown">

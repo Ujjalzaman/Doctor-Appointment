@@ -11,7 +11,7 @@ const Doctor = () => {
     //         .then(data => setDoctor(data))
     // }, [])
     return (
-        <section className="doctors">
+        <section className="doctors" id="doctorContaints">
             <div className="container">
                 <h1 className="brand-color text-center mb-5">Our Doctors </h1>
             </div>
