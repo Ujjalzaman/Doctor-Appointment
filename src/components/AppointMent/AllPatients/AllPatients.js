@@ -7,9 +7,9 @@ import DeshActivity from './DeshActivity';
 const AllPatients = () => {
     const [patient, setPatients] = useState([]);
     useEffect(() => {
-        fetch('https://sleepy-tundra-72379.herokuapp.com/allPatients')
-            .then(res => res.json())
-            .then(data => setPatients(data))
+        // fetch('https://sleepy-tundra-72379.herokuapp.com/allPatients')
+        //     .then(res => res.json())
+        //     .then(data => setPatients(data))
     }, [])
     return (
         <div className="all-patient">

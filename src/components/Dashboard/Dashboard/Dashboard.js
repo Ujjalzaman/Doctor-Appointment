@@ -7,7 +7,7 @@ import { UserContext } from '../../../App';
 import './Dashboard.css';
 
 const Dashboard = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    // const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [appointments, setAppointments] = useState([]);
 
@@ -16,13 +16,13 @@ const Dashboard = () => {
 
     }
     useEffect(() => {
-        fetch("https://sleepy-tundra-72379.herokuapp.com/appointByDate", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ date: selectedDate, email: loggedInUser.email })
-        })
-            .then(res => res.json())
-            .then(data => setAppointments(data))
+        // fetch("https://sleepy-tundra-72379.herokuapp.com/appointByDate", {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     // body: JSON.stringify({ date: selectedDate, email: loggedInUser.email })
+        // })
+            // .then(res => res.json())
+            // .then(data => setAppointments(data))
     }, [selectedDate])
 
     return (
