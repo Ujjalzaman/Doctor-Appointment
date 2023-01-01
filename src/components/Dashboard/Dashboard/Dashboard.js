@@ -5,17 +5,18 @@ import 'react-calendar/dist/Calendar.css';
 import AppointByDate from '../../AppointMent/AppointByDate/AppointByDate';
 import { UserContext } from '../../../App';
 import './Dashboard.css';
+import useFetch from '../../hooks/useFetch';
 
 const Dashboard = () => {
-    // const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [appointments, setAppointments] = useState([]);
+    // const [appointments, setAppointments] = useState([]);
+    const { data, loading, error } = useFetch("http://localhost:5000/auth/patients");
 
     const handleDateChange = date => {
         setSelectedDate(date);
 
     }
-    useEffect(() => {
+    // useEffect(() => {
         // fetch("https://sleepy-tundra-72379.herokuapp.com/appointByDate", {
         //     method: 'POST',
         //     headers: { 'Content-Type': 'application/json' },
@@ -23,7 +24,7 @@ const Dashboard = () => {
         // })
             // .then(res => res.json())
             // .then(data => setAppointments(data))
-    }, [selectedDate])
+    // }, [selectedDate])
 
     return (
         <section className="dashboard">
@@ -40,7 +41,7 @@ const Dashboard = () => {
                         />
                     </div>
                     <div className="col-md-8 col-sm-12 col-12 desh-appointment m-0 p-0">
-                        <AppointByDate appopintMent={appointments} key={10} selectedDate={selectedDate}></AppointByDate>
+                        <AppointByDate appopintMent={data} key={10} selectedDate={selectedDate}></AppointByDate>
                     </div>
                 </div>
             </div>

@@ -8,14 +8,14 @@ const AppointByDate = ({ appopintMent, selectedDate }) => {
                 <p className="brand-color text-center">Appointment</p>
                 <p>{selectedDate.toDateString()}</p>
             </div>
-            {
+            {/* {
                 appopintMent.length ?
                     <div className="p-5">
                         <h4 className="lead text-center no-appointment">No AppointMent For this date</h4>
                     </div>
-                    :
+                    : */}
                     <AppointMentShorList appointment={appopintMent}></AppointMentShorList>
-            }
+            {/* } */}
         </div>
     );
 };
