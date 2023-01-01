@@ -15,11 +15,11 @@ const BookingDate = ({ booking, date }) => {
   return (
     <div className="col-md-4 mb-5 mt-5">
       <div className="card p-3">
-        <h5 className="card-title brand-color">{booking.subject}</h5>
-        <h6>{booking.visitingHour}</h6>
-        <p>Space : {booking.totalSpace}</p>
+        <h5 className="card-title brand-color">{booking.title}</h5>
+        <h6>{booking.time}</h6>
+        <p>Space : {booking.space}</p>
         <button onClick={openModal} className="btn btn-primary">Book AppointMent</button>
-        <AppointMentForm modalIsOpen={modalIsOpen} appointMentDate={booking.subject} closeModal={closeModal} date={date}></AppointMentForm>
+        <AppointMentForm modalIsOpen={modalIsOpen} appointMentDate={booking.title} closeModal={closeModal} date={date}></AppointMentForm>
       </div>
     </div>
   );

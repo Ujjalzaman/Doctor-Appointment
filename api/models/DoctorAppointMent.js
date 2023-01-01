@@ -15,16 +15,17 @@ const appointMentSchema = new mongoose.Schema({
         type: String,
     },
     age:{
-        type: Number
+        type: String
     },
     weight:{
-        type: Number,
+        type: String,
     },
-    service:{
+    serviceTitle:{
         type: String
     },
-    date:{
-        type: String
+    appointmantDate:{
+        type: String,
+        required:true
     },
     
 }, {timestamps: true})

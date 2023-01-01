@@ -2,7 +2,9 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClosedCaptioning, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const customStyles = {
     content: {
@@ -18,23 +20,18 @@ Modal.setAppElement('#root')
 
 const AppointMentForm = ({modalIsOpen, appointMentDate, closeModal, date }) => {
     const {register,handleSubmit, errors} = useForm()
-
-    const onSubmit = (data) =>{
-        data.service = appointMentDate;
-        data.date = date;
-        data.created = new Date();
-        // console.log(data)
-        fetch('https://sleepy-tundra-72379.herokuapp.com/addAppointMent', {
-            method : 'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(success => {
-            if (success){
-                closeModal();
-            }
-        })
+    const navigate = useNavigate();
+    const onSubmit = async(data) =>{
+        data.appointmantDate = date;
+        data.serviceTitle = appointMentDate;
+        try{
+            await axios.post("http://localhost:5000/auth/addAppointMent",data)
+            closeModal();
+            navigate("/");
+        }
+        catch(err){
+            console.log(err)
+        }
     }
     return (
 
