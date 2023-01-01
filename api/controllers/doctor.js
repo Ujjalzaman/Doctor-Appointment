@@ -1,5 +1,6 @@
 import appointMentSchema from "../models/DoctorAppointMent.js";
-import OurServices from "../models/PatientsServices.js"
+import OurServices from "../models/PatientsServices.js";
+import reviewSchema from "../models/ReviewsModal.js";
 import Users from "../models/Users.js";
 export const appointMentByDate = async(req, res, next) => {
     try{
@@ -73,5 +74,25 @@ export const IsDoctor = async(req, res, next) => {
     }
     catch(err){
         next(err);
+    }
+}
+
+//Reviews
+
+export const AddReview = async(req, res, next) =>{
+    const savedData = new reviewSchema(req.body);
+    try{
+        const saveReview = await savedData.save();
+        res.status(200).json(saveReview);
+    }catch(err){
+        next(err)
+    }
+}
+export const ReviewsList = async(req, res, next) =>{
+    try{
+        const response = await reviewSchema.find();
+        res.status(200).json(response)
+    }catch(err){
+        next(err)
     }
 }

@@ -1,7 +1,4 @@
-
-
 import mongoose from 'mongoose'
-import React from 'react'
 
 const OurServices = new mongoose.Schema({
     title:{
