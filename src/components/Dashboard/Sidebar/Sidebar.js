@@ -9,20 +9,8 @@ import Spinner from 'react-bootstrap/Spinner'
 import toast from 'react-hot-toast';
 
 const Sidebar = () => {
-    // const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [doctor, setDoctor] = useState({});
     const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        // fetch("https://sleepy-tundra-72379.herokuapp.com/isDoctor", {
-        //     method: 'POST',
-        //     headers: { 'content-type': 'application/json' },
-        //     // body: JSON.stringify({ email: loggedInUser.email })
-        // })
-            // .then(res => res.json())
-            // .then(data => setDoctor(data))
-    }, [])
-
     const signOut = () => {
         setLoading(true)
         hanldeSignOut()
@@ -70,6 +58,11 @@ const Sidebar = () => {
                             </Link>
                         </li>
 
+                        <li>
+                            <Link to="/doctors" className="text-white text-decoration-none"><FontAwesomeIcon icon={faUserPlus} />
+                                <span>Doctors</span>
+                            </Link>
+                        </li>
 
                         <li>
                             <Link to="/addDoctor" className="text-white text-decoration-none"><FontAwesomeIcon icon={faUserPlus} />
