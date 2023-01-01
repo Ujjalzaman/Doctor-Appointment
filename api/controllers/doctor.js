@@ -1,4 +1,5 @@
 import appointMentSchema from "../models/DoctorAppointMent.js";
+import OurServices from "../models/PatientsServices.js"
 import Users from "../models/Users.js";
 export const appointMentByDate = async(req, res, next) => {
     try{
@@ -6,6 +7,23 @@ export const appointMentByDate = async(req, res, next) => {
         res.status(200).json(appointmentDate);
     }catch(err){
         next(err);
+    }
+}
+export const AddServices = async(req, res, next) => {
+    const serviceData = new OurServices(req.body);
+    try{
+        const services = await serviceData.save();
+        res.status(200).json(services);
+    }catch(err){
+        next(err);
+    }
+}
+export const ServicesList = async(req, res, next) =>{
+    try{
+        const services = await OurServices.find();
+        res.status(200).json(services);
+    }catch(err){
+        next(err)
     }
 }
 
