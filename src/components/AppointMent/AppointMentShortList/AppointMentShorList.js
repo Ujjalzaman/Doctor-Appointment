@@ -26,9 +26,9 @@ const AppointMentShorList = ({ appointment }) => {
                         <td>{item.serviceTitle}</td>
                         <td>{item.appointmantDate}</td>
                         <td>{item.weight}</td>
-                        <div class="btn-group">
-                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Not Visited</button>
-                        </div>
+                        <td className="btn-group">
+                            <button className="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Not Visited</button>
+                        </td>
                     </tr>
 
 

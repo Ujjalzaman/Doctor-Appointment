@@ -22,9 +22,9 @@ const connect = async () =>{
 const app = express();
 dotenv.config();
 
+app.use(cors());
 app.use(express.json())
 app.use(bodyParser.json());
-app.use(cors());
 app.use(express.static('doctors'));
 app.use(fileUpload());
 app.use('/', doctorRoutes)

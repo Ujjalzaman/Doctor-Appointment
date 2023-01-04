@@ -2,9 +2,11 @@ import appointMentSchema from "../models/DoctorAppointMent.js";
 import OurServices from "../models/PatientsServices.js";
 import reviewSchema from "../models/ReviewsModal.js";
 import Users from "../models/Users.js";
+
+
 export const appointMentByDate = async(req, res, next) => {
     try{
-        const appointmentDate = await appointMentSchema.find({date: req.body.date})
+        const appointmentDate = await appointMentSchema.find({appointmantDate: req.body.date})
         res.status(200).json(appointmentDate);
     }catch(err){
         next(err);
