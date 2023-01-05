@@ -31,12 +31,26 @@ export const ServicesList = async(req, res, next) =>{
 }
 
 export const DoctorList = async(req, res, next) => {
+    const {email} = req.query;
     try{
-        const doctorList = await Users.find({isDoctor:true})
-        res.status(200).json(doctorList)
+        if(email){
+            const doctorList = await Users.find({email: email})
+            res.status(200).json(doctorList);
+        }else{
+            const doctorList = await Users.find({isDoctor: true})
+            res.status(200).json(doctorList);
+        }
     }
     catch(err){
         next(err);
+    }
+}
+export const UpdateUserInfo = async(req, res, next) =>{
+    try{
+        const response = await Users.findByIdAndUpdate(req.params.id, {$set:req.body}, {new:true});
+        res.status(200).json(response)
+    }catch(err){
+        next(err)
     }
 }
 
