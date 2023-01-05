@@ -18,6 +18,7 @@ const DoctorList = () => {
                                     <th className="text-primar text-center" scope="col">Sr No</th>
                                     <th className="text-primar" scope="col">Name</th>
                                     <th className="text-primar" scope="col">Email</th>
+                                    <th className="text-primar" scope="col">Type</th>
                                 </tr>
 
                             </thead>
@@ -26,8 +27,9 @@ const DoctorList = () => {
                                     data && data.map((item, index) =>
                                         <tr className="pateint-table-data" key={index + 100}>
                                             <th className="text-center">{index + 1}</th>
-                                            <td>{item.name}</td>
+                                            <td>{item.username}</td>
                                             <td>{item.email}</td>
+                                            <td>{item.isDoctor ? "Doctor" : "User"}</td>
                                         </tr>
                                     )
                                 }

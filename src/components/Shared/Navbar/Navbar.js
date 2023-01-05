@@ -7,11 +7,11 @@ import './Navbar.css';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
 
 
 const Navbar = () => {
-    // const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const [loading, setLoading] = useState(false);
+    const {user, loading, error, dispatch} = useContext(AuthContext);
     const [isSticky, setSticky] = useState(false)
 
     useEffect(() => {
@@ -23,19 +23,6 @@ const Navbar = () => {
             }
         })
     }, [])
-
-    const signOut = () => {
-        // setLoading(true)
-        // hanldeSignOut()
-        //     .then(res => {
-        //         setLoggedInUser(res)
-        //         toast("Successfully logged out")
-        //         if (res.error) {
-        //             setLoading(false)
-        //         }
-        //     })
-    }
-
     return (
         <nav className={`navbar navbar-expand-lg navbar-light ${isSticky ? "stickynav" : "normalnav"}`} expand="lg">
             <Toaster />
@@ -79,13 +66,13 @@ const Navbar = () => {
                         <div className="dropdown">
 
                             <li className="nav-item">
-                                {/* {loggedInUser.email ?
-                                    <Pop user={loggedInUser} hanldeSignOut={signOut} loading={loading} setLoading={setLoading} />
+                                {user?.email ?
+                                    <Pop/>
                                     :
                                     <span>
                                         <Link className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} to="/login">LOGIN</Link>
                                     </span>
-                                } */}
+                                }
                             </li>
 
                         </div>
