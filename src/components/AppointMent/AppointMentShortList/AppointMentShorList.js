@@ -2,7 +2,8 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 const AppointMentShorList = ({ appointment }) => {
     return (
-        <Table striped responsive>
+        <div className='card shadow'>
+            <Table striped responsive>
             <thead>
                 <tr>
                     <th className="text-secondary" scope="col">Name</th>
@@ -32,6 +33,7 @@ const AppointMentShorList = ({ appointment }) => {
                 )}
             </tbody>
         </Table>
+        </div>
     );
 };
 
