@@ -21,7 +21,9 @@ const Dashboard = () => {
         const fetchData = async () => {
             try {
                 const res = await axios.post("http://localhost:5000/auth/appointByDate", { date: selectedDate })
-                setAppointments(res.data)
+                if(res.data){
+                    setAppointments(res.data)
+                }
             } catch (err) {
                 console.log(err)
             }

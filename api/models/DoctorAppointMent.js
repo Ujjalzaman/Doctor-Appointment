@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 const appointMentSchema = new mongoose.Schema({
-    name:{
+    username:{
         type: String,
         required:true,
     }, 
@@ -27,7 +27,10 @@ const appointMentSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    
+    doctor_id:{
+        type: String,
+        required:true
+    }
 }, {timestamps: true})
 
 export default mongoose.model('Appointments', appointMentSchema)
