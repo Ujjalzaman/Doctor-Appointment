@@ -4,8 +4,6 @@ import jwt from 'jsonwebtoken';
 import {createError} from '../utils/error.js'
 
 
-let sshkey = "W16aQUoCDwHm8AAAAadWpqYWx6YW1hbkBERVNLVE9QLUlLNkVITkUB";
-
 export const register = async (req, res, next)=>{
     const salt =  bcrypt.genSaltSync(10);
     const hash =  bcrypt.hashSync(req.body.password, salt);
@@ -37,7 +35,7 @@ export const login = async(req, res, next) =>{
             return next(createError(404, 'Password is not matched!'));
         }
 
-        const token = jwt.sign({id: user._id, isAdmin: user.isAdmin}, sshkey);
+        const token = jwt.sign({id: user._id, isAdmin: user.isAdmin}, process.env.JWT);
         const {password, isAdmin, ...others} = user._doc;
         res.cookie('access_token', token, {
             httpOnly: true

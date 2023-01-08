@@ -5,6 +5,7 @@ import fileUpload from 'express-fileupload';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import doctorRoutes from './routes/doctor.js'
+import cookieParser from 'cookie-parser';
 
 const port = 5000;
 
@@ -20,6 +21,7 @@ const connect = async () =>{
 }
 
 const app = express();
+app.use(cookieParser())
 dotenv.config();
 
 app.use(cors());
