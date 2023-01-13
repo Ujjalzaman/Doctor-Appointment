@@ -6,7 +6,7 @@ import Users from "../models/Users.js";
 
 export const appointMentByDate = async(req, res, next) => {
     try{
-        const appointmentDate = await appointMentSchema.find({appointmantDate: req.body.date})
+        const appointmentDate = await appointMentSchema.find({appointmantDate: req.body.date, email:req.body.email})
         res.status(200).json(appointmentDate);
     }catch(err){
         next(err);
@@ -67,8 +67,9 @@ export const AddAppointMentCollection = async(req, res, next) => {
 
 //Appopintment PatientList
 export const AppointmentPatientsList = async(req, res, next) => {
+    const email = req.query.email;
     try{
-        const appointmentPatients = await appointMentSchema.find({});
+        const appointmentPatients = await appointMentSchema.find({email:email});
         res.status(200).json(appointmentPatients);
     }
     catch(err){

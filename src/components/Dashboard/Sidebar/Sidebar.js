@@ -3,30 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../App';
-import { hanldeSignOut } from '../../Login/LoginMain/LoginManager';
 import './Sidebar.css';
 import Spinner from 'react-bootstrap/Spinner'
 import toast from 'react-hot-toast';
 
 const Sidebar = () => {
-    const [doctor, setDoctor] = useState({});
     const [loading, setLoading] = useState(false);
-    const signOut = () => {
-        setLoading(true)
-        hanldeSignOut()
-            // .then(res => {
-            //     setLoggedInUser(res)
-            //     toast("Successfully logged out")
-            //     if (res.error) {
-            //         setLoading(false)
-            //     }
-            // })
-    }
     return (
         <div className="sidebar d-flex flex-column justify-content-between col-md-2 py-5">
             <ul className="list-unstyled">
                 <li>
                     <Link to="/" className="text-white text-decoration-none"><FontAwesomeIcon icon={faUser} />
+                        user
                         {/* <span>{loggedInUser.name}</span> */}
                     </Link>
                 </li>
@@ -69,6 +57,11 @@ const Sidebar = () => {
                                 <span>Add Doctor</span>
                             </Link>
                         </li>
+                        <li>
+                            <Link to="/auth/review" className="text-white text-decoration-none"><FontAwesomeIcon icon={faUserPlus} />
+                                <span>Review</span>
+                            </Link>
+                        </li>
 
                         <li>
                             <Link to="#" className="text-white text-decoration-none"><FontAwesomeIcon icon={faCog} />
@@ -78,11 +71,11 @@ const Sidebar = () => {
                     </div>
                 {/* } */}
             </ul>
-            <div className="desh-logout">
+            {/* <div className="desh-logout">
                 <Link to="/" className="text-white text-decoration-none" onClick={signOut}><FontAwesomeIcon icon={faSignOutAlt} /><span>
                     {loading ? <Spinner animation="border" variant="info" /> : "LogOut"}
                 </span></Link>
-            </div>
+            </div> */}
         </div>
     );
 };

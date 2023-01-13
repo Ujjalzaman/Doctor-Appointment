@@ -15,6 +15,7 @@ import AppointMent from './components/AppointMent/AppointMent/AppointMent';
 import AllPatients from './components/AppointMent/AllPatients/AllPatients';
 import AddDoctor from './components/Dashboard/AddDoctor/AddDoctor';
 import DoctorList from './components/Dashboard/DoctorList/DoctorList';
+import AddReview from './components/Dashboard/My Review/AddReview';
 
 
 // import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
   {path: '/addDoctor', element:<AddDoctor/>},
   {path: '/appointment', element:<AppointMent/>},
   {path: '/doctors', element:<DoctorList/>},
+  {path: '/auth/review', element:<AddReview/>},
 ])
 
 function App() {
