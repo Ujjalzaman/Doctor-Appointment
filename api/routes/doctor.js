@@ -23,7 +23,7 @@ router.get('/auth/users', verifyToken,viewUser);
 //global
 router.get('/auth/ourServices', ServicesList);
 router.post('/auth/isDoctor',verifyAdmin, IsDoctor);
-router.get('/auth/reviews', ReviewsList);
+router.get('/auth/reviews', verifyToken, ReviewsList);
 router.get('/auth/doctors', DoctorList);
 
 

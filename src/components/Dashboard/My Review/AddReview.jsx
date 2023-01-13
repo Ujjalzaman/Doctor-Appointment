@@ -5,7 +5,7 @@ import Sidebar from '../Sidebar/Sidebar';
 
 const AddReview = () => {
     const [review, setReview] = useState({});
-    const { data, loading, error, reFetchData } = useFetch("http://localhost:5000/auth/reviews");
+    const { data, loading, error, reFetchData } = useFetch("/auth/reviews");
 
     const handleChange = (e) => {
         setReview(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -15,13 +15,14 @@ const AddReview = () => {
         e.preventDefault();
         try{
             if(review.email){
-                const res = await axios.post("http://localhost:5000/auth/addReview", review)
+                const res = await axios.post("/auth/addReview", review)
                 console.log(res.data);
             }
         }catch(err){
             console.log(err)
         }   
     }
+    console.log(data)
     return (
         <section className='container row g-0'>
             <div className='col-md-3'>

@@ -10,7 +10,7 @@ import axios from 'axios';
 const Dashboard = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [appointByDate, setAppointments] = useState([]);
-    const { data, loading, error } = useFetch("http://localhost:5000/auth/patients");
+    const { data, loading, error } = useFetch("/auth/patients");
     if (appointByDate.length == 0) {
         setAppointments(data);
     }
@@ -20,7 +20,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.post("http://localhost:5000/auth/appointByDate", { date: selectedDate })
+                const res = await axios.post("/auth/appointByDate", { date: selectedDate })
                 if(res.data){
                     setAppointments(res.data)
                 }
@@ -41,7 +41,7 @@ const Dashboard = () => {
                 <div className=''>
                     <div className='mb-2'>
                         <Calendar
-                            onChange={handleDateChange}
+                            onChange={()=>handleDateChange}
                             value={new Date()}
                             className="calender-design"
                         />

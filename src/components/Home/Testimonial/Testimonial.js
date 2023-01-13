@@ -7,7 +7,7 @@ import './Testimonial.css';
 import useFetch from '../../hooks/useFetch';
 
 const Testimonial = () => {
-    const { data, loading, error } = useFetch("http://localhost:5000/auth/reviews");
+    const { data, loading, error } = useFetch("/auth/reviews");
     return (
         <section className="container testimonial my-5 py-5" id="reviewsContaints">
             <div className="cointainer">

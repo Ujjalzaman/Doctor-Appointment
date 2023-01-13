@@ -18,12 +18,12 @@ const DoctorList = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const { data, loading, error, reFetchData } = useFetch("http://localhost:5000/auth/doctors");
+    const { data, loading, error, reFetchData } = useFetch("/auth/doctors");
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
     const onSubmit = async (event) => {
         try {
-            const response = await axios.get(`http://localhost:5000/auth/doctors?email=${event.email}`);
+            const response = await axios.get(`/auth/doctors?email=${event.email}`);
             setSearchData(response.data)
             handleShow();
         } catch (err) {
@@ -35,7 +35,7 @@ const DoctorList = () => {
     }
     const handleUpdateInfo = async(e) => {
         try{
-            const response = await axios.put(`http://localhost:5000/auth/updateInfo/${searchData[0]._id}`,userData)
+            const response = await axios.put(`/auth/updateInfo/${searchData[0]._id}`,userData)
             handleClose();
         }catch(err){
             console.log(err)

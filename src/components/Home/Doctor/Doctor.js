@@ -4,7 +4,7 @@ import './Doctor.css';
 import DoctorDetail from './DoctorDetail';
 
 const Doctor = () => {
-    const { data, loading, error } = useFetch("http://localhost:5000/auth/doctors");
+    const { data, loading, error } = useFetch("/auth/doctors");
     return (
         <section className="doctors" id="doctorContaints">
             <div className="container">
