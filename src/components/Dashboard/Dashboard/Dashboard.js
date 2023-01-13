@@ -11,9 +11,9 @@ const Dashboard = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [appointByDate, setAppointments] = useState([]);
     const { data, loading, error } = useFetch("/auth/patients");
-    if (appointByDate.length == 0) {
-        setAppointments(data);
-    }
+    // if (appointByDate.length == 0) {
+    //     setAppointments(data);
+    // }
     const handleDateChange = date => {
         setSelectedDate(date);
     }
@@ -21,15 +21,14 @@ const Dashboard = () => {
         const fetchData = async () => {
             try {
                 const res = await axios.post("/auth/appointByDate", { date: selectedDate })
-                if(res.data){
+                // if(res.data){
                     setAppointments(res.data)
-                }
+                // }
             } catch (err) {
                 console.log(err)
             }
         }
         fetchData();
-
     }, [selectedDate])
 
     return (
