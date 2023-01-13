@@ -13,17 +13,17 @@ router.post('/auth/addServices',verifyToken,verifyAdmin, AddServices);
 
 //user or admin can access
 router.post('/auth/addAppointMent',verifyToken, AddAppointMentCollection);
-router.post('/auth/appointByDate', verifyToken,appointMentByDate);
-router.post('/auth/addReview', AddReview);
+router.post('/auth/appointByDate', verifyToken, verifyUser, appointMentByDate);
+router.post('/auth/addReview', verifyToken, AddReview);
 router.put('/auth/updateInfo/:id', verifyToken,UpdateUserInfo);
-router.get('/auth/patients', verifyToken,AppointmentPatientsList);
-router.get('/auth/users', verifyToken,viewUser);
+router.get('/auth/patients', verifyToken, verifyUser,AppointmentPatientsList);
+router.get('/auth/users',verifyToken, verifyAdmin,viewUser);
 
 
 //global
 router.get('/auth/ourServices', ServicesList);
-router.post('/auth/isDoctor',verifyAdmin, IsDoctor);
-router.get('/auth/reviews', verifyToken, verifyUser, ReviewsList);
+router.post('/auth/isDoctor',IsDoctor);
+router.get('/auth/reviews', ReviewsList);
 router.get('/auth/doctors', DoctorList);
 
 

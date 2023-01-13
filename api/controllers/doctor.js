@@ -5,9 +5,15 @@ import Users from "../models/Users.js";
 
 
 export const appointMentByDate = async(req, res, next) => {
+    const {id, isAdmin} =req.user;
     try{
-        const appointmentDate = await appointMentSchema.find({appointmantDate: req.body.date, email:req.body.email})
-        res.status(200).json(appointmentDate);
+        if(isAdmin){
+            const appointmentDate = await appointMentSchema.find({appointmantDate: req.body.date})
+            res.status(200).json(appointmentDate);
+        }else{
+            const appointmentDate = await appointMentSchema.find({appointmantDate: req.body.date, user_id:id})
+            res.status(200).json(appointmentDate);
+        }
     }catch(err){
         next(err);
     }
@@ -67,10 +73,15 @@ export const AddAppointMentCollection = async(req, res, next) => {
 
 //Appopintment PatientList
 export const AppointmentPatientsList = async(req, res, next) => {
-    const email = req.query.email;
+    const {id, isAdmin} = req.user;
     try{
-        const appointmentPatients = await appointMentSchema.find({email:email});
-        res.status(200).json(appointmentPatients);
+        if(isAdmin){
+            const appointmentPatients = await appointMentSchema.find();
+            res.status(200).json(appointmentPatients);
+        }else{
+            const appointmentPatients = await appointMentSchema.find({user_id:id});
+            res.status(200).json(appointmentPatients);
+        }
     }
     catch(err){
         next(err);
