@@ -21,6 +21,11 @@ const ReviewSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    user_id:{
+        type: String,
+        unique: true,
+        required: true
+    },
 }, {timestamps:true})
 
 export default mongoose.model("reivews", ReviewSchema);

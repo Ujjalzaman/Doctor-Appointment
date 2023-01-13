@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { AuthContext } from '../../Context/AuthContext';
 import useFetch from '../../hooks/useFetch';
 import Sidebar from '../Sidebar/Sidebar';
 
 const AddReview = () => {
     const [review, setReview] = useState({});
     const { data, loading, error, reFetchData } = useFetch("/auth/reviews");
+    const { user } = useContext(AuthContext);
 
     const handleChange = (e) => {
         setReview(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -13,16 +15,19 @@ const AddReview = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
-            if(review.email){
+        review.user_id = user._id;
+        review.email = user.email;
+        review.name = user.username
+        try {
+            if (user._id && review.desc) {
                 const res = await axios.post("/auth/addReview", review)
                 console.log(res.data);
             }
-        }catch(err){
+        } catch (err) {
             console.log(err)
-        }   
+        }
     }
-    console.log(data)
+    // @Ujjalzaman123
     return (
         <section className='container row g-0'>
             <div className='col-md-3'>
@@ -31,18 +36,6 @@ const AddReview = () => {
             <div className="col-md-9">
                 <h2 className="text-center brand-color">Add a Review</h2>
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group mt-2">
-                        <label htmlFor="reviewname" className="form-label">Name</label>
-                        <input type="text" onChange={handleChange} name="name" id="reviewname" placeholder="Enter Your Name" className="form-control" />
-                    </div>
-                    <div className="form-group mt-2">
-                        <label htmlFor="reviewEmail" className="form-label">Email</label>
-                        <input type="email" onChange={handleChange} name="email" id="reviewEmail" placeholder="example@mail.com" className="form-control" />
-                    </div>
-                    <div className="form-group mt-2">
-                        <label htmlFor="reviewImage" className="form-label">Image</label>
-                        <input type="file" name="image" id="reviewImage" placeholder="Image" className="form-control" />
-                    </div>
                     <div className="form-group mt-2">
                         <label htmlFor="reviewAddress" className="form-label">Address</label>
                         <input type="text" onChange={handleChange} name="address" id="reviewAddress" placeholder="stree/avenue" className="form-control" />

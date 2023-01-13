@@ -106,10 +106,18 @@ export const AddReview = async(req, res, next) =>{
     }
 }
 export const ReviewsList = async(req, res, next) =>{
+    const {id, isAdmin} = req.user;
     try{
-        const response = await reviewSchema.find();
-        res.status(200).json(response)
-    }catch(err){
+        if(isAdmin){
+            const response = await reviewSchema.find({});
+            res.status(200).json(response)
+        }
+        else{
+            const response = await reviewSchema.find({user_id:id});
+            res.status(200).json(response)
+        }
+    }
+    catch(err){
         next(err)
     }
 }

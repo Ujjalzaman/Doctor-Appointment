@@ -14,17 +14,13 @@ export const verifyToken = (req, res, next) => {
   });
 };
 
-// export const verifyUser = (req, res, next) => {
-//   console.log("id",req.user.id == req.user.isAdmin)
-//   console.log("params",req.params.id)
-//   console.log("is Admin",req.user.isAdmin)
-//   next();
-  // if (req.user.id === req.params.id || req.user.isAdmin) {
-  //   next();
-  // } else {
-  //   return next(createError(403, "You are not authorized!"));
-  // }
-// };
+export const verifyUser = (req, res, next) => {
+  if (req.user.id || req.user.isAdmin) {
+    next();
+  } else {
+    return next(createError(403, "You are not authorized!"));
+  }
+};
 
 export const verifyAdmin = (req, res, next) => {
   if (req.user.isAdmin) {
