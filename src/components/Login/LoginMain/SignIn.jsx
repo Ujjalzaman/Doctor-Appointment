@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 const SignIn = ({ handleResponse }) => {
@@ -19,6 +20,11 @@ const SignIn = ({ handleResponse }) => {
         try{
             const res = await axios.post('/auth/login', event);
             dispatch({type: "LOGIN_SUCCESS", payload: res.data.details})
+            swal({
+                icon:'success',
+                text:'Successfully Sign In',
+                timer: 2000
+            })
             navigate("/")
         }catch(err){
             dispatch({type: "LOGIN_FAILURE", payload: err.response.data})
