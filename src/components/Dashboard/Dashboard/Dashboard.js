@@ -11,19 +11,18 @@ const Dashboard = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [appointByDate, setAppointments] = useState([]);
     const { data, loading, error } = useFetch("/auth/patients");
-    // if (appointByDate.length == 0) {
-    //     setAppointments(data);
-    // }
     const handleDateChange = date => {
         setSelectedDate(date);
     }
-    useEffect(() => {
+    const showAllPatientsList = () =>{
+        setAppointments(data);
+    }
+
+    useEffect(() =>{
         const fetchData = async () => {
             try {
                 const res = await axios.post("/auth/appointByDate", { date: selectedDate })
-                // if(res.data){
                     setAppointments(res.data)
-                // }
             } catch (err) {
                 console.log(err)
             }
@@ -38,12 +37,15 @@ const Dashboard = () => {
             </div>
             <div className="col-md-9">
                 <div className=''>
-                    <div className='mb-2'>
+                    <div className='mt-5 mb-2 d-flex justify-content-between'>
                         <Calendar
-                            onChange={()=>handleDateChange}
+                            onChange={handleDateChange}
                             value={new Date()}
                             className="calender-design"
                         />
+                        <div>
+                            <button className='btn btn-primary' onClick={showAllPatientsList}>Show All Apppointments</button>
+                        </div>
                     </div>
                     <div>
                         <AppointByDate appopintMent={appointByDate} key={10} selectedDate={selectedDate}></AppointByDate>

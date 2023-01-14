@@ -19,6 +19,7 @@ const AppointMentShorList = ({ appointment }) => {
             <tbody>
                 {appointment && appointment?.map((item, index) =>
                     <tr key={index + 200}>
+                        <td>{index + 1}</td>
                         <td>{item.username}</td>
                         <td>{item.phone}</td>
                         <td>{item.email}</td>

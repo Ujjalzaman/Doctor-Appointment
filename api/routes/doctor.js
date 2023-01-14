@@ -26,8 +26,6 @@ router.post('/auth/isDoctor',IsDoctor);
 router.get('/auth/reviews', ReviewsList);
 router.get('/auth/doctors', DoctorList);
 
-
-
 //auth
 router.post('/auth/register', register);
 router.post('/auth/login', login);

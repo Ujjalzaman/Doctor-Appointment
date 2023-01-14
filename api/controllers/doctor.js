@@ -4,131 +4,124 @@ import reviewSchema from "../models/ReviewsModal.js";
 import Users from "../models/Users.js";
 
 
-export const appointMentByDate = async(req, res, next) => {
-    const {id, isAdmin} =req.user;
-    try{
-        if(isAdmin){
-            const appointmentDate = await appointMentSchema.find({appointmantDate: req.body.date})
+export const appointMentByDate = async (req, res, next) => {
+    const { id, isAdmin } = req.user;
+    try {
+        if (isAdmin) {
+            const appointmentDate = await appointMentSchema.find({ appointmantDate: req.body.date })
             res.status(200).json(appointmentDate);
-        }else{
-            const appointmentDate = await appointMentSchema.find({appointmantDate: req.body.date, user_id:id})
+        } else {
+            const appointmentDate = await appointMentSchema.find({ appointmantDate: req.body.date, user_id: id })
             res.status(200).json(appointmentDate);
         }
-    }catch(err){
+    } catch (err) {
         next(err);
     }
 }
-export const AddServices = async(req, res, next) => {
+export const AddServices = async (req, res, next) => {
     const serviceData = new OurServices(req.body);
-    try{
+    try {
         const services = await serviceData.save();
         res.status(200).json(services);
-    }catch(err){
+    } catch (err) {
         next(err);
     }
 }
-export const ServicesList = async(req, res, next) =>{
-    try{
+export const ServicesList = async (req, res, next) => {
+    try {
         const services = await OurServices.find();
         res.status(200).json(services);
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 }
 
-export const DoctorList = async(req, res, next) => {
-    const {email} = req.query;
-    try{
-        if(email){
-            const doctorList = await Users.find({email: email})
+export const DoctorList = async (req, res, next) => {
+    const { email } = req.query;
+    try {
+        if (email) {
+            const doctorList = await Users.find({ email: email })
             res.status(200).json(doctorList);
-        }else{
-            const doctorList = await Users.find({isDoctor: true})
+        } else {
+            const doctorList = await Users.find({ isDoctor: true })
             res.status(200).json(doctorList);
         }
     }
-    catch(err){
+    catch (err) {
         next(err);
     }
 }
-export const UpdateUserInfo = async(req, res, next) =>{
-    try{
-        const response = await Users.findByIdAndUpdate(req.params.id, {$set:req.body}, {new:true});
+export const UpdateUserInfo = async (req, res, next) => {
+    try {
+        const response = await Users.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
         res.status(200).json(response)
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 }
 
-export const AddAppointMentCollection = async(req, res, next) => {
+export const AddAppointMentCollection = async (req, res, next) => {
     const saveAppoint = new appointMentSchema(req.body)
-    try{
+    try {
         const addpointment = await saveAppoint.save();
         res.status(200).json(addpointment)
     }
-    catch(err){
+    catch (err) {
         next(err);
     }
 }
 
 //Appopintment PatientList
-export const AppointmentPatientsList = async(req, res, next) => {
-    const {id, isAdmin} = req.user;
-    try{
-        if(isAdmin){
-            const appointmentPatients = await appointMentSchema.find();
+export const AppointmentPatientsList = async (req, res, next) => {
+    const { id, isAdmin } = req.user;
+    try {
+        if (isAdmin) {
+            const appointmentPatients = await appointMentSchema.find({});
             res.status(200).json(appointmentPatients);
-        }else{
-            const appointmentPatients = await appointMentSchema.find({user_id:id});
+        } else {
+            const appointmentPatients = await appointMentSchema.find({ user_id: id });
             res.status(200).json(appointmentPatients);
         }
     }
-    catch(err){
+    catch (err) {
         next(err);
     }
 }
 
-export const IsDoctor = async(req, res, next) => {
+export const IsDoctor = async (req, res, next) => {
     const docEmail = req.body.email;
-    try{
-        const isDoc = await Users.findOne({email:docEmail})
-        if(isDoc.isDoctor=true){
-            const {password, ...others} = isDoc._doc;
-            res.status(200).json({...others})
+    try {
+        const isDoc = await Users.findOne({ email: docEmail })
+        if (isDoc.isDoctor = true) {
+            const { password, ...others } = isDoc._doc;
+            res.status(200).json({ ...others })
         }
-        else{
+        else {
             res.status(200).json(false)
         }
     }
-    catch(err){
+    catch (err) {
         next(err);
     }
 }
 
 //Reviews
 
-export const AddReview = async(req, res, next) =>{
+export const AddReview = async (req, res, next) => {
     const savedData = new reviewSchema(req.body);
-    try{
+    try {
         const saveReview = await savedData.save();
         res.status(200).json(saveReview);
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 }
-export const ReviewsList = async(req, res, next) =>{
-    const {id, isAdmin} = req.user;
-    try{
-        if(isAdmin){
-            const response = await reviewSchema.find({});
-            res.status(200).json(response)
-        }
-        else{
-            const response = await reviewSchema.find({user_id:id});
-            res.status(200).json(response)
-        }
+export const ReviewsList = async (req, res, next) => {
+    try {
+        const response = await reviewSchema.find({});
+        res.status(200).json(response)
     }
-    catch(err){
+    catch (err) {
         next(err)
     }
 }
