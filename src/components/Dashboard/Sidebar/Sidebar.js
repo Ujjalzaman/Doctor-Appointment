@@ -1,21 +1,26 @@
 import { faCalendar, faCog, faGripHorizontal, faHome, faSignOutAlt, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../App';
 import './Sidebar.css';
 import Spinner from 'react-bootstrap/Spinner'
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../Context/AuthContext';
 
 const Sidebar = () => {
-    const [loading, setLoading] = useState(false);
+    const {user,loading, erro, dispatch} = useContext(AuthContext);
+    const hanldeSignOut = () =>{
+        dispatch({type: "LOGOUT"})
+    }
+
     return (
         <div className="sidebar d-flex flex-column justify-content-between col-md-2 py-5">
             <ul className="list-unstyled">
                 <li>
-                    <Link to="/" className="text-white text-decoration-none"><FontAwesomeIcon icon={faUser} />
-                        user
-                        {/* <span>{loggedInUser.name}</span> */}
+                    <Link to="/" className="text-white text-decoration-none">
+                        <FontAwesomeIcon icon={faUser} />
+                        <span className='text-capitalize'>{user?.username}</span>
                     </Link>
                 </li>
                 <li>
@@ -71,11 +76,12 @@ const Sidebar = () => {
                     </div>
                 {/* } */}
             </ul>
-            {/* <div className="desh-logout">
-                <Link to="/" className="text-white text-decoration-none" onClick={signOut}><FontAwesomeIcon icon={faSignOutAlt} /><span>
+            <div className="desh-logout">
+                <Link to="/" className="text-white text-decoration-none" onClick={hanldeSignOut}>
+                    <FontAwesomeIcon icon={faSignOutAlt} /><span>
                     {loading ? <Spinner animation="border" variant="info" /> : "LogOut"}
                 </span></Link>
-            </div> */}
+            </div>
         </div>
     );
 };

@@ -39,8 +39,8 @@ const Pop = () => {
                 containerPadding={20}
             >
                 <Popover id="popover-contained">
-                    <Popover.Header as="h4">
-                        {user.name}
+                    <Popover.Header as="h4" className='text-capitalize'>
+                        {user.username}
                     </Popover.Header>
                     <Popover.Body>
                         <p className="userName">{user.email}</p>
