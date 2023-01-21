@@ -1,15 +1,16 @@
 import React from 'react';
-import { Route, useNavigate } from 'react-router-dom';
+import { Navigate, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../../../App';
 import jwt_decode from "jwt-decode";
+import { AuthContext } from '../../Context/AuthContext';
 
-const PrivateRoute = ({ children, ...rest }) => {
-  const [loggedInUser] = useContext(UserContext);
+const PrivateRoute = ({ children }) => {
+  const { user } = useContext(AuthContext);
+  const { state } = useLocation();
+  const history = state ? state.from.pathname : '/';
 
-  const navigate = useNavigate();
   const isLoggedIn = () => {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('access_token');
     if (!token) {
       return false;
     }
@@ -17,24 +18,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     const currentTime = new Date().getTime() / 1000;
     return decodedToken.exp > currentTime;
   }
-
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        (loggedInUser.email || isLoggedIn()) ? (
-          children
-        ) : (
-          <navigate
-            to={{
-              pathname: "/login",
-              state: { from: location }
-            }}
-          />
-        )
-      }
-    />
-  );
+  return user.email ? children : <Navigate to="/login" state={{from : history}}/>
 };
 
 export default PrivateRoute;

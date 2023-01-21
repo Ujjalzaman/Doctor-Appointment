@@ -29,7 +29,7 @@ const Navbar = () => {
             <div className="container-fluid">
                 <div className="navbar-heading">
                     <h3>
-                        <Link className="navbar-h" to="/">Online Doctor AppointMent</Link>
+                        <Link className="navbar-h" to="/">Dental Doctor</Link>
                     </h3>
                 </div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
