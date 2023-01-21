@@ -12,7 +12,6 @@ import swal from 'sweetalert';
 
 const Sidebar = () => {
     const { user, loading, erro, dispatch } = useContext(AuthContext);
-    console.log("foooo", user)
     const hanldeSignOut = () => {
         swal({
             icon:'success',
@@ -43,13 +42,13 @@ const Sidebar = () => {
                     </Link>
                 </li>
 
-                <li>
-                    <Link to="/patients" className="text-nowrap text-white text-decoration-none"><FontAwesomeIcon icon={faUser} />
-                        <span>Patients</span>
-                    </Link>
-                </li>
-                {user.isDoctor &&
+                {user.isAdmin &&
                     <>
+                    <li>
+                        <Link to="/patients" className="text-nowrap text-white text-decoration-none"><FontAwesomeIcon icon={faUser} />
+                            <span>Patients</span>
+                        </Link>
+                    </li>
                         <li>
                             <Link to="/doctors" className="text-nowrap text-white text-decoration-none"><FontAwesomeIcon icon={faUserPlus} />
                                 <span>Doctors</span>

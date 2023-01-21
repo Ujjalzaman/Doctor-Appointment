@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Modal from 'react-modal';
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +6,8 @@ import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
+import { AuthContext } from '../../Context/AuthContext';
+import swal from 'sweetalert';
 
 const customStyles = {
     content: {
@@ -20,16 +22,22 @@ const customStyles = {
 Modal.setAppElement('#root')
 
 const AppointMentForm = ({modalIsOpen, appointMentDate, closeModal, date }) => {
-    const { data, loading, error } = useFetch("http://localhost:5000/auth/doctors");
+    const {user} = useContext(AuthContext);
+    const { data, loading, error } = useFetch("/auth/doctors");
     const {register,handleSubmit, errors} = useForm()
     const navigate = useNavigate();
     const onSubmit = async(data) =>{
         data.appointmantDate = date;
         data.serviceTitle = appointMentDate;
+        data.user_id = user._id;
         try{
-            // console.log("dddd", data)
-            await axios.post("http://localhost:5000/auth/addAppointMent",data)
+            await axios.post("/auth/addAppointMent",data)
             closeModal();
+            swal({
+                icon:'success',
+                text:'Successfully Appointment Submited',
+                timer: 23
+            })
             navigate("/");
         }
         catch(err){

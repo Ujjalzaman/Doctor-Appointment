@@ -1,13 +1,17 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import useFetch from '../../hooks/useFetch';
 import Sidebar from '../Sidebar/Sidebar';
+import swal from 'sweetalert';
 
 const AddReview = () => {
     const [review, setReview] = useState({});
     const { data, loading, error, reFetchData } = useFetch("/auth/reviews");
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [showForm, setShowForm] = useState(false);
 
     const handleChange = (e) => {
         setReview(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -21,13 +25,17 @@ const AddReview = () => {
         try {
             if (user._id && review.desc) {
                 const res = await axios.post("/auth/addReview", review)
-                console.log(res.data);
+                swal({
+                    icon: 'success',
+                    text: 'Successfully Sign In',
+                    timer: 2000
+                })
+                navigate("/")
             }
         } catch (err) {
             console.log(err)
         }
     }
-    // @Ujjalzaman123
     return (
         <section className='container row g-0'>
             <div className='col-md-3'>
@@ -46,7 +54,6 @@ const AddReview = () => {
                     </div>
                     <button type="submit" className="btn btn-primary my-3">Submit</button>
                 </form>
-
                 <table className="table shadow-lg p-5 mt-4">
                     <thead className="thead-dark">
                         <tr>
