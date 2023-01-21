@@ -20,6 +20,7 @@ const SignIn = ({ handleResponse }) => {
         try{
             const res = await axios.post('/auth/login', event);
             dispatch({type: "LOGIN_SUCCESS", payload: res.data.details})
+            console.log("res.daata", res.data)
             swal({
                 icon:'success',
                 text:'Successfully Sign In',

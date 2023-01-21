@@ -12,6 +12,7 @@ import swal from 'sweetalert';
 
 const Sidebar = () => {
     const { user, loading, erro, dispatch } = useContext(AuthContext);
+    console.log("foooo", user)
     const hanldeSignOut = () => {
         swal({
             icon:'success',
@@ -25,9 +26,9 @@ const Sidebar = () => {
         <div className="sidebar d-flex flex-column justify-content-between col-md-2 py-5">
             <ul className="list-unstyled">
                 <li>
-                    <Link to="/" className="text-nowrap text-white text-decoration-none">
+                    <Link className="text-nowrap text-white text-decoration-none">
                         <FontAwesomeIcon icon={faUser} />
-                        <span className='text-capitalize'>{user?.username}</span>
+                        <span className='text-capitalize'>{user?.username}</span>   {user?.isDoctor ? "(Doctor)" : user?.isAdmin ? "(Admin)" : ""}
                     </Link>
                 </li>
                 <li>
