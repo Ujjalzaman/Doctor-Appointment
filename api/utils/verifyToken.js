@@ -15,13 +15,12 @@ export const verifyToken = (req, res, next) => {
 };
 
 export const verifyUser = (req, res, next) => {
-  if (req.user.id || req.user.isAdmin) {
+  if (req.user.id || req.user.isAdmin || req.user.isDoctor) {
     next();
   } else {
     return next(createError(403, "You are not authorized!"));
   }
 };
-
 export const verifyAdmin = (req, res, next) => {
   if (req.user.isAdmin) {
     next();
