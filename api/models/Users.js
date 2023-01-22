@@ -20,10 +20,13 @@ const UserSchema = new mongoose.Schema({
         default: null
     },
     isAdmin:{
-        type: String,
-        required: true,
-        default: true,
+        type: Boolean,
+        default: false,
     },
+    isDoctor:{
+        type: Boolean,
+        default: false,
+    }
     
 }, {timestamps: true})
 

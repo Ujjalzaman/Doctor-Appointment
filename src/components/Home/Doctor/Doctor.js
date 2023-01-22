@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import useFetch from '../../hooks/useFetch';
 import './Doctor.css';
 import DoctorDetail from './DoctorDetail';
 
 const Doctor = () => {
-    const [doctor, setDoctor] = useState([])
-
-    // useEffect(() => {
-    //     fetch('https://sleepy-tundra-72379.herokuapp.com/doctors')
-    //         .then(res => res.json())
-    //         .then(data => setDoctor(data))
-    // }, [])
+    const { data, loading, error } = useFetch("/auth/doctors");
     return (
-        <section className="doctors">
+        <section className="doctors" id="doctorContaints">
             <div className="container">
                 <h1 className="brand-color text-center mb-5">Our Doctors </h1>
             </div>
             <div className=" container">
                 <div className="row d-flex justify-content-center">
-                    {/* {
-                        doctor.map(doctor => <DoctorDetail key={doctor._id} doctor={doctor}></DoctorDetail>)
-                    } */}
+                {
+                    data && data.map(item => <DoctorDetail key={item._id} item={item}></DoctorDetail>)
+                }
                 </div>
             </div>
         </section>

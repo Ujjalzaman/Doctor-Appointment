@@ -6,32 +6,29 @@ import Spinner from 'react-bootstrap/Spinner';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 const SignIn = ({ handleResponse }) => {
     const {user, loading, error, dispatch} = useContext(AuthContext);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = async(event) => {
         dispatch({type: "LOGIN_START"})
         try{
-            const res = await axios.post('http://localhost:5000/auth/login', event);
+            const res = await axios.post('/auth/login', event);
             dispatch({type: "LOGIN_SUCCESS", payload: res.data.details})
+            swal({
+                icon:'success',
+                text:'Successfully Sign In',
+                timer: 2000
+            })
+            navigate("/")
         }catch(err){
             dispatch({type: "LOGIN_FAILURE", payload: err.response.data})
         }
-
-        //REMOVE ONLY ==>  Sign In code --- Authentication with firebase
-        // ===================================================
-        // hanldeSignInWithEmailAndPass(email, password)
-        //     .then(res => {
-        //         handleResponse(res)
-        //         setLoading(true)
-        //         if (res.error) {
-        //             setLoading(false)
-        //             setErr(res.error)
-        //         }
-        //     })
     }
 
     return (

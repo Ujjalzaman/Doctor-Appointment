@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Modal from 'react-modal';
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClosedCaptioning, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import useFetch from '../../hooks/useFetch';
+import { AuthContext } from '../../Context/AuthContext';
+import swal from 'sweetalert';
 
 const customStyles = {
     content: {
@@ -17,24 +22,27 @@ const customStyles = {
 Modal.setAppElement('#root')
 
 const AppointMentForm = ({modalIsOpen, appointMentDate, closeModal, date }) => {
+    const {user} = useContext(AuthContext);
+    const { data, loading, error } = useFetch("/auth/doctors");
     const {register,handleSubmit, errors} = useForm()
-
-    const onSubmit = (data) =>{
-        data.service = appointMentDate;
-        data.date = date;
-        data.created = new Date();
-        // console.log(data)
-        fetch('https://sleepy-tundra-72379.herokuapp.com/addAppointMent', {
-            method : 'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(success => {
-            if (success){
-                closeModal();
-            }
-        })
+    const navigate = useNavigate();
+    const onSubmit = async(data) =>{
+        data.appointmantDate = date;
+        data.serviceTitle = appointMentDate;
+        data.user_id = user._id;
+        try{
+            await axios.post("/auth/addAppointMent",data)
+            closeModal();
+            swal({
+                icon:'success',
+                text:'Successfully Appointment Submited',
+                timer: 23
+            })
+            navigate("/");
+        }
+        catch(err){
+            console.log(err)
+        }
     }
     return (
 
@@ -49,26 +57,33 @@ const AppointMentForm = ({modalIsOpen, appointMentDate, closeModal, date }) => {
                 <h1 className="text-center brand-color">{appointMentDate}</h1>
                 <p className="text-secondary text-center"> On {date.toDateString()}</p>
                 <form className="p-5" onSubmit={handleSubmit(onSubmit)}>
-                    <div className="form-group">
-                        <input type="text" {...register("name",{required: true})} name="name" placeholder="Your Name" className="form-control" />
-
+                    <div className="form-group mb-2">
+                        <input type="text" {...register("username",{required: true})} name="username" placeholder="Your Name" className="form-control" />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group mb-2">
                         <input type="text" {...register("phone", { required: true })} name="phone" placeholder="Phone Number" className="form-control" />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group mb-2">
                         <input type="text" {...register("email", { required: true })} name="email" placeholder="Email" className="form-control" />
+                    </div>
+                    <div className="form-group mb-2">
+                            <select className="form-control" name="doctor_id"  {...register("doctor_id", { required: true })}>
+                                <option disabled={true} value="Not set">Select Doctor</option>
+                                {
+                                    data && data.map((item) =>(
+                                        <option value={item._id} key={item._id + 20000}>{item.username}</option>
+                                    ))
+                                }
+                            </select>
                     </div>
                     <div className="form-group row">
                         <div className="col-4">
-                     
                             <select className="form-control" name="gender"  {...register("gender", { required: true })}>
                                 <option disabled={true} value="Not set">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Not set">Other</option>
                             </select>
-
                         </div>
                         <div className="col-4">
                             <input {...register("age", { required: true })} className="form-control" name="age" placeholder="Your Age" type="number" />
@@ -78,7 +93,7 @@ const AppointMentForm = ({modalIsOpen, appointMentDate, closeModal, date }) => {
                         </div>
                     </div>
 
-                    <div className="form-group text-right">
+                    <div className="form-group text-right mt-2">
                         <button type="submit" className="btn btn-primary">Send</button>
                     </div>
                 </form>

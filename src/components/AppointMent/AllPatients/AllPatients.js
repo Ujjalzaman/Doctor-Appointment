@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Sidebar from '../../Dashboard/Sidebar/Sidebar';
 import PatientList from './PatientList';
 import './patient.css';
 import DeshActivity from './DeshActivity';
+import useFetch from '../../hooks/useFetch';
 
 const AllPatients = () => {
-    const [patient, setPatients] = useState([]);
-    useEffect(() => {
-        fetch('https://sleepy-tundra-72379.herokuapp.com/allPatients')
-            .then(res => res.json())
-            .then(data => setPatients(data))
-    }, [])
+    const {data, loading, error} = useFetch("/auth/patients");
     return (
         <div className="all-patient">
             <Sidebar></Sidebar>
@@ -21,7 +17,7 @@ const AllPatients = () => {
                             <DeshActivity />
                         </div>
                         <h6 className="brand-color text-start">Recent Appointments</h6>
-                        <PatientList patient={patient}></PatientList>
+                        <PatientList patient={data}></PatientList>
                     </div>
                 </div>
             </div>

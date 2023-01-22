@@ -1,5 +1,6 @@
 .sidebar{
-    background-image: linear-gradient(45deg, #00c0b0, #1CC7C1);
+    /* background-image: linear-gradient(45deg, #00c0b0, #1CC7C1); */
+    background-color: #01012c;
     position: fixed;
     height: 100vh;
     font-family: sans-serif;
@@ -11,9 +12,9 @@
     font-size: 1rem;
     transition: 0.3s ease-in-out;
 }
-.sidebar li:hover span{
+.desh-logout:hover, .sidebar li:hover {
     display:inline-block;
-    font-size: 1.1rem;
+    scale: 1.1;
 }
 .sidebar li svg{
     margin-right: 18px;
@@ -23,7 +24,3 @@
     margin-left: 1rem;
     transition: 0.3s ease-in-out;
 }
-.desh-logout:hover{
-    font-size: 1.1rem;
-}
-/* https://bootsnipp.com/ */

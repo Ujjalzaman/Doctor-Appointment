@@ -7,11 +7,11 @@ import './Navbar.css';
 import toast, { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
 
 
 const Navbar = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const [loading, setLoading] = useState(false);
+    const {user, loading, error, dispatch} = useContext(AuthContext);
     const [isSticky, setSticky] = useState(false)
 
     useEffect(() => {
@@ -23,26 +23,13 @@ const Navbar = () => {
             }
         })
     }, [])
-
-    const signOut = () => {
-        setLoading(true)
-        hanldeSignOut()
-            .then(res => {
-                setLoggedInUser(res)
-                toast("Successfully logged out")
-                if (res.error) {
-                    setLoading(false)
-                }
-            })
-    }
-
     return (
         <nav className={`navbar navbar-expand-lg navbar-light ${isSticky ? "stickynav" : "normalnav"}`} expand="lg">
             <Toaster />
             <div className="container-fluid">
                 <div className="navbar-heading">
                     <h3>
-                        <Link className="navbar-h" to="/">Online Doctor AppointMent</Link>
+                        <Link className="navbar-h" to="/">Dental Doctor</Link>
                     </h3>
                 </div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,32 +42,32 @@ const Navbar = () => {
                             <a className="nav-link active me-3" aria-current="page" href="/">HOME</a>
                         </li>
                         <li className="nav-item active">
-                            <a className="nav-link me-3" href="!#">ABOUT</a>
+                            <a className="nav-link me-3" href="#doctorContaints">ABOUT</a>
                         </li>
 
                         <li className="nav-item">
-                            <NavLink activeClassName="ContactPage" className="nav-link me-3" to="#ContactPage">CONTACT</NavLink>
+                            <a href='#ContactPage' className="nav-link me-3">CONTACT</a>
+                            {/* <NavLink activeClassName="ContactPage" className="nav-link me-3" to="#ContactPage">CONTACT</NavLink> */}
                         </li>
 
                         <li className="nav-item">
-                            <a className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} href="!#">BLOG</a>
+                            {/* <a className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} href="#BlogContaint">BLOG</a> */}
+                            <a className="nav-link me-3 textDark" href="#BlogContaint">BLOG</a>
                         </li>
 
                         <li className="nav-item">
-                            <a
-                                className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`}
-                                href="!#" >DENTAL SERVICE</a>
+                            <a className="nav-link me-3 textDark" href="#serviceContaint" >DENTAL SERVICE</a>
                         </li>
 
                         <li className="nav-item">
-                            <a className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} href="!#">REVIEWS</a>
+                            <a className="nav-link me-3 textDark" href="#reviewsContaints">REVIEWS</a>
                         </li>
 
                         <div className="dropdown">
 
                             <li className="nav-item">
-                                {loggedInUser.email ?
-                                    <Pop user={loggedInUser} hanldeSignOut={signOut} loading={loading} setLoading={setLoading} />
+                                {user?.email ?
+                                    <Pop/>
                                     :
                                     <span>
                                         <Link className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} to="/login">LOGIN</Link>
@@ -88,7 +75,7 @@ const Navbar = () => {
                                 }
                             </li>
 
-                        </div>)
+                        </div>
                     </ul>
                 </div>
             </div>

@@ -22,7 +22,7 @@
     "react-hot-toast": "^2.1.0",
     "react-icons": "^4.2.0",
     "react-modal": "^3.13.1",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^6.6.2",
     "react-scripts": "4.0.2",
     "sweetalert": "^2.1.2",
     "web-vitals": "^1.1.0"
@@ -50,5 +50,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

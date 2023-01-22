@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Overlay } from 'react-bootstrap';
 import { useRef } from 'react';
 import Popover from 'react-bootstrap/Popover';
@@ -6,10 +6,11 @@ import UserIcon from '../../../images/doc/user.svg';
 import './Pop.css';
 import { Link } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner'
+import { AuthContext } from '../../Context/AuthContext';
 
 
-const Pop = ({ user, hanldeSignOut, loading }) => {
-
+const Pop = () => {
+    const {user, loading, error, dispatch} = useContext(AuthContext);
     const [show, setShow] = useState(false);
     const [target, setTarget] = useState(null);
     const ref = useRef(null);
@@ -17,11 +18,14 @@ const Pop = ({ user, hanldeSignOut, loading }) => {
         setShow(!show)
         setTarget(e.target);
     }
+    const hanldeSignOut = () =>{
+        dispatch({type: "LOGOUT"})
+    }
 
 
     return (
         <div ref={ref}>
-            {user.dp ?
+            {user.img ?
                 <img src={user.dp} alt="" className="popImg" onClick={handleClick} /> :
                 <img src={UserIcon} alt="" className="popImg" onClick={handleClick} />
             }
@@ -35,8 +39,8 @@ const Pop = ({ user, hanldeSignOut, loading }) => {
                 containerPadding={20}
             >
                 <Popover id="popover-contained">
-                    <Popover.Header as="h4">
-                        {user.name}
+                    <Popover.Header as="h4" className='text-capitalize'>
+                        {user.username}
                     </Popover.Header>
                     <Popover.Body>
                         <p className="userName">{user.email}</p>

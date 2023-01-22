@@ -4,8 +4,6 @@ import jwt from 'jsonwebtoken';
 import {createError} from '../utils/error.js'
 
 
-let sshkey = "W16aQUoCDwHm8AAAAadWpqYWx6YW1hbkBERVNLVE9QLUlLNkVITkUB";
-
 export const register = async (req, res, next)=>{
     const salt =  bcrypt.genSaltSync(10);
     const hash =  bcrypt.hashSync(req.body.password, salt);
@@ -14,7 +12,9 @@ export const register = async (req, res, next)=>{
         const userData = new Users({
             username: req.body.username,
             email: req.body.email,
-            password: hash
+            password: hash,
+            isAdmin:req.body.isAdmin,
+            isDoctor: req.body.isDoctor
         })
         const newUser = await userData.save();
         res.status(200).json(newUser);
@@ -35,13 +35,23 @@ export const login = async(req, res, next) =>{
             return next(createError(404, 'Password is not matched!'));
         }
 
-        const token = jwt.sign({id: user._id, isAdmin: user.isAdmin}, sshkey);
-        const {password, isAdmin, ...others} = user._doc;
+        const token = jwt.sign({id: user._id, isAdmin: user.isAdmin, isDoctor: user.isDoctor}, process.env.JWT);
+        const {password, ...others} = user._doc;
         res.cookie('access_token', token, {
             httpOnly: true
         })
         .status(200)
-        .json({details: {...others}, isAdmin});
+        .json({details: {...others}});
+    }
+    catch(err){
+        next(err)
+    }
+}
+export const viewUser = async (req, res, next) =>{
+    try{
+        const user = await Users.find();
+        const {password, ...others} = user;
+        res.status(200).json(user);
     }
     catch(err){
         next(err)
