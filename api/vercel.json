@@ -2,9 +2,15 @@
     "version": 2,
     "name": "online-doctor-api",
     "builds": [
-       { "src": "app.js", "use": "@vercel/node" }
+        {
+            "src": "index.js",
+            "use": "@now/node"
+        }
     ],
     "routes": [
-       { "src": "/(.*)", "dest": "/app.js" }
+        {
+            "src": "/(.*)",
+            "dest": "index.js"
+        }
     ]
- }
+}
