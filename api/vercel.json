@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "music-album",
+    "name": "server",
     "builds": [
        { "src": "app.js", "use": "@vercel/node" }
     ],
