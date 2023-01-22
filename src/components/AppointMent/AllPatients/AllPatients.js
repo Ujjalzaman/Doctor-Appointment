@@ -6,7 +6,7 @@ import DeshActivity from './DeshActivity';
 import useFetch from '../../hooks/useFetch';
 
 const AllPatients = () => {
-    const {data, loading, error} = useFetch("http://localhost:5000/auth/patients");
+    const {data, loading, error} = useFetch("/auth/patients");
     return (
         <div className="all-patient">
             <Sidebar></Sidebar>
