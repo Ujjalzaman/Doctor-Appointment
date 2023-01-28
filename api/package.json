@@ -8,7 +8,7 @@
   },
   "type": "module",
   "scripts": {
-    "start": "node --experimental-modules --experimental-json-modules index.mjs",
+    "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "author": "ujjal",
