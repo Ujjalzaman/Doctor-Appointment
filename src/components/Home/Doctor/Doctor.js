@@ -4,7 +4,7 @@ import './Doctor.css';
 import DoctorDetail from './DoctorDetail';
 
 const Doctor = () => {
-    const { data, loading, error } = useFetch("/auth/doctors");
+    const { data, loading, error } = useFetch(`${process.env.REACT_APP_API_PATH}/auth/doctors`);
     return (
         <section className="doctors" id="doctorContaints">
             <div className="container">
