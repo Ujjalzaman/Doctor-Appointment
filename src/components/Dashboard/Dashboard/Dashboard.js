@@ -8,9 +8,10 @@ import useFetch from '../../hooks/useFetch';
 import axios from 'axios';
 
 const Dashboard = () => {
+    const baseUrl = process.env.REACT_APP_BASE_URL;
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [appointByDate, setAppointments] = useState([]);
-    const { data, loading, error } = useFetch("/auth/patients");
+    const { data, loading, error } = useFetch(`${baseUrl}/auth/patients`);
     const handleDateChange = date => {
         setSelectedDate(date);
     }
@@ -21,7 +22,7 @@ const Dashboard = () => {
     useEffect(() =>{
         const fetchData = async () => {
             try {
-                const res = await axios.post("/auth/appointByDate", { date: selectedDate })
+                const res = await axios.post(`${baseUrl}/auth/appointByDate`, { date: selectedDate })
                     setAppointments(res.data)
             } catch (err) {
                 console.log(err)

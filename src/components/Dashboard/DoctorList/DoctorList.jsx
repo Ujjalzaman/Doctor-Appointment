@@ -13,17 +13,18 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
 const DoctorList = () => {
+    const baseUrl = process.env.REACT_APP_BASE_URL;
     const [userData, setUserData] = useState({})
     const [searchData, setSearchData] = useState({})
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const { data, loading, error, reFetchData } = useFetch("/auth/doctors");
+    const { data, loading, error, reFetchData } = useFetch(`${baseUrl}/auth/doctors`);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
     const onSubmit = async (event) => {
         try {
-            const response = await axios.get(`/auth/doctors?email=${event.email}`);
+            const response = await axios.get(`${baseUrl}/auth/doctors?email=${event.email}`);
             setSearchData(response.data)
             handleShow();
         } catch (err) {
@@ -35,7 +36,7 @@ const DoctorList = () => {
     }
     const handleUpdateInfo = async(e) => {
         try{
-            const response = await axios.put(`/auth/updateInfo/${searchData[0]._id}`,userData)
+            const response = await axios.put(`${baseUrl}/auth/updateInfo/${searchData[0]._id}`,userData)
             handleClose();
         }catch(err){
             console.log(err)
