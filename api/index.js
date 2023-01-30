@@ -7,6 +7,10 @@ import dotenv from 'dotenv';
 import doctorRoutes from './routes/doctor.js'
 import cookieParser from 'cookie-parser';
 
+const app = express();
+app.use(cors({
+    origin: "http://localhost:3000"
+}));
 const port = 5000;
 
 mongoose.connection.on("disconnected", () =>{console.log("Disconnected")})
