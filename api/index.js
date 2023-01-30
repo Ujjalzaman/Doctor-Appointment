@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 
 const app = express();
 app.use(cors({
-    origin: "http://localhost:3000"
+    origin: "https://master--dental-doctor-ujjal.netlify.app/"
 }));
 const port = 5000;
 
