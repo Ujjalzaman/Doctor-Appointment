@@ -24,7 +24,7 @@ Modal.setAppElement('#root')
 const AppointMentForm = ({modalIsOpen, appointMentDate, closeModal, date }) => {
     const baseUrl = process.env.REACT_APP_BASE_URL;
     const {user} = useContext(AuthContext);
-    const { data, loading, error } = useFetch(`${baseUrl}/auth/doctors`);
+    const { data, loading, error } = useFetch("/auth/doctors");
     const {register,handleSubmit, errors} = useForm()
     const navigate = useNavigate();
     const onSubmit = async(data) =>{

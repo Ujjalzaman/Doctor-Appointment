@@ -6,8 +6,7 @@ import DeshActivity from './DeshActivity';
 import useFetch from '../../hooks/useFetch';
 
 const AllPatients = () => {
-    const baseUrl = process.env.REACT_APP_BASE_URL;
-    const {data, loading, error} = useFetch(`${baseUrl}/auth/patients`);
+    const {data, loading, error} = useFetch("/auth/patients");
     return (
         <div className="all-patient">
             <Sidebar></Sidebar>

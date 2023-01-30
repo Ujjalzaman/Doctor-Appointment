@@ -21,14 +21,6 @@ const AddDoctor = () => {
         formData.append('file', file);
         formData.append('name', info.name);
         formData.append('email', info.email);
-        // console.log("form data",formData)
-
-        // fetch('https://sleepy-tundra-72379.herokuapp.com/addDoctor', {
-        //     method: 'POST',
-        //     body: formData
-        // })
-        //     .then(response => response.json())
-        //     .then(data => console.log(data))
     }
 
     return (

@@ -80,7 +80,7 @@ const SignUp = ({ handleResponse }) => {
         }
         try{
             // Register With node-server & mongodb
-            const data = await axios.post(`${baseUrl}/auth/register`, registerInfo)
+            const data = await axios.post("/auth/register", registerInfo)
             setLoading(false);
             swal({
                 icon:'success',

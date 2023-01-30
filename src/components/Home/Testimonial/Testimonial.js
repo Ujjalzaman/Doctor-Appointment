@@ -8,7 +8,7 @@ import useFetch from '../../hooks/useFetch';
 
 const Testimonial = () => {
     const baseUrl = process.env.REACT_APP_BASE_URL;
-    const { data, loading, error } = useFetch(`${baseUrl}/auth/reviews`);
+    const { data, loading, error } = useFetch("/auth/reviews");
     return (
         <section className="container testimonial my-5 py-5" id="reviewsContaints">
             <div className="cointainer">
