@@ -1,9 +1,9 @@
 import { createContext } from 'react';
 import './App.css';
 import {
-  Outlet,
   createBrowserRouter,
   RouterProvider,
+  Route
 } from "react-router-dom";
 import Header from './components/Home/Header/Header';
 import Footer from './components/Shared/Footer/Footer';
@@ -23,16 +23,6 @@ import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
 // const Home = lazy(() => import('./components/Home/Home/Home'))
 
 export const UserContext = createContext();
-
-const Layout = () => {
-  return (
-    <>
-      <Header />
-      <Outlet />
-      <Footer />
-    </>
-  )
-}
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },

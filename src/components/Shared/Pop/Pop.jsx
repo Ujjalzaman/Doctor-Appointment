@@ -24,7 +24,7 @@ const Pop = () => {
 
 
     return (
-        <div ref={ref}>
+        <div>
             {user.img ?
                 <img src={user.dp} alt="" className="popImg" onClick={handleClick} /> :
                 <img src={UserIcon} alt="" className="popImg" onClick={handleClick} />
@@ -44,7 +44,7 @@ const Pop = () => {
                     </Popover.Header>
                     <Popover.Body>
                         <p className="userName">{user.email}</p>
-                        <p><Link className="nav-link userName" to="/dashboard">Deshboard</Link></p>
+                        <Link className="nav-link userName" to="/dashboard">Deshboard</Link>
                         <Button variant="outline-danger" size="sm" onClick={hanldeSignOut}>
                             {loading ? <Spinner animation="border" variant="info" /> : "Sign OUt"}
                         </Button>

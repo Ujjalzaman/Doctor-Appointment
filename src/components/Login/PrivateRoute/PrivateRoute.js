@@ -7,7 +7,7 @@ import { AuthContext } from '../../Context/AuthContext';
 const PrivateRoute = ({ children }) => {
   const { user } = useContext(AuthContext);
   const { state } = useLocation();
-  const history = state ? state.from.pathname : '/';
+  // const history = state ? state.from.pathname : '/';
 
   const isLoggedIn = () => {
     const token = sessionStorage.getItem('access_token');
@@ -18,7 +18,9 @@ const PrivateRoute = ({ children }) => {
     const currentTime = new Date().getTime() / 1000;
     return decodedToken.exp > currentTime;
   }
-  return user.email ? children : <Navigate to="/login" state={{from : history}}/>
+  return user.email ? children : <Navigate to="/login"
+  // state={{from : history}}
+  />
 };
 
 export default PrivateRoute;

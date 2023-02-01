@@ -15,8 +15,7 @@ const SignInForm = () => {
     const [isSignUp, setSignUp] = useState(false);
     // const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     // const history = useNavigate();
-    const location = useLocation();
-    // let { from } = location.state || { from: { pathname: "/" } };
+    // const location = useLocation();
 
     const handleResponse = (res) => {
         // setLoggedInUser(res);
