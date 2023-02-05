@@ -25,7 +25,7 @@ const SignIn = ({ handleResponse }) => {
     const onSubmit = async (event) => {
         dispatch({ type: "LOGIN_START" })
         try {
-            const res = await axios.post("/auth/login", event);
+            const res = await axios.post(`${baseUrl}/auth/login`, event);
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details })
             swal({
                 icon: 'success',

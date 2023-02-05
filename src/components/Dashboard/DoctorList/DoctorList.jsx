@@ -24,7 +24,7 @@ const DoctorList = () => {
     
     const onSubmit = async (event) => {
         try {
-            const response = await axios.get("/auth/doctors?email=${event.email}");
+            const response = await axios.get(`${baseUrl}/auth/doctors?email=${event.email}`);
             setSearchData(response.data)
             handleShow();
         } catch (err) {
@@ -36,7 +36,7 @@ const DoctorList = () => {
     }
     const handleUpdateInfo = async(e) => {
         try{
-            const response = await axios.put("/auth/updateInfo/${searchData[0]._id}",userData)
+            const response = await axios.put(`${baseUrl}/auth/updateInfo/${searchData[0]._id}`,userData)
             handleClose();
         }catch(err){
             console.log(err)

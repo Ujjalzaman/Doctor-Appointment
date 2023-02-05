@@ -2,8 +2,6 @@ import React from 'react';
 import doctor from '../../../images/doctor.png';
 import './Appointment.css';
 
-
-
 const Appointment = () => {
     return (
         <div className="appointment my-5">

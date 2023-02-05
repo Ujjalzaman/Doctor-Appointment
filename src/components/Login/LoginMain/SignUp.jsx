@@ -80,7 +80,7 @@ const SignUp = ({ handleResponse }) => {
         }
         try{
             // Register With node-server & mongodb
-            const data = await axios.post("/auth/register", registerInfo)
+            const data = await axios.post(`${baseUrl}/auth/register`, registerInfo)
             setLoading(false);
             swal({
                 icon:'success',
@@ -93,27 +93,6 @@ const SignUp = ({ handleResponse }) => {
             setError(err);
         }
     }
-    
-    // Remove Firebase Authentication 
-    // ================================================================
-        // createAccountWithEmail(user.displayName, user.email, user.password)
-        //     .then(res => {
-        //         handleResponse(res)
-        //         setLoading(false)
-        //         if (!res.error) {
-        //             swal({
-        //                 icon: "success",
-        //                 text: "Successfully Sign Up",
-        //                 timer: 2000
-        //             });
-        //         }
-        //         if (res.error) {
-        //             setLoading(false)
-        //             setError(res.error)
-        //             console.log(res.error)
-        //         }
-        //     })
-
 
     return (
         <form className="sign-up-form" onSubmit={hanldeOnSubmit}>

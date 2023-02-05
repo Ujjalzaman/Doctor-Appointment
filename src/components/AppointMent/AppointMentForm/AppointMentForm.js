@@ -24,7 +24,7 @@ Modal.setAppElement('#root')
 const AppointMentForm = ({modalIsOpen, appointMentDate, closeModal, date }) => {
     const baseUrl = process.env.REACT_APP_BASE_URL;
     const {user} = useContext(AuthContext);
-    const { data, loading, error } = useFetch("/auth/doctors");
+    const { data, loading, error } = useFetch(`${baseUrl}/auth/doctors`);
     const {register,handleSubmit, errors} = useForm()
     const navigate = useNavigate();
     const onSubmit = async(data) =>{
@@ -32,7 +32,7 @@ const AppointMentForm = ({modalIsOpen, appointMentDate, closeModal, date }) => {
         data.serviceTitle = appointMentDate;
         data.user_id = user._id;
         try{
-            await axios.post("/auth/addAppointMent",data)
+            await axios.post(`${baseUrl}/auth/addAppointMent`,data)
             closeModal();
             swal({
                 icon:'success',

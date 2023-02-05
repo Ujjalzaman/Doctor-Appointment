@@ -9,7 +9,7 @@ import swal from 'sweetalert';
 const AddReview = () => {
     const baseUrl = process.env.REACT_APP_BASE_URL;
     const [review, setReview] = useState({});
-    const { data, loading, error, reFetchData } = useFetch("/auth/reviews");
+    const { data, loading, error, reFetchData } = useFetch(`${baseUrl}/auth/reviews`);
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [showForm, setShowForm] = useState(false);
@@ -25,7 +25,7 @@ const AddReview = () => {
         review.name = user.username
         try {
             if (user._id && review.desc) {
-                const res = await axios.post("/auth/addReview", review)
+                const res = await axios.post(`${baseUrl}/auth/addReview`, review)
                 swal({
                     icon: 'success',
                     text: 'Successfully Sign In',
