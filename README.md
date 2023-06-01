@@ -19,6 +19,7 @@ For Example: create a file called .env and inside write.
 MONGO=here will be your mongodb value      
 JWT= Here will be your jason web token (Generate random number for secured your api).
 ```
+
 3. Start the server by running a command such as node index.js or nodemon index.js in the terminal.
 4. Test the API by sending HTTP requests to the server using tools such as Postman or cURL.
 
