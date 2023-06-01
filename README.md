@@ -35,7 +35,6 @@ Note: These are general instructions for setting up an Express API, and the spec
 
 ```
 **demo** : https://dental-doctor-ujjal.netlify.app/
-**My Websit**e : https://ujjalzaman-b6c8a.web.app/
 ```
 
 
