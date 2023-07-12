@@ -4,12 +4,10 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node":"16.x"
+    "node": "16.x"
   },
-  "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "ts-node-dev --respawn --transpile-only src/server.ts"
   },
   "author": "ujjal",
   "license": "ISC",
@@ -26,6 +24,17 @@
     "mongoose": "^6.7.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
-  }
+    "@types/cookie-parser": "^1.4.3",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/express-fileupload": "^1.4.1",
+    "@types/node": "^20.4.1",
+    "i": "^0.3.7",
+    "nodemon": "^2.0.7",
+    "npm": "^9.8.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.1.6"
+  },
+  "keywords": []
 }
