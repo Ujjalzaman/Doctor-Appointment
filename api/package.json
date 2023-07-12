@@ -7,7 +7,13 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only src/server.ts"
+    "start": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
+    "lint:fix": "eslint . --fix",
+    "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+    "prettier:fix": "prettier --write .",
+    "lint-prettier": "npm run lint:check && npm run prettier:check",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ujjal",
   "license": "ISC",
@@ -29,9 +35,15 @@
     "@types/express": "^4.17.17",
     "@types/express-fileupload": "^1.4.1",
     "@types/node": "^20.4.1",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "i": "^0.3.7",
     "nodemon": "^2.0.7",
     "npm": "^9.8.0",
+    "prettier": "^3.0.0",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.1.6"
