@@ -1,13 +1,14 @@
 import { Server } from "http"
 import mongoose from "mongoose";
 import app from "./app";
+import config from "./config";
 
 
 let server: Server;
 
 async function bootstrap() {
     try {
-        await mongoose.connect(process.env.MONGO as string);
+        await mongoose.connect(config.database_url as string);
         console.log("Database is Connected Sucessfully !!");
         server = app.listen(process.env.PORT, () => {
             console.log(`Application Listenting on port ${process.env.PORT}`)
@@ -29,3 +30,9 @@ async function bootstrap() {
 
 }
 bootstrap();
+
+process.on('SIGTERM', () => {
+    if(server){
+        server.close();
+    }
+})
