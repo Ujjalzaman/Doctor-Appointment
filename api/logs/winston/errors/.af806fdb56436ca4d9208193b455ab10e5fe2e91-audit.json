@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\work\\Online-Doctor-Appointment\\api\\logs\\winston\\errors\\.af806fdb56436ca4d9208193b455ab10e5fe2e91-audit.json",
+    "files": [
+        {
+            "date": 1689173567781,
+            "name": "C:\\work\\Online-Doctor-Appointment\\api\\logs\\winston\\errors\\phu-2023-12-07-20-error.log",
+            "hash": "c449d7f3b9180b82707fb2f823c669b099bf058a12f8000bb5bb4dd6f44e605d"
+        }
+    ],
+    "hashType": "sha256"
+}
