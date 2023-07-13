@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 // import doctorRoutes from './routes/doctor.js'
 import cookieParser from 'cookie-parser';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import router from './app/routes';
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use(fileUpload());
 app.use(express.urlencoded({ extended: true }));
 
 // app.use('/', doctorRoutes)
+app.use('/api/v1', router);
+
 app.use(globalErrorHandler);
 app.get('/', (req, res) => {
     res.send("hello it/s running")
