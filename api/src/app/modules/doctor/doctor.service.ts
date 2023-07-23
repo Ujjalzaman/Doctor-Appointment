@@ -20,8 +20,8 @@ const deleteDoctor = async (doctorId: string): Promise<void> => {
     await DoctorModel.findOneAndDelete({ _id: doctorId });
 }
 
-const updateDoctor = async (adminId: string, payload: Partial<IDoctor>): Promise<IDoctor | null> => {
-    const result = await DoctorModel.findOneAndUpdate({ _id: adminId }, { payload });
+const updateDoctor = async (doctorId: string, payload: Partial<IDoctor>): Promise<IDoctor | null> => {
+    const result = await DoctorModel.findOneAndUpdate({ _id: doctorId }, { payload });
     return result;
 }
 
