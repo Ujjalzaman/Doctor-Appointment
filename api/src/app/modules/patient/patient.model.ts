@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose";
 import { BloodGroup } from "../../../constants";
-import { IDoctor, IDoctorModel } from "./doctor.interface";
+import { IPatient, IPatientModel } from "./patient.interface";
 
-const DoctorSchema = new Schema<IDoctor, IDoctorModel>({
+const PatientSchema = new Schema<IPatient, IPatientModel>({
     name: {
         firstName: {
             type: String,
@@ -37,9 +37,12 @@ const DoctorSchema = new Schema<IDoctor, IDoctorModel>({
     age: {
         type: String
     },
-    department: {
+    weight: {
+        type: String
+    },
+    disease: {
         type: Schema.Types.ObjectId,
-        ref: 'Department'
+        ref: 'Disease'
     }
 }, {
     timestamps: true,
@@ -47,4 +50,4 @@ const DoctorSchema = new Schema<IDoctor, IDoctorModel>({
         virtuals: true,
     }
 });
-export const DoctorModel = model<IDoctor, IDoctorModel>('Doctor', DoctorSchema);
+export const PatientModel = model<IPatient, IPatientModel>('Patient', PatientSchema);
