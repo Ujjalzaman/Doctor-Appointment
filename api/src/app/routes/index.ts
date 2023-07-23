@@ -5,6 +5,7 @@ import { DepartmentRoutes } from '../modules/madical-department/department.route
 import { DoctorRouter } from '../modules/doctor/admin.route';
 import { DoctorTimeSlotRouter } from '../modules/doctor-time-slot/doctorTimeSlot.route';
 import { PatientRouter } from '../modules/patient/patient.route';
+import { MadicalHistoryRouter } from '../modules/madicalHistory/madicalHistory.route';
 
 const router = express.Router();
 
@@ -32,6 +33,10 @@ const moduleRoutes = [
     {
         path: '/patient',
         route: PatientRouter,
+    },
+    {
+        path: '/madical-history',
+        route: MadicalHistoryRouter,
     }
 ]
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
