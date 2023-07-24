@@ -1,11 +1,6 @@
 import { IAdmin } from "./admin.interface";
 import { AdminModel } from "./admin.model";
 
-const createAdmin = async (payload: IAdmin): Promise<IAdmin | null> => {
-    const result = await AdminModel.create(payload);
-    return result;
-}
-
 const getAllAdmin = async (): Promise<IAdmin[] | null> => {
     const result = await AdminModel.find();
     return result;
@@ -26,7 +21,6 @@ const updateAdmin = async (adminId: string, payload: IAdmin): Promise<IAdmin | n
 }
 
 export const AdminService = {
-    createAdmin,
     getAllAdmin,
     getSingleAdmin,
     deleteAdmin, 

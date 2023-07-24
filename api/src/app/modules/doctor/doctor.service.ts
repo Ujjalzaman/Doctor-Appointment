@@ -1,11 +1,6 @@
 import { IDoctor } from "./doctor.interface";
 import { DoctorModel } from "./doctor.model";
 
-const createDoctor = async (payload: IDoctor): Promise<IDoctor | null> => {
-    const result = await DoctorModel.create(payload);
-    return result;
-}
-
 const getAllDoctor = async (): Promise<IDoctor[] | null> => {
     const result = await DoctorModel.find();
     return result;
@@ -26,7 +21,6 @@ const updateDoctor = async (doctorId: string, payload: Partial<IDoctor>): Promis
 }
 
 export const DoctorService = {
-    createDoctor,
     getAllDoctor,
     getSingleDoctor,
     deleteDoctor,

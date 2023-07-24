@@ -3,8 +3,8 @@ import { IAuth, IAuthModel } from "./auth.interface";
 import { IAuthRules } from "../../../constants";
 
 const AuthSchema = new Schema<IAuth, IAuthModel>({
-    userId: {
-        type: Schema.Types.ObjectId,
+    user: {
+        type: String,
         required: true
     },
     password: {
