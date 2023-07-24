@@ -4,17 +4,6 @@ import sendResponse from "../../../shared/sendResponse";
 import { DoctorService } from "./doctor.service";
 import { IDoctor } from "./doctor.interface";
 
-const createDoctor = catchAsync(async (req: Request, res: Response) => {
-    const { ...DoctorInfo } = req.body;
-    const result = await DoctorService.createDoctor(DoctorInfo);
-    sendResponse<IDoctor>(res, {
-        statusCode: 200,
-        message: 'Successfully doctor created !!',
-        success: true,
-        data: result,
-    })
-})
-
 const getAllDoctor = catchAsync(async (req: Request, res: Response) => {
     const result = await DoctorService.getAllDoctor();
     sendResponse<IDoctor[]>(res, {
@@ -62,6 +51,5 @@ export const DoctorController = {
     updateDoctor,
     deleteDoctor,
     getAllDoctor,
-    getSingleDoctor,
-    createDoctor
+    getSingleDoctor
 }

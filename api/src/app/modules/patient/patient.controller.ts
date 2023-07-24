@@ -4,17 +4,6 @@ import sendResponse from "../../../shared/sendResponse";
 import { IPatient } from "./patient.interface";
 import { PatientService } from "./patient.service";
 
-const createPatient = catchAsync(async (req: Request, res: Response) => {
-    const { ...patientInfo } = req.body;
-    const result = await PatientService.createPatient(patientInfo);
-    sendResponse<IPatient>(res, {
-        statusCode: 200,
-        message: 'Successfully patient created !!',
-        success: true,
-        data: result,
-    })
-})
-
 const getAllPatient = catchAsync(async (req: Request, res: Response) => {
     const result = await PatientService.getAllPatient();
     sendResponse<IPatient[]>(res, {
@@ -63,5 +52,5 @@ export const PatientController = {
     deletePatient,
     getAllPatient,
     getSinglePatient,
-    createPatient
+    // createPatient
 }
