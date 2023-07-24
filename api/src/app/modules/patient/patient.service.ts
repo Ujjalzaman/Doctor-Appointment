@@ -1,10 +1,6 @@
+import mongoose from "mongoose";
 import { IPatient } from "./patient.interface";
 import { PatientModel } from "./patient.model";
-
-const createPatient = async (payload: IPatient): Promise<IPatient | null> => {
-    const result = await PatientModel.create(payload);
-    return result;
-}
 
 const getAllPatient = async (): Promise<IPatient[] | null> => {
     const result = await PatientModel.find();
@@ -29,6 +25,5 @@ export const PatientService = {
     updatePatient,
     getAllPatient,
     getSinglePatient,
-    deletePatient,
-    createPatient
+    deletePatient
 }

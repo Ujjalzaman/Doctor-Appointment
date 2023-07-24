@@ -4,17 +4,6 @@ import sendResponse from "../../../shared/sendResponse";
 import { IAdmin } from "./admin.interface";
 import { AdminService } from "./admin.service";
 
-const createAdmin = catchAsync(async (req: Request, res: Response) => {
-    const { ...adminInfo } = req.body;
-    const result = await AdminService.createAdmin(adminInfo);
-    sendResponse<IAdmin>(res, {
-        statusCode: 200,
-        message: 'Successfully created Admin !!',
-        success: true,
-        data: result,
-    })
-})
-
 const getAllAdmin = catchAsync(async (req: Request, res: Response) => {
     const result = await AdminService.getAllAdmin();
     sendResponse<IAdmin[]>(res, {
@@ -59,7 +48,6 @@ const updateAdmin = catchAsync(async (req: Request, res: Response) => {
 })
 
 export const AdminController = {
-    createAdmin,
     deleteAdmin,
     getAllAdmin,
     getSingleAdmin,
