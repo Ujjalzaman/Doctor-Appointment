@@ -8,6 +8,7 @@ import { PatientRouter } from '../modules/patient/patient.route';
 import { MadicalHistoryRouter } from '../modules/madicalHistory/madicalHistory.route';
 import { AppointmentRouter } from '../modules/appointment/appointment.route';
 import { PaymentRouter } from '../modules/payment/payment.route';
+import { AuthRouter } from '../modules/auth/auth.route';
 
 const router = express.Router();
 
@@ -47,6 +48,10 @@ const moduleRoutes = [
     {
         path: '/payment',
         route: PaymentRouter,
+    },
+    {
+        path: '/auth',
+        route: AuthRouter,
     }
 ]
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
