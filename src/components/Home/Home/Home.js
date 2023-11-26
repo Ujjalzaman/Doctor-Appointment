@@ -8,12 +8,16 @@ import Footer from '../../Shared/Footer/Footer';
 import Header from '../Header/Header';
 import Services from '../Services/Services';
 import Testimonial from '../Testimonial/Testimonial';
+import ClinicAndSpecialities from '../ClinicAndSpecialities/ClinicAndSpecialities';
+import BookDoctor from '../bookDoctor/BookDoctor';
 
 const Home = () => {
     return (
         <div>
             <Header></Header>
             <Services></Services>
+            <ClinicAndSpecialities/>
+            <BookDoctor/>
             <FeaturedService></FeaturedService>
             <Appointment></Appointment>
             <Testimonial></Testimonial>
