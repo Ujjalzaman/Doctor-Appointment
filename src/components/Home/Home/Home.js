@@ -10,6 +10,7 @@ import Services from '../Services/Services';
 import Testimonial from '../Testimonial/Testimonial';
 import ClinicAndSpecialities from '../ClinicAndSpecialities/ClinicAndSpecialities';
 import BookDoctor from '../bookDoctor/BookDoctor';
+import Availabe from '../AvailableFeatures/Available';
 
 const Home = () => {
     return (
@@ -22,6 +23,7 @@ const Home = () => {
             <Appointment></Appointment>
             <Testimonial></Testimonial>
             <Blog></Blog>
+            <Availabe/>
             <Doctor></Doctor>
             <Contact></Contact>
             <Footer></Footer>
