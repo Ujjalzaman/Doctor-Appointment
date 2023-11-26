@@ -15,6 +15,8 @@ import BookingCheckout from './components/Booking/BookingCheckout/BookingCheckou
 import BookingSuccess from './components/Booking/BookingSuccess/BookingSuccess';
 import BookingInvoice from './components/Booking/BookingInvoice/BookingInvoice';
 import DoctorProfile from './components/Doctor/DoctorProfile/DoctorProfile';
+import MainDashboard from './components/Doctor/Dashboard/Dashboard';
+import Appointments from './components/Doctor/Appointments/Appointments';
 export const UserContext = createContext();
 
 const router = createBrowserRouter([
@@ -25,6 +27,8 @@ const router = createBrowserRouter([
   { path: '/addDoctor', element: <AddDoctor /> },
   { path: '/doctors', element: <DoctorList /> },
   { path: '/doctors/profile', element: <DoctorProfile /> },
+  { path: '/doctor/dashboard', element: <MainDashboard /> },
+  { path: '/doctor/appointments', element: <Appointments /> },
   { path: '/booking', element: <DoctorBooking /> },
   { path: '/booking/checkout', element: <BookingCheckout /> },
   { path: '/booking/success', element: <BookingSuccess /> },
