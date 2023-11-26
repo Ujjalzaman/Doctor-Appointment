@@ -1,0 +1,32 @@
+.breadcrumb-bar {
+    background-color: #15558d;
+    padding: 15px 0;
+    margin-bottom: 7rem;
+}
+
+.breadcrumb-bar .breadcrumb-title {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 5px 0 0;
+}
+
+.page-breadcrumb ol {
+    background-color: transparent;
+    font-size: 12px;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.page-breadcrumb ol li a {
+    color: #fff;
+}
+
+.page-breadcrumb ol li.active {
+    color: #fff;
+}
+
+.page-breadcrumb .breadcrumb-item+.breadcrumb-item:before {
+    color: #fff;
+    font-size: 10px;
+}

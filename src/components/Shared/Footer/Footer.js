@@ -4,9 +4,7 @@ import logo from '../../../images/logo.png';
 
 const Footer = () => {
 	return (
-		<footer className="footer">
-
-
+		<footer className="footer position-relative">
 			<div className="footer-top">
 				<div className="container-fluid">
 					<div className="row">
@@ -19,7 +17,6 @@ const Footer = () => {
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
 								</div>
 							</div>
-
 						</div>
 
 						<div className="col-lg-3 col-md-6">

@@ -1,0 +1,169 @@
+
+.info-widget {
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+.card-label > label {
+    background-color: #fff;
+    color: #959595;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 6px auto auto 8px;
+    padding: 0 7px;
+}
+.card-label > input {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .05);
+    display: block;
+    height: 50px;
+    margin-top: -13px;
+    padding: 5px 15px 0;
+    transition: border-color .3s;
+    width: 100%;
+}
+.exist-customer a {
+	color: #20c0f3;
+	font-weight: 500;
+}
+.payment-widget .payment-list + .payment-list {
+	margin-bottom: 15px;
+}
+.payment-radio {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: 600;
+    color: #272b41;
+    text-transform: capitalize;
+}
+.payment-radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.payment-radio .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 19px;
+    height: 19px;
+    margin: 3px 0 0 0;
+    border: 2px solid #ddd;
+        border-top-color: rgb(221, 221, 221);
+        border-right-color: rgb(221, 221, 221);
+        border-bottom-color: rgb(221, 221, 221);
+        border-left-color: rgb(221, 221, 221);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+.payment-radio input:checked ~ .checkmark {
+    border-color: #20c0f3;
+}
+.payment-radio .checkmark::after {
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    content: '';
+    width: 9px;
+    height: 9px;
+    background-color: #20c0f3;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transform: scale(0.1);
+    -moz-transform: scale(0.1);
+    -ms-transform: scale(0.1);
+    -o-transform: scale(0.1);
+    transform: scale(0.1);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+.payment-radio input:checked ~ .checkmark::after {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+.booking-date {
+    padding: 0;
+    list-style: none;
+}
+.booking-date li {
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    color: #272b41;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+.booking-date li span {
+    float: right;
+    color: #757575;
+    font-weight: 400;
+    font-size: 15px;
+}
+.booking-fee {
+    padding: 0;
+    list-style: none;
+}
+.booking-fee li {
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    color: #272b41;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+.booking-fee li span {
+    float: right;
+    color: #757575;
+    font-weight: 400;
+    font-size: 15px;
+}
+.booking-total {
+    border-top: 1px solid #e4e4e4;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+.booking-total ul {
+	padding: 0;
+	list-style: none;
+	margin: 0;
+}
+.booking-total ul li span {
+    font-size: 18px;
+    font-weight: 600;
+    color: #272b41;
+}
+.booking-total ul li .total-cost {
+    color: #20c0f3;
+    font-size: 16px;
+    float: right;
+}

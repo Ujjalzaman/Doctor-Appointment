@@ -25,8 +25,8 @@ const Home = () => {
             <Blog></Blog>
             <Availabe/>
             <Doctor></Doctor>
-            <Contact></Contact>
-            <Footer></Footer>
+            <Contact/>
+            <Footer/>
         </div>
     );
 };
