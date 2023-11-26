@@ -8,7 +8,7 @@ import './index.css';
 
 const ClinicAndSpecialities = () => {
     return (
-        <section class="section section-specialities">
+        <section class="section section-specialities position-relative">
 				<div class="container-fluid">
 					<div class="section-header text-center mb-5">
 						<h2>Clinic and Specialities</h2>

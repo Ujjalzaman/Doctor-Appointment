@@ -1,6 +1,7 @@
 import React from 'react';
 import './BookDoctor.css';
 import img from '../../../images/doc/doctor 3.jpg';
+import { Link } from 'react-router-dom';
 
 const BookDoctor = () => {
 	return (
@@ -60,7 +61,9 @@ const BookDoctor = () => {
 											<a href="/" className="btn btn-outline-info">View Profile</a>
 										</div>
 										<div className="col-6">
-											<a href="/" className="btn btn-info text-white">Book Now</a>
+											<Link to={'/booking'} className="btn btn-info text-white">Book Now
+											 
+											</Link>
 										</div>
 									</div>
 								</div>
