@@ -1,5 +1,5 @@
-import mongoose, { Model } from "mongoose";
-import { IPatient, IPatientModel } from "../patient/patient.interface";
+import mongoose from "mongoose";
+import { IPatient } from "../patient/patient.interface";
 import { PatientModel } from "../patient/patient.model";
 import { IAuth } from "./auth.interface";
 import { AuthModel } from "./auth.model";
@@ -12,36 +12,39 @@ import { AdminModel } from "../admin/admin.model";
 
 const createPatient = async (payload: IPatient, auth: IAuth): Promise<IAuth | null> => {
 
-    let session = await mongoose.startSession();
-    let newUserData;
-    try {
-        session.startTransaction();
+    // let session = await mongoose.startSession();
+    // let newUserData;
+    // try {
+    //     session.startTransaction();
 
-        const patient = await PatientModel.create([payload], { session });
+    //     const patient = await PatientModel.create([payload], { session });
 
-        if (!patient) {
-            throw new ApiError(403, "Unable to Create Patient Account !!");
-        }
+    //     if (!patient) {
+    //         throw new ApiError(403, "Unable to Create Patient Account !!");
+    //     }
 
-        auth.email = patient[0].email;
-        auth.rule = "PATIENT";
-        auth.user = patient[0]._id;
+    //     auth.email = patient[0].email;
+    //     auth.rule = "patient";
+    //     auth.user = patient[0]._id;
 
-        const authUser = await AuthModel.create([auth], { session });
+    //     const authUser = await AuthModel.create([auth], { session });
 
-        if (!authUser) {
-            throw new ApiError(403, "Unable to Create Auth Account !!");
-        }
-        newUserData = authUser[0];
-    } catch (error) {
-        session.endSession();
-        session.abortTransaction();
-        throw new ApiError(403, "Session aborted !!")
-    }
-    if (newUserData) {
-        newUserData = await AuthModel.findOne({ _id: newUserData._id }).populate('user');
-    }
-    return newUserData;
+    //     if (!authUser) {
+    //         throw new ApiError(403, "Unable to Create Auth Account !!");
+    //     }
+    //     newUserData = authUser[0];
+
+    //     await session.commitTransaction();
+    //     await session.endSession();
+    // } catch (error) {
+    //     await session.endSession();
+    //     await session.abortTransaction();
+    //     throw new ApiError(403, "Session aborted !!")
+    // }
+    // if (newUserData) {
+    //     newUserData = await AuthModel.findOne({ _id: newUserData._id }).populate('user');
+    // }
+    // return newUserData;
 }
 
 const createDoctor = async (payload: IDoctor, auth: IAuth): Promise<IAuth | null> => {
@@ -58,7 +61,7 @@ const createDoctor = async (payload: IDoctor, auth: IAuth): Promise<IAuth | null
         }
 
         auth.email = patient[0].email;
-        auth.rule = "DOCTOR";
+        auth.rule = "doctor";
         auth.user = patient[0]._id;
         auth.password = config.default_doctor_pass as string;
 
@@ -68,9 +71,13 @@ const createDoctor = async (payload: IDoctor, auth: IAuth): Promise<IAuth | null
             throw new ApiError(403, "Unable to Create Auth Account !!");
         }
         newUserData = authUser[0];
+
+        await session.commitTransaction();
+        await session.endSession();
+
     } catch (error) {
-        session.endSession();
-        session.abortTransaction();
+        await session.endSession();
+        await session.abortTransaction();
         throw new ApiError(403, "Session aborted !!")
     }
     if (newUserData) {
@@ -93,7 +100,7 @@ const createAdmin = async (payload: IAdmin, auth: IAuth): Promise<IAuth | null> 
         }
 
         auth.email = patient[0].email;
-        auth.rule = "DOCTOR";
+        auth.rule = "admin";
         auth.user = patient[0]._id;
         auth.password = config.default_doctor_pass as string;
 
