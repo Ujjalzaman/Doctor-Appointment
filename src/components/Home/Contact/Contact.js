@@ -3,11 +3,11 @@ import './Contact.css';
 
 const Contact = () => {
     return (
-        <section className="contact my-5 py-5" id="ContactPage">
+        <section className="contact my-5 py-5 position-relative" id="ContactPage">
             <div className="container">
                 <div className="section-header text-center text-white mb-5">
-                    <h5 className="text-secondary">Contact Us </h5>
-                    <h1 className="brand-color">Alawys Connect With Us</h1>
+                    <h5 className="text-white">Contact Us </h5>
+                    <h1 className="text-white">Alawys Connect With Us</h1>
                 </div>
             </div>
 
