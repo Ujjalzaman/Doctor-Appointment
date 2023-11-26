@@ -1,0 +1,31 @@
+.dash-card .row {
+	margin-left: -10px;
+	margin-right: -10px;
+}
+.dash-card .row > div {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.dash-widget {
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.circle-bar {
+    margin-right: 15px;
+}
+.dct-border-rht {
+	border-right: 1px solid #f0f0f0;
+}
+.dash-widget h6 {
+    font-size: 16px;
+    font-weight: 400;
+}
+.dash-widget h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}

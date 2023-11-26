@@ -1,0 +1,63 @@
+.appointment-list .profile-info-widget {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    margin-right: auto;
+    text-align: left;
+}
+.appointment-list .profile-info-widget .booking-doc-img img {
+    border-radius: 4px;
+    height: 120px;
+    object-fit: cover;
+    width: 120px;
+}
+.appointments .appointment-list {
+	background-color: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+	margin-bottom: 20px;
+    padding: 20px;
+}
+.appointments .appointment-list:last-child {
+	margin-bottom: 30px;
+}
+.appointments .appointment-action {
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+}
+.appointment-action a + a {
+	margin-left: 5px;
+}
+.appointment-action a {
+    font-size: 13px;
+}
+.info-details {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.info-details li .title {
+    color: #272b41;
+    font-weight: 500;
+}
+.info-details li .text {
+    color: #757575;
+    display: block;
+    font-size: 16px;
+    overflow: hidden;
+}
+.info-details li {
+	margin-bottom: 10px;
+}
+.info-details li:last-child {
+	margin-bottom: 0;
+}
