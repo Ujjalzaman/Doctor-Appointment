@@ -6,6 +6,7 @@ import { FaRegStar } from "react-icons/fa";
 import './index.css';
 import BreadCrumb from '../../UI/BreadCrumb';
 import { Link } from 'react-router-dom';
+import { FaMapMarker } from "react-icons/fa";
 
 const DoctorBooking = () => {
     return (
@@ -25,7 +26,9 @@ const DoctorBooking = () => {
                                             <img src={img} alt="User Image" />
                                         </a>
                                         <div class="booking-info">
-                                            <h4><a href="#" style={{textDecoration: 'none'}}>Dr. Darren Elder</a></h4>
+                                            <h4>
+                                                <Link to={'/doctors/profile'} style={{textDecoration: 'none'}}>Dr. Darren Elder</Link>
+                                                </h4>
                                             <div class="rating">
                                                 <FaRegStar />
                                                 <FaRegStar />
@@ -35,7 +38,7 @@ const DoctorBooking = () => {
                                                 <FaRegStar />
                                                 <span class="d-inline-block average-rating">35</span>
                                             </div>
-                                            <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</p>
+                                            <p class=" mb-0"><FaMapMarker/> Newyork, USA</p>
                                         </div>
                                     </div>
                                 </div>

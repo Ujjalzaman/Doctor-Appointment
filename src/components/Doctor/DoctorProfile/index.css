@@ -1,0 +1,179 @@
+.doctor-widget {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    margin-bottom: 7rem;
+}
+
+.doctor-widget .doc-name {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+.doc-speciality {
+    font-size: 14px;
+    color: #757575;
+    margin-bottom: 15px;
+}
+.doctor-widget .rating i {
+	font-size: 14px;
+}
+.doctor-widget .average-rating {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+
+.doc-info-left {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.doc-info-right {
+    margin-left: auto;
+    -ms-flex: 0 0 200px;
+    flex: 0 0 200px;
+    max-width: 200px;
+}
+.doctor-img {
+    -ms-flex: 0 0 150px;
+    flex: 0 0 150px;
+    margin-right: 20px;
+    width: 150px;
+}
+.doctor-img img {
+	border-radius: 5px;
+}
+.doc-department {
+    color: #20c0f3;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+.doc-department img {
+    width: 19px;
+    display: inline-block;
+    margin-right: 10px;
+}
+.doc-location {
+    color: #757575;
+	font-size: 14px;
+    margin-bottom: 25px;
+}
+.doc-location a {
+    color: #09e5ab;
+    font-weight: 500;
+}
+.doctor-widget .doc-name {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+.doc-speciality {
+    font-size: 14px;
+    color: #757575;
+    margin-bottom: 15px;
+}
+.doctor-widget .rating i {
+	font-size: 14px;
+}
+.doctor-widget .average-rating {
+	font-size: 14px;
+	font-weight: 500;
+}
+.clinic-details {
+	margin-bottom: 15px;
+}
+.clinic-details h5 {
+    font-weight: normal;
+    color: #757575;
+    margin-bottom: 25px;
+}
+.clinic-details ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.clinic-details ul li {
+	display: inline-block;
+	padding-right: 5px;
+}
+.clinic-details ul li:last-child {
+	padding-right: 0;
+}
+.clinic-details ul li a {
+	display: inline-block;
+}
+.clinic-details ul li a img {
+	border-radius: 5px;
+	width: 40px;
+}
+.clinic-services {
+    color: #272b41;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    font-size: 13px;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.clinic-services span {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 12px;
+    padding: 3px 10px;
+}
+.clinic-services span + span {
+    margin-left: 5px;
+}
+.clini-infos {
+    margin-bottom: 15px;
+}
+.clini-infos ul {
+	font-size: 14px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.clini-infos ul li {
+    display: block;
+    line-height: 30px;
+    color: #4E4852;
+}
+.clini-infos ul li i {
+    font-size: 15px;
+    min-width: 30px;
+}
+.clinic-booking a + a {
+	margin-top: 15px;
+}
+.clinic-booking a {
+    background-color: #fff;
+    border: 2px solid #20c0f3;
+    border-radius: 4px;
+    color: #20c0f3;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+}
+.clinic-booking a.view-pro-btn:hover, .clinic-booking a.view-pro-btn:focus {
+	background: #20c0f3; 
+	color: #fff;
+}
+.clinic-booking a.apt-btn {
+    background-color: #20c0f3;
+    color: #fff;
+}
+.clinic-booking a.apt-btn:hover, .clinic-booking a.apt-btn:focus {
+	background-color: #0db9f2;
+	border-color: #0db9f2;
+	color: #fff;
+}
+.load-more {
+	margin-bottom: 30px;
+}
