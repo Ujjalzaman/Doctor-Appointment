@@ -58,12 +58,10 @@ const BookDoctor = () => {
 									</ul>
 									<div className="row row-sm">
 										<div className="col-6">
-											<a href="/" className="btn btn-outline-info">View Profile</a>
+										<Link to={'/doctors/profile'} className="btn btn-outline-info">View Profile</Link>
 										</div>
 										<div className="col-6">
-											<Link to={'/booking'} className="btn btn-info text-white">Book Now
-											 
-											</Link>
+											<Link to={'/booking'} className="btn btn-info text-white">Book Now</Link>
 										</div>
 									</div>
 								</div>
