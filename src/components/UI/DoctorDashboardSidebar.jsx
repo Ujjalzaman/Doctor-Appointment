@@ -36,56 +36,40 @@ const DoctorDashboardSidebar = () => {
 
                         </li>
                         <li>
-                            <a href="my-patients.html">
+                            <Link to={'/doctor/my-patients'}>
                                 <i className="fas fa-user-injured"></i>
                                 <span>My Patients</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="schedule-timings.html">
+                            <Link to={'/doctor/schedule'}>
                                 <i className="fas fa-hourglass-start"></i>
                                 <span>Schedule Timings</span>
-                            </a>
+                            </Link>
                         </li>
+
                         <li>
-                            <a href="invoices.html">
-                                <i className="fas fa-file-invoice"></i>
-                                <span>Invoices</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="reviews.html">
+                            <Link to={'/doctor/reviews'}>
                                 <i className="fas fa-star"></i>
                                 <span>Reviews</span>
-                            </a>
+                            </Link>
                         </li>
+
                         <li>
-                            <a href="chat-doctor.html">
-                                <i className="fas fa-comments"></i>
-                                <span>Message</span>
-                                <small className="unread-msg">23</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="doctor-profile-settings.html">
+                            <Link to={'/doctor/profile-setting'}>
                                 <i className="fas fa-user-cog"></i>
                                 <span>Profile Settings</span>
-                            </a>
+                            </Link>
                         </li>
+
                         <li>
-                            <a href="social-media.html">
-                                <i className="fas fa-share-alt"></i>
-                                <span>Social Media</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="doctor-change-password.html">
+                            <Link to={'/doctor/change-password'}>
                                 <i className="fas fa-lock"></i>
                                 <span>Change Password</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="index-2.html">
+                            <a href="">
                                 <i className="fas fa-sign-out-alt"></i>
                                 <span>Logout</span>
                             </a>
