@@ -1,0 +1,183 @@
+.review-listing {
+    border-bottom: 1px solid #f5f7fc;
+    margin-top: 20px;
+    padding-bottom: 30px;
+}
+.review-listing > ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.review-listing > ul li + li {
+	margin-top: 20px;
+	border-top: 1px dashed #f0f0f0;
+	padding-top: 20px;
+}
+.review-listing > ul li .comment {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    margin-bottom: 30px;
+}
+.review-listing > ul li .comment:last-child {
+	margin-bottom: 0;
+}
+.review-listing > ul li .comment .comment-body {
+    margin-left: 16px;
+}
+.review-listing > ul li .comment .comment-body .meta-data {
+    position: relative;
+    margin-bottom: 10px;
+}
+.review-listing > ul li .comment .comment-body .meta-data span {
+    display: block;
+    font-size: 16px;
+    color: #757575;
+}
+.review-listing > ul li .comment .comment-body .meta-data span.comment-author {
+    font-weight: 600;
+    color: #272b41;
+    text-transform: capitalize;
+}
+.review-listing > ul li .comment .comment-body .meta-data span.comment-date {
+    font-size: 14px;
+}
+.review-listing > ul li .comment .comment-body .meta-data .review-count {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    position: absolute;
+    top: 3px;
+    right: 0;
+    width: auto;
+}
+.review-listing > ul li .comment .comment-body .comment-content {
+    color: #757575;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+.review-listing > ul li .comment .comment-body .comment-reply .comment-btn {
+    color: #20c0f3;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 15px;
+}
+.review-listing .recommend-btn {
+    float: right;
+    color: #757575;
+    font-size: 14px;
+    padding: 5px 0;
+	margin-bottom: 0;
+}
+.review-listing .recommend-btn a {
+    border: 1px solid rgba(128,137,150,0.4);
+    border-radius: 4px;
+    padding: 4px 12px;
+    color: #757575;
+    margin-left: 3px;
+    margin-right: 3px;
+    transition: all .3s;
+}
+.review-listing .recommend-btn a.like-btn:hover {
+	background-color: #28a745;
+	border: 1px solid #28a745;
+	color: #fff;
+}
+.review-listing .recommend-btn a.dislike-btn:hover {
+	background-color: #dc3545;
+	border: 1px solid #dc3545;
+	color: #fff;
+}
+.review-listing .recommend-btn a i {
+    font-size: 16px;
+}
+.review-listing > ul li .comments-reply {
+    list-style: none;
+    margin-left: 65px;
+    padding: 0;
+}
+.recommended {
+    color: #28a745;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+}
+.all-feedback {
+    margin-top: 20px;
+}
+.star-rating {
+    direction: rtl;
+}
+.star-rating input[type=radio] {
+    display: none
+}
+.star-rating label {
+    color: #bbb;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input[type=radio]:checked ~ label {
+    color: #f2b600
+}
+.terms-accept a {
+	color: #20c0f3;
+	font-weight: 500;
+}
+.business-widget {
+    background-color: #fcfcfc;
+    border: 1px solid #f0f0f0;
+    padding: 20px;
+    margin-bottom: 0;
+}
+.listing-day {
+	-webkit-box-align: flex-start;
+	-ms-flex-align: flex-start;
+	align-items: flex-start;
+    color: #000;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: space-between;
+    margin-bottom: 10px;
+}
+.listing-day:last-child {
+	margin-bottom: 0;
+}
+.listing-day.current {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 13px;
+    margin-bottom: 13px;
+}
+.listing-day .day {
+	font-weight: 500;
+}
+.listing-day.current .day {
+	font-weight: bold;
+}
+.listing-day.current .day span {
+	display: block;
+	font-weight: normal;
+}
+.time-items {
+    color: #757575;
+}
+.time-items > span {
+    display: block;
+    text-align: right;
+}
+.time-items > span.open-status {
+	margin-bottom: 3px;
+}
+.dropzone .dz-preview.dz-error:hover .dz-error-message {
+	display: none;
+}
