@@ -1,0 +1,30 @@
+
+.change-avatar {
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.change-avatar .profile-img {
+	margin-right: 15px;
+}
+.change-avatar .profile-img img {
+    border-radius: 4px;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+.change-avatar .change-photo-btn {
+    margin: 0 0 10px;
+    width: 150px;
+}
+.widget-profile.pat-widget-profile .profile-info-widget .booking-doc-img {
+	padding: 0;
+}
+.widget-profile.pat-widget-profile .profile-info-widget .booking-doc-img img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}

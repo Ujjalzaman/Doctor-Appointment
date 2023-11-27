@@ -17,6 +17,11 @@ import BookingInvoice from './components/Booking/BookingInvoice/BookingInvoice';
 import DoctorProfile from './components/Doctor/DoctorProfile/DoctorProfile';
 import MainDashboard from './components/Doctor/Dashboard/Dashboard';
 import Appointments from './components/Doctor/Appointments/Appointments';
+import MyPatients from './components/Doctor/MyPatients/MyPatients';
+import Reviews from './components/Doctor/Reviews/Reviews';
+import Schedule from './components/Doctor/Schedule/Schedule';
+import ProfileSetting from './components/Doctor/ProfileSetting/ProfileSetting';
+import ChangePassword from './components/Doctor/ChangePassword/ChangePassword';
 export const UserContext = createContext();
 
 const router = createBrowserRouter([
@@ -29,6 +34,14 @@ const router = createBrowserRouter([
   { path: '/doctors/profile', element: <DoctorProfile /> },
   { path: '/doctor/dashboard', element: <MainDashboard /> },
   { path: '/doctor/appointments', element: <Appointments /> },
+  { path: '/doctor/my-patients', element: <MyPatients /> },
+  { path: '/doctor/reviews', element: <Reviews /> },
+  { path: '/doctor/schedule', element: <Schedule /> },
+
+  { path: '/doctor/change-password', element: <ChangePassword /> },
+  { path: '/doctor/profile-setting', element: <ProfileSetting /> },
+
+  { path: '/doctor/my-patients', element: <MyPatients /> },
   { path: '/booking', element: <DoctorBooking /> },
   { path: '/booking/checkout', element: <BookingCheckout /> },
   { path: '/booking/success', element: <BookingSuccess /> },
