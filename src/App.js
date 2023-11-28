@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import './App.css';
-import {createBrowserRouter,RouterProvider} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from './components/Home/Home/Home';
 import SignInForm from './components/Login/LoginMain/SignInForm';
 import Dashboard from './components/Dashboard/Dashboard/Dashboard';
@@ -22,8 +22,16 @@ import Reviews from './components/Doctor/Reviews/Reviews';
 import Schedule from './components/Doctor/Schedule/Schedule';
 import ProfileSetting from './components/Doctor/ProfileSetting/ProfileSetting';
 import ChangePassword from './components/Doctor/ChangePassword/ChangePassword';
-export const UserContext = createContext();
+import AdminDashboard from './components/Admin/Dashboard/Dashboard';
+import AdminAppointments from './components/Admin/Appointments/Appointments';
+import Doctors from './components/Admin/Doctors/Doctors';
+import Patients from './components/Admin/Patients/Patients';
+import Profile from './components/Admin/Profile/Profile';
+import Transactions from './components/Admin/Transactions/Transactions';
+import Specialites from './components/Admin/Specialites/Specialites';
+import AdminReviews from './components/Admin/Reviews/Reviews'
 
+export const UserContext = createContext();
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
   { path: '/login', element: <SignInForm /> },
@@ -46,8 +54,19 @@ const router = createBrowserRouter([
   { path: '/booking/checkout', element: <BookingCheckout /> },
   { path: '/booking/success', element: <BookingSuccess /> },
   { path: '/booking/invoice', element: <BookingInvoice /> },
+
+  // Dashboard
+  { path: '/admin/dashboard', element: <AdminDashboard /> },
+  { path: '/admin/appointments', element: <AdminAppointments /> },
+  { path: '/admin/doctors', element: <Doctors /> },
+  { path: '/admin/patients', element: <Patients /> },
+  { path: '/admin/profile', element: <Profile /> },
+  { path: '/admin/reviews', element: <AdminReviews /> },
+  { path: '/admin/transaction', element: <Transactions /> },
+  { path: '/admin/specialites', element: <Specialites /> },
+
   { path: '/auth/review', element: <AddReview /> },
-  {path: '/appointment', element: <PrivateRoute><AppointMent /></PrivateRoute>},
+  { path: '/appointment', element: <PrivateRoute><AppointMent /></PrivateRoute> },
 ])
 
 function App() {
