@@ -1,28 +1,56 @@
-import { IDoctor } from "./doctor.interface";
-import { DoctorModel } from "./doctor.model";
+import { Doctor } from "@prisma/client";
+import prisma from "../../../shared/prisma";
 
-const getAllDoctor = async (): Promise<IDoctor[] | null> => {
-    const result = await DoctorModel.find();
+
+const create = async (payload: any): Promise<any> => {
+    const result = await create(payload)
     return result;
 }
 
-const getSingleDoctor = async (doctorId: string): Promise<IDoctor | null> => {
-    const result = await DoctorModel.findOne({ _id: doctorId });
+const getAllDoctors = async (): Promise<Doctor[] | null> => {
+    const result = await prisma.doctor.findMany();
     return result;
 }
 
-const deleteDoctor = async (doctorId: string): Promise<void> => {
-    await DoctorModel.findOneAndDelete({ _id: doctorId });
+const getDoctor = async (id: string): Promise<Doctor | null> => {
+    const result = await prisma.doctor.findUnique({
+        where: {
+            id: id
+        }
+    });
+    return result;
 }
 
-const updateDoctor = async (doctorId: string, payload: Partial<IDoctor>): Promise<IDoctor | null> => {
-    const result = await DoctorModel.findOneAndUpdate({ _id: doctorId }, { payload });
+const deleteDoctor = async (id: string): Promise<any> => {
+    const result = await prisma.$transaction(async (tx) => {
+        const patient = await tx.doctor.delete({
+            where: {
+                id: id
+            }
+        });
+        await tx.auth.delete({
+            where: {
+                email: patient.email
+            }
+        })
+    });
+    return result;
+}
+
+const updateDoctor = async (id: string, payload: Partial<Doctor>): Promise<Doctor> => {
+    const result = await prisma.doctor.update({
+        data: payload,
+        where: {
+            id: id
+        }
+    })
     return result;
 }
 
 export const DoctorService = {
-    getAllDoctor,
-    getSingleDoctor,
+    create,
+    updateDoctor,
     deleteDoctor,
-    updateDoctor
+    getAllDoctors,
+    getDoctor
 }

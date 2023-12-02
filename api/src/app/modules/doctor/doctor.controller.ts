@@ -1,55 +1,62 @@
 import { Request, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
+import { Doctor } from "@prisma/client";
 import { DoctorService } from "./doctor.service";
-import { IDoctor } from "./doctor.interface";
 
-const getAllDoctor = catchAsync(async (req: Request, res: Response) => {
-    const result = await DoctorService.getAllDoctor();
-    sendResponse<IDoctor[]>(res, {
+const createDoctor = catchAsync(async (req: Request, res: Response) => {
+    await DoctorService.create(req.body);
+    sendResponse(res, {
         statusCode: 200,
-        message: 'Successfully Retriev All Doctor !!',
+        message: 'Successfully Doctor Created !!',
+        success: true
+    })
+})
+
+const getAllDoctors = catchAsync(async (req: Request, res: Response) => {
+    const result = await DoctorService.getAllDoctors();
+    sendResponse<Doctor[]>(res, {
+        statusCode: 200,
+        message: 'Successfully Retrieve doctors !!',
         success: true,
         data: result,
     })
 })
 
-const getSingleDoctor = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const result = await DoctorService.getSingleDoctor(id);
-    sendResponse<IDoctor>(res, {
+const getDoctor = catchAsync(async (req: Request, res: Response) => {
+    const result = await DoctorService.getDoctor(req.params.id);
+    sendResponse<Doctor>(res, {
         statusCode: 200,
-        message: 'Successfully Get Single Doctor !!',
+        message: 'Successfully Get Doctor !!',
         success: true,
         data: result,
     })
 })
 
 const deleteDoctor = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
-    await DoctorService.deleteDoctor(id);
-    sendResponse<IDoctor>(res, {
+    const result = await DoctorService.deleteDoctor(req.params.id);
+    sendResponse<Doctor>(res, {
         statusCode: 200,
         message: 'Successfully Deleted Doctor !!',
         success: true,
+        data: result,
     })
 })
 
 const updateDoctor = catchAsync(async (req: Request, res: Response) => {
-    const { ...doctorInfo } = req.body;
-    const { id } = req.params;
-    const result = await DoctorService.updateDoctor(id, doctorInfo);
-    sendResponse<IDoctor>(res, {
+    const result = await DoctorService.updateDoctor(req.params.id, req.body);
+    sendResponse<Doctor>(res, {
         statusCode: 200,
-        message: 'Successfully Updated doctor informations !!',
+        message: 'Successfully Updated Doctor !!',
         success: true,
         data: result,
     })
 })
 
 export const DoctorController = {
+    createDoctor,
     updateDoctor,
     deleteDoctor,
-    getAllDoctor,
-    getSingleDoctor
+    getAllDoctors,
+    getDoctor
 }

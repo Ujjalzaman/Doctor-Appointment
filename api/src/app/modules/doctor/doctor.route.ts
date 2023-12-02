@@ -3,9 +3,10 @@ import { DoctorController } from './doctor.controller';
 
 const router = express.Router();
 
-router.get('/:id', DoctorController.getSingleDoctor);
-router.get('/', DoctorController.getAllDoctor);
-router.patch('/:id', DoctorController.updateDoctor);
+router.get('/', DoctorController.getAllDoctors);
+router.post('/', DoctorController.createDoctor);
+router.get('/:id', DoctorController.getDoctor);
 router.delete('/:id', DoctorController.deleteDoctor);
+router.patch('/:id', DoctorController.updateDoctor);
 
 export const DoctorRouter = router;
