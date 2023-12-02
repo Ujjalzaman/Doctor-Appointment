@@ -1,29 +1,56 @@
-import mongoose from "mongoose";
-import { IPatient } from "./patient.interface";
-import { PatientModel } from "./patient.model";
-
-const getAllPatient = async (): Promise<IPatient[] | null> => {
-    const result = await PatientModel.find();
+import { Patient, UserRole } from "@prisma/client";
+import prisma from "../../../shared/prisma";
+import { create } from "./patientService";
+const createPatient = async (payload: any): Promise<any> => {
+    const result = await create(payload)
     return result;
 }
 
-const getSinglePatient = async (patientId: string): Promise<IPatient | null> => {
-    const result = await PatientModel.findOne({ _id: patientId });
+const getAllPatients = async (): Promise<Patient[] | null> => {
+    console.log("caal")
+    const result = await prisma.patient.findMany();
     return result;
 }
 
-const deletePatient = async (patientId: string): Promise<void> => {
-    await PatientModel.findOneAndDelete({ _id: patientId });
+const getPatient = async (id: string): Promise<Patient | null> => {
+    const result = await prisma.patient.findUnique({
+        where: {
+            id: id
+        }
+    });
+    return result;
 }
 
-const updatePatient = async (patientId: string, payload: Partial<IPatient>): Promise<IPatient | null> => {
-    const result = await PatientModel.findOneAndUpdate({ _id: patientId }, { payload });
+const deletePatient = async (id: string): Promise<any> => {
+    const result = await prisma.$transaction(async (tx) => {
+        const patient = await tx.patient.delete({
+            where: {
+                id: id
+            }
+        });
+        await tx.auth.delete({
+            where: {
+                email: patient.email
+            }
+        })
+    });
+    return result;
+}
+
+const updatePatient = async (id: string, payload: Partial<Patient>): Promise<Patient> => {
+    const result = await prisma.patient.update({
+        data: payload,
+        where: {
+            id: id
+        }
+    })
     return result;
 }
 
 export const PatientService = {
+    createPatient,
     updatePatient,
-    getAllPatient,
-    getSinglePatient,
+    getPatient,
+    getAllPatients,
     deletePatient
 }

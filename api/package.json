@@ -26,6 +26,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
+    "http-status": "^1.7.3",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^3.6.6",
     "mongoose": "^6.7.1",
