@@ -11,7 +11,7 @@ export default {
     default_doctor_pass: process.env.DOCTOR_PASS,
     jwt: {
         secret: process.env.JWT_SCRET,
-        JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN,
+        JWT_EXPIRES_IN: process.env.JWT_EXPIRED_IN,
         refresh_secret: process.env.JWT_REFRESH_SCRET,
     }
 }

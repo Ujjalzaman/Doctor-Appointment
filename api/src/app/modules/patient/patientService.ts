@@ -2,6 +2,7 @@ import httpStatus from "http-status";
 import ApiError from "../../../errors/apiError";
 import prisma from "../../../shared/prisma";
 import { UserRole } from "@prisma/client";
+import bcrypt from 'bcrypt';
 
 export const create = async (payload: any): Promise<any> => {
     try {
@@ -16,7 +17,7 @@ export const create = async (payload: any): Promise<any> => {
                 const auth = await tx.auth.create({
                     data: {
                         email: patient.email,
-                        password: password,
+                        password: password && await bcrypt.hashSync(password, 12),
                         role: UserRole.patient,
                     },
                 });
