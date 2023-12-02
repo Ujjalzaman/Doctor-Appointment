@@ -19,6 +19,7 @@ export const create = async (payload: any): Promise<any> => {
                         email: patient.email,
                         password: password && await bcrypt.hashSync(password, 12),
                         role: UserRole.patient,
+                        userId: patient.id
                     },
                 });
                 return {

@@ -8,7 +8,7 @@ export const auth = (...rules: string[]) => async (req: Request, res: Response, 
     try {
         const token = req.headers.authorization;
         if (!token) {
-            throw new ApiError(404, "Token if not Found !!")
+            throw new ApiError(404, "Token is not Found !!")
         }
         let verifiedUser;
         try {

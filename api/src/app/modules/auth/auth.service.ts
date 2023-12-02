@@ -25,13 +25,13 @@ const loginUser = async (user: any): Promise<ILginResponse> => {
     if (!isPasswordMatched) {
         throw new ApiError(httpStatus.NOT_FOUND, "Password is not Matched !");
     }
-    const { email, id, role } = isUserExist;
+    const { email, id, role, userId } = isUserExist;
     const accessToken = JwtHelper.createToken(
-        { email, id, role },
+        { role, userId },
         config.jwt.secret as Secret,
         config.jwt.JWT_EXPIRES_IN as string
     )
-    return { accessToken, user: { email, role, id } }
+    return { accessToken, user: { role, userId } }
 }
 
 export const AuthService = {
