@@ -1,44 +1,41 @@
-import express, { NextFunction, Request, Response } from 'express'
-import bodyParser from 'body-parser';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import fileUpload from 'express-fileupload';
-import dotenv from 'dotenv';
-// import doctorRoutes from './routes/doctor.js'
-import cookieParser from 'cookie-parser';
-import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import CookieParser from 'cookie-parser';
+import httpStatus from 'http-status';
+import ApiError from './errors/apiError';
 import router from './app/routes';
 
-const app = express();
+const app: Application = express();
 
-//Middlewares
 app.use(cors());
-app.use(cookieParser())
-dotenv.config();
-app.use(express.json())
-app.use(bodyParser.json());
-app.use(express.static('doctors'));
-app.use(fileUpload());
-app.use(express.urlencoded({ extended: true }));
+app.use(CookieParser());
 
-// app.use('/', doctorRoutes)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
 app.use('/api/v1', router);
 
-app.use(globalErrorHandler);
 app.get('/', (req, res) => {
-    res.send("hello it/s running")
+    res.send('Hello World!')
 })
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-    res.status(404).json({
-        success: false,
-        message: "Something Went Wrong",
-        errorMessage: [
-            {
-                path: req.originalUrl,
-                message: 'Api not found !!'
-            }
-        ],
-    })
-    next();
-})
+// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+//     if (err instanceof ApiError) {
+//         res.status(err.statusCode).json({ sucess: false, message: err.message })
+//     } else {
+//         res.status(httpStatus.NOT_FOUND).json({
+//             success: false,
+//             message: 'Something Went Wrong',
+//             errorMessages: [
+//                 {
+//                     path: req.originalUrl,
+//                     message: 'Api not found'
+//                 }
+//             ]
+//         });
+//     }
+//     next();
+// })
+
 export default app;

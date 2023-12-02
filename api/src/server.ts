@@ -1,38 +1,33 @@
-import { Server } from "http"
-import mongoose from "mongoose";
+import {Server} from 'http';
 import app from "./app";
-import config from "./config";
+import config from './config';
 
+async function bootstrap(){
+    const server:Server = app.listen(config.port, () =>{
+        console.log(`Server running on port ${config.port}`);
+    });
 
-let server: Server;
-
-async function bootstrap() {
-    try {
-        await mongoose.connect(config.database_url as string);
-        console.log("Database is Connected Sucessfully !!");
-        server = app.listen(process.env.PORT, () => {
-            console.log(`Application Listenting on port ${process.env.PORT}`)
-        })
-    } catch (error) {
-        console.log("Failed to connect Database!!");
-    }
-
-    process.on("unhandledRejection", error => {
+    const exitHandler = () =>{
         if(server){
-            server.close(() => {
-                process.exit(1);
-                console.log("Un handle Rejection Cought !!")
-            });
-        }else{
-            process.exit(1)
+            server.close(() =>{
+                console.log('Server Close')
+            })
+        }
+    };
+
+    const unexpectedHandler = () =>{
+        console.log('Handler Error');
+        exitHandler();
+    }
+    process.on('uncaughtException', unexpectedHandler);
+    process.on('unhandledRejection', unexpectedHandler);
+
+    process.on('SIGTERM', () =>{
+        console.log('Sigterm Recieved');
+        if(server){
+            server.close();
         }
     })
-
 }
-bootstrap();
 
-process.on('SIGTERM', () => {
-    if(server){
-        server.close();
-    }
-})
+bootstrap();
