@@ -11,36 +11,55 @@ model Auth {
   id       String   @id @default(uuid())
   email    String   @unique
   password String
+  userId   String?
   role     UserRole
 
   @@map("Auth")
 }
 
 model Patient {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   firstName String
   lastName  String
-  email     String   @unique
+  email     String    @unique
   address   String?
   img       String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  booking   Booking[]
 
   @@map("Patient")
 }
 
 model Doctor {
-  id         String   @id @default(uuid())
+  id         String    @id @default(uuid())
   firstName  String
   lastName   String
   middleName String?
-  email      String   @unique
+  email      String    @unique
   address    String?
   img        String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  booking    Booking[]
 
   @@map("Doctor")
+}
+
+model Booking {
+  id        String  @id @default(uuid())
+  patientId String
+  patient   Patient @relation(fields: [patientId], references: [id])
+
+  doctorId String
+  doctor   Doctor @relation(fields: [doctorId], references: [id])
+
+  appointmentTime DateTime
+  totalAmount     Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("Booking")
 }
 
 enum UserRole {

@@ -1,10 +1,37 @@
-import { Doctor } from "@prisma/client";
+import { Doctor, UserRole } from "@prisma/client";
 import prisma from "../../../shared/prisma";
-
+import bcrypt from 'bcrypt';
+import ApiError from "../../../errors/apiError";
+import httpStatus from "http-status";
 
 const create = async (payload: any): Promise<any> => {
-    const result = await create(payload)
-    return result;
+    try {
+        const data = await prisma.$transaction(async (tx) => {
+            const { password, ...othersData } = payload;
+            const doctor = await tx.doctor.create({
+                data: othersData,
+            });
+
+            if (doctor) {
+                const auth = await tx.auth.create({
+                    data: {
+                        email: doctor.email,
+                        password: password && await bcrypt.hashSync(password, 12),
+                        role: UserRole.doctor,
+                        userId: doctor.id
+                    },
+                });
+                return {
+                    doctor,
+                    auth,
+                };
+            }
+        });
+
+        return data;
+    } catch (error:any) {
+        throw new ApiError(httpStatus.BAD_REQUEST, error.message)
+    }
 }
 
 const getAllDoctors = async (): Promise<Doctor[] | null> => {

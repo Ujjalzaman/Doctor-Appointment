@@ -8,20 +8,21 @@ export const create = async (payload: any): Promise<any> => {
     try {
         const data = await prisma.$transaction(async (tx) => {
             const { password, ...othersData } = payload;
-            const patient = await tx.doctor.create({
+            const doctor = await tx.doctor.create({
                 data: othersData,
             });
 
-            if (patient) {
+            if (doctor) {
                 const auth = await tx.auth.create({
                     data: {
-                        email: patient.email,
+                        email: doctor.email,
                         password: password && await bcrypt.hashSync(password, 12),
                         role: UserRole.doctor,
+                        userId: doctor.id
                     },
                 });
                 return {
-                    patient,
+                    doctor,
                     auth,
                 };
             }
