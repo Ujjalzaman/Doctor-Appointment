@@ -40,18 +40,39 @@ model Patient {
 }
 
 model Doctor {
-  id         String     @id @default(uuid())
-  firstName  String
-  lastName   String
-  middleName String?
-  email      String     @unique
-  address    String?
-  img        String?
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  booking    Booking[]
-  TimeSlot   TimeSlot[]
-  Reviews    Reviews[]
+  id             String  @id @default(uuid())
+  firstName      String
+  lastName       String
+  email          String  @unique
+  address        String?
+  img            String?
+  phone          String?
+  gender         Gender?
+  dob            String?
+  biography      String?
+  clinicName     String?
+  clinicAddress  String?
+  clinicImages   String?
+  city           String?
+  state          String?
+  country        String?
+  postalCode     String?
+  price          String?
+  services       String?
+  specialization String?
+  degree         String?
+  college        String?
+  completionYear String?
+  experience     String?
+  designation    String?
+  award          String?
+  registration   String?
+  year           String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  booking   Booking[]
+  TimeSlot  TimeSlot[]
+  Reviews   Reviews[]
 
   @@map("Doctor")
 }
@@ -121,6 +142,11 @@ enum UserRole {
 enum PaidType {
   online
   cash
+}
+
+enum Gender {
+  male
+  female
 }
 
 enum AppointmentStatus {
