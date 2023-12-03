@@ -5,6 +5,7 @@ import { PatientRouter } from '../modules/patient/patient.route';
 import { BookingRouter } from '../modules/booking/booking.route';
 import { DoctorRouter } from '../modules/doctor/doctor.route';
 import { AppointmentRouter } from '../modules/appointment/appointment.route';
+import { ReviewRouter } from '../modules/reviews/reviews.route';
 
 const router = express.Router();
 
@@ -25,23 +26,14 @@ const moduleRoutes = [
         path: '/doctor',
         route: DoctorRouter,
     },
-    // {
-    //     path: '/time-slot',
-    //     route: DoctorTimeSlotRouter,
-    // },
-    
-    // {
-    //     path: '/madical-history',
-    //     route: MadicalHistoryRouter,
-    // },
+    {
+        path: '/review',
+        route: ReviewRouter,
+    },
     {
         path: '/appointment',
         route: AppointmentRouter,
     },
-    // {
-    //     path: '/payment',
-    //     route: PaymentRouter,
-    // },
     {
         path: '/auth',
         route: AuthRouter,
