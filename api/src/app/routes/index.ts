@@ -4,6 +4,7 @@ import { AuthRouter } from '../modules/auth/auth.route';
 import { PatientRouter } from '../modules/patient/patient.route';
 import { BookingRouter } from '../modules/booking/booking.route';
 import { DoctorRouter } from '../modules/doctor/doctor.route';
+import { AppointmentRouter } from '../modules/appointment/appointment.route';
 
 const router = express.Router();
 
@@ -33,10 +34,10 @@ const moduleRoutes = [
     //     path: '/madical-history',
     //     route: MadicalHistoryRouter,
     // },
-    // {
-    //     path: '/appointment',
-    //     route: AppointmentRouter,
-    // },
+    {
+        path: '/appointment',
+        route: AppointmentRouter,
+    },
     // {
     //     path: '/payment',
     //     route: PaymentRouter,

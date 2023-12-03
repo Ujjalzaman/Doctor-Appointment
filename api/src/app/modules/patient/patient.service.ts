@@ -7,7 +7,6 @@ const createPatient = async (payload: any): Promise<any> => {
 }
 
 const getAllPatients = async (): Promise<Patient[] | null> => {
-    console.log("caal")
     const result = await prisma.patient.findMany();
     return result;
 }

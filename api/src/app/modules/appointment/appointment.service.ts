@@ -1,34 +1,67 @@
-import { IAppointment } from "./appointment.interface";
-import { AppointmentModel } from "./appointment.model";
+import httpStatus from "http-status";
+import ApiError from "../../../errors/apiError";
+import prisma from "../../../shared/prisma";
+import { Booking } from "@prisma/client";
 
-const createAppointment = async (payload: IAppointment): Promise<IAppointment | null> => {
-    const result = await AppointmentModel.create(payload);
+const doctorAppointment = async (user: any): Promise<Booking[] | null> => {
+    const {userId} = user;
+    const isDoctor = await prisma.doctor.findUnique({
+        where: {
+            id: userId
+        }
+    })
+    if(!isDoctor){
+        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
+    }
+    const result = await prisma.booking.findMany({
+        where: {
+            doctorId: userId
+        }
+    })
     return result;
 }
 
-const getAllAppointment = async (): Promise<IAppointment[] | null> => {
-    const result = await AppointmentModel.find();
+
+const updateAppointmentByDoctor = async (user: any, payload: Partial<Booking>): Promise<Booking | null> => {
+    const {userId} = user;
+    const isDoctor = await prisma.doctor.findUnique({
+        where: {
+            id: userId
+        }
+    })
+    if(!isDoctor){
+        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
+    }
+    const result = await prisma.booking.update({
+        where: {
+            id: payload.id
+        },
+        data: payload
+    })
     return result;
 }
 
-const getSingleAppointment = async (id: string): Promise<IAppointment | null> => {
-    const result = await AppointmentModel.findOne({ _id: id });
-    return result;
-}
 
-const deleteAppointment = async (id: string): Promise<void> => {
-    await AppointmentModel.findOneAndDelete({ _id: id });
-}
-
-const updateAppointment = async (id: string, payload: Partial<IAppointment>): Promise<IAppointment | null> => {
-    const result = await AppointmentModel.findOneAndUpdate({ _id: id }, { payload });
+const patientAppointment = async (user: any): Promise<Booking[] | null> => {
+    const {userId} = user;
+    const isPatient = await prisma.doctor.findUnique({
+        where: {
+            id: userId
+        }
+    })
+    if(!isPatient){
+        throw new ApiError(httpStatus.NOT_FOUND, 'Patient Account is not found !!')
+    }
+    const result = await prisma.booking.findMany({
+        where: {
+            patientId: userId
+        }
+    })
     return result;
 }
 
 export const AppointmentService = {
-    createAppointment,
-    getAllAppointment,
-    getSingleAppointment,
-    deleteAppointment,
-    updateAppointment
+    doctorAppointment,
+    patientAppointment,
+    updateAppointmentByDoctor
 }
