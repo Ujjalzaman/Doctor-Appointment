@@ -3,11 +3,7 @@ import './App.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from './components/Home/Home/Home';
 import SignInForm from './components/Login/LoginMain/SignInForm';
-import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import AppointMent from './components/AppointMent/AppointMent/AppointMent';
-import AllPatients from './components/AppointMent/AllPatients/AllPatients';
-import AddDoctor from './components/Dashboard/AddDoctor/AddDoctor';
-import DoctorList from './components/Dashboard/DoctorList/DoctorList';
 import AddReview from './components/Dashboard/My Review/AddReview';
 import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
 import DoctorBooking from './components/Booking/DoctorBooking/DoctorBooking';
@@ -35,11 +31,6 @@ export const UserContext = createContext();
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
   { path: '/login', element: <SignInForm /> },
-  // { path: '/dashboard', element: <Dashboard /> },
-  // { path: '/patients', element: <AllPatients /> },
-  // { path: '/addDoctor', element: <AddDoctor /> },
-  // { path: '/doctors', element: <DoctorList /> },
-  // { path: '/doctors/profile', element: <DoctorProfile /> },
   { path: '/doctor/dashboard', element: <MainDashboard /> },
   { path: '/doctor/appointments', element: <Appointments /> },
   { path: '/doctor/my-patients', element: <MyPatients /> },
