@@ -34,6 +34,7 @@ model Patient {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   booking     Booking[]
+  Reviews     Reviews[]
 
   @@map("Patient")
 }
@@ -50,6 +51,7 @@ model Doctor {
   updatedAt  DateTime   @updatedAt
   booking    Booking[]
   TimeSlot   TimeSlot[]
+  Reviews    Reviews[]
 
   @@map("Doctor")
 }
@@ -88,6 +90,26 @@ model TimeSlot {
   updatedAt      DateTime @updatedAt
 
   @@map("TimeSlot")
+}
+
+model Reviews {
+  id String @id @default(uuid())
+
+  doctorId String
+  doctor   Doctor @relation(fields: [doctorId], references: [id])
+
+  patientId String
+  patient   Patient @relation(fields: [patientId], references: [id])
+
+  description   String
+  star          Int
+  isRecommended String
+  response      String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Reviews")
 }
 
 enum UserRole {
