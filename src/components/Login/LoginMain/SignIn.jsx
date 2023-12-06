@@ -9,12 +9,13 @@ import { AuthContext } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Toast } from 'react-bootstrap';
+import { useUserLoginMutation } from '../../../redux/api/authApi';
 
 const SignIn = ({ handleResponse }) => {
-    const { user, loading, error, dispatch } = useContext(AuthContext);
+    // const { user, loading, error, dispatch } = useContext(AuthContext);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const navigate = useNavigate();
-    const baseUrl = process.env.REACT_APP_BASE_URL;
+    // const baseUrl = process.env.REACT_APP_BASE_URL;
 
     const [show, setShow] = useState(true);
 
@@ -22,20 +23,24 @@ const SignIn = ({ handleResponse }) => {
         setShow(false);
     }, 10000)
 
+    const [userLogin, {isError, isLoading, isSuccess, data}] = useUserLoginMutation();
+
     const onSubmit = async (event) => {
-        dispatch({ type: "LOGIN_START" })
-        try {
-            const res = await axios.post(`${baseUrl}/auth/login`, event);
-            dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details })
-            swal({
-                icon: 'success',
-                text: 'Successfully Sign In',
-                timer: 2000
-            })
-            navigate("/")
-        } catch (err) {
-            dispatch({ type: "LOGIN_FAILURE", payload: err.response.data })
-        }
+        userLogin({...event})
+        console.log("event", event)
+        // dispatch({ type: "LOGIN_START" })
+        // try {
+        //     const res = await axios.post(`${baseUrl}/auth/login`, event);
+        //     dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details })
+        //     swal({
+        //         icon: 'success',
+        //         text: 'Successfully Sign In',
+        //         timer: 2000
+        //     })
+        //     navigate("/")
+        // } catch (err) {
+        //     dispatch({ type: "LOGIN_FAILURE", payload: err.response.data })
+        // }
     }
 
     return (
@@ -61,15 +66,16 @@ const SignIn = ({ handleResponse }) => {
                 <span className="fIcon"><FaEnvelope /></span>
                 <input {...register("email", { required: true })} placeholder="Enter Your Email" type="email" />
             </div>
-            {errors.email && <span className="text-warning">This field is required</span>}
+            {/* {errors.email && <span className="text-warning">This field is required</span>} */}
             <div className="input-field">
                 <span className="fIcon"><FaLock /></span>
                 <input {...register("password", { required: true })} type="password" placeholder="Enter Your Password" />
             </div>
-            {errors.password && <span className="text-warning">This field is required</span>}
-            {error && <p className="text-danger">{error.message}</p>}
+            {/* {errors.password && <span className="text-warning">This field is required</span>} */}
+            {/* {error && <p className="text-danger">{error.message}</p>} */}
             <button className="iBtn" type="submit" value="sign In" >
-                {loading ? <Spinner animation="border" variant="info" /> : "Sign In"}
+                Sign In
+                {/* {loading ? <Spinner animation="border" variant="info" /> : "Sign In"} */}
             </button>
             <p className="social-text">Or Sign in with social platforms</p>
             <SocialSignUp handleResponse={handleResponse} />

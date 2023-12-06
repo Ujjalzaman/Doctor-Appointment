@@ -15,27 +15,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.use('/api/v1', router);
-
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    if (err instanceof ApiError) {
+        res.status(err.statusCode).json({ sucess: false, message: err.message })
+    } else {
+        res.status(httpStatus.NOT_FOUND).json({
+            success: false,
+            message: 'Something Went Wrong',
+            errorMessages: [
+                {
+                    path: req.originalUrl,
+                    message: 'Api not found'
+                }
+            ]
+        });
+    }
+    next();
 })
-
-// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-//     if (err instanceof ApiError) {
-//         res.status(err.statusCode).json({ sucess: false, message: err.message })
-//     } else {
-//         res.status(httpStatus.NOT_FOUND).json({
-//             success: false,
-//             message: 'Something Went Wrong',
-//             errorMessages: [
-//                 {
-//                     path: req.originalUrl,
-//                     message: 'Api not found'
-//                 }
-//             ]
-//         });
-//     }
-//     next();
-// })
 
 export default app;
