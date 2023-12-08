@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaCheck, FaEnvelope, FaLock, FaTimes, FaUser } from 'react-icons/fa';
 import SocialSignUp from './SocialSignUp';
-import { createAccountWithEmail } from './LoginManager';
 import Spinner from 'react-bootstrap/Spinner'
 import swal from 'sweetalert';
-import axios from 'axios';
+import { useDoctorSignUpMutation, usePatientSignUpMutation } from '../../../redux/api/authApi';
 
 
 // password regex
@@ -16,17 +15,57 @@ import axios from 'axios';
 // Minimum eight in length .{8,} (with the anchors)
 
 
-const SignUp = ({ handleResponse }) => {
-    const baseUrl = process.env.REACT_APP_BASE_URL;
-    const [error, setError] = useState({})
+const SignUp = ({ setSignUp }) => {
+    const [error, setError] = useState({});
+    const [infoError, setInfoError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState({})
+    const formField = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+    }
+    const [user, setUser] = useState(formField)
+    const [userType, setUserType] = useState('patient');
+    const [doctorSignUp, { data: dData, isSuccess: dIsSuccess, isError: dIsError, error: dError, isLoading: dIsLoading }] = useDoctorSignUpMutation();
+    const [patientSignUp, { data: pData, isSuccess: pIsSuccess, isError: pIsError, error: pError, isLoading: pIsLoading }] = usePatientSignUpMutation();
     const [passwordValidation, setPasswordValidation] = useState({
         carLength: false,
         specailChar: false,
         upperLowerCase: false,
         numeric: false
     })
+
+    const handleSignUpSuccess = () => {
+        setLoading(false);
+        setUser(formField)
+        setSignUp(false)
+        swal({
+            icon: 'success',
+            text: `Successfully ${userType === 'doctor' ? 'Doctor' : 'Patient'} Account Created Please Login`,
+            timer: 2000
+        })
+    }
+    useEffect(() => {
+        // doctor account
+        if (dIsError && dError) {
+            setLoading(false)
+            setInfoError(dError.data.message)
+        }
+        if (!dIsError && dIsSuccess) {
+            handleSignUpSuccess();
+        }
+        // Patient account
+        if (pIsError && pError) {
+            setLoading(false)
+            setInfoError(pError.data.message)
+        }
+        if (!pIsError && pIsSuccess) {
+            handleSignUpSuccess();
+        }
+
+    }, [dIsError, dError, pError, pIsError, , pIsLoading, dIsLoading, pData, dData, setSignUp, setLoading])
+
     const [emailError, setEmailError] = useState({
         emailError: false
     })
@@ -70,27 +109,17 @@ const SignUp = ({ handleResponse }) => {
             setUser(newPass)
         }
     }
-    const hanldeOnSubmit = async(e) => {
+
+    const handleUserTypeChange = (e) => {
+        setUserType(e.target.value);
+    }
+    const hanldeOnSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const registerInfo = {
-            username : user.displayName,
-            email: user.email,
-            password: user.password
-        }
-        try{
-            // Register With node-server & mongodb
-            const data = await axios.post(`${baseUrl}/auth/register`, registerInfo)
-            setLoading(false);
-            swal({
-                icon:'success',
-                text:'Successfully Sign Up',
-                timer: 2000
-            })
-        }
-        catch(err){
-            setLoading(false);
-            setError(err);
+        if (userType === "doctor") {
+            doctorSignUp(user);
+        } else {
+            patientSignUp(user)
         }
     }
 
@@ -99,17 +128,34 @@ const SignUp = ({ handleResponse }) => {
             <h2 className="title">Sign Up</h2>
             <div className="input-field">
                 <span className="fIcon"><FaUser /></span>
-                <input placeholder="Name" name="displayName" type="text" onChange={(e) => hanldeOnChange(e)} />
+                <input placeholder="Name" name="firstName" type="text" onChange={(e) => hanldeOnChange(e)} value={user.firstName} />
+            </div>
+            <div className="input-field">
+                <span className="fIcon"><FaUser /></span>
+                <input placeholder="Name" name="lastName" type="text" onChange={(e) => hanldeOnChange(e)} value={user.lastName} />
             </div>
             <div className="input-field">
                 <span className="fIcon"><FaEnvelope /></span>
-                <input placeholder="Email" name="email" type="email" onChange={(e) => hanldeOnChange(e)} />
+                <input placeholder="Email" name="email" type="email" onChange={(e) => hanldeOnChange(e)} value={user.email} />
             </div>
             <div className="input-field">
                 <span className="fIcon"><FaLock /></span>
-                <input type="password" name="password" placeholder="password" onChange={(e) => hanldeOnChange(e)} />
+                <input type="password" name="password" placeholder="password" onChange={(e) => hanldeOnChange(e)} value={user.password} />
+            </div>
+            <div className='input-field d-flex align-items-center gap-2 justify-content-center'>
+                <div className='text-nowrap'>I'M A</div>
+                <select
+                    className="form-select w-50"
+                    aria-label="select"
+                    onChange={(e) => handleUserTypeChange(e)}
+                    defaultValue='patient'
+                >
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                </select>
             </div>
             {error.length && <h6 className="text-danger text-center">{error}</h6>}
+            {infoError && <h6 className="text-danger text-center">{infoError}</h6>}
             <button type="submit"
                 className="btn btn-primary btn-block mt-2 iBtn"
                 disabled={
@@ -123,27 +169,27 @@ const SignUp = ({ handleResponse }) => {
 
                 <div style={emailError.emailError ? { color: "green" } : { color: "red" }}>
                     <p>{passwordValidation.numeric ? <FaCheck /> : <FaTimes />}
-                        Must Have Valid Email.</p>
+                        <span className="ms-2">Must Have Valid Email.</span></p>
                 </div>
 
                 <div style={passwordValidation.carLength ? { color: "green" } : { color: "red" }}>
                     <p>{passwordValidation.numeric ? <FaCheck /> : <FaTimes />}
-                        Password Must Have atlast 8 character.</p>
+                        <span className="ms-2">Password Must Have atlast 8 character.</span></p>
                 </div>
 
                 <div style={passwordValidation.specailChar ? { color: "green" } : { color: "red" }}>
                     <p>{passwordValidation.numeric ? <FaCheck /> : <FaTimes />}
-                        Password Must Have a special cracter.</p>
+                        <span className="ms-2">Password Must Have a special cracter.</span></p>
                 </div>
 
                 <div style={passwordValidation.upperLowerCase ? { color: "green" } : { color: "red" }}>
                     <p>{passwordValidation.numeric ? <FaCheck /> : <FaTimes />}
-                        Password Must Have uppercase and lower case.</p>
+                        <span className="ms-2">Password Must Have uppercase and lower case.</span></p>
                 </div>
 
                 <div style={passwordValidation.numeric ? { color: "green" } : { color: "red" }}>
                     <p>{passwordValidation.numeric ? <FaCheck /> : <FaTimes />}
-                        Password Must Have Number.</p>
+                        <span className="ms-2">Password Must Have Number.</span></p>
                 </div>
             </div>
 

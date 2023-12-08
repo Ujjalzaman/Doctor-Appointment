@@ -19,15 +19,21 @@ export const authApi = baseApi.injectEndpoints({
                 }
             },
         }),
-        // userSignUp: build.mutation({
-        //     query: (data) => ({
-        //         url: `${AUTH_URL}/signup`,
-        //         method: 'POST',
-        //         data,
-        //         headers: { 'Content-Type': 'multipart/form-data' },
-        //     }),
-        // }),
+        patientSignUp: build.mutation({
+            query: (data) => ({
+                url: `/patient`,
+                method: 'POST',
+                data,
+            }),
+        }),
+        doctorSignUp: build.mutation({
+            query: (data) => ({
+                url: `/doctor`,
+                method: 'POST',
+                data,
+            }),
+        }),
     })
 })
 
-export const { useUserLoginMutation } = authApi
+export const { useUserLoginMutation, useDoctorSignUpMutation, usePatientSignUpMutation } = authApi
