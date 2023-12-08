@@ -1,30 +1,14 @@
 import React, { useState } from 'react';
-import { useContext } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { Link, useHistory, useLocation, useNavigate } from 'react-router-dom';
-import { UserContext } from '../../../App';
-import log from '../../../images/doc/info.svg';
-import register from '../../../images/doc/register.svg';
+import { Link } from 'react-router-dom';
+import log from '../../images/doc/info.svg';
+import register from '../../images/doc/register.svg';
 import SignIn from './SignIn';
 import './SignInForm.css';
 import SignUp from './SignUp';
-import toast, { Toaster } from 'react-hot-toast';
-
 
 const SignInForm = () => {
     const [isSignUp, setSignUp] = useState(false);
-    // const [loggedInUser, setLoggedInUser] = useContext(UserContext)
-    // const history = useNavigate();
-    // const location = useLocation();
-
-    const handleResponse = (res) => {
-        // setLoggedInUser(res);
-        // if (!res.error) {
-        //     toast.success("Successfully Sign in")
-        //     history.replace(from)
-        // }
-    }
-
     return (
         <div className={`${isSignUp ? "signin-signup-container sign-up-mode" : "signin-signup-container"}`}>
             <Link to="/">
@@ -32,7 +16,7 @@ const SignInForm = () => {
             </Link>
             <div className="forms-container">
                 <div className="signIn-singUp">
-                    <SignIn handleResponse={handleResponse} />
+                    <SignIn />
                     <SignUp setSignUp={setSignUp} />
                 </div>
             </div>
@@ -57,7 +41,6 @@ const SignInForm = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 

@@ -1,47 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import SocialSignUp from './SocialSignUp';
 import { useForm } from "react-hook-form";
 import Spinner from 'react-bootstrap/Spinner';
-import axios from 'axios';
-import { useContext } from 'react';
-import { AuthContext } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Toast } from 'react-bootstrap';
-import { useUserLoginMutation } from '../../../redux/api/authApi';
+import { useUserLoginMutation } from '../../redux/api/authApi';
 
 const SignIn = ({ handleResponse }) => {
-    // const { user, loading, error, dispatch } = useContext(AuthContext);
+    const [infoError, setInfoError] = useState('');
+    const [show, setShow] = useState(true);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const navigate = useNavigate();
-    // const baseUrl = process.env.REACT_APP_BASE_URL;
-
-    const [show, setShow] = useState(true);
 
     setTimeout(() => {
         setShow(false);
     }, 10000)
-
-    const [userLogin, {isError, isLoading, isSuccess, data}] = useUserLoginMutation();
+    const [userLogin, {isError, isLoading, isSuccess, data, error}] = useUserLoginMutation();
 
     const onSubmit = async (event) => {
         userLogin({...event})
-        console.log("event", event)
-        // dispatch({ type: "LOGIN_START" })
-        // try {
-        //     const res = await axios.post(`${baseUrl}/auth/login`, event);
-        //     dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details })
-        //     swal({
-        //         icon: 'success',
-        //         text: 'Successfully Sign In',
-        //         timer: 2000
-        //     })
-        //     navigate("/")
-        // } catch (err) {
-        //     dispatch({ type: "LOGIN_FAILURE", payload: err.response.data })
-        // }
     }
+    useEffect(() => {
+        if(isError){
+            setInfoError(error?.data?.message)
+        }
+        if(isSuccess){
+            swal({
+                icon: 'success',
+                text: `Successfully Logged In`,
+                timer: 2000
+            })
+            navigate("/")
+        }
+    }, [isError, error, isSuccess])
 
     return (
         <form className="sign-in-form" onSubmit={handleSubmit(onSubmit)}>
@@ -66,16 +59,15 @@ const SignIn = ({ handleResponse }) => {
                 <span className="fIcon"><FaEnvelope /></span>
                 <input {...register("email", { required: true })} placeholder="Enter Your Email" type="email" />
             </div>
-            {/* {errors.email && <span className="text-warning">This field is required</span>} */}
+            {errors.email && <span className="text-danger">This field is required</span>}
             <div className="input-field">
                 <span className="fIcon"><FaLock /></span>
                 <input {...register("password", { required: true })} type="password" placeholder="Enter Your Password" />
             </div>
-            {/* {errors.password && <span className="text-warning">This field is required</span>} */}
-            {/* {error && <p className="text-danger">{error.message}</p>} */}
+            {errors.password && <span className="text-danger">This field is required</span>}
+            {infoError && <p className="text-danger">{infoError}</p>}
             <button className="iBtn" type="submit" value="sign In" >
-                Sign In
-                {/* {loading ? <Spinner animation="border" variant="info" /> : "Sign In"} */}
+                {isLoading ? <Spinner animation="border" variant="info" /> : "Sign In"}
             </button>
             <p className="social-text">Or Sign in with social platforms</p>
             <SocialSignUp handleResponse={handleResponse} />
