@@ -23,10 +23,5 @@ instance.interceptors.response.use(function (response) {
     }
     return responseObj;
 }, function (error) {
-    const erorResponseObj = {
-        message: error?.response?.data?.message,
-    }
-    // return erorResponseObj
-    // console.log(error?.response?.data?.message)
     return Promise.reject(error);
 });

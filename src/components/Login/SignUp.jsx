@@ -3,8 +3,7 @@ import { FaCheck, FaEnvelope, FaLock, FaTimes, FaUser } from 'react-icons/fa';
 import SocialSignUp from './SocialSignUp';
 import Spinner from 'react-bootstrap/Spinner'
 import swal from 'sweetalert';
-import { useDoctorSignUpMutation, usePatientSignUpMutation } from '../../../redux/api/authApi';
-
+import { useDoctorSignUpMutation, usePatientSignUpMutation } from '../../redux/api/authApi';
 
 // password regex
 // ^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$
@@ -13,7 +12,6 @@ import { useDoctorSignUpMutation, usePatientSignUpMutation } from '../../../redu
 // At least one digit, (?=.*?[0-9])
 // At least one special character, (?=.*?[#?!@$%^&*-])
 // Minimum eight in length .{8,} (with the anchors)
-
 
 const SignUp = ({ setSignUp }) => {
     const [error, setError] = useState({});
