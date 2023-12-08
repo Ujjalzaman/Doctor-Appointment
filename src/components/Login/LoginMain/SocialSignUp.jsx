@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
-import { handleLoginWithProvider } from './LoginManager';
 import toast, { Toaster } from 'react-hot-toast';
 
 

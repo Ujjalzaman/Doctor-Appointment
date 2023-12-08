@@ -33,14 +33,14 @@ const SignInForm = () => {
             <div className="forms-container">
                 <div className="signIn-singUp">
                     <SignIn handleResponse={handleResponse} />
-                    <SignUp handleResponse={handleResponse} />
+                    <SignUp setSignUp={setSignUp} />
                 </div>
             </div>
 
             <div className="panels-container">
                 <div className="panel left-panel">
                     <div className="content">
-                        <h3>New here ?</h3>
+                        <h3 className='text-white'>New here ?</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae quas magnam!</p>
                         <button className="iBtn transparent" onClick={() => setSignUp(true)}>Sign Up</button>
                     </div>
