@@ -6,7 +6,6 @@ import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
 
 const BookDoctor = () => {
 	const { data, isError, isLoading } = useGetDoctorsQuery();
-	
 	// what to render 
 	let content = null;
 	if (!isLoading && isError) content = <div>Something Went Wrong !</div>
@@ -15,7 +14,7 @@ const BookDoctor = () => {
 		<>
 			{
 				data && data?.map((item) => (
-					<div className="profile-widget">
+					<div className="profile-widget" key={item?.id}>
 						<div className="doc-img">
 							<a href="doctor-profile.html">
 								<img className="img-fluid" alt="User Image" src={img} />

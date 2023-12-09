@@ -1,25 +1,37 @@
-import { getUserInfo } from "@/service/auth.service";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { userLoggedIn } from "../slice/userSlice";
-import { useCustomerQuery } from "../api/customersApi";
+import { useGetDoctorQuery } from "../api/doctorApi";
+import { useGetPatientQuery } from "../api/patientApi";
+import { getUserInfo } from '../../service/auth.service';
 
 export default function useAuthCheck() {
-    const dispatch = useDispatch();
-    const [authChecked, setAuthChecked] = useState();
-    const [userId, setUserId] = useState<string>('');
-    const [isSkip, setIsSkip] = useState<boolean>(true);
-    const { data } = useCustomerQuery(userId, { skip: isSkip });
+    const [authChecked, setAuthChecked] = useState(false);
+    const [userId, setUserId] = useState('');
+    const [isSkip, setIsSkip] = useState(true);
+    const [data, setData] = useState({});
+
+    const { data: doctorData, isError, isSuccess: dIsSuccess } = useGetDoctorQuery(userId, { skip: isSkip });
+    const { data: patientData, isError: pIsError, isSuccess: pIsSuccess } = useGetPatientQuery(userId, { skip: isSkip });
 
     useEffect(() => {
         const localAuth = getUserInfo();
-        if (localAuth && localAuth !== null) {
-            setAuthChecked(true)
-            setUserId(localAuth.id);
-            setIsSkip(false);
-            dispatch(userLoggedIn({ ...data }));
-        }
-    }, [dispatch, data, userId]);
 
-    return !!authChecked;
+        if (localAuth && localAuth !== null) {
+            if (localAuth.role === 'patient') {
+                setUserId(localAuth?.userId)
+                setIsSkip(false);
+                setData(patientData)
+                setAuthChecked(pIsSuccess && !pIsError)
+            } else if (localAuth.role === 'doctor') {
+                setUserId(localAuth?.userId)
+                setIsSkip(false);
+                setData(doctorData)
+                setAuthChecked(dIsSuccess && !isError)
+            }
+        }
+    }, [patientData, doctorData, isError, dIsSuccess, pIsError, pIsSuccess]);
+
+    return {
+        authChecked,
+        data
+    };
 }
