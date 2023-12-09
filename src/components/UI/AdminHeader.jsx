@@ -5,53 +5,53 @@ import './AdminHeader.css';
 
 const AdminHeader = () => {
     return (
-        <div class="header">
-            <div class="header-left">
-                <a href="index.html" class="logo">
+        <div className="header">
+            <div className="header-left">
+                <a href="index.html" className="logo">
                     <img src={logo} alt="Logo" />
                 </a>
             </div>
 
             <a href="javascript:void(0);" id="toggle_btn">
-                <i class="fe fe-text-align-left"></i>
+                <i className="fe fe-text-align-left"></i>
             </a>
 
-            <div class="top-nav-search">
+            <div className="top-nav-search">
                 <form>
-                    <input type="text" class="form-control" placeholder="Search here" />
-                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                    <input type="text" className="form-control" placeholder="Search here" />
+                    <button className="btn" type="submit"><i className="fa fa-search"></i></button>
                 </form>
             </div>
 
-            <a class="mobile_btn" id="mobile_btn">
-                <i class="fa fa-bars"></i>
+            <a className="mobile_btn" id="mobile_btn">
+                <i className="fa fa-bars"></i>
             </a>
-            <ul class="nav user-menu">
+            <ul className="nav user-menu">
 
-                <li class="nav-item dropdown noti-dropdown">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="fe fe-bell"></i> <span class="badge badge-pill">3</span>
+                <li className="nav-item dropdown noti-dropdown">
+                    <a href="#" className="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i className="fe fe-bell"></i> <span className="badge badge-pill">3</span>
                     </a>
-                    <div class="dropdown-menu notifications">
+                    <div className="dropdown-menu notifications">
                     </div>
                 </li>
-                <li class="nav-item dropdown has-arrow">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <span class="user-img"><img class="rounded-circle" src={userImg} width="31" alt="Ryan Taylor" /></span>
+                <li className="nav-item dropdown has-arrow">
+                    <a href="#" className="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <span className="user-img"><img className="rounded-circle" src={userImg} width="31" alt="Ryan Taylor" /></span>
                     </a>
-                    <div class="dropdown-menu">
-                        <div class="user-header">
-                            <div class="avatar avatar-sm">
-                                <img src={userImg} alt="User Image" class="avatar-img rounded-circle" />
+                    <div className="dropdown-menu">
+                        <div className="user-header">
+                            <div className="avatar avatar-sm">
+                                <img src={userImg} alt="User Image" className="avatar-img rounded-circle" />
                             </div>
-                            <div class="user-text">
+                            <div className="user-text">
                                 <h6>Ryan Taylor</h6>
-                                <p class="text-muted mb-0">Administrator</p>
+                                <p className="text-muted mb-0">Administrator</p>
                             </div>
                         </div>
-                        <a class="dropdown-item" href="profile.html">My Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a className="dropdown-item" href="profile.html">My Profile</a>
+                        <a className="dropdown-item" href="settings.html">Settings</a>
+                        <a className="dropdown-item" href="login.html">Logout</a>
                     </div>
                 </li>
 

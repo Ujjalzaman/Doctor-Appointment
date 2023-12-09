@@ -8,49 +8,49 @@ import './index.css';
 
 const ClinicAndSpecialities = () => {
     return (
-        <section class="section section-specialities position-relative">
-				<div class="container-fluid">
-					<div class="section-header text-center mb-5">
+        <section className="section section-specialities position-relative">
+				<div className="container-fluid">
+					<div className="section-header text-center mb-5">
 						<h2>Clinic and Specialities</h2>
-						<p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						<p className="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 					</div>
-					<div class="row justify-content-center">
-						<div class="col-md-9">
-							<div class="specialities-slider slider d-flex justify-content-center align-items-center gap-5">
+					<div className="row justify-content-center">
+						<div className="col-md-9">
+							<div className="specialities-slider slider d-flex justify-content-center align-items-center gap-5">
 							
 							
-								<div class="speicality-item text-center">
-									<div class="speicality-img">
-										<img src={img1} class="img-fluid" alt="Speciality"/>
-										<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+								<div className="speicality-item text-center">
+									<div className="speicality-img">
+										<img src={img1} className="img-fluid" alt="Speciality"/>
+										<span><i className="fa fa-circle" aria-hidden="true"></i></span>
 									</div>
 									<p>Urology</p>
 								</div>	
-								<div class="speicality-item text-center">
-									<div class="speicality-img">
-										<img src={img2} class="img-fluid" alt="Speciality"/>
-										<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+								<div className="speicality-item text-center">
+									<div className="speicality-img">
+										<img src={img2} className="img-fluid" alt="Speciality"/>
+										<span><i className="fa fa-circle" aria-hidden="true"></i></span>
 									</div>
 									<p>Neurology</p>	
 								</div>
-								<div class="speicality-item text-center">
-									<div class="speicality-img">
-										<img src={img3} class="img-fluid" alt="Speciality"/>
-										<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+								<div className="speicality-item text-center">
+									<div className="speicality-img">
+										<img src={img3} className="img-fluid" alt="Speciality"/>
+										<span><i className="fa fa-circle" aria-hidden="true"></i></span>
 									</div>
 									<p>Orthopedic</p>	
 								</div>				
-								<div class="speicality-item text-center">
-									<div class="speicality-img">
-										<img src={img4} class="img-fluid" alt="Speciality"/>
-										<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+								<div className="speicality-item text-center">
+									<div className="speicality-img">
+										<img src={img4} className="img-fluid" alt="Speciality"/>
+										<span><i className="fa fa-circle" aria-hidden="true"></i></span>
 									</div>	
 									<p>Cardiologist</p>	
 								</div>			
-								<div class="speicality-item text-center">
-									<div class="speicality-img">
-										<img src={img5} class="img-fluid" alt="Speciality"/>
-										<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+								<div className="speicality-item text-center">
+									<div className="speicality-img">
+										<img src={img5} className="img-fluid" alt="Speciality"/>
+										<span><i className="fa fa-circle" aria-hidden="true"></i></span>
 									</div>	
 									<p>Dentist</p>
 								</div>					
