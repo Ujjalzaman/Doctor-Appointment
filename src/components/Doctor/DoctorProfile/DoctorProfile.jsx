@@ -82,16 +82,16 @@ const DoctorProfile = () => {
                                         </ul>
                                     </div>
                                     <div className="doctor-action">
-                                        <a href="javascript:void(0)" className="btn btn-white fav-btn">
+                                        <a  className="btn btn-white fav-btn">
                                             <i className="far fa-bookmark"></i>
                                         </a>
                                         <a href="chat.html" className="btn btn-white msg-btn">
                                             <i className="far fa-comment-alt"></i>
                                         </a>
-                                        <a href="javascript:void(0)" className="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
+                                        <a  className="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
                                             <i className="fas fa-phone"></i>
                                         </a>
-                                        <a href="javascript:void(0)" className="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
+                                        <a  className="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
                                             <i className="fas fa-video"></i>
                                         </a>
                                     </div>
