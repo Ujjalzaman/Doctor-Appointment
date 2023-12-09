@@ -25,7 +25,7 @@ const Availabe = () => {
 								<p>ICU</p>
 							</div>
 
-							<div class="feature-item text-center">
+							<div className="feature-item text-center">
 								<img src={img4} className="img-fluid" alt="Feature" />
 								<p>Patient Ward</p>
 							</div>

@@ -7,15 +7,15 @@ const MainDashboard = () => {
     return (
         <>
             <DashboardLayout>
-                <div class="row">
-                    <div class="col-md-12">
+                <div className="row">
+                    <div className="col-md-12">
                         <DoctorDashCard />
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 class="mb-4">Patient Appoinment</h4>
+                <div className="row">
+                    <div className="col-md-12">
+                        <h4 className="mb-4">Patient Appoinment</h4>
                         <PatientAppointment />
                     </div>
                 </div>

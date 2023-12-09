@@ -13,81 +13,81 @@ const DoctorBooking = () => {
         <>
             <Navbar />
             <BreadCrumb/>
-            <div class="content">
-                <div class="container">
+            <div className="content">
+                <div className="container">
 
-                    <div class="row">
-                        <div class="col-12">
+                    <div className="row">
+                        <div className="col-12">
 
-                            <div class="card shadow-sm mb-3">
-                                <div class="card-body">
-                                    <div class="booking-doc-info">
-                                        <a href="doctor-profile.html" class="booking-doc-img">
+                            <div className="card shadow-sm mb-3">
+                                <div className="card-body">
+                                    <div className="booking-doc-info">
+                                        <a href="doctor-profile.html" className="booking-doc-img">
                                             <img src={img} alt="User Image" />
                                         </a>
-                                        <div class="booking-info">
+                                        <div className="booking-info">
                                             <h4>
                                                 <Link to={'/doctors/profile'} style={{textDecoration: 'none'}}>Dr. Darren Elder</Link>
                                                 </h4>
-                                            <div class="rating">
+                                            <div className="rating">
                                                 <FaRegStar />
                                                 <FaRegStar />
                                                 <FaRegStar />
                                                 <FaRegStar />
                                                 <FaRegStar />
                                                 <FaRegStar />
-                                                <span class="d-inline-block average-rating">35</span>
+                                                <span className="d-inline-block average-rating">35</span>
                                             </div>
-                                            <p class=" mb-0"><FaMapMarker/> Newyork, USA</p>
+                                            <p className=" mb-0"><FaMapMarker/> Newyork, USA</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="card booking-schedule schedule-widget mb-3">
+                            <div className="card booking-schedule schedule-widget mb-3">
 
-                                <div class="schedule-header">
-                                    <div class="row">
-                                        <div class="col-md-12">
+                                <div className="schedule-header">
+                                    <div className="row">
+                                        <div className="col-md-12">
 
-                                            <div class="day-slot">
+                                            <div className="day-slot">
                                                 <ul>
-                                                    <li class="left-arrow">
+                                                    <li className="left-arrow">
                                                         <a href="#">
-                                                            <i class="fa fa-chevron-left"></i>
+                                                            <i className="fa fa-chevron-left"></i>
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <span>Mon</span>
-                                                        <span class="slot-date">11 Nov <small class="slot-year">2019</small></span>
+                                                        <span className="slot-date">11 Nov <small className="slot-year">2019</small></span>
                                                     </li>
                                                     <li>
                                                         <span>Tue</span>
-                                                        <span class="slot-date">12 Nov <small class="slot-year">2019</small></span>
+                                                        <span className="slot-date">12 Nov <small className="slot-year">2019</small></span>
                                                     </li>
                                                     <li>
                                                         <span>Wed</span>
-                                                        <span class="slot-date">13 Nov <small class="slot-year">2019</small></span>
+                                                        <span className="slot-date">13 Nov <small className="slot-year">2019</small></span>
                                                     </li>
                                                     <li>
                                                         <span>Thu</span>
-                                                        <span class="slot-date">14 Nov <small class="slot-year">2019</small></span>
+                                                        <span className="slot-date">14 Nov <small className="slot-year">2019</small></span>
                                                     </li>
                                                     <li>
                                                         <span>Fri</span>
-                                                        <span class="slot-date">15 Nov <small class="slot-year">2019</small></span>
+                                                        <span className="slot-date">15 Nov <small className="slot-year">2019</small></span>
                                                     </li>
                                                     <li>
                                                         <span>Sat</span>
-                                                        <span class="slot-date">16 Nov <small class="slot-year">2019</small></span>
+                                                        <span className="slot-date">16 Nov <small className="slot-year">2019</small></span>
                                                     </li>
                                                     <li>
                                                         <span>Sun</span>
-                                                        <span class="slot-date">17 Nov <small class="slot-year">2019</small></span>
+                                                        <span className="slot-date">17 Nov <small className="slot-year">2019</small></span>
                                                     </li>
-                                                    <li class="right-arrow">
+                                                    <li className="right-arrow">
                                                         <a href="#">
-                                                            <i class="fa fa-chevron-right"></i>
+                                                            <i className="fa fa-chevron-right"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -96,86 +96,86 @@ const DoctorBooking = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="schedule-cont">
-                                    <div class="row">
-                                        <div class="col-md-12">
+                                <div className="schedule-cont">
+                                    <div className="row">
+                                        <div className="col-md-12">
 
-                                            <div class="time-slot">
-                                                <ul class="clearfix">
+                                            <div className="time-slot">
+                                                <ul className="clearfix">
                                                     <li>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>9:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>10:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>11:00</span> <span>AM</span>
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>9:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>10:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>11:00</span> <span>AM</span>
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>9:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>10:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>11:00</span> <span>AM</span>
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>9:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>10:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>11:00</span> <span>AM</span>
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>9:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing selected" href="#">
+                                                        <a className="timing selected" href="#">
                                                             <span>10:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>11:00</span> <span>AM</span>
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>9:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>10:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>11:00</span> <span>AM</span>
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>9:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>10:00</span> <span>AM</span>
                                                         </a>
-                                                        <a class="timing" href="#">
+                                                        <a className="timing" href="#">
                                                             <span>11:00</span> <span>AM</span>
                                                         </a>
                                                     </li>
@@ -187,8 +187,8 @@ const DoctorBooking = () => {
                                 </div>
 
                             </div>
-                            <div class="submit-section proceed-btn text-end">
-                                <Link class="btn btn-primary submit-btn" to={"/booking/checkout"}>Proceed to Pay</Link>
+                            <div className="submit-section proceed-btn text-end">
+                                <Link className="btn btn-primary submit-btn" to={"/booking/checkout"}>Proceed to Pay</Link>
                             </div>
 
                         </div>
