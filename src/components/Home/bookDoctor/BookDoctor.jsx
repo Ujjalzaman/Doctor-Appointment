@@ -19,7 +19,7 @@ const BookDoctor = () => {
 							<a href="doctor-profile.html">
 								<img className="img-fluid" alt="User Image" src={img} />
 							</a>
-							<a href="javascript:void(0)" className="fav-btn">
+							<a className="fav-btn">
 								<i className="far fa-bookmark"></i>
 							</a>
 						</div>
@@ -76,7 +76,7 @@ const BookDoctor = () => {
 						<div className="about-content">
 							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.</p>
 							<p>web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes</p>
-							<a href="javascript:;">Read More..</a>
+							<a>Read More..</a>
 						</div>
 					</div>
 					<div className="col-lg-8">

@@ -78,25 +78,25 @@ const Schedule = () => {
                                                     <div className="doc-times">
                                                         <div className="doc-slot-list">
                                                             8:00 pm - 11:30 pm
-                                                            <a href="javascript:void(0)" className="delete_schedule">
+                                                            <a  className="delete_schedule">
                                                                 <i className="fa fa-times"></i>
                                                             </a>
                                                         </div>
                                                         <div className="doc-slot-list">
                                                             11:30 pm - 1:30 pm
-                                                            <a href="javascript:void(0)" className="delete_schedule">
+                                                            <a  className="delete_schedule">
                                                                 <i className="fa fa-times"></i>
                                                             </a>
                                                         </div>
                                                         <div className="doc-slot-list">
                                                             3:00 pm - 5:00 pm
-                                                            <a href="javascript:void(0)" className="delete_schedule">
+                                                            <a  className="delete_schedule">
                                                                 <i className="fa fa-times"></i>
                                                             </a>
                                                         </div>
                                                         <div className="doc-slot-list">
                                                             6:00 pm - 11:00 pm
-                                                            <a href="javascript:void(0)" className="delete_schedule">
+                                                            <a  className="delete_schedule">
                                                                 <i className="fa fa-times"></i>
                                                             </a>
                                                         </div>
