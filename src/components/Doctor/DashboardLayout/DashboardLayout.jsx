@@ -8,14 +8,14 @@ const DashboardLayout = ({children}) => {
 		<>
 			<Navbar />
 			<BreadCrumb/>
-			<div class="content">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+			<div className="content">
+				<div className="container-fluid">
+					<div className="row">
+						<div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 							<DoctorDashboardSidebar />
 						</div>
 
-						<div class="col-md-7 col-lg-8 col-xl-9">
+						<div className="col-md-7 col-lg-8 col-xl-9">
 							{children}
 						</div>
 					</div>
