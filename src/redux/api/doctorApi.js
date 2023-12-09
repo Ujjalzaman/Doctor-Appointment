@@ -9,8 +9,14 @@ export const doctorApi = baseApi.injectEndpoints({
                 url: `${DOC_URL}`,
                 method: 'GET',
             })
+        }),
+        getDoctor: build.query({
+            query: (id) => ({
+                url: `${DOC_URL}/${id}`,
+                method: 'GET',
+            })
         })
     })
 })
 
-export const { useGetDoctorsQuery } = doctorApi
+export const { useGetDoctorsQuery, useGetDoctorQuery } = doctorApi

@@ -58,7 +58,7 @@ const router = createBrowserRouter([
   { path: '/admin/specialites', element: <Specialites /> },
 
   { path: '/auth/review', element: <AddReview /> },
-  { path: '/appointment', element: <PrivateRoute><AppointMent /></PrivateRoute> },
+  // { path: '/appointment', element: <PrivateRoute><AppointMent /></PrivateRoute> },
 ])
 
 function App() {
