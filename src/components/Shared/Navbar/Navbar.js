@@ -1,16 +1,19 @@
-import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Pop from '../Pop/Pop';
 import './Navbar.css';
 import { Toaster } from 'react-hot-toast';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { AuthContext } from '../../Context/AuthContext';
+import React, { useState, useEffect } from 'react';
 import logo from '../../../images/logo.png';
+import useAuthCheck from '../../../redux/hooks/useAuthCheck';
+import { loggedOut } from '../../../service/auth.service';
+import swal from 'sweetalert';
 
 const Navbar = () => {
-    const { user, loading, error, dispatch } = useContext(AuthContext);
+    const { authChecked, data } = useAuthCheck();
+    const [isLoggedIn, setIsLogged] = useState(false)
     const [isSticky, setSticky] = useState(false)
+
+    
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -20,7 +23,20 @@ const Navbar = () => {
                 setSticky(false)
             }
         })
-    }, [])
+        if(authChecked){
+            setIsLogged(true)
+        }
+    }, [authChecked])
+
+    const hanldeSignOut = () => {
+        loggedOut();
+        swal({
+            icon: 'success',
+            text: `Successfully Logged Out`,
+            timer: 2000
+        })
+        setIsLogged(false)
+    }
     return (
         <nav className={`navbar navbar-expand-lg navbar-light ${isSticky ? "stickynav" : "normalnav"}`} expand="lg">
             <Toaster />
@@ -64,8 +80,8 @@ const Navbar = () => {
                         <div className="dropdown">
 
                             <li className="nav-item">
-                                {user?.email ?
-                                    <Pop />
+                                {isLoggedIn ?
+                                    <Pop data={data} hanldeSignOut={hanldeSignOut} />
                                     :
                                     <span>
                                         <Link className={`btn-primary btn py-1 px-3nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} to="/login">LOGIN / SIGNUP</Link>

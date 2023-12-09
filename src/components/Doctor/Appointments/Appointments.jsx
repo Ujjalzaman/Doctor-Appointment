@@ -27,10 +27,10 @@ const Appointments = () => {
                             <a href="#" className="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
                                 <i className="far fa-eye"></i> View
                             </a>
-                            <a href="javascript:void(0);" className="btn btn-sm bg-success-light">
+                            <a  className="btn btn-sm bg-success-light">
                                 <i className="fas fa-check"></i> Accept
                             </a>
-                            <a href="javascript:void(0);" className="btn btn-sm bg-danger-light">
+                            <a  className="btn btn-sm bg-danger-light">
                                 <i className="fas fa-times"></i> Cancel
                             </a>
                         </div>
