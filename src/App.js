@@ -3,8 +3,6 @@ import './App.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from './components/Home/Home/Home';
 import SignInForm from './components/Login/SignInForm';
-import AppointMent from './components/AppointMent/AppointMent/AppointMent';
-import AddReview from './components/Dashboard/My Review/AddReview';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import DoctorBooking from './components/Booking/DoctorBooking/DoctorBooking';
 import BookingCheckout from './components/Booking/BookingCheckout/BookingCheckout';
@@ -57,7 +55,7 @@ const router = createBrowserRouter([
   { path: '/admin/transaction', element: <Transactions /> },
   { path: '/admin/specialites', element: <Specialites /> },
 
-  { path: '/auth/review', element: <AddReview /> },
+  // { path: '/auth/review', element: <AddReview /> },
   // { path: '/appointment', element: <PrivateRoute><AppointMent /></PrivateRoute> },
 ])
 

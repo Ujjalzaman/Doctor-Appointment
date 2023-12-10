@@ -8,7 +8,7 @@ export default function useAuthCheck() {
     const [userId, setUserId] = useState('');
     const [isSkip, setIsSkip] = useState(true);
     const [data, setData] = useState({});
-
+    const [role, setRole] = useState("");
     const { data: doctorData, isError, isSuccess: dIsSuccess } = useGetDoctorQuery(userId, { skip: isSkip });
     const { data: patientData, isError: pIsError, isSuccess: pIsSuccess } = useGetPatientQuery(userId, { skip: isSkip });
 
@@ -20,6 +20,7 @@ export default function useAuthCheck() {
                 setUserId(localAuth?.userId)
                 setIsSkip(false);
                 setData(patientData)
+                setRole(localAuth.role)
                 setAuthChecked(pIsSuccess && !pIsError)
             } else if (localAuth.role === 'doctor') {
                 setUserId(localAuth?.userId)
@@ -32,6 +33,7 @@ export default function useAuthCheck() {
 
     return {
         authChecked,
-        data
+        data,
+        role
     };
 }
