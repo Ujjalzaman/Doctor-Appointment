@@ -25,6 +25,18 @@ const getBooking = async (id: string): Promise<Booking | null> => {
     return result;
 }
 
+const getMyBooking = async (user: any): Promise<Booking[] | null> => {
+    const result = await prisma.booking.findMany({
+        where: {
+            patientId : user.userId
+        },
+        include: {
+            doctor: true
+        }
+    })
+    return result;
+}
+
 const deleteBooking = async (id: string): Promise<any> => {
     const result = await prisma.booking.delete({
         where: {
@@ -49,5 +61,6 @@ export const BookingService = {
     getAllBookings,
     getBooking,
     deleteBooking,
-    updateBooking
+    updateBooking,
+    getMyBooking
 }

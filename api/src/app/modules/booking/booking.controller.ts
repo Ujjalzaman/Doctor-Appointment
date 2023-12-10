@@ -54,10 +54,21 @@ const updateBooking = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+const getMyBooking = catchAsync(async (req: Request, res: Response) => {
+    const result = await BookingService.getMyBooking(req.user);
+    sendResponse<Booking[]>(res, {
+        statusCode: 200,
+        message: 'Successfully Updated Booking !!',
+        success: true,
+        data: result,
+    })
+})
+
 export const BookingController = {
     createDoctor,
     getAllBooking,
     getBooking,
     updateBooking,
-    deleteBooking
+    deleteBooking,
+    getMyBooking
 }
