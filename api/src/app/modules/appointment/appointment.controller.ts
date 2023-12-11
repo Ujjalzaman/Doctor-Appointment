@@ -1,12 +1,72 @@
 import { Request, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
-import { Booking } from "@prisma/client";
 import { AppointmentService } from "./appointment.service";
+import { Appointments } from "@prisma/client";
 
-const doctorAppointment = catchAsync(async (req: Request, res: Response) => {
-    const result = await AppointmentService.doctorAppointment(req.user);
-    sendResponse<Booking[]>(res, {
+const createAppointment = catchAsync(async (req: Request, res: Response) => {
+    const result = await AppointmentService.createAppointment(req.user, req.body);
+    sendResponse(res, {
+        statusCode: 200,
+        message: 'Successfully Appointment Created !!',
+        success: true,
+        data: result
+    })
+})
+
+const getAllAppointment = catchAsync(async (req: Request, res: Response) => {
+    const result = await AppointmentService.getAllAppointments();
+    sendResponse<Appointments[]>(res, {
+        statusCode: 200,
+        message: 'Successfully Retrieve All Appointment !!',
+        success: true,
+        data: result,
+    })
+})
+
+const getAppointment = catchAsync(async (req: Request, res: Response) => {
+    const result = await AppointmentService.getAppointment(req.params.id);
+    sendResponse<Appointments>(res, {
+        statusCode: 200,
+        message: 'Successfully Get Appointment !!',
+        success: true,
+        data: result,
+    })
+})
+
+const deleteAppointment = catchAsync(async (req: Request, res: Response) => {
+    const result = await AppointmentService.deleteAppointment(req.params.id);
+    sendResponse<Appointments>(res, {
+        statusCode: 200,
+        message: 'Successfully Deleted Appointment !!',
+        success: true,
+        data: result,
+    })
+})
+
+const updateAppointment = catchAsync(async (req: Request, res: Response) => {
+    const result = await AppointmentService.updateAppointment(req.params.id, req.body);
+    sendResponse<Appointments>(res, {
+        statusCode: 200,
+        message: 'Successfully Updated Appointment !!',
+        success: true,
+        data: result,
+    })
+})
+
+const getPatientAppointmentById = catchAsync(async (req: Request, res: Response) => {
+    const result = await AppointmentService.getPatientAppointmentById(req.user);
+    sendResponse<Appointments[]>(res, {
+        statusCode: 200,
+        message: 'Successfully Updated Appointment !!',
+        success: true,
+        data: result,
+    })
+})
+
+const getDoctorAppointmentsById = catchAsync(async (req: Request, res: Response) => {
+    const result = await AppointmentService.getDoctorAppointmentsById(req.user);
+    sendResponse<Appointments[]>(res, {
         statusCode: 200,
         message: 'Successfully Retrieve doctor apppointments !!',
         success: true,
@@ -14,19 +74,9 @@ const doctorAppointment = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
-const patientAppointment = catchAsync(async (req: Request, res: Response) => {
-    const result = await AppointmentService.patientAppointment(req.user);
-    sendResponse<Booking[]>(res, {
-        statusCode: 200,
-        message: 'Successfully patient apppointments !!',
-        success: true,
-        data: result
-    })
-})
-
 const updateAppointmentByDoctor = catchAsync(async (req: Request, res: Response) => {
     const result = await AppointmentService.updateAppointmentByDoctor(req.user, req.body);
-    sendResponse<Booking>(res, {
+    sendResponse<Appointments>(res, {
         statusCode: 200,
         message: 'Successfully updated apppointments !!',
         success: true,
@@ -34,9 +84,13 @@ const updateAppointmentByDoctor = catchAsync(async (req: Request, res: Response)
     })
 })
 
-
 export const AppointmentController = {
-    doctorAppointment,
-    patientAppointment,
-    updateAppointmentByDoctor
+    getDoctorAppointmentsById,
+    updateAppointmentByDoctor,
+    getPatientAppointmentById,
+    updateAppointment,
+    createAppointment,
+    getAllAppointment,
+    getAppointment,
+    deleteAppointment
 }
