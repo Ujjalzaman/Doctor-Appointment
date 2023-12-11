@@ -18,32 +18,33 @@ model Auth {
 }
 
 model Patient {
-  id          String    @id @default(uuid())
-  firstName   String
-  lastName    String
-  dateOfBirth String?
-  bloodGroup  String?
-  mobile      String?
-  city        String?
-  state       String?
-  zipCode     String?
-  country     String?
-  email       String    @unique
-  address     String?
-  img         String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  booking     Booking[]
-  Reviews     Reviews[]
+  id           String         @id @default(uuid())
+  firstName    String
+  lastName     String
+  dateOfBirth  String?
+  bloodGroup   String?
+  mobile       String?
+  city         String?
+  state        String?
+  zipCode      String?
+  country      String?
+  email        String         @unique
+  address      String?
+  img          String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  appointments Appointments[]
+  Reviews      Reviews[]
+  Prescription Prescription[]
 
   @@map("Patient")
 }
 
 model Doctor {
-  id             String  @id @default(uuid())
+  id             String         @id @default(uuid())
   firstName      String
   lastName       String
-  email          String  @unique
+  email          String         @unique
   address        String?
   img            String?
   phone          String?
@@ -68,16 +69,17 @@ model Doctor {
   award          String?
   registration   String?
   year           String?
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  booking   Booking[]
-  TimeSlot  TimeSlot[]
-  Reviews   Reviews[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  appointments   Appointments[]
+  TimeSlot       TimeSlot[]
+  Reviews        Reviews[]
+  prescription   Prescription[]
 
   @@map("Doctor")
 }
 
-model Booking {
+model Appointments {
   id        String  @id @default(uuid())
   patientId String
   patient   Patient @relation(fields: [patientId], references: [id])
@@ -88,12 +90,15 @@ model Booking {
   appointmentTime DateTime
   purpose         String?
   paidtype        PaidType?
-  status          AppointmentStatus?
-  totalAmount     Int
-  createdAt       DateTime           @default(now())
-  updatedAt       DateTime           @updatedAt
+  status          String
+  followUp        DateTime?
 
-  @@map("Booking")
+  totalAmount  Int
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  prescription Prescription[]
+
+  @@map("Appointments")
 }
 
 model TimeSlot {
@@ -133,6 +138,51 @@ model Reviews {
   @@map("Reviews")
 }
 
+model Prescription {
+  id String @id @default(uuid())
+
+  doctorId String
+  doctor   Doctor @relation(fields: [doctorId], references: [id])
+
+  patientId String
+  patient   Patient @relation(fields: [patientId], references: [id])
+
+  appointmentId String
+  appointment   Appointments @relation(fields: [appointmentId], references: [id])
+
+  instructions String?
+  isFullfilled Boolean @default(false)
+  isArchived   Boolean @default(false)
+  daignosis    String?
+
+  disease    String
+  bronchitis String
+
+  medicines Medicine[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Prescription")
+}
+
+model Medicine {
+  id             String       @id @default(uuid())
+  prescriptionId String
+  prescription   Prescription @relation(fields: [prescriptionId], references: [id])
+
+  quantity  Int?
+  dosage    String?
+  frequency String?
+  startDate DateTime?
+  endDate   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Medicine")
+}
+
 enum UserRole {
   admin
   patient
@@ -147,9 +197,4 @@ enum PaidType {
 enum Gender {
   male
   female
-}
-
-enum AppointmentStatus {
-  accept
-  cancel
 }
