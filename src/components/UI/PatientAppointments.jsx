@@ -5,10 +5,12 @@ import Tabs from 'react-bootstrap/Tabs'
 import { FaEye } from "react-icons/fa";
 import moment from 'moment';
 import { useGetPatientAppointmentsQuery } from '../../redux/api/appointmentApi';
+import { useGetPatientPrescriptionQuery } from '../../redux/api/prescriptionApi';
 
 const PatientAppointments = () => {
     const [key, setKey] = useState('appointment');
     const { data } = useGetPatientAppointmentsQuery();
+    const { data: pPrescription } = useGetPatientPrescriptionQuery();
 
     return (
         <Tabs
@@ -45,7 +47,7 @@ const PatientAppointments = () => {
                                                                     <a className="avatar avatar-sm mr-2 d-flex gap-2">
                                                                         <img className="avatar-img rounded-circle" src={img} alt="User Image" />
                                                                         <div>
-                                                                            <p className='p-0 m-0 text-nowrap'>{item?.doctor?.firstName +' ' + item?.doctor?.lastName}</p>
+                                                                            <p className='p-0 m-0 text-nowrap'>{item?.doctor?.firstName + ' ' + item?.doctor?.lastName}</p>
                                                                             <p className='p-0 m-0'>Dental</p>
                                                                         </div>
                                                                     </a>
@@ -94,28 +96,32 @@ const PatientAppointments = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr className='text-nowrap' >
-                                                    <td>11 Nov 2019</td>
-                                                    <td>Fever Problem</td>
-                                                    <td>
-                                                        <div className="table-avatar">
-                                                            <a className="avatar avatar-sm mr-2 d-flex gap-2">
-                                                                <img className="avatar-img rounded-circle" src={img} alt="User Image" />
-                                                                <div>
-                                                                    <p className='p-0 m-0 text-nowrap'>Dr. Ruby Perrin</p>
-                                                                    <p className='p-0 m-0'>Dental</p>
+                                                {
+                                                    pPrescription && pPrescription?.map((item) => (
+                                                        <tr className='text-nowrap' key={item.id}>
+                                                            <td>{moment(item?.appointment?.appointmentTime).format("MMM Do YY")}</td>
+                                                            <td>{item?.disease}</td>
+                                                            <td>
+                                                                <div className="table-avatar">
+                                                                    <a className="avatar avatar-sm mr-2 d-flex gap-2">
+                                                                        <img className="avatar-img rounded-circle" src={img} alt="User Image" />
+                                                                        <div>
+                                                                            <p className='p-0 m-0 text-nowrap'>{item?.doctor?.firstName + ' ' + item?.doctor?.lastName}</p>
+                                                                            <p className='p-0 m-0'>{item?.doctor?.designation}</p>
+                                                                        </div>
+                                                                    </a>
                                                                 </div>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div className="table-action">
-                                                            <div className="btn btn-sm bg-info-light">
-                                                                <FaEye /> View
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                            </td>
+                                                            <td>
+                                                                <div className="table-action">
+                                                                    <div className="btn btn-sm bg-info-light">
+                                                                        <FaEye /> View
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    ))
+                                                }
                                             </tbody>
                                         </table>
                                     </div>
