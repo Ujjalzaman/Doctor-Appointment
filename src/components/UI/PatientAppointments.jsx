@@ -3,12 +3,12 @@ import img from '../../images/john.png';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs'
 import { FaEye } from "react-icons/fa";
-import { useGetMyAppointmentQuery } from '../../redux/api/appointmentApi';
 import moment from 'moment';
+import { useGetPatientAppointmentsQuery } from '../../redux/api/appointmentApi';
 
 const PatientAppointments = () => {
     const [key, setKey] = useState('appointment');
-    const { data } = useGetMyAppointmentQuery();
+    const { data } = useGetPatientAppointmentsQuery();
 
     return (
         <Tabs
