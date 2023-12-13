@@ -5,6 +5,15 @@ import { PrescriptionController } from './prescription.controller';
 
 const router = express.Router();
 
-router.post('/create', auth(AuthUser.DOCTOR), PrescriptionController.createPrescription);
+router.get('/doctor/prescription', auth(AuthUser.DOCTOR), PrescriptionController.getDoctorPrescriptionById);
+router.get('/patient/prescription', auth(AuthUser.PATIENT), PrescriptionController.getPatientPrescriptionById);
+
+router.get('/:id', PrescriptionController.getPrescriptionById);
+router.get('/', PrescriptionController.getAllPrescriptions);
+
+router.post('/create', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionController.createPrescription);
+
+router.delete('/:', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionController.deletePrescription);
+router.patch('/', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionController.updatePrescription);
 
 export const PrescriptionRouter = router;

@@ -1,16 +1,22 @@
 import { baseApi } from "./baseApi"
 
-const APPOINTMENT_URL = '/booking'
+const APPOINTMENT_URL = '/appointment'
 
 export const appointmentApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        getMyAppointment: build.query({
+        getPatientAppointments : build.query({
             query: () => ({
-                url: `${APPOINTMENT_URL}/my-appoinment`,
-                method: 'GET',
+                url: `${APPOINTMENT_URL}/patient/appointments`,
+                method: 'GET'
+            })
+        }),
+        getDoctorAppointments : build.query({
+            query: () => ({
+                url: `${APPOINTMENT_URL}/doctor/appointments`,
+                method: 'GET'
             })
         })
     })
 })
 
-export const { useGetMyAppointmentQuery } = appointmentApi;
+export const { useGetDoctorAppointmentsQuery, useGetPatientAppointmentsQuery } = appointmentApi;
