@@ -82,13 +82,13 @@ const getPrescriptionById = async (id: string): Promise<Prescription | null> => 
 }
 
 const getPatientPrescriptionById = async (user: any): Promise<Prescription[] | null> => {
-    const {userId} = user;
+    const { userId } = user;
     const isPatient = await prisma.patient.findUnique({
         where: {
             id: userId
         }
     })
-    if(!isPatient){
+    if (!isPatient) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Patient Account is not found !!')
     }
     const result = await prisma.prescription.findMany({
@@ -96,21 +96,31 @@ const getPatientPrescriptionById = async (user: any): Promise<Prescription[] | n
             patientId: userId
         },
         include: {
-            medicines: true,
-            doctor: true
+            doctor: {
+                select: {
+                    firstName: true,
+                    lastName: true,
+                    designation: true
+                }
+            },
+            appointment: {
+                select: {
+                    appointmentTime: true
+                }
+            }
         }
     })
     return result;
 }
 
 const getDoctorPrescriptionById = async (user: any): Promise<Prescription[] | null> => {
-    const {userId} = user;
+    const { userId } = user;
     const isDoctor = await prisma.doctor.findUnique({
         where: {
             id: userId
         }
     })
-    if(!isDoctor){
+    if (!isDoctor) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
     }
     const result = await prisma.prescription.findMany({
