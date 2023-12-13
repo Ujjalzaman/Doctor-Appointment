@@ -36,6 +36,7 @@ model Patient {
   appointments Appointments[]
   Reviews      Reviews[]
   Prescription Prescription[]
+  favourites   Favourites[]
 
   @@map("Patient")
 }
@@ -75,6 +76,7 @@ model Doctor {
   TimeSlot       TimeSlot[]
   Reviews        Reviews[]
   prescription   Prescription[]
+  favourites     Favourites[]
 
   @@map("Doctor")
 }
@@ -181,6 +183,16 @@ model Medicine {
   updatedAt DateTime @updatedAt
 
   @@map("Medicine")
+}
+
+model Favourites {
+  id        String   @id @default(uuid())
+  doctorId  String   @unique
+  doctor    Doctor   @relation(fields: [doctorId], references: [id])
+  patient   Patient? @relation(fields: [patientId], references: [id])
+  patientId String?
+
+  @@map("Favourites")
 }
 
 enum UserRole {

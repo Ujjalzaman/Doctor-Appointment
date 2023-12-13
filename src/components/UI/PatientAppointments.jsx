@@ -131,56 +131,6 @@ const PatientAppointments = () => {
                     </div>
                 </div>
             </Tab>
-            <Tab eventKey="Records" title="Medical Records">
-                <div className="appointment-tab">
-                    <div className="tab-content">
-                        <div className="tab-pane show active" id="upcoming-appointments">
-                            <div className="card card-table mb-0">
-                                <div className="card-body">
-                                    <div className="table-responsive">
-                                        <table className="table table-hover table-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th className='text-nowrap'>ID</th>
-                                                    <th className='text-nowrap'>Date</th>
-                                                    <th className='text-nowrap'>Description</th>
-                                                    <th className='text-nowrap'>App Doctor</th>
-                                                    <th className='text-nowrap'>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr className='text-nowrap' >
-                                                    <td>#MR-00010</td>
-                                                    <td>14 Dec 2023</td>
-                                                    <td>To Much Fever</td>
-                                                    <td>
-                                                        <div className="table-avatar">
-                                                            <a className="avatar avatar-sm mr-2 d-flex gap-2">
-                                                                <img className="avatar-img rounded-circle" src={img} alt="User Image" />
-                                                                <div>
-                                                                    <p className='p-0 m-0 text-nowrap'>Dr. Ruby Perrin</p>
-                                                                    <p className='p-0 m-0'>Dental</p>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div className="table-action">
-                                                            <div className="btn btn-sm bg-info-light">
-                                                                <FaEye /> View
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Tab>
             <Tab eventKey="Billing" title="Billing">
                 <div className="appointment-tab">
                     <div className="tab-content">
