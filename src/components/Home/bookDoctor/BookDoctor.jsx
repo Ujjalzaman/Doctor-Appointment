@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './BookDoctor.css';
 import img from '../../../images/doc/doctor 3.jpg';
 import { Link } from 'react-router-dom';
 import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
+import { FaHeart } from "react-icons/fa";
+import { useAddFavouriteMutation } from '../../../redux/api/favouriteApi';
+import toast,{ Toaster } from 'react-hot-toast';
 
 const BookDoctor = () => {
 	const { data, isError, isLoading } = useGetDoctorsQuery();
+	const [addFavourite, { isSuccess, isLoading: FIsLoading, isError: fIsError, error }] = useAddFavouriteMutation();
+
+	const handleAddFavourite = (id) => {
+		addFavourite({ doctorId: id });
+	};
+
+	useEffect(() => {
+		if (!FIsLoading && fIsError) {
+			toast.error(error?.data?.message)
+		}
+		if (isSuccess) {
+			toast.success('Successfully Favourite Adde')
+		}
+	}, [isSuccess, fIsError])
+
 	// what to render 
 	let content = null;
 	if (!isLoading && isError) content = <div>Something Went Wrong !</div>
@@ -19,14 +37,14 @@ const BookDoctor = () => {
 							<a href="doctor-profile.html">
 								<img className="img-fluid" alt="User Image" src={img} />
 							</a>
-							<a className="fav-btn">
-								<i className="far fa-bookmark"></i>
+							<a style={{ cursor: 'pointer' }} className="position-absolute top-0 end-0 me-2" onClick={() => handleAddFavourite(item?.id)}>
+								<FaHeart />
 							</a>
 						</div>
 						<div className="pro-content">
 							<h3 className="title">
 								<Link to={'/doctors/profile'}>
-								<a>{item?.firstName} {item?.lastName}</a>
+									<a>{item?.firstName} {item?.lastName}</a>
 								</Link>
 								<i className="fas fa-check-circle verified"></i>
 							</h3>
@@ -82,6 +100,10 @@ const BookDoctor = () => {
 					<div className="col-lg-8">
 						<div className="doctor-slider slider d-flex justify-content-center align-items-center gap-3 border-0">
 							{content}
+							<Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
 						</div>
 					</div>
 				</div>

@@ -82,20 +82,11 @@
     -webkit-transform: translate3d(100%, 0, 0);
     -ms-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
-    opacity: 0;
+    opacity: 1;
     visibility: hidden;
 	z-index: 99;
-}
-.profile-widget:hover .fav-btn {
-    opacity: 1;
-    visibility: visible;
-    -webkit-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-}
-.profile-widget .fav-btn:hover {
-	background-color: #fb1612;
-	color: #fff;
+    background-color: #fb1612;
+    color: #fff;
 }
 .pro-content {
     padding: 15px 0 0;
