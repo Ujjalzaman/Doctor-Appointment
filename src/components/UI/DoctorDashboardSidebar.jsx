@@ -52,7 +52,7 @@ const DoctorDashboardSidebar = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to={'/doctor/appointments'}>
+                                    <Link to={'/doctor/favourite'}>
                                         <i className="fas fa-calendar-check"></i>
                                         <span>Favourites</span>
                                     </Link>

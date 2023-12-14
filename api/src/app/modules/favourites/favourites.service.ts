@@ -30,35 +30,33 @@ const createFavourite = async (user: any, payload: Favourites): Promise<Favourit
         return favourites;
     }
 }
+const removeFavourite = async (user: any, payload: Favourites): Promise<Favourites> => {
+    const isUserExist = await prisma.patient.findUnique({
+        where: {
+            id: user.userId
+        }
+    })
+    if (!isUserExist) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Patient Account is not found !!')
+    }
 
-
-    const removeFavourite = async (user: any, payload: Favourites): Promise<Favourites> => {
-        const isUserExist = await prisma.patient.findUnique({
+    //check already have or not
+    const isFavourite = await prisma.favourites.findFirst({
+        where: {
+            doctorId: payload.doctorId
+        }
+    });
+    if(!isFavourite){
+        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor is not in Favourite !!')
+    }else{
+        const favourites = await prisma.favourites.delete({
             where: {
-                id: user.userId
+                id: isFavourite.id
             }
         })
-        if (!isUserExist) {
-            throw new ApiError(httpStatus.NOT_FOUND, 'Patient Account is not found !!')
-        }
-
-        //check already have or not
-        const isFavourite = await prisma.favourites.findFirst({
-            where: {
-                doctorId: payload.doctorId
-            }
-        });
-        if(!isFavourite){
-            throw new ApiError(httpStatus.NOT_FOUND, 'Doctor is not in Favourite !!')
-        }else{
-            const favourites = await prisma.favourites.delete({
-                where: {
-                    id: isFavourite.id
-                }
-            })
-            return favourites;
-        }
+        return favourites;
     }
+}
 
 const getPatientFavourites = async (user: any): Promise<Favourites[]> => {
     const isUserExist = await prisma.patient.findUnique({
