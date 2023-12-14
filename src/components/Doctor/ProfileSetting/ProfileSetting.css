@@ -28,3 +28,130 @@
     height: 100px;
     width: 100px;
 }
+
+
+.profile-image img {
+	margin-bottom: 1.5rem;
+}
+.change-photo-btn {
+    background-color: #20c0f3;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 auto;
+    padding: 10px 15px;
+    position: relative;
+    transition: .3s;
+    text-align: center;
+    width: 220px;
+}
+.change-photo-btn input.upload {
+	bottom: 0;
+    cursor: pointer;
+    filter: alpha(opacity=0);
+	left: 0;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+	width: 220px;
+}
+.dropzone {
+    background-color: #fbfbfb;
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+}
+.btn-icon {
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+    text-align: center;
+    position: absolute;
+    padding: 0;
+    font-size: 10px;
+    width: 20px;
+    height: 20px;
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+    right: 3px;
+    top: 3px;
+	justify-content: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+}
+.upload-images {
+    position: relative;
+    width: 80px;
+}
+.upload-images img {
+	border-radius: 4px;
+	height: 80px;
+	width: auto;
+}
+.upload-wrap {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.upload-wrap .upload-images + .upload-images {
+	margin-left: 20px;
+}
+.contact-card .card-body {
+	padding-bottom: 0.625rem;
+}
+.custom_price_cont {
+	margin-top: 20px;
+}
+.btn.btn-danger.trash {
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+    height: 46px;
+    width: 46px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+}
+.add-more a {
+	color: #20c0f3;
+}
+.bootstrap-tagsinput {
+    border-color: #dcdcdc;
+    box-shadow: inherit;
+    min-height: 46px;
+    width: 100%;
+    border-radius: 0;
+}
+.bootstrap-tagsinput.focus {
+	border-color: #bbb;
+}
+.bootstrap-tagsinput .tag {
+    background-color: #20c0f3;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    margin-right: 2px;
+    padding: 11px 15px;
+    border-radius: 0;
+}
+.services-card .bootstrap-tagsinput input {
+	width: 160px;
+}
+.submit-section .submit-btn {
+    padding: 12px 30px;
+    font-weight: 600;
+    font-size: 16px;
+    min-width: 120px;
+}
+.submit-section .submit-btn + .submit-btn {
+    margin-left: 15px;
+}
