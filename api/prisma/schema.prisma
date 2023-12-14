@@ -21,12 +21,13 @@ model Patient {
   id           String         @id @default(uuid())
   firstName    String
   lastName     String
-  dateOfBirth  String?
+  dateOfBirth  DateTime?
   bloodGroup   String?
   mobile       String?
   city         String?
   state        String?
   zipCode      String?
+  gender       String?
   country      String?
   email        String         @unique
   address      String?
