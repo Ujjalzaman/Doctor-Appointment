@@ -24,20 +24,22 @@ import Profile from './components/Admin/Profile/Profile';
 import Transactions from './components/Admin/Transactions/Transactions';
 import Specialites from './components/Admin/Specialites/Specialites';
 import AdminReviews from './components/Admin/Reviews/Reviews'
+import PatientFavouriteDoctor from './components/Doctor/PatientFavourite/PatientFavourite';
 
 export const UserContext = createContext();
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
   { path: '/login', element: <SignInForm /> },
+  { path: '/doctors/profile', element: <DoctorProfile /> },
+  
   { path: '/doctor/dashboard', element: <MainDashboard /> },
-  { path: '/doctor/appointments', element: <Appointments /> },
   { path: '/doctor/my-patients', element: <MyPatients /> },
   { path: '/doctor/reviews', element: <Reviews /> },
-  { path: '/doctors/profile', element: <DoctorProfile /> },
   { path: '/doctor/schedule', element: <Schedule /> },
-
+  { path: '/doctor/appointments', element: <Appointments /> },
   { path: '/doctor/change-password', element: <ChangePassword /> },
   { path: '/doctor/profile-setting', element: <ProfileSetting /> },
+  { path: '/doctor/favourite', element: <PatientFavouriteDoctor /> },
 
   { path: '/doctor/my-patients', element: <MyPatients /> },
   { path: '/booking', element: <DoctorBooking /> },
