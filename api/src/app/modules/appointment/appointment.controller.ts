@@ -65,8 +65,8 @@ const getPatientAppointmentById = catchAsync(async (req: Request, res: Response)
 })
 
 const getDoctorAppointmentsById = catchAsync(async (req: Request, res: Response) => {
-    const result = await AppointmentService.getDoctorAppointmentsById(req.user);
-    sendResponse<Appointments[]>(res, {
+    const result = await AppointmentService.getDoctorAppointmentsById(req.user, req.query);
+    sendResponse(res, {
         statusCode: 200,
         message: 'Successfully Retrieve doctor apppointments !!',
         success: true,
