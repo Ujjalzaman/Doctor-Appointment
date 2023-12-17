@@ -1,4 +1,4 @@
-import { Appointments } from "@prisma/client";
+import { Appointments, Patient } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/apiError";
 import httpStatus from "http-status";
@@ -121,6 +121,37 @@ const getDoctorAppointmentsById = async (user: any, filter: any): Promise<Appoin
     return result;
 }
 
+const getDoctorPatients = async (user: any): Promise<Patient[]> => {  
+    const {userId} = user;
+    const isDoctor = await prisma.doctor.findUnique({
+        where: {
+            id: userId
+        }
+    })
+    if(!isDoctor){
+        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
+    }
+
+    const patients = await prisma.appointments.findMany({
+        where: {
+            doctorId: userId
+        },
+        distinct: ['patientId']
+    });
+
+    //extract patients from the appointments table
+    const patientIds = patients.map(appointment => appointment.patientId);
+
+    const patientList = await prisma.patient.findMany({
+        where: {
+            id: {
+                in: patientIds
+            }
+        }
+    })
+    return patientList;
+}
+
 const updateAppointmentByDoctor = async (user: any, payload: Partial<Appointments>): Promise<Appointments | null> => {
     const {userId} = user;
     const isDoctor = await prisma.doctor.findUnique({
@@ -149,4 +180,5 @@ export const AppointmentService = {
     getPatientAppointmentById,
     getDoctorAppointmentsById,
     updateAppointmentByDoctor,
+    getDoctorPatients
 }
