@@ -13,8 +13,6 @@ const Navbar = () => {
     const [isLoggedIn, setIsLogged] = useState(false)
     const [isSticky, setSticky] = useState(false)
 
-    
-
     useEffect(() => {
         window.addEventListener("scroll", () => {
             if (window.scrollY > 50) {

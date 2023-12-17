@@ -2,6 +2,7 @@ import { Appointments } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/apiError";
 import httpStatus from "http-status";
+import moment from 'moment';
 
 const createAppointment = async (user: any, payload: Appointments): Promise<Appointments> => {
     const isUserExist = await prisma.patient.findUnique({
@@ -78,7 +79,7 @@ const updateAppointment = async (id: string, payload: Partial<Appointments>): Pr
 }
 
 //doctor Side
-const getDoctorAppointmentsById = async (user: any): Promise<Appointments[] | null> => {
+const getDoctorAppointmentsById = async (user: any, filter: any): Promise<Appointments[] | null> => {  
     const {userId} = user;
     const isDoctor = await prisma.doctor.findUnique({
         where: {
@@ -88,11 +89,35 @@ const getDoctorAppointmentsById = async (user: any): Promise<Appointments[] | nu
     if(!isDoctor){
         throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
     }
-    const result = await prisma.appointments.findMany({
-        where: {
-            doctorId: userId
+
+    let andCondition:any = {doctorId: userId};
+
+    if(filter.sortBy == 'today'){
+        const today = moment().startOf('day');
+        const tomorrow = moment(today).add(1, 'days');
+
+        andCondition.appointmentTime = {
+            gte: today.toDate(),
+            lt: tomorrow.toDate()
         }
-    })
+    }
+    if(filter.sortBy == 'upcoming'){
+        const todayDate = moment().startOf('day');
+        const upcomingDate = moment(todayDate).add(1, 'days');
+        andCondition.appointmentTime = {
+            gte: upcomingDate.toDate()
+        }
+    }
+
+    const whereConditions = andCondition ? andCondition : {}
+
+    const result = await prisma.appointments.findMany({
+        where: whereConditions,
+        include: {
+            patient: true
+        }
+    });
+
     return result;
 }
 
