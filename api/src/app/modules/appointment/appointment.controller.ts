@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { AppointmentService } from "./appointment.service";
-import { Appointments } from "@prisma/client";
+import { Appointments, Patient } from "@prisma/client";
 
 const createAppointment = catchAsync(async (req: Request, res: Response) => {
     const result = await AppointmentService.createAppointment(req.user, req.body);
@@ -84,6 +84,16 @@ const updateAppointmentByDoctor = catchAsync(async (req: Request, res: Response)
     })
 })
 
+const getDoctorPatients = catchAsync(async (req: Request, res: Response) => {
+    const result = await AppointmentService.getDoctorPatients(req.user);
+    sendResponse<Patient[]>(res, {
+        statusCode: 200,
+        message: 'Successfully retrieve doctor patients !!',
+        success: true,
+        data: result
+    })
+})
+
 export const AppointmentController = {
     getDoctorAppointmentsById,
     updateAppointmentByDoctor,
@@ -92,5 +102,6 @@ export const AppointmentController = {
     createAppointment,
     getAllAppointment,
     getAppointment,
-    deleteAppointment
+    deleteAppointment,
+    getDoctorPatients
 }

@@ -19,8 +19,15 @@ export const appointmentApi = baseApi.injectEndpoints({
                 params: arg
             }),
             providesTags: [tagTypes.appointments]
+        }),
+        getDoctorPatients : build.query({
+            query: () => ({
+                url: `${APPOINTMENT_URL}/doctor/patients`,
+                method: 'GET'
+            }),
+            providesTags: [tagTypes.appointments]
         })
     })
 })
 
-export const { useGetDoctorAppointmentsQuery, useGetPatientAppointmentsQuery } = appointmentApi;
+export const { useGetDoctorAppointmentsQuery, useGetPatientAppointmentsQuery, useGetDoctorPatientsQuery } = appointmentApi;

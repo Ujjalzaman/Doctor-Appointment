@@ -9,6 +9,7 @@ router.get('/', AppointmentController.getAllAppointment);
 
 router.get('/patient/appointments',auth(AuthUser.PATIENT), AppointmentController.getPatientAppointmentById);
 router.get('/doctor/appointments',auth(AuthUser.DOCTOR), AppointmentController.getDoctorAppointmentsById);
+router.get('/doctor/patients',auth(AuthUser.DOCTOR), AppointmentController.getDoctorPatients);
 
 router.post('/create',auth(AuthUser.PATIENT), AppointmentController.createAppointment);
 
