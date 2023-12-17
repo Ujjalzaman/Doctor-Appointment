@@ -26,6 +26,7 @@ export default function useAuthCheck() {
                 setUserId(localAuth?.userId)
                 setIsSkip(false);
                 setData(doctorData)
+                setRole(localAuth.role)
                 setAuthChecked(dIsSuccess && !isError)
             }
         }
