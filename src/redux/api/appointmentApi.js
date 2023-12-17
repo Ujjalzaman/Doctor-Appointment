@@ -1,3 +1,4 @@
+import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi"
 
 const APPOINTMENT_URL = '/appointment'
@@ -8,13 +9,16 @@ export const appointmentApi = baseApi.injectEndpoints({
             query: () => ({
                 url: `${APPOINTMENT_URL}/patient/appointments`,
                 method: 'GET'
-            })
+            }),
+            providesTags: [tagTypes.appointments]
         }),
         getDoctorAppointments : build.query({
-            query: () => ({
+            query: (arg) => ({
                 url: `${APPOINTMENT_URL}/doctor/appointments`,
-                method: 'GET'
-            })
+                method: 'GET',
+                params: arg
+            }),
+            providesTags: [tagTypes.appointments]
         })
     })
 })
