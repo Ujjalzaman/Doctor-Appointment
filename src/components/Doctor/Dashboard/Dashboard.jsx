@@ -1,12 +1,12 @@
 import React from 'react'
 import DashboardLayout from '../DashboardLayout/DashboardLayout'
 import DoctorDashCard from '../../UI/DoctorDashCard'
-import PatientAppointment from '../../UI/PatientAppointment'
 import useAuthCheck from '../../../redux/hooks/useAuthCheck'
 import PatientAppointments from '../../UI/PatientAppointments'
+import DoctorDashboardPatient from '../../UI/DoctorDashboardPatient'
 
 const MainDashboard = () => {
-    const { authChecked, data, role } = useAuthCheck();
+    const { role } = useAuthCheck();
     return (
         <>
             <DashboardLayout>
@@ -24,8 +24,8 @@ const MainDashboard = () => {
                         </div>
                         :
                         <div className="col-md-12">
-                            <h4 className="mb-4">Patient Appoinments</h4>
-                            <PatientAppointment />
+                            <h4 className="mb-4 mt-5">Patient Appoinment</h4>
+                            <DoctorDashboardPatient />
                         </div>
                     }
 
