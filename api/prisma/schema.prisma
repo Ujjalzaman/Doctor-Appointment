@@ -43,41 +43,45 @@ model Patient {
 }
 
 model Doctor {
-  id             String         @id @default(uuid())
-  firstName      String
-  lastName       String
-  email          String         @unique
-  address        String?
-  img            String?
-  phone          String?
-  gender         Gender?
-  dob            String?
-  biography      String?
-  clinicName     String?
-  clinicAddress  String?
-  clinicImages   String?
-  city           String?
-  state          String?
-  country        String?
-  postalCode     String?
-  price          String?
-  services       String?
-  specialization String?
-  degree         String?
-  college        String?
-  completionYear String?
-  experience     String?
-  designation    String?
-  award          String?
-  registration   String?
-  year           String?
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  appointments   Appointments[]
-  TimeSlot       TimeSlot[]
-  Reviews        Reviews[]
-  prescription   Prescription[]
-  favourites     Favourites[]
+  id                     String         @id @default(uuid())
+  firstName              String
+  lastName               String
+  email                  String         @unique
+  address                String?
+  img                    String?
+  phone                  String?
+  gender                 Gender?
+  dob                    String?
+  biography              String?
+  clinicName             String?
+  clinicAddress          String?
+  clinicImages           String?
+  city                   String?
+  state                  String?
+  country                String?
+  postalCode             String?
+  price                  String?
+  services               String?
+  specialization         String?
+  degree                 String?
+  college                String?
+  completionYear         String?
+  experience             String?
+  designation            String?
+  award                  String?
+  awardYear              String?
+  registration           String?
+  year                   String?
+  experienceHospitalName String?
+  expericenceStart       String?
+  expericenceEnd         String?
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
+  appointments           Appointments[]
+  TimeSlot               TimeSlot[]
+  Reviews                Reviews[]
+  prescription           Prescription[]
+  favourites             Favourites[]
 
   @@map("Doctor")
 }

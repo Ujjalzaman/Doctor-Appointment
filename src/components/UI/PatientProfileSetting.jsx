@@ -19,7 +19,7 @@ const PatientProfileSetting = () => {
     const [showCalendar, setShowCalendar] = useState(false);
     const buttonRef = useRef(null);
     const [updatePatient, { isSuccess, isError, error, isLoading }] = useUpdatePatientMutation();
-    console.log(data)
+
     const handleDateChange = (date) => {
         setValue(date);
     };
