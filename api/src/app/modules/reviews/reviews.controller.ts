@@ -24,8 +24,18 @@ const getAllReview = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+const getSingleReview = catchAsync(async (req: Request, res: Response) => {
+    const result = await ReviewService.getSingleReview(req.params.id as string);
+    sendResponse<Reviews>(res, {
+        statusCode: 200,
+        message: 'Successfully Retrieve review !!',
+        success: true,
+        data: result,
+    })
+})
+
 const getDoctorReviews = catchAsync(async (req: Request, res: Response) => {
-    const result = await ReviewService.getDoctorReviews(req.params.id);
+    const result = await ReviewService.getDoctorReviews(req.user);
     sendResponse<Reviews[]>(res, {
         statusCode: 200,
         message: 'Successfully Retrieve review !!',
@@ -55,10 +65,22 @@ const updateReview = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+const replyReviewByDoctor = catchAsync(async (req: Request, res: Response) => {
+    const result = await ReviewService.replyReviewByDoctor(req.user, req.params.id, req.body);
+    sendResponse<Reviews>(res, {
+        statusCode: 200,
+        message: 'Successfully Reply review !!',
+        success: true,
+        data: result,
+    })
+})
+
 export const ReviewController = {
     creatReview,
     updateReview,
     getAllReview,
     getDoctorReviews,
-    deleteReview
+    deleteReview,
+    getSingleReview,
+    replyReviewByDoctor
 }
