@@ -22,12 +22,6 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
         res.status(httpStatus.NOT_FOUND).json({
             success: false,
             message: 'Something Went Wrong',
-            // errorMessages: [
-            //     {
-            //         path: req.originalUrl,
-            //         message: 'Api not found'
-            //     }
-            // ]
         });
     }
     next();
