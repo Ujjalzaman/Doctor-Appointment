@@ -134,10 +134,10 @@ model Reviews {
   patientId String
   patient   Patient @relation(fields: [patientId], references: [id])
 
-  description   String
-  star          Int
-  isRecommended String
-  response      String
+  description   String?
+  star          String?
+  isRecommended Boolean?
+  response      String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

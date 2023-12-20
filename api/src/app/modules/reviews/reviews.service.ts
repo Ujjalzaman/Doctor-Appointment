@@ -1,8 +1,18 @@
-import { Doctor, Reviews, UserRole } from "@prisma/client";
+import { Reviews } from "@prisma/client";
 import prisma from "../../../shared/prisma";
+import ApiError from "../../../errors/apiError";
+import httpStatus from "http-status";
 
 const create = async (user: any, payload: Reviews): Promise<Reviews> => {
-    if (user) {
+    const isUserExist = await prisma.patient.findUnique({
+        where: {
+            id: user.userId
+        }
+    })
+    if (!isUserExist) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Patient Account is not found !!')
+    }
+    if (isUserExist) {
         payload.patientId = user.userId
     }
     const result = await prisma.reviews.create({
@@ -16,11 +26,28 @@ const getAllReviews = async (): Promise<Reviews[] | null> => {
     return result;
 }
 
-const getDoctorReviews = async (doctorId: string): Promise<Reviews[] | null> => {
+const getSingleReview = async (id: string): Promise<Reviews | null> => {
+    console.log(id)
+    const result = await prisma.reviews.findUnique({
+        where: {
+            id: id
+        }
+    });
+    return result;
+}
 
+const getDoctorReviews = async (user: any): Promise<Reviews[] | null> => {
+    const isUserExist = await prisma.doctor.findUnique({
+        where: {
+            id: user.userId
+        }
+    })
+    if (!isUserExist) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
+    }
     const result = await prisma.reviews.findMany({
         where: {
-            doctorId: doctorId
+            doctorId: isUserExist.id
         }
     });
     return result;
@@ -45,11 +72,34 @@ const updateReview = async (id: string, payload: Partial<Reviews>): Promise<Revi
     return result;
 }
 
+const replyReviewByDoctor = async (user: any, id: string, payload: Partial<Reviews>): Promise<Reviews> => {
+    const isUserExist = await prisma.doctor.findUnique({
+        where: {
+            id: user.userId
+        }
+    })
+    if (!isUserExist) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
+    }
+
+    const result = await prisma.reviews.update({
+        data: {
+            response: payload.response
+        },
+        where: {
+            id: id
+        }
+    })
+    return result;
+}
+
 
 export const ReviewService = {
     create,
     getAllReviews,
     getDoctorReviews,
     deleteReviews,
-    updateReview
+    updateReview,
+    getSingleReview,
+    replyReviewByDoctor
 }
