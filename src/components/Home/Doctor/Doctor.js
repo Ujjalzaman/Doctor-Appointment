@@ -1,11 +1,21 @@
 import React from 'react';
-import useFetch from '../../hooks/useFetch';
 import './Doctor.css';
 import DoctorDetail from './DoctorDetail';
+import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
 
 const Doctor = () => {
-    const baseUrl = process.env.REACT_APP_BASE_URL;
-    const { data, loading, error } = useFetch(`${baseUrl}/auth/doctors`);
+    const { data, isLoading, isError } = useGetDoctorsQuery();
+    let content = null;
+    if (!isLoading && isError) content = <div>Something Went Wrong !</div>
+    if (!isLoading && !isError && data?.length === 0) content = <div>Empty</div>
+    if (!isLoading && !isError && data?.length > 0) content =
+        <>
+            {
+                data && data.map((item, key) => (
+                    <DoctorDetail key={item?.id + key} item={item}></DoctorDetail>
+                ))
+            }
+        </>
     return (
         <section className="doctors" id="doctorContaints">
             <div className="container">
@@ -13,9 +23,7 @@ const Doctor = () => {
             </div>
             <div className=" container">
                 <div className="row d-flex justify-content-center">
-                {
-                    data && data.map(item => <DoctorDetail key={item._id} item={item}></DoctorDetail>)
-                }
+                    {content}
                 </div>
             </div>
         </section>
