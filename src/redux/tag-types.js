@@ -4,6 +4,7 @@ export const tagTypes = {
     patient: 'patient',
     appointments: 'appointments',
     doctor: 'doctor',
+    reviews: 'reviews',
 }
 
 export const tagTypeList = [
@@ -11,5 +12,6 @@ export const tagTypeList = [
     tagTypes.prescription,
     tagTypes.patient,
     tagTypes.appointments,
-    tagTypes.doctor
+    tagTypes.doctor,
+    tagTypes.reviews
 ]

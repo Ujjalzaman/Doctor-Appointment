@@ -48,6 +48,20 @@ const getDoctorReviews = async (user: any): Promise<Reviews[] | null> => {
     const result = await prisma.reviews.findMany({
         where: {
             doctorId: isUserExist.id
+        },
+        include: {
+            doctor: {
+                select: {
+                    firstName: true,
+                    lastName: true
+                }
+            },
+            patient: {
+                select: {
+                    firstName: true,
+                    lastName: true
+                }
+            }
         }
     });
     return result;
