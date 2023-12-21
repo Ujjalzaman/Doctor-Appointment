@@ -3,78 +3,84 @@ import './Reviews.css';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import img from '../../../images/ema.png';
 import img2 from '../../../images/john.png';
+import { useGetDoctorReviewsQuery } from '../../../redux/api/reviewsApi';
+import { FaRegThumbsUp } from "react-icons/fa";
+import moment from 'moment';
+import StarRatings from 'react-star-ratings';
+
 const Reviews = () => {
-    return (
-        <DashboardLayout>
-            <ul className="comments-list">
-                <li>
-                    <div className="comment">
-                        <img className="avatar rounded-circle" alt="User Image" src={img} />
-                        <div className="comment-body">
-                            <div className="meta-data">
-                                <span className="comment-author">Richard Wilson</span>
-                                <span className="comment-date">Reviewed 2 Days ago</span>
-                                <div className="review-count rating">
-                                    <i className="fas fa-star filled"></i>
-                                    <i className="fas fa-star filled"></i>
-                                    <i className="fas fa-star filled"></i>
-                                    <i className="fas fa-star filled"></i>
-                                    <i className="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <p className="recommended"><i className="far fa-thumbs-up"></i> I recommend the doctor</p>
-                            <p className="comment-content">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation.
-                                Curabitur non nulla sit amet nisl tempus
-                            </p>
-                            <div className="comment-reply">
-                                <a className="comment-btn" href="#">
-                                    <i className="fas fa-reply"></i> Reply
-                                </a>
-                                <p className="recommend-btn">
-                                    <span>Recommend?</span>
-                                    <a href="#" className="like-btn">
-                                        <i className="far fa-thumbs-up"></i> Yes
-                                    </a>
-                                    <a href="#" className="dislike-btn">
-                                        <i className="far fa-thumbs-down"></i> No
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+    const { data, isError, isLoading } = useGetDoctorReviewsQuery();
 
-                    <ul className="comments-reply">
-
+    let content = null;
+    if (!isLoading && isError) content = <div>Something Went Wrong !</div>
+    if (!isLoading && !isError && data?.length === 0) content = <div>Empty</div>
+    if (!isLoading && !isError && data?.length > 0) content =
+        <>
+            {
+                data && data.map((item, key) => (
+                    <ul className="comments-list" key={item?.id + key}>
                         <li>
                             <div className="comment">
-                                <img className="avatar rounded-circle" alt="User Image" src={img2} />
+                                <img className="avatar rounded-circle" alt="User Image" src={img} />
                                 <div className="comment-body">
-                                    <div className="meta-data">
-                                        <span className="comment-author">Dr. Darren Elder</span>
-                                        <span className="comment-date">Reviewed 3 Days ago</span>
+                                    <div className="meta-data d-flex">
+                                        <div>
+                                            <span className="comment-author">{item?.patient?.firstName + ' ' + item?.patient?.lastName}</span>
+                                            <span className="comment-date">Reviewed {moment(item?.createdAt).startOf('day').fromNow()}</span>
+                                        </div>
+                                        <div className="">
+                                            <StarRatings
+                                                rating={Number(item?.star)}
+                                                starRatedColor="yellow"
+                                                numberOfStars={5}
+                                                name='rating'
+                                            />
+                                        </div>
                                     </div>
-                                    <p className="comment-content">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Ut enim ad minim veniam.
-                                        Curabitur non nulla sit amet nisl tempus
-                                    </p>
+                                    <p className="recommended"><FaRegThumbsUp /> {item?.isRecommended ? 'I recommend the doctor' : 'I do not recommend the doctor'}</p>
+                                    <p className="comment-content">{item?.description}</p>
                                     <div className="comment-reply">
-                                        <a className="comment-btn" href="#">
+                                        <a className="comment-btn">
                                             <i className="fas fa-reply"></i> Reply
                                         </a>
                                     </div>
                                 </div>
                             </div>
+
+                            {
+                                item?.response &&
+                                <ul className="comments-reply">
+                                    <li>
+                                        <div className="comment">
+                                            <img className="avatar rounded-circle" alt="User Image" src={img2} />
+                                            <div className="comment-body">
+                                                <div className="meta-data">
+                                                    <span className="comment-author">Dr. {item?.doctor?.firstName + ' ' + item?.doctor?.lastName}</span>
+                                                </div>
+                                                <p className="comment-content">
+                                                    {item?.response}
+                                                </p>
+                                                <div className="comment-reply">
+                                                    <a className="comment-btn" href="#">
+                                                        <i className="fas fa-reply"></i> Reply
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            }
+
                         </li>
-
                     </ul>
-
-                </li>
-            </ul>
+                ))
+            }
+        </>
+    return (
+        <DashboardLayout>
+            <div className='doc-review review-listing'>
+                {content}
+            </div>
         </DashboardLayout>
     )
 }
