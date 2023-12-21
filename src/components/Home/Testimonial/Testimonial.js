@@ -1,14 +1,21 @@
 import React from 'react';
-import ema from '../../../images/ema.png';
-import john from '../../../images/john.png';
-import watson from '../../../images/watson.png';
 import TestimonialDetails from './TestimonialDetails';
 import './Testimonial.css';
-import useFetch from '../../hooks/useFetch';
+import { useGetAllReviewsQuery } from '../../../redux/api/reviewsApi';
 
 const Testimonial = () => {
-    const baseUrl = process.env.REACT_APP_BASE_URL;
-    const { data, loading, error } = useFetch(`${baseUrl}/auth/reviews`);
+    const { data, isLoading, isError } = useGetAllReviewsQuery();
+    let content = null;
+    if (!isLoading && isError) content = <div>Something Went Wrong !</div>
+    if (!isLoading && !isError && data?.length === 0) content = <div>Empty</div>
+    if (!isLoading && !isError && data?.length > 0) content =
+        <>
+            {
+                data && data.map((item, key) => (
+                    <TestimonialDetails key={item?.id + key} testimonial={item}></TestimonialDetails>
+                ))
+            }
+        </>
     return (
         <section className="container testimonial my-5 py-5" id="reviewsContaints">
             <div className="cointainer">
@@ -19,9 +26,7 @@ const Testimonial = () => {
                 <div className="card-deck ">
                     <div className="d-flex justify-content-center ">
                         <div className="row w-80 ">
-                            {
-                                data && data?.map(review => <TestimonialDetails key={review._id} testimonial={review}></TestimonialDetails>)
-                            }
+                            {content}
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
 import { FaHeart } from "react-icons/fa";
 import { useAddFavouriteMutation } from '../../../redux/api/favouriteApi';
-import toast,{ Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 const BookDoctor = () => {
 	const { data, isError, isLoading } = useGetDoctorsQuery();
@@ -101,9 +101,9 @@ const BookDoctor = () => {
 						<div className="doctor-slider slider d-flex justify-content-center align-items-center gap-3 border-0">
 							{content}
 							<Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
+								position="top-center"
+								reverseOrder={false}
+							/>
 						</div>
 					</div>
 				</div>

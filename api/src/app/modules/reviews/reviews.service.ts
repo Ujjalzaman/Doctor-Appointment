@@ -22,7 +22,22 @@ const create = async (user: any, payload: Reviews): Promise<Reviews> => {
 }
 
 const getAllReviews = async (): Promise<Reviews[] | null> => {
-    const result = await prisma.reviews.findMany();
+    const result = await prisma.reviews.findMany({
+        include: {
+            doctor: {
+                select: {
+                    firstName: true,
+                    lastName: true
+                }
+            },
+            patient: {
+                select: {
+                    firstName: true,
+                    lastName: true
+                }
+            }
+        }
+    });
     return result;
 }
 
@@ -31,6 +46,20 @@ const getSingleReview = async (id: string): Promise<Reviews | null> => {
     const result = await prisma.reviews.findUnique({
         where: {
             id: id
+        },
+        include: {
+            doctor: {
+                select: {
+                    firstName: true,
+                    lastName: true
+                }
+            },
+            patient: {
+                select: {
+                    firstName: true,
+                    lastName: true
+                }
+            }
         }
     });
     return result;
