@@ -42,15 +42,6 @@
 .review-listing > ul li .comment .comment-body .meta-data span.comment-date {
     font-size: 14px;
 }
-.review-listing > ul li .comment .comment-body .meta-data .review-count {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-    position: absolute;
-    top: 3px;
-    right: 0;
-    width: auto;
-}
 .review-listing > ul li .comment .comment-body .comment-content {
     color: #757575;
     margin-top: 15px;
@@ -105,25 +96,6 @@
 }
 .all-feedback {
     margin-top: 20px;
-}
-.star-rating {
-    direction: rtl;
-}
-.star-rating input[type=radio] {
-    display: none
-}
-.star-rating label {
-    color: #bbb;
-    cursor: pointer;
-    font-size: 18px;
-    padding: 0;
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out
-}
-.star-rating label:hover,
-.star-rating label:hover ~ label,
-.star-rating input[type=radio]:checked ~ label {
-    color: #f2b600
 }
 .terms-accept a {
 	color: #20c0f3;
@@ -180,4 +152,18 @@
 }
 .dropzone .dz-preview.dz-error:hover .dz-error-message {
 	display: none;
+}
+
+
+.avatar {
+	position: relative;
+	display: inline-block;
+	width: 3rem;
+	height: 3rem
+}
+.avatar > img {
+	width: 100%;
+	height: 100%;
+	-o-object-fit: cover;
+	object-fit: cover;
 }
