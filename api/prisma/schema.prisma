@@ -43,10 +43,10 @@ model Patient {
 }
 
 model Doctor {
-  id                     String         @id @default(uuid())
+  id                     String           @id @default(uuid())
   firstName              String
   lastName               String
-  email                  String         @unique
+  email                  String           @unique
   address                String?
   img                    String?
   phone                  String?
@@ -75,13 +75,13 @@ model Doctor {
   experienceHospitalName String?
   expericenceStart       String?
   expericenceEnd         String?
-  createdAt              DateTime       @default(now())
-  updatedAt              DateTime       @updatedAt
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
   appointments           Appointments[]
-  TimeSlot               TimeSlot[]
   Reviews                Reviews[]
   prescription           Prescription[]
   favourites             Favourites[]
+  DoctorTimeSlot         DoctorTimeSlot[]
 
   @@map("Doctor")
 }
@@ -106,23 +106,6 @@ model Appointments {
   prescription Prescription[]
 
   @@map("Appointments")
-}
-
-model TimeSlot {
-  id String @id @default(uuid())
-
-  doctorId String
-  doctor   Doctor @relation(fields: [doctorId], references: [id])
-
-  start          String
-  end            String
-  day            String
-  weekDay        String
-  maximumPatient Int?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  @@map("TimeSlot")
 }
 
 model Reviews {
@@ -200,10 +183,43 @@ model Favourites {
   @@map("Favourites")
 }
 
+model DoctorTimeSlot {
+  id String @id @default(uuid())
+
+  doctorId       String
+  doctor         Doctor        @relation(fields: [doctorId], references: [id])
+  day            Day?
+  timeSlot       ScheduleDay[]
+  weekDay        String?
+  maximumPatient Int?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@map("DoctorTimeSlot")
+}
+
+model ScheduleDay {
+  id               Int             @id @default(autoincrement())
+  startTime        String
+  endTime          String
+  doctorTimeSlot   DoctorTimeSlot? @relation(fields: [doctorTimeSlotId], references: [id])
+  doctorTimeSlotId String?
+}
+
 enum UserRole {
   admin
   patient
   doctor
+}
+
+enum Day {
+  saturday
+  sunday
+  monday
+  tuesday
+  wednesday
+  thursday
+  friday
 }
 
 enum PaidType {
