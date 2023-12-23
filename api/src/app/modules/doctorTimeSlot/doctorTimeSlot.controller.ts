@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
-import { TimeSlot } from "@prisma/client";
 import { TimeSlotService } from "./doctorTimeSlot.service";
+import { DoctorTimeSlot } from "@prisma/client";
 
 const createTimeSlot = catchAsync(async (req: Request, res: Response) => {
     const result = await TimeSlotService.createTimeSlot(req.user, req.body);
-    sendResponse<TimeSlot>(res, {
+    sendResponse<DoctorTimeSlot>(res, {
         statusCode: 200,
         message: 'Successfully created Time Slot !!',
         success: true,
@@ -15,8 +15,8 @@ const createTimeSlot = catchAsync(async (req: Request, res: Response) => {
 })
 
 const getAllTimeSlot = catchAsync(async (req: Request, res: Response) => {
-    const result = await TimeSlotService.getallTimeSlot();
-    sendResponse<TimeSlot[]>(res, {
+    const result = await TimeSlotService.getAllTimeSlot();
+    sendResponse<DoctorTimeSlot[]>(res, {
         statusCode: 200,
         message: 'Successfully  get all Time Slot !!',
         success: true,
@@ -26,7 +26,7 @@ const getAllTimeSlot = catchAsync(async (req: Request, res: Response) => {
 
 const getMyTimeSlot = catchAsync(async (req: Request, res: Response) => {
     const result = await TimeSlotService.getMyTimeSlot(req.user);
-    sendResponse<TimeSlot[]>(res, {
+    sendResponse<DoctorTimeSlot[]>(res, {
         statusCode: 200,
         message: 'Successfully  get all Time Slot !!',
         success: true,
@@ -36,7 +36,7 @@ const getMyTimeSlot = catchAsync(async (req: Request, res: Response) => {
 
 const getTimeSlot = catchAsync(async (req: Request, res: Response) => {
     const result = await TimeSlotService.getTimeSlot(req.params.id);
-    sendResponse<TimeSlot>(res, {
+    sendResponse<DoctorTimeSlot>(res, {
         statusCode: 200,
         message: 'Successfully get Time Slot !!',
         success: true,
@@ -46,7 +46,7 @@ const getTimeSlot = catchAsync(async (req: Request, res: Response) => {
 
 const updateTimeSlot = catchAsync(async (req: Request, res: Response) => {
     const result = await TimeSlotService.updateTimeSlot(req.params.id, req.body);
-    sendResponse<TimeSlot>(res, {
+    sendResponse<DoctorTimeSlot>(res, {
         statusCode: 200,
         message: 'Successfully updated Time Slot !!',
         success: true,
@@ -56,7 +56,7 @@ const updateTimeSlot = catchAsync(async (req: Request, res: Response) => {
 
 const deleteTimeSlot = catchAsync(async (req: Request, res: Response) => {
     const result = await TimeSlotService.deleteTimeSlot(req.params.id);
-    sendResponse<TimeSlot>(res, {
+    sendResponse<DoctorTimeSlot>(res, {
         statusCode: 200,
         message: 'Successfully deleted Time Slot !!',
         success: true,
