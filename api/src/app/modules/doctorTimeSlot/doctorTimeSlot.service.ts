@@ -1,9 +1,9 @@
 import httpStatus from "http-status";
 import ApiError from "../../../errors/apiError";
 import prisma from "../../../shared/prisma";
-import { TimeSlot } from "@prisma/client";
+import { DoctorTimeSlot } from "@prisma/client";
 
-const createTimeSlot = async (user: any, payload: TimeSlot): Promise<TimeSlot | null> => {
+const createTimeSlot = async (user: any, payload: any): Promise<DoctorTimeSlot | null> => {
     const { userId } = user;
     const isDoctor = await prisma.doctor.findUnique({
         where: {
@@ -13,14 +13,25 @@ const createTimeSlot = async (user: any, payload: TimeSlot): Promise<TimeSlot | 
     if (!isDoctor) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
     }
-    const result = await prisma.timeSlot.create({
-        data: payload
+    const result = await prisma.doctorTimeSlot.create({
+        data: {
+            day: payload.day,
+            doctorId: payload.doctorId,
+            maximumPatient: payload.maximumPatient,
+            weekDay: payload.weekDay,
+            timeSlot: {
+                create: payload.timeSlot.map((item:any) => ({
+                    startTime : item.startTime,
+                    endTime : item.endTime
+                }))
+            }
+        }
     })
     return result;
 }
 
-const deleteTimeSlot = async (id: string): Promise<TimeSlot | null> => {
-    const result = await prisma.timeSlot.delete({
+const deleteTimeSlot = async (id: string): Promise<DoctorTimeSlot | null> => {
+    const result = await prisma.doctorTimeSlot.delete({
         where: {
             id: id
         }
@@ -28,8 +39,8 @@ const deleteTimeSlot = async (id: string): Promise<TimeSlot | null> => {
     return result;
 }
 
-const getTimeSlot = async (id: string): Promise<TimeSlot | null> => {
-    const result = await prisma.timeSlot.findFirst({
+const getTimeSlot = async (id: string): Promise<DoctorTimeSlot | null> => {
+    const result = await prisma.doctorTimeSlot.findFirst({
         where: {
             id: id
         }
@@ -37,8 +48,8 @@ const getTimeSlot = async (id: string): Promise<TimeSlot | null> => {
     return result;
 }
 
-const getMyTimeSlot = async (user: any): Promise<TimeSlot[] | null> => {
-    const result = await prisma.timeSlot.findMany({
+const getMyTimeSlot = async (user: any): Promise<DoctorTimeSlot[] | null> => {
+    const result = await prisma.doctorTimeSlot.findMany({
         where: {
             doctorId: user.userId
         }
@@ -46,12 +57,12 @@ const getMyTimeSlot = async (user: any): Promise<TimeSlot[] | null> => {
     return result;
 }
 
-const getallTimeSlot = async (): Promise<TimeSlot[] | null> => {
-    const result = await prisma.timeSlot.findMany({})
+const getAllTimeSlot = async (): Promise<DoctorTimeSlot[] | null> => {
+    const result = await prisma.doctorTimeSlot.findMany({})
     return result;
 }
-const updateTimeSlot = async (id: string, payload: Partial<TimeSlot>): Promise<TimeSlot | null> => {
-    const result = await prisma.timeSlot.update({
+const updateTimeSlot = async (id: string, payload: Partial<DoctorTimeSlot>): Promise<DoctorTimeSlot | null> => {
+    const result = await prisma.doctorTimeSlot.update({
         where: {
             id: id
         },
@@ -60,10 +71,9 @@ const updateTimeSlot = async (id: string, payload: Partial<TimeSlot>): Promise<T
     return result;
 }
 
-
 export const TimeSlotService = {
     updateTimeSlot,
-    getallTimeSlot,
+    getAllTimeSlot,
     getTimeSlot,
     createTimeSlot,
     deleteTimeSlot,
