@@ -16,13 +16,13 @@ const createTimeSlot = async (user: any, payload: any): Promise<DoctorTimeSlot |
     const result = await prisma.doctorTimeSlot.create({
         data: {
             day: payload.day,
-            doctorId: payload.doctorId,
+            doctorId: isDoctor.id,
             maximumPatient: payload.maximumPatient,
             weekDay: payload.weekDay,
             timeSlot: {
-                create: payload.timeSlot.map((item:any) => ({
-                    startTime : item.startTime,
-                    endTime : item.endTime
+                create: payload.timeSlot.map((item: any) => ({
+                    startTime: item.startTime,
+                    endTime: item.endTime
                 }))
             }
         }
@@ -48,17 +48,43 @@ const getTimeSlot = async (id: string): Promise<DoctorTimeSlot | null> => {
     return result;
 }
 
-const getMyTimeSlot = async (user: any): Promise<DoctorTimeSlot[] | null> => {
-    const result = await prisma.doctorTimeSlot.findMany({
+const getMyTimeSlot = async (user: any, filter: any): Promise<DoctorTimeSlot[] | null> => {
+    const { userId } = user;
+    const isDoctor = await prisma.doctor.findUnique({
         where: {
-            doctorId: user.userId
+            id: userId
+        }
+    })
+    if (!isDoctor) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
+    }
+    let andCondition: any = { doctorId: isDoctor.id };
+    if(filter.day){
+        andCondition.day = filter.day
+    }
+    
+    const whereCondition = andCondition ? andCondition : {}
+    const result = await prisma.doctorTimeSlot.findMany({
+        where: whereCondition,
+        include: {
+            timeSlot: true
         }
     })
     return result;
 }
 
 const getAllTimeSlot = async (): Promise<DoctorTimeSlot[] | null> => {
-    const result = await prisma.doctorTimeSlot.findMany({})
+    const result = await prisma.doctorTimeSlot.findMany({
+        include: {
+            timeSlot: true,
+            doctor: {
+                select: {
+                    firstName: true,
+                    lastName: true
+                }
+            }
+        }
+    })
     return result;
 }
 const updateTimeSlot = async (id: string, payload: Partial<DoctorTimeSlot>): Promise<DoctorTimeSlot | null> => {

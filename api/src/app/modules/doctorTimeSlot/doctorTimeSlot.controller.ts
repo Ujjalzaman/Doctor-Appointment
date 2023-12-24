@@ -25,7 +25,7 @@ const getAllTimeSlot = catchAsync(async (req: Request, res: Response) => {
 })
 
 const getMyTimeSlot = catchAsync(async (req: Request, res: Response) => {
-    const result = await TimeSlotService.getMyTimeSlot(req.user);
+    const result = await TimeSlotService.getMyTimeSlot(req.user, req.query);
     sendResponse<DoctorTimeSlot[]>(res, {
         statusCode: 200,
         message: 'Successfully  get all Time Slot !!',
