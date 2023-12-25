@@ -3,10 +3,10 @@ import { baseApi } from "./baseApi"
 
 const TIMELOT_URL = '/timeslot'
 
-export const appointmentApi = baseApi.injectEndpoints({
+export const timeSlotApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        createTimeSlot: build.query({
-            query: ({data}) => ({
+        createTimeSlot: build.mutation({
+            query: ({ data }) => ({
                 url: `${TIMELOT_URL}/create`,
                 method: 'POST',
                 data: data
@@ -43,7 +43,7 @@ export const appointmentApi = baseApi.injectEndpoints({
             invalidatesTags: [tagTypes.timeSlot]
         }),
         UpdateTimeSlot: build.mutation({
-            query: ({id, data}) => ({
+            query: ({ id, data }) => ({
                 url: `${TIMELOT_URL}/${id}`,
                 method: 'PATCH',
                 data: data
@@ -53,4 +53,11 @@ export const appointmentApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetDoctorAppointmentsQuery, useGetPatientAppointmentsQuery, useGetDoctorPatientsQuery } = appointmentApi;
+export const {
+    useGetAllTimeSlotQuery,
+    useDeleteTimeSlotQuery,
+    useGetDoctorTimeSlotQuery,
+    useGetTimeSlotQuery,
+    useUpdateTimeSlotMutation,
+    useCreateTimeSlotMutation
+} = timeSlotApi;
