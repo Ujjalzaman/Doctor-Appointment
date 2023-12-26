@@ -45,12 +45,11 @@ const getTimeSlot = catchAsync(async (req: Request, res: Response) => {
 })
 
 const updateTimeSlot = catchAsync(async (req: Request, res: Response) => {
-    const result = await TimeSlotService.updateTimeSlot(req.params.id, req.body);
+    await TimeSlotService.updateTimeSlot(req.user, req.params.id, req.body);
     sendResponse<DoctorTimeSlot>(res, {
         statusCode: 200,
         message: 'Successfully updated Time Slot !!',
         success: true,
-        data: result
     })
 })
 
