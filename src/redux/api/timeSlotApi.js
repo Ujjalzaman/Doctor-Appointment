@@ -43,8 +43,8 @@ export const timeSlotApi = baseApi.injectEndpoints({
             invalidatesTags: [tagTypes.timeSlot]
         }),
         UpdateTimeSlot: build.mutation({
-            query: ({ id, data }) => ({
-                url: `${TIMELOT_URL}/${id}`,
+            query: (data) => ({
+                url: `${TIMELOT_URL}`,
                 method: 'PATCH',
                 data: data
             }),

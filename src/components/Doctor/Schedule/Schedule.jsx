@@ -1,31 +1,91 @@
 import './Schedule.css';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs'
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
-import { FaEdit } from "react-icons/fa";
 import React, { useEffect, useState } from 'react';
-import { Space, Tag, Button, Empty, Modal, TimePicker } from 'antd';
-import { useCreateTimeSlotMutation, useGetDoctorTimeSlotQuery } from '../../../redux/api/timeSlotApi';
+import { Space, Tag, Button, Empty } from 'antd';
+import { useCreateTimeSlotMutation, useGetDoctorTimeSlotQuery, useUpdateTimeSlotMutation } from '../../../redux/api/timeSlotApi';
 import { FaWindowClose, FaPlus } from "react-icons/fa";
 import UseModal from '../../UI/UseModal';
 import toast, { Toaster } from 'react-hot-toast';
+import TimePicer from '../../UI/form/TimePicer';
+import TabForm from '../../UI/form/TabForm';
 
 const Schedule = () => {
     const [key, setKey] = useState('sunday');
     const [timeSlot, setTimeSlot] = useState([]);
-    const [addTimeSlot, setAddTimeSlot] = useState([{ id: 1 }]);
+    const [editTimeSlot, setEditTimeSlot] = useState([]);
+    const [addTimeSlot, setAddTimeSlot] = useState([]);
+    const [UpdateTimeSlot, { isError: uIsError, error: uError, isLoading: UIsLoading, isSuccess: uIsSuccess }] = useUpdateTimeSlotMutation();
     const { data, refetch, isLoading, isError } = useGetDoctorTimeSlotQuery({ day: key });
     const [createTimeSlot, { isError: AIsError, error, isLoading: AIsLoading, isSuccess }] = useCreateTimeSlotMutation();
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const showModal = () => { setIsModalOpen(!isModalOpen) };
     const handleCancel = () => { setIsModalOpen(false) };
     const showEditModal = () => { setIsEditModalOpen(!isEditModalOpen) };
-    const handleEditOk = () => { setIsEditModalOpen(!isEditModalOpen) };
+
+    const handleEditOk = () => {
+        if (editTimeSlot.length > 0) {
+            const { toCreate, toUpdate } = editTimeSlot.reduce((acc, cur) => {
+                if (cur.doctorTimeSlotId) {
+                    acc.toUpdate.push(cur);
+                } else {
+                    acc.toCreate.push({ ...cur, day: key })
+                }
+                return acc;
+            }, { toCreate: [], toUpdate: [] });
+            UpdateTimeSlot({ timeSlot: toUpdate, create: toCreate })
+        }
+        setIsEditModalOpen(UIsLoading ? true : false)
+    };
+
+    useEffect(() => {
+        if (!UIsLoading && uIsError) {
+            toast.error(uError?.data?.message)
+        }
+        if (uIsSuccess) {
+            toast.success('Successfully Favourite Removed')
+        }
+    }, [uIsSuccess, uIsError, UIsLoading])
+
+
+    const handleEditStartTime = (id, time, timeString) => {
+        const findIndex = timeSlot.find(item => item.id === id);
+        const updatedItem = { ...findIndex, startTime: timeString }
+        setEditTimeSlot(prev => {
+            const indexToUpdate = prev.findIndex(item => item.id === id);
+            if (indexToUpdate !== -1) {
+                const updatedArray = [...prev];
+                updatedArray[indexToUpdate] = updatedItem;
+                return updatedArray
+            } else {
+                return [...prev, updatedItem]
+            }
+        })
+    }
+
+    const handleEditEndTime = (id, time, timeString) => {
+        const findObject = timeSlot.find(item => item.id === id);
+        if (findObject) {
+            const editedObject = editTimeSlot.find(item => item.id === id);
+
+            const updateObject = editedObject.id ? { ...editedObject, endTime: timeString } : { ...findObject, endTime: timeString };
+            setEditTimeSlot(prev => {
+                const findIndex = prev.findIndex(item => item.id === id);
+                if (findIndex !== -1) {
+                    const updateArray = [...prev];
+                    updateArray[findIndex] = updateObject;
+                    return updateArray;
+                } else {
+                    return [...prev, updateObject]
+                }
+            })
+        }
+    }
     const handleEditCancel = () => { setIsEditModalOpen(!isEditModalOpen) };
 
     const handleOk = () => {
-        const timeSlot = addTimeSlot.map(item => {
+        const timeSlot = addTimeSlot?.map(item => {
             const { id, ...rest } = item;
             return rest;
         })
@@ -46,15 +106,12 @@ const Schedule = () => {
     }, [isSuccess, AIsError])
 
     const handleStartTime = (id, time, timeString) => {
-        const myChange = addTimeSlot.map((item) => item.id === id ? { ...item, startTime: timeString } : item);
-        setAddTimeSlot(myChange)
+        setAddTimeSlot(prev => (prev.map(item => item.id === id ? { ...item, startTime: timeString } : item)));
     }
 
     const handleEndTime = (id, time, timeString) => {
-        const myChange = addTimeSlot.map((item) => item.id === id ? { ...item, endTime: timeString } : item);
-        setAddTimeSlot(myChange)
+        setAddTimeSlot(prev => prev.map(item => item.id === id ? { ...item, endTime: timeString } : item));
     }
-
     const handleOnSelect = (value) => {
         setKey(value);
         refetch();
@@ -66,13 +123,12 @@ const Schedule = () => {
         }
     }, [data])
 
-
     const remove = (id) => {
         setTimeSlot(timeSlot.filter((item) => item.id !== id))
     }
     const addField = (e) => {
-        const newId = timeSlot.length + 1;
-        setTimeSlot([...timeSlot, { id: newId }])
+        const getLastValue = timeSlot[timeSlot.length - 1];
+        setTimeSlot([...timeSlot, { id: getLastValue.id + 1 }])
         e.preventDefault();
     }
 
@@ -113,87 +169,12 @@ const Schedule = () => {
         <DashboardLayout>
             <Toaster />
             <h4 className="card-title">Schedule Timings</h4>
-            <Tabs
-                defaultActiveKey="sunday"
-                id="uncontrolled-tab-example-schedule"
-                className="mb-3"
-                onSelect={(k) => handleOnSelect(k)}
-            >
-                <Tab eventKey="sunday" title="Sunday">
-                    <div className='d-flex justify-content-between'>
-                        {content}
-                        {
-                            <Button type="primary" shape="circle" onClick={data && data?.length > 0 ? showEditModal : showModal}>
-                                {data && data?.length > 0 ? <FaEdit /> : <FaPlus />}
-                            </Button>
-                        }
-                    </div>
-                </Tab>
-                <Tab eventKey="monday" title="Monday">
-                    <div className='d-flex justify-content-between'>
-                        {content}
-                        {
-                            <Button type="primary" shape="circle" onClick={data && data?.length > 0 ? showEditModal : showModal}>
-                                {data && data?.length > 0 ? <FaEdit /> : <FaPlus />}
-                            </Button>
-                        }
-                    </div>
-                </Tab>
-                <Tab eventKey="tuesday" title="TuesDay">
-                    <div className='d-flex justify-content-between'>
-                        {content}
-                        {
-                            <Button type="primary" shape="circle" onClick={data && data?.length > 0 ? showEditModal : showModal}>
-                                {data && data?.length > 0 ? <FaEdit /> : <FaPlus />}
-                            </Button>
-                        }
-                    </div>
-                </Tab>
-                <Tab eventKey="wednesday" title="Wednesday">
-                    <div className='d-flex justify-content-between'>
-                        {content}
-                        {
-                            <Button type="primary" shape="circle" onClick={data && data?.length > 0 ? showEditModal : showModal}>
-                                {data && data?.length > 0 ? <FaEdit /> : <FaPlus />}
-                            </Button>
-                        }
-                    </div>
-                </Tab>
-                <Tab eventKey="thursday" title="Thursday">
-                    <div className='d-flex justify-content-between'>
-                        {content}
-                        <div>
-                            {
-                                <Button type="primary" shape="circle" onClick={data && data?.length > 0 ? showEditModal : showModal}>
-                                    {data && data?.length > 0 ? <FaEdit /> : <FaPlus />}
-                                </Button>
-                            }
-                        </div>
-                    </div>
-                </Tab>
-                <Tab eventKey="friday" title="Friday">
-                    <div className='d-flex justify-content-between'>
-                        {content}
-                        {
-                            <Button type="primary" shape="circle" onClick={data && data?.length > 0 ? showEditModal : showModal}>
-                                {data && data?.length > 0 ? <FaEdit /> : <FaPlus />}
-                            </Button>
-                        }
-                    </div>
-                </Tab>
-                <Tab eventKey="saturday" title="Saturday">
-                    <div className='d-flex justify-content-between'>
-                        {content}
-                        {
-                            <Button type="primary" shape="circle" onClick={data && data?.length > 0 ? showEditModal : showModal}>
-                                {data && data?.length > 0 ? <FaEdit /> : <FaPlus />}
-                            </Button>
-                        }
-                    </div>
-                </Tab>
-            </Tabs>
-
-            <UseModal title="Edit Time Slots" isModaOpen={isEditModalOpen} handleOk={handleEditOk} handleCancel={handleEditCancel}>
+            <TabForm content={content} data={data} handleOnSelect={handleOnSelect} showEditModal={showEditModal} showModal={showModal}/>
+            
+            <UseModal title="Edit Time Slots"
+                isModaOpen={isEditModalOpen}
+                handleOk={handleEditOk}
+                handleCancel={handleEditCancel}>
                 <form>
                     <div className="hours-info">
                         <div className="row form-row hours-cont">
@@ -204,17 +185,18 @@ const Schedule = () => {
                                             <div className="col-12 col-md-6">
                                                 <div className="form-group">
                                                     <label>Start Time</label>
-                                                    <TimePicker use12Hours format="h:mm a" onChange={handleStartTime} />
+                                                    <TimePicer handleFunction={handleEditStartTime} time={item.startTime} id={item.id} />
                                                 </div>
                                             </div>
                                             <div className="col-12 col-md-6">
                                                 <div className="form-group">
                                                     <label>End Time</label>
-                                                    <TimePicker use12Hours format="h:mm a" onChange={handleEndTime} />
+                                                    <TimePicer handleFunction={handleEditEndTime} time={item.startTime} id={item.id} />
                                                 </div>
                                             </div>
                                         </div>
-                                        <Button type="primary" size='small' htmlType="submit" onClick={() => remove(item?.id)} block icon={<FaWindowClose />}>
+                                        <Button type="primary" size='small' htmlType="submit"
+                                            onClick={() => remove(item?.id)} block icon={<FaWindowClose />}>
                                         </Button>
                                     </div>
                                 ))
@@ -241,13 +223,13 @@ const Schedule = () => {
                                             <div className="col-12 col-md-6">
                                                 <div className="form-group">
                                                     <label>Start Time</label>
-                                                    <TimePicker use12Hours format="h:mm a" onChange={(time, timeString) => handleStartTime(item.id, time, timeString)} />
+                                                    <TimePicer handleFunction={handleStartTime} time={item.startTime} id={item.id} />
                                                 </div>
                                             </div>
                                             <div className="col-12 col-md-6">
                                                 <div className="form-group">
                                                     <label>End Time</label>
-                                                    <TimePicker use12Hours format="h:mm a" onChange={(time, timeString) => handleEndTime(item.id, time, timeString)} />
+                                                    <TimePicer handleFunction={handleEndTime} time={item.endTime} id={item.id} />
                                                 </div>
                                             </div>
                                         </div>
@@ -266,10 +248,7 @@ const Schedule = () => {
                     </div>
                 </form>
             </UseModal>
-
-
         </DashboardLayout >
     )
 }
-
-export default Schedule
+export default Schedule;

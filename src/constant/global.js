@@ -1,5 +1,5 @@
 export const bloodGrup = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
-export const bloodGrupOptions = bloodGrup.map((data) =>{
+export const bloodGrupOptions = bloodGrup.map((data) => {
     return {
         label: data,
         value: data
@@ -8,9 +8,10 @@ export const bloodGrupOptions = bloodGrup.map((data) =>{
 
 const gender = ['male', 'femal', 'shemale']
 
-export const genderOptions = gender.map((data) =>{
+export const genderOptions = gender.map((data) => {
     return {
         label: data,
         value: data
     }
 })
+export const daysArray = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
