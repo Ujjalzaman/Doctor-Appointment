@@ -27,12 +27,12 @@ const DoctorProfile = () => {
                             <div className="doctor-widget">
                                 <div className="doc-info-left">
                                     <div className="doctor-img">
-                                        <img src={img} className="img-fluid" alt="User Image" />
+                                        <img src={img} className="img-fluid" alt="" />
                                     </div>
                                     <div className="doc-info-cont">
                                         <h4 className="doc-name">Dr. Darren Elder</h4>
                                         <p className="doc-speciality">BDS, MDS - Oral & Maxillofacial Surgery</p>
-                                        <p className="doc-department"><img src={img5} className="img-fluid" alt="Speciality" />Dentist</p>
+                                        <p className="doc-department"><img src={img5} className="img-fluid" alt="" />Dentist</p>
                                         <div className="rating">
                                             <FaRegStar/>
                                             <FaRegStar/>
@@ -42,26 +42,26 @@ const DoctorProfile = () => {
                                             <span className="d-inline-block average-rating">(35)</span>
                                         </div>
                                         <div className="clinic-details">
-                                            <p className="doc-location"><FaMapMarker/> Newyork, USA - <a href="javascript:void(0);">Get Directions</a></p>
+                                            <p className="doc-location"><FaMapMarker/> Newyork, USA - <a>Get Directions</a></p>
                                             <ul className="clinic-gallery">
                                                 <li>
                                                     <a href="" data-fancybox="gallery">
-                                                        <img src={img2} alt="Feature" />
+                                                        <img src={img2} alt="" />
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="" data-fancybox="gallery">
-                                                        <img src={img3} alt="Feature Image" />
+                                                        <img src={img3} alt="" />
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="" data-fancybox="gallery">
-                                                        <img src={img4} alt="Feature" />
+                                                        <img src={img4} alt="" />
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="" data-fancybox="gallery">
-                                                        <img src={img2} alt="Feature" />
+                                                        <img src={img2} alt="" />
                                                     </a>
                                                 </li>
                                             </ul>
@@ -291,7 +291,7 @@ const DoctorProfile = () => {
                                                         <span className="d-inline-block average-rating">(4)</span>
                                                     </div>
                                                     <div className="clinic-details mb-0">
-                                                        <h5 className="clinic-direction"> <i className="fas fa-map-marker-alt"></i> 2286  Sundown Lane, Austin, Texas 78749, USA <br /><a href="javascript:void(0);">Get Directions</a></h5>
+                                                        <h5 className="clinic-direction"> <i className="fas fa-map-marker-alt"></i> 2286  Sundown Lane, Austin, Texas 78749, USA <br /><a>Get Directions</a></h5>
                                                         <ul>
                                                             <li>
                                                                 <a href="assets/img/features/feature-01.jpg" data-fancybox="gallery2">
@@ -362,7 +362,7 @@ const DoctorProfile = () => {
                                                         <span className="d-inline-block average-rating">(4)</span>
                                                     </div>
                                                     <div className="clinic-details mb-0">
-                                                        <p className="clinic-direction"> <i className="fas fa-map-marker-alt"></i> 2883  University Street, Seattle, Texas Washington, 98155 <br /><a href="javascript:void(0);">Get Directions</a></p>
+                                                        <p className="clinic-direction"> <i className="fas fa-map-marker-alt"></i> 2883  University Street, Seattle, Texas Washington, 98155 <br /><a>Get Directions</a></p>
                                                         <ul>
                                                             <li>
                                                                 <a href="assets/img/features/feature-01.jpg" data-fancybox="gallery2">
@@ -428,7 +428,7 @@ const DoctorProfile = () => {
 
                                             <li>
                                                 <div className="comment">
-                                                    <img className="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient.jpg" />
+                                                    <img className="avatar avatar-sm rounded-circle" alt="" src="assets/img/patients/patient.jpg" />
                                                     <div className="comment-body">
                                                         <div className="meta-data">
                                                             <span className="comment-author">Richard Wilson</span>
@@ -468,7 +468,7 @@ const DoctorProfile = () => {
                                                 <ul className="comments-reply">
                                                     <li>
                                                         <div className="comment">
-                                                            <img className="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient1.jpg" />
+                                                            <img className="avatar avatar-sm rounded-circle" alt="" src="assets/img/patients/patient1.jpg" />
                                                             <div className="comment-body">
                                                                 <div className="meta-data">
                                                                     <span className="comment-author">Charlene Reed</span>
@@ -509,7 +509,7 @@ const DoctorProfile = () => {
                                             </li>
                                             <li>
                                                 <div className="comment">
-                                                    <img className="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient2.jpg" />
+                                                    <img className="avatar avatar-sm rounded-circle" alt="" src="assets/img/patients/patient2.jpg" />
                                                     <div className="comment-body">
                                                         <div className="meta-data">
                                                             <span className="comment-author">Travis Trimble</span>

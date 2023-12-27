@@ -12,7 +12,7 @@ const DoctorDashboardSidebar = () => {
                     role === 'doctor' ?
                         <div className="profile-info-widget">
                             <a className="booking-doc-img">
-                                <img src={img} alt="User Image" />
+                                <img src={img} alt="" />
                             </a>
                             <div className="profile-det-info">
                                 <h3>{data?.firstName + " " + data?.lastName}</h3>
@@ -25,7 +25,7 @@ const DoctorDashboardSidebar = () => {
                         :
                         <div className="profile-info-widget">
                             <a className="booking-doc-img">
-                                <img src={img} alt="User Image" />
+                                <img src={img} alt="" />
                             </a>
                             <div className="profile-det-info">
                                 <h3>{data?.firstName + " " + data?.lastName}</h3>
@@ -43,7 +43,7 @@ const DoctorDashboardSidebar = () => {
             <div className="dashboard-widget">
                 <nav className="dashboard-menu">
                     {
-                        role == 'patient' ?
+                        role === 'patient' ?
                             <ul>
                                 <li className="active">
                                     <Link to={'/dashboard'}>

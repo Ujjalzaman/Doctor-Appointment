@@ -130,7 +130,7 @@ const BookingCheckout = () => {
 
                                     <div className="booking-doc-info">
                                         <a href="doctor-profile.html" className="booking-doc-img">
-                                            <img src={img} alt="User Image" />
+                                            <img src={img} alt="" />
                                         </a>
                                         <div className="booking-info">
                                             <h4><a href="doctor-profile.html">Dr. Darren Elder</a></h4>

@@ -62,7 +62,7 @@ const SignUp = ({ setSignUp }) => {
             handleSignUpSuccess();
         }
 
-    }, [dIsError, dError, pError, pIsError, , pIsLoading, dIsLoading, pData, dData, setSignUp, setLoading])
+    }, [dIsError, dError, pError, pIsError, , pIsLoading, dIsLoading, pData, dData, setSignUp, setLoading, dIsSuccess])
 
     const [emailError, setEmailError] = useState({
         emailError: false

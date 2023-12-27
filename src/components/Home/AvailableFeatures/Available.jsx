@@ -11,7 +11,7 @@ const Availabe = () => {
 			<div className="container-fluid">
 				<div className="row">
 					<div className="col-md-5 features-img">
-						<img src={img} className="img-fluid" alt="Feature" />
+						<img src={img} className="img-fluid" alt="" />
 					</div>
 					<div className="col-md-7">
 						<div className="section-header">
@@ -21,12 +21,12 @@ const Availabe = () => {
 						<div className="features-slider slider d-flex justify-content-center align-items-center gap-4">
 
 							<div className="feature-item text-center">
-								<img src={img4} className="img-fluid" alt="Feature" />
+								<img src={img4} className="img-fluid" alt="" />
 								<p>ICU</p>
 							</div>
 
 							<div className="feature-item text-center">
-								<img src={img4} className="img-fluid" alt="Feature" />
+								<img src={img4} className="img-fluid" alt="" />
 								<p>Patient Ward</p>
 							</div>
 
@@ -36,7 +36,7 @@ const Availabe = () => {
 							</div>
 
 							<div className="feature-item text-center">
-								<img src={img3} className="img-fluid" alt="Feature" />
+								<img src={img3} className="img-fluid" alt="" />
 								<p>Laboratory</p>
 							</div>
 						</div>

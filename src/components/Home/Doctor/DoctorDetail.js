@@ -5,7 +5,6 @@ import toast, { Toaster } from 'react-hot-toast';
 import { FaHeart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
-
 const DoctorDetail = ({ item }) => {
     const [addFavourite, { isSuccess, isLoading: FIsLoading, isError: fIsError, error }] = useAddFavouriteMutation();
 
@@ -20,7 +19,7 @@ const DoctorDetail = ({ item }) => {
         if (isSuccess) {
             toast.success('Successfully Favourite Adde')
         }
-    }, [isSuccess, fIsError])
+    }, [isSuccess, fIsError, error?.data?.message, FIsLoading])
 
     return (
         <div className='col-md-4 col-sm-6 col-12 text-center doctor-content m-3'>
@@ -31,7 +30,7 @@ const DoctorDetail = ({ item }) => {
             <div className="profile-widget" key={item?.id}>
                 <div className="doc-img">
                     <a href="doctor-profile.html">
-                        <img className="img-fluid" alt="User Image" src={img} />
+                        <img className="img-fluid" alt="" src={img} />
                     </a>
                     <a style={{ cursor: 'pointer' }} className="position-absolute top-0 end-0 me-2" onClick={() => handleAddFavourite(item?.id)}>
                         <FaHeart />
@@ -62,7 +61,7 @@ const DoctorDetail = ({ item }) => {
                             <Link to={'/doctors/profile'} className="btn btn-outline-info">View Profile</Link>
                         </div>
                         <div className="col-6">
-                            <Link to={'/booking'} className="btn btn-info text-white">Book Now</Link>
+                            <Link to={`/booking/${item?.id}`} className="btn btn-info text-white">Book Now</Link>
                         </div>
                     </div>
                 </div>

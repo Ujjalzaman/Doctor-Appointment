@@ -22,7 +22,7 @@ const BookDoctor = () => {
 		if (isSuccess) {
 			toast.success('Successfully Favourite Adde')
 		}
-	}, [isSuccess, fIsError])
+	}, [isSuccess, fIsError, FIsLoading, error?.data?.message])
 
 	// what to render 
 	let content = null;
@@ -35,7 +35,7 @@ const BookDoctor = () => {
 					<div className="profile-widget" key={item?.id}>
 						<div className="doc-img">
 							<a href="doctor-profile.html">
-								<img className="img-fluid" alt="User Image" src={img} />
+								<img className="img-fluid" alt="" src={img} />
 							</a>
 							<a style={{ cursor: 'pointer' }} className="position-absolute top-0 end-0 me-2" onClick={() => handleAddFavourite(item?.id)}>
 								<FaHeart />
@@ -74,7 +74,7 @@ const BookDoctor = () => {
 									<Link to={'/doctors/profile'} className="btn btn-outline-info">View Profile</Link>
 								</div>
 								<div className="col-6">
-									<Link to={'/booking'} className="btn btn-info text-white">Book Now</Link>
+									<Link to={`/booking/${item?.id}`} className="btn btn-info text-white">Book Now</Link>
 								</div>
 							</div>
 						</div>

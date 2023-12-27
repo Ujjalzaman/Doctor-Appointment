@@ -1,23 +1,9 @@
 import React, { useState } from 'react';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
-import toast, { Toaster } from 'react-hot-toast';
 
-
-const SocialSignUp = ({ handleResponse }) => {
-
-    const [error, setError] = useState({})
-
+const SocialSignUp = () => {
+    const [error] = useState({})
     const handleGoogleSignIn = () => {
-
-        // let provider = new firebase.auth.GoogleAuthProvider();
-        // handleLoginWithProvider(provider)
-        //     .then(res => {
-        //         if (res.error) {
-        //             setError(res.error)
-        //         }
-        //         handleResponse(res)
-        //         toast("Successfully logged in")
-        //     })
     }
 
 

@@ -18,7 +18,7 @@ const Appointments = () => {
                         <div className="appointment-list">
                             <div className="profile-info-widget">
                                 <a href="#" className="booking-doc-img">
-                                    <img src={img} alt="User Image" />
+                                    <img src={img} alt="" />
                                 </a>
                                 <div className="profile-det-info">
                                     <h3><a href="patient-profile.html">{item?.patient?.firstName + ' ' + item?.patient?.lastName}</a></h3>

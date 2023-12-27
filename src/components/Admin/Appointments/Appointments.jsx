@@ -29,14 +29,14 @@ const AdminAppointments = () => {
 												<tr>
 													<td>
 														<h2 className="table-avatar">
-															<a href="profile.html" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image"/></a>
+															<a href="profile.html" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpg" alt=""/></a>
 															<a href="profile.html">Dr. Ruby Perrin</a>
 														</h2>
 													</td>
 													<td>Dental</td>
 													<td>
 														<h2 className="table-avatar">
-															<a href="profile.html" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg" alt="User Image"/></a>
+															<a href="profile.html" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg" alt=""/></a>
 															<a href="profile.html">Charlene Reed </a>
 														</h2>
 													</td>
