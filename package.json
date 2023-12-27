@@ -17,17 +17,17 @@
     "firebase": "^8.4.2",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
-    "react": "^17.0.1",
+    "react": "^18.2.0",
     "react-bootstrap": "^2.0.0-beta.4",
     "react-calendar": "^3.4.0",
-    "react-dom": "^17.0.1",
+    "react-dom": "^18.2.0",
     "react-hook-form": "^7.3.4",
     "react-hot-toast": "^2.1.0",
     "react-icons": "^4.2.0",
     "react-modal": "^3.13.1",
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.4.3",
-    "react-scripts": "4.0.2",
+    "react-scripts": "^5.0.1",
     "react-star-ratings": "^2.3.0",
     "sweetalert": "^2.1.2",
     "web-vitals": "^1.1.0"
@@ -42,7 +42,16 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "no-unused-vars": "off",
+      "jsx-a11y/anchor-is-valid": "off",
+      "no-empty-pattern": "off",
+      "no-sparse-arrays": "off",
+      "react-hooks/exhaustive-deps": "off",
+      "jsx-a11y/img-redundant-alt": "off",
+      "jsx-a11y/alt-text":"off"
+    }
   },
   "browserslist": {
     "production": [

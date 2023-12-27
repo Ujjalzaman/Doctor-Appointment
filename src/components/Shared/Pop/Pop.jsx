@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Overlay } from 'react-bootstrap';
 import { useRef } from 'react';
 import Popover from 'react-bootstrap/Popover';
-import UserIcon from '../../../images/doc/user.svg';
+import UserIcon from '../../../images/doc/doctor 3.jpg';
 import './Pop.css';
 import { Link } from 'react-router-dom';
 
@@ -15,19 +15,6 @@ const Pop = ({ data, hanldeSignOut }) => {
         setShow(!show)
         setTarget(e.target);
     }
-
-    // useEffect(() => {
-    //     const handleClickOutside = (event) => {
-    //         if(ref.current && !ref.current.contains(event.target)){
-    //             setShow(false)
-    //         }
-    //     }
-    //     document.addEventListener('mousedown', handleClickOutside);
-    //     return () =>{
-    //         document.removeEventListener('mousedown', handleClickOutside)
-    //     }
-    // }, [ref])
-    
     return (
         <div>
             <img src={UserIcon} alt="" className="popImg" onClick={handleClick} />

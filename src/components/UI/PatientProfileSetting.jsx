@@ -83,7 +83,7 @@ const PatientProfileSetting = () => {
                                 <div className="form-group">
                                     <div className="change-avatar">
                                         <div className="profile-img">
-                                            <img src={img} alt="User Image" />
+                                            <img src={img} alt="" />
                                         </div>
                                         <div className="upload-img">
                                             <div className="change-photo-btn">

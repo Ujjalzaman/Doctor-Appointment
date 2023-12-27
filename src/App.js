@@ -41,7 +41,7 @@ const router = createBrowserRouter([
   { path: '/dashboard/profile-setting', element: <ProfileSetting /> },
   { path: '/dashboard/favourite', element: <PatientFavouriteDoctor /> },
 
-  { path: '/booking', element: <DoctorBooking /> },
+  { path: '/booking/:doctorId', element: <DoctorBooking /> },
   { path: '/booking/checkout', element: <BookingCheckout /> },
   { path: '/booking/success', element: <BookingSuccess /> },
   { path: '/booking/invoice', element: <BookingInvoice /> },

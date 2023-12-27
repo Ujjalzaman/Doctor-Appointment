@@ -47,7 +47,7 @@ const DoctorDashboardPatient = () => {
                                                             <td>
                                                                 <div className="table-avatar">
                                                                     <a className="avatar avatar-sm mr-2 d-flex gap-2">
-                                                                        <img className="avatar-img rounded-circle" src={img} alt="User Image" />
+                                                                        <img className="avatar-img rounded-circle" src={img} alt="" />
                                                                         <div>
                                                                             <p className='p-0 m-0 text-nowrap'>{item?.patient?.firstName + ' ' + item?.patient?.lastName}</p>
                                                                             <p className='p-0 m-0'>#PT00156</p>
@@ -115,7 +115,7 @@ const DoctorDashboardPatient = () => {
                                                             <td >
                                                                 <div className="table-avatar">
                                                                     <a className="avatar avatar-sm mr-2 d-flex gap-2">
-                                                                        <img className="avatar-img rounded-circle" src={img} alt="User Image" />
+                                                                        <img className="avatar-img rounded-circle" src={img} alt="" />
                                                                         <div>
                                                                             <p className='p-0 m-0 text-nowrap'>{item?.patient?.firstName + ' ' + item?.patient?.lastName}</p>
                                                                             <p className='p-0 m-0'>#PT00156</p>

@@ -141,7 +141,7 @@ const AdminDashboard = () => {
                                             <tr>
                                                 <td>
                                                     <h2 className="table-avatar">
-                                                        <a className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={userImg} alt="User Image"/></a>
+                                                        <a className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={userImg} alt=""/></a>
                                                         <a>Dr. Ruby Perrin</a>
                                                     </h2>
                                                 </td>
@@ -183,7 +183,7 @@ const AdminDashboard = () => {
                                             <tr>
                                                 <td>
                                                     <h2 className="table-avatar">
-                                                        <a href="profile.html" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={userImg} alt="User Image"/></a>
+                                                        <a href="profile.html" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={userImg} alt=""/></a>
                                                         <a href="profile.html">Charlene Reed </a>
                                                     </h2>
                                                 </td>
@@ -224,14 +224,14 @@ const AdminDashboard = () => {
                                             <tr>
                                                 <td>
                                                     <h2 className="table-avatar">
-                                                        <a href="profile.html" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={userImg} alt="User Image"/></a>
+                                                        <a href="profile.html" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={userImg} alt=""/></a>
                                                         <a href="profile.html">Dr. Ruby Perrin</a>
                                                     </h2>
                                                 </td>
                                                 <td>Dental</td>
                                                 <td>
                                                     <h2 className="table-avatar">
-                                                        <a href="profile.html" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={userImg} alt="User Image"/></a>
+                                                        <a href="profile.html" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={userImg} alt=""/></a>
                                                         <a href="profile.html">Charlene Reed </a>
                                                     </h2>
                                                 </td>
