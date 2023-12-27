@@ -46,7 +46,7 @@ const Schedule = () => {
         if (uIsSuccess) {
             toast.success('Successfully Favourite Removed')
         }
-    }, [uIsSuccess, uIsError, UIsLoading])
+    }, [uIsSuccess, uIsError, UIsLoading, uError?.data?.message])
 
 
     const handleEditStartTime = (id, time, timeString) => {
@@ -103,7 +103,7 @@ const Schedule = () => {
         if (isSuccess) {
             toast.success('Successfully Add Time Slots')
         }
-    }, [isSuccess, AIsError])
+    }, [isSuccess, AIsError, error?.data?.message, AIsLoading])
 
     const handleStartTime = (id, time, timeString) => {
         setAddTimeSlot(prev => (prev.map(item => item.id === id ? { ...item, startTime: timeString } : item)));

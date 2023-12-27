@@ -12,7 +12,7 @@ const AdminHeader = () => {
                 </a>
             </div>
 
-            <a href="javascript:void(0);" id="toggle_btn">
+            <a id="toggle_btn">
                 <i className="fe fe-text-align-left"></i>
             </a>
 
@@ -42,7 +42,7 @@ const AdminHeader = () => {
                     <div className="dropdown-menu">
                         <div className="user-header">
                             <div className="avatar avatar-sm">
-                                <img src={userImg} alt="User Image" className="avatar-img rounded-circle" />
+                                <img src={userImg} alt="" className="avatar-img rounded-circle" />
                             </div>
                             <div className="user-text">
                                 <h6>Ryan Taylor</h6>

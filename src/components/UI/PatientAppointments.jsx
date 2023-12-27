@@ -8,7 +8,7 @@ import { useGetPatientAppointmentsQuery } from '../../redux/api/appointmentApi';
 import { useGetPatientPrescriptionQuery } from '../../redux/api/prescriptionApi';
 
 const PatientAppointments = () => {
-    const [key, setKey] = useState('appointment');
+    const [, setKey] = useState('appointment');
     const { data } = useGetPatientAppointmentsQuery();
     const { data: pPrescription } = useGetPatientPrescriptionQuery();
 
@@ -45,7 +45,7 @@ const PatientAppointments = () => {
                                                             <td key={item.id}>
                                                                 <div className="table-avatar">
                                                                     <a className="avatar avatar-sm mr-2 d-flex gap-2">
-                                                                        <img className="avatar-img rounded-circle" src={img} alt="User Image" />
+                                                                        <img className="avatar-img rounded-circle" src={img} alt="" />
                                                                         <div>
                                                                             <p className='p-0 m-0 text-nowrap'>{item?.doctor?.firstName + ' ' + item?.doctor?.lastName}</p>
                                                                             <p className='p-0 m-0'>Dental</p>
@@ -104,7 +104,7 @@ const PatientAppointments = () => {
                                                             <td>
                                                                 <div className="table-avatar">
                                                                     <a className="avatar avatar-sm mr-2 d-flex gap-2">
-                                                                        <img className="avatar-img rounded-circle" src={img} alt="User Image" />
+                                                                        <img className="avatar-img rounded-circle" src={img} alt="" />
                                                                         <div>
                                                                             <p className='p-0 m-0 text-nowrap'>{item?.doctor?.firstName + ' ' + item?.doctor?.lastName}</p>
                                                                             <p className='p-0 m-0'>{item?.doctor?.designation}</p>
@@ -154,7 +154,7 @@ const PatientAppointments = () => {
                                                     <td>
                                                         <div className="table-avatar">
                                                             <a className="avatar avatar-sm mr-2 d-flex gap-2">
-                                                                <img className="avatar-img rounded-circle" src={img} alt="User Image" />
+                                                                <img className="avatar-img rounded-circle" src={img} alt="" />
                                                                 <div>
                                                                     <p className='p-0 m-0 text-nowrap'>Dr. Ruby Perrin</p>
                                                                     <p className='p-0 m-0'>Dental</p>

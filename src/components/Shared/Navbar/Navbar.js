@@ -42,7 +42,7 @@ const Navbar = () => {
                 <div className="navbar-heading">
                     <h3>
                         <Link className="navbar-h" to="/">
-                            <img src={logo} style={{ maxWidth: '170px' }} />
+                            <img src={logo} style={{ maxWidth: '170px' }} alt=''/>
                         </Link>
                     </h3>
                 </div>

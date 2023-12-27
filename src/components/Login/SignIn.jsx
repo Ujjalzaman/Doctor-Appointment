@@ -34,7 +34,7 @@ const SignIn = ({ handleResponse }) => {
             })
             navigate("/")
         }
-    }, [isError, error, isSuccess])
+    }, [isError, error, isSuccess, navigate])
 
     return (
         <form className="sign-in-form" onSubmit={handleSubmit(onSubmit)}>

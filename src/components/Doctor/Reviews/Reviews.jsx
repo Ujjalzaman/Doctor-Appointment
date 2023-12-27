@@ -21,7 +21,7 @@ const Reviews = () => {
                     <ul className="comments-list" key={item?.id + key}>
                         <li>
                             <div className="comment">
-                                <img className="avatar rounded-circle" alt="User Image" src={img} />
+                                <img className="avatar rounded-circle" alt="" src={img} />
                                 <div className="comment-body">
                                     <div className="meta-data d-flex">
                                         <div>
@@ -52,7 +52,7 @@ const Reviews = () => {
                                 <ul className="comments-reply">
                                     <li>
                                         <div className="comment">
-                                            <img className="avatar rounded-circle" alt="User Image" src={img2} />
+                                            <img className="avatar rounded-circle" alt="" src={img2} />
                                             <div className="comment-body">
                                                 <div className="meta-data">
                                                     <span className="comment-author">Dr. {item?.doctor?.firstName + ' ' + item?.doctor?.lastName}</span>

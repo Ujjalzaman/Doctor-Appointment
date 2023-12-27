@@ -33,7 +33,7 @@ const PatientFavouriteDoctor = () => {
                 <div className="profile-widget" key={item?.id}>
                     <div className="doc-img position-relative">
                         <a>
-                            <img className="img-fluid" alt="User Image" src={img} />
+                            <img className="img-fluid" alt="" src={img} />
                         </a>
                         <a style={{ cursor: 'pointer' }} className="position-absolute top-0 end-0 me-2" onClick={() => handleRemoveFavourite(item?.doctor?.id)}>
                             <FaHeart />

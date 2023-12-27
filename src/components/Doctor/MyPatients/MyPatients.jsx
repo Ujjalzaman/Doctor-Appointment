@@ -18,7 +18,7 @@ const MyPatients = () => {
                             <div className="pro-widget-content">
                                 <div className="profile-info-widget">
                                     <a href="" className="booking-doc-img">
-                                        <img src={img} alt="User Image"/>
+                                        <img src={img} alt=""/>
                                     </a>
                                     <div className="profile-det-info">
                                         <h3><a href="">{item?.firstName + ' ' + item?.lastName}</a></h3>

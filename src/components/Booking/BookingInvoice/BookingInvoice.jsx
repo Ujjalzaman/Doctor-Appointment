@@ -22,7 +22,7 @@ const BookingInvoice = () => {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="invoice-logo">
-                                                <img src={logo} alt="logo" />
+                                                <img src={logo} alt="" />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
