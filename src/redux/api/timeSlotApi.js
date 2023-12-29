@@ -27,6 +27,15 @@ export const timeSlotApi = baseApi.injectEndpoints({
             }),
             providesTags: [tagTypes.timeSlot]
         }),
+        getAppointmentTime: build.query({
+            query: ({ day, id }) => ({
+                url: `${TIMELOT_URL}/appointment-time/${id}`,
+                method: 'GET',
+                params: {day:day}
+            }
+            ),
+            providesTags: [tagTypes.timeSlot]
+        }),
         getDoctorTimeSlot: build.query({
             query: (arg) => ({
                 url: `${TIMELOT_URL}/my-slot`,
@@ -59,5 +68,6 @@ export const {
     useGetDoctorTimeSlotQuery,
     useGetTimeSlotQuery,
     useUpdateTimeSlotMutation,
-    useCreateTimeSlotMutation
+    useCreateTimeSlotMutation,
+    useGetAppointmentTimeQuery
 } = timeSlotApi;

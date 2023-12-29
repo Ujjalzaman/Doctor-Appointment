@@ -2,6 +2,7 @@ import httpStatus from "http-status";
 import ApiError from "../../../errors/apiError";
 import prisma from "../../../shared/prisma";
 import { DoctorTimeSlot, ScheduleDay } from "@prisma/client";
+import moment from "moment";
 
 const createTimeSlot = async (user: any, payload: any): Promise<DoctorTimeSlot | null> => {
     const { userId } = user;
@@ -87,7 +88,7 @@ const getAllTimeSlot = async (): Promise<DoctorTimeSlot[] | null> => {
     })
     return result;
 }
-const updateTimeSlot = async (user: any, id: string, payload: any): Promise<{message: string}> => {
+const updateTimeSlot = async (user: any, id: string, payload: any): Promise<{ message: string }> => {
     const { userId } = user;
     const isDoctor = await prisma.doctor.findUnique({
         where: {
@@ -99,7 +100,7 @@ const updateTimeSlot = async (user: any, id: string, payload: any): Promise<{mes
     }
     const { timeSlot, create } = payload;
 
-    if(create && create.length > 0){
+    if (create && create.length > 0) {
         const doctorTimeSlot = await prisma.doctorTimeSlot.findFirst({
             where: {
                 day: create[0].day
@@ -108,7 +109,7 @@ const updateTimeSlot = async (user: any, id: string, payload: any): Promise<{mes
         if (!doctorTimeSlot) {
             throw new ApiError(httpStatus.NOT_FOUND, 'Time Slot is not found !!')
         }
-        await Promise.all(create.map(async(item: ScheduleDay) => {
+        await Promise.all(create.map(async (item: ScheduleDay) => {
             try {
                 await prisma.scheduleDay.create({
                     data: {
@@ -123,12 +124,12 @@ const updateTimeSlot = async (user: any, id: string, payload: any): Promise<{mes
         }))
     }
 
-    if(timeSlot && timeSlot.length > 0){
-        await Promise.all(timeSlot.map(async(item: ScheduleDay) =>{
-            const {doctorTimeSlotId, ...others} = item;
+    if (timeSlot && timeSlot.length > 0) {
+        await Promise.all(timeSlot.map(async (item: ScheduleDay) => {
+            const { doctorTimeSlotId, ...others } = item;
             try {
                 await prisma.scheduleDay.updateMany({
-                    where: {id: others.id},
+                    where: { id: others.id },
                     data: {
                         startTime: others.startTime,
                         endTime: others.endTime
@@ -144,11 +145,60 @@ const updateTimeSlot = async (user: any, id: string, payload: any): Promise<{mes
     }
 }
 
+const getAppointmentTimeOfEachDoctor = async (id: string, filter:any): Promise<any> => {
+    const doctorTimSlot = await prisma.doctorTimeSlot.findMany({
+        where: {
+            doctorId: id
+        },
+        include: {
+            timeSlot: true
+        },
+    })
+
+    const allSlots = doctorTimSlot.map((item) => {
+        const { day, timeSlot, ...others } = item;
+        return { day, timeSlot }
+    })
+
+    const generateTimeSlot = (timeSlot: any) => {
+        const selectedTime :any[] = [];
+        timeSlot.forEach((item: any) => {
+            const interval = 30;
+            const newTimeSlots: any[] = [];
+            const day: string = item?.day;
+
+            item?.timeSlot.map((slot: ScheduleDay) => {
+
+                const { startTime, endTime } = slot;
+                const startDate = moment(startTime, 'hh:mm a');
+                const endDate = moment(endTime, 'hh:mm a');
+
+                while (startDate < endDate) {
+                    const selectableTime = {
+                        id: newTimeSlots.length + 1,
+                        time: startDate.format('hh:mm a')
+                    }
+                    newTimeSlots.push({ day: day, slot: selectableTime });
+                    startDate.add(interval, 'minutes');
+                }
+            })
+            if(filter.day){
+                const newTime = newTimeSlots.filter((item) => item.day === filter.day);
+                selectedTime.push(newTime);
+            }
+        })
+        return selectedTime.flat();
+    }
+    const result = generateTimeSlot(allSlots)
+    return result
+}
+
 export const TimeSlotService = {
     updateTimeSlot,
     getAllTimeSlot,
     getTimeSlot,
     createTimeSlot,
     deleteTimeSlot,
-    getMyTimeSlot
+    getMyTimeSlot,
+    getAppointmentTimeOfEachDoctor
 }
