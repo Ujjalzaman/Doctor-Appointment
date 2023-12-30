@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../Shared/Navbar/Navbar'
 import Footer from '../../Shared/Footer/Footer'
 import img from '../../../images/doc/doctor 3.jpg'
@@ -19,10 +19,25 @@ const DoctorBooking = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectDay, setSelecDay] = useState('');
     const [selectTime, setSelectTime] = useState('');
+    const [isCheck, setIsChecked] = useState(false);
     const { doctorId } = useParams();
     const navigation = useNavigate();
     const { data, isLoading, isError, error } = useGetDoctorQuery(doctorId);
     const { data: time, refetch, isLoading: dIsLoading, isError: dIsError, error: dError } = useGetAppointmentTimeQuery({ day: selectDay, id: doctorId });
+
+    const [selectValue, setSelectValue] = useState({ paymentMethod: 'paypal', paymentType: 'creditCard' });
+    const [IsdDisable, setIsDisable] = useState(true);
+    const [IsConfirmDisable, setIsConfirmDisable] = useState(true);
+
+    const handleChange = (e) => { setSelectValue({ ...selectValue, [e.target.name]: e.target.value }) }
+
+    useEffect(() => {
+        const { firstName, lastName, email, phone, nameOnCard, cardNumber, expiredMonth, cardExpiredYear, cvv } = selectValue;
+        const isInputEmpty = !firstName || !lastName || !email || !phone;
+        const isConfirmInputEmpty = !nameOnCard || !cardNumber || !expiredMonth || !cardExpiredYear || !cvv || !isCheck;
+        setIsDisable(isInputEmpty);
+        setIsConfirmDisable(isConfirmInputEmpty);
+    }, [selectValue, isCheck])
 
     const handleDateChange = (_date, dateString) => {
         setSelectedDate(dateString)
@@ -31,6 +46,7 @@ const DoctorBooking = () => {
     }
     const disabledDateTime = (current) => current && (current < moment().add(1, 'day').startOf('day') || current > moment().add(8, 'days').startOf("day"))
     const handleSelectTime = (date) => { setSelectTime(date) }
+
     const next = () => { setCurrent(current + 1) };
     const prev = () => { setCurrent(current - 1) };
 
@@ -41,8 +57,8 @@ const DoctorBooking = () => {
     if (!dIsLoading && !dIsError && time.length > 0) dContent =
         <>
             {
-                time && time.map((item) => (
-                    <div className="col-md-4">
+                time && time.map((item, id) => (
+                    <div className="col-md-4" key={id + 155}>
                         <Button type={item?.slot?.time === selectTime ? "primary" : "default"} shape="round" size='large' className='mb-3' onClick={() => handleSelectTime(item?.slot?.time)}> {item?.slot?.time} </Button>
                     </div>
                 ))
@@ -86,11 +102,19 @@ const DoctorBooking = () => {
         },
         {
             title: 'Patient Information',
-            content: <PersonalInformation />
+            content: <PersonalInformation handleChange={handleChange} selectValue={selectValue}/>
         },
         {
             title: 'Payment',
-            content: <CheckoutPage />,
+            content: <CheckoutPage 
+            handleChange={handleChange} 
+            selectValue={selectValue} 
+            isCheck={isCheck} 
+            setIsChecked={setIsChecked} 
+            data={data}
+            selectedDate={selectedDate} 
+            selectTime={selectTime}
+            />,
         },
     ]
 
@@ -99,9 +123,32 @@ const DoctorBooking = () => {
         title: item.title,
     }))
 
-    const handleConfirmSchedule = () =>{
+    const handleConfirmSchedule = () => {
         message.success('Processing complete!');
-        navigation('/booking/success')
+        const obj = {};
+
+        obj.patientInfo = {
+            firstName: selectValue.firstName,
+            lastName: selectValue.lastName,
+            email: selectValue.email,
+            phone: selectValue.phone,
+            patientId: selectValue.patientId,
+            scheduleDate: selectedDate,
+            scheduleTime: selectTime,
+            doctorId: doctorId
+
+        }
+        obj.payment = {
+            paymentType: selectValue.paymentType,
+            paymentMethod: selectValue.paymentMethod,
+            cardNumber: selectValue.cardNumber,
+            cardExpiredYear: selectValue.cardExpiredYear,
+            cvv: selectValue.cvv,
+            expiredMonth: selectValue.expiredMonth,
+            nameOnCard: selectValue.nameOnCard
+        }
+        console.log("dd", obj)
+        // navigation('/booking/success')
     }
     return (
         <>
@@ -109,9 +156,12 @@ const DoctorBooking = () => {
             <BreadCrumb />
             <Steps current={current} items={items} />
             <div className='mb-5 mt-3 mx-3'>{steps[current].content}</div>
-            <div className='text-end mx-3' style={{marginBottom: 48 }} >
-                {current < steps.length - 1 && (<Button type="primary" onClick={() => next()}>Next</Button>)}
-                {current === steps.length - 1 && (<Button type="primary" onClick={() => handleConfirmSchedule()}>Confirm</Button>)}
+            <div className='text-end mx-3' style={{ marginBottom: 48 }} >
+                {current < steps.length - 1 && (<Button type="primary"
+                    disabled={current === 0 ? (selectTime ? false : true) : IsdDisable || !selectTime}
+                    onClick={() => next()}>Next</Button>)}
+
+                {current === steps.length - 1 && (<Button type="primary" disabled={IsConfirmDisable} onClick={() => handleConfirmSchedule()}>Confirm</Button>)}
                 {current > 0 && (<Button style={{ margin: '0 8px', }} onClick={() => prev()} >Previous</Button>)}
             </div>
             <Footer />
