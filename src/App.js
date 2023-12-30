@@ -5,7 +5,6 @@ import Home from './components/Home/Home/Home';
 import SignInForm from './components/Login/SignInForm';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import DoctorBooking from './components/Booking/DoctorBooking/DoctorBooking';
-import BookingCheckout from './components/Booking/BookingCheckout/BookingCheckout';
 import BookingSuccess from './components/Booking/BookingSuccess/BookingSuccess';
 import BookingInvoice from './components/Booking/BookingInvoice/BookingInvoice';
 import DoctorProfile from './components/Doctor/DoctorProfile/DoctorProfile';
@@ -42,7 +41,6 @@ const router = createBrowserRouter([
   { path: '/dashboard/favourite', element: <PatientFavouriteDoctor /> },
 
   { path: '/booking/:doctorId', element: <DoctorBooking /> },
-  { path: '/booking/checkout', element: <BookingCheckout /> },
   { path: '/booking/success', element: <BookingSuccess /> },
   { path: '/booking/invoice', element: <BookingInvoice /> },
 
