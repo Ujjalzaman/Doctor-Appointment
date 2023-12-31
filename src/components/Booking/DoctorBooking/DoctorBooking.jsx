@@ -14,8 +14,11 @@ import SelectDateAndTime from './SelectDateAndTime';
 import PersonalInformation from '../BookingCheckout/PersonalInformation';
 import CheckoutPage from '../BookingCheckout/CheckoutPage';
 import { useCreateAppointmentMutation } from '../../../redux/api/appointmentApi';
+import { useDispatch } from 'react-redux';
+import { addInvoice } from '../../../redux/feature/invoiceSlice';
 
 const DoctorBooking = () => {
+    const dispatch = useDispatch();
     let initialValue = {
         paymentMethod: 'paypal',
         paymentType: 'creditCard',
@@ -37,7 +40,7 @@ const DoctorBooking = () => {
     const [selectDay, setSelecDay] = useState('');
     const [selectTime, setSelectTime] = useState('');
     const [isCheck, setIsChecked] = useState(false);
-    const [createAppointment, { isSuccess: createIsSuccess, isError: createIsError, error: createError, isLoading: createIsLoading }] = useCreateAppointmentMutation();
+    const [createAppointment, { data: appointmentData, isSuccess: createIsSuccess, isError: createIsError, error: createError, isLoading: createIsLoading }] = useCreateAppointmentMutation();
     const { doctorId } = useParams();
     const navigation = useNavigate();
     const { data, isLoading, isError, error } = useGetDoctorQuery(doctorId);
@@ -60,7 +63,8 @@ const DoctorBooking = () => {
     useEffect(() => {
         if (createIsSuccess) {
             message.success("Succcessfully Appointment Scheduled")
-            setSelectValue(initialValue)
+            setSelectValue(initialValue);
+            dispatch(addInvoice({ ...appointmentData }))
             navigation('/booking/success')
         }
         if (createIsError) {
@@ -82,7 +86,7 @@ const DoctorBooking = () => {
     let dContent = null;
     if (dIsLoading) dContent = <div>Loading ...</div>
     if (!dIsLoading && dIsError) dContent = <div>Something went Wrong!</div>
-    if (!dIsLoading && !dIsError && time.length === 0) dContent = <Empty />
+    if (!dIsLoading && !dIsError && time.length === 0) dContent = <Empty children="Doctor Is not Available" />
     if (!dIsLoading && !dIsError && time.length > 0) dContent =
         <>
             {
@@ -179,7 +183,7 @@ const DoctorBooking = () => {
         <>
             <Navbar />
             <BreadCrumb />
-            <div style={{ marginBottom: '10rem'}}>
+            <div style={{ marginBottom: '10rem' }}>
                 <Steps current={current} items={items} />
                 <div className='mb-5 mt-3 mx-3'>{steps[current].content}</div>
                 <div className='text-end mx-3' style={{ marginBottom: 48 }} >
