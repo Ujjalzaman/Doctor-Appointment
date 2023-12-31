@@ -4,24 +4,56 @@ import ApiError from "../../../errors/apiError";
 import httpStatus from "http-status";
 import moment from 'moment';
 
-const createAppointment = async (user: any, payload: Appointments): Promise<Appointments> => {
+const createAppointment = async (user: any, payload: any): Promise<{ message: string }> => {
+    const { patientInfo, payment } = payload;
     const isUserExist = await prisma.patient.findUnique({
         where: {
             id: user.userId
         }
     })
-    if(!isUserExist){
+    if (!isUserExist) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Patient Account is not found !!')
     }
-    
-    if (user) {
-        payload['patientId'] = user.userId;
-        payload['status'] = 'pending';
+
+    const isDoctorExist = await prisma.doctor.findUnique({
+        where: {
+            id: patientInfo.doctorId
+        }
+    })
+    if (!isDoctorExist) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
     }
-    const appointment = await prisma.appointments.create({
-        data: payload
-    });
-    return appointment;
+
+    if (isUserExist) {
+        patientInfo['patientId'] = isUserExist.id;
+        patientInfo['status'] = 'pending';
+    }
+
+    await prisma.$transaction(async (tx) => {
+        const appointment = await tx.appointments.create({
+            data: patientInfo
+        });
+        const { paymentMethod, paymentType } = payment;
+        const docFee = Number(isDoctorExist.price);
+        const vat = (15 / 100) * (docFee + 10)
+        if (appointment.id) {
+            await tx.payment.create({
+                data: {
+                    appointmentId: appointment.id,
+                    bookingFee: 10,
+                    paymentMethod: paymentMethod,
+                    paymentType: paymentType,
+                    vat: vat,
+                    DoctorFee: docFee,
+                    totalAmount: (vat + docFee),
+                }
+            })
+        }
+    })
+
+    return {
+        message: 'Successfully Appointment setup'
+    };
 }
 
 const getAllAppointments = async (): Promise<Appointments[] | null> => {
@@ -39,13 +71,13 @@ const getAppointment = async (id: string): Promise<Appointments | null> => {
 }
 
 const getPatientAppointmentById = async (user: any): Promise<Appointments[] | null> => {
-    const {userId} = user;
+    const { userId } = user;
     const isPatient = await prisma.patient.findUnique({
         where: {
             id: userId
         }
     })
-    if(!isPatient){
+    if (!isPatient) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Patient Account is not found !!')
     }
     const result = await prisma.appointments.findMany({
@@ -79,20 +111,20 @@ const updateAppointment = async (id: string, payload: Partial<Appointments>): Pr
 }
 
 //doctor Side
-const getDoctorAppointmentsById = async (user: any, filter: any): Promise<Appointments[] | null> => {  
-    const {userId} = user;
+const getDoctorAppointmentsById = async (user: any, filter: any): Promise<Appointments[] | null> => {
+    const { userId } = user;
     const isDoctor = await prisma.doctor.findUnique({
         where: {
             id: userId
         }
     })
-    if(!isDoctor){
+    if (!isDoctor) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
     }
 
-    let andCondition:any = {doctorId: userId};
+    let andCondition: any = { doctorId: userId };
 
-    if(filter.sortBy == 'today'){
+    if (filter.sortBy == 'today') {
         const today = moment().startOf('day');
         const tomorrow = moment(today).add(1, 'days');
 
@@ -101,7 +133,7 @@ const getDoctorAppointmentsById = async (user: any, filter: any): Promise<Appoin
             lt: tomorrow.toDate()
         }
     }
-    if(filter.sortBy == 'upcoming'){
+    if (filter.sortBy == 'upcoming') {
         const todayDate = moment().startOf('day');
         const upcomingDate = moment(todayDate).add(1, 'days');
         andCondition.appointmentTime = {
@@ -121,14 +153,14 @@ const getDoctorAppointmentsById = async (user: any, filter: any): Promise<Appoin
     return result;
 }
 
-const getDoctorPatients = async (user: any): Promise<Patient[]> => {  
-    const {userId} = user;
+const getDoctorPatients = async (user: any): Promise<Patient[]> => {
+    const { userId } = user;
     const isDoctor = await prisma.doctor.findUnique({
         where: {
             id: userId
         }
     })
-    if(!isDoctor){
+    if (!isDoctor) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
     }
 
@@ -153,13 +185,13 @@ const getDoctorPatients = async (user: any): Promise<Patient[]> => {
 }
 
 const updateAppointmentByDoctor = async (user: any, payload: Partial<Appointments>): Promise<Appointments | null> => {
-    const {userId} = user;
+    const { userId } = user;
     const isDoctor = await prisma.doctor.findUnique({
         where: {
             id: userId
         }
     })
-    if(!isDoctor){
+    if (!isDoctor) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
     }
     const result = await prisma.appointments.update({
