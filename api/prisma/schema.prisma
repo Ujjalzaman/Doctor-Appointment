@@ -90,22 +90,44 @@ model Appointments {
   id        String  @id @default(uuid())
   patientId String
   patient   Patient @relation(fields: [patientId], references: [id])
+  doctorId  String
+  doctor    Doctor  @relation(fields: [doctorId], references: [id])
 
-  doctorId String
-  doctor   Doctor @relation(fields: [doctorId], references: [id])
+  firstName      String?
+  lastName       String?
+  email          String?
+  phone          String?
+  address        String?
+  description    String?
+  scheduleDate   String?
+  scheduleTime   String?
+  reasonForVisit String?
+  status         String?
 
-  appointmentTime DateTime
-  purpose         String?
-  paidtype        PaidType?
-  status          String
-  followUp        DateTime?
+  patientType PatientType @default(normal)
+  followUp    DateTime?
 
-  totalAmount  Int
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
   prescription Prescription[]
+  payment      Payment[]
 
   @@map("Appointments")
+}
+
+model Payment {
+  id            String       @id @default(uuid())
+  appointmentId String
+  appointment   Appointments @relation(fields: [appointmentId], references: [id])
+  paymentMethod String
+  paymentType   String
+
+  DoctorFee   Int
+  bookingFee  Int
+  vat         Int?
+  totalAmount Int
+
+  @@map("Payment")
 }
 
 model Reviews {
@@ -230,4 +252,9 @@ enum PaidType {
 enum Gender {
   male
   female
+}
+
+enum PatientType {
+  emergency
+  normal
 }
