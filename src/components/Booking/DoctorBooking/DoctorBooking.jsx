@@ -13,31 +13,60 @@ import moment from 'moment';
 import SelectDateAndTime from './SelectDateAndTime';
 import PersonalInformation from '../BookingCheckout/PersonalInformation';
 import CheckoutPage from '../BookingCheckout/CheckoutPage';
+import { useCreateAppointmentMutation } from '../../../redux/api/appointmentApi';
 
 const DoctorBooking = () => {
+    let initialValue = {
+        paymentMethod: 'paypal',
+        paymentType: 'creditCard',
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        reasonForVisit: '',
+        description: '',
+        address: '',
+        nameOnCard: '',
+        cardNumber: '',
+        expiredMonth: '',
+        cardExpiredYear: '',
+        cvv: '',
+    }
     const [current, setCurrent] = useState(0);
     const [selectedDate, setSelectedDate] = useState('');
     const [selectDay, setSelecDay] = useState('');
     const [selectTime, setSelectTime] = useState('');
     const [isCheck, setIsChecked] = useState(false);
+    const [createAppointment, { isSuccess: createIsSuccess, isError: createIsError, error: createError, isLoading: createIsLoading }] = useCreateAppointmentMutation();
     const { doctorId } = useParams();
     const navigation = useNavigate();
     const { data, isLoading, isError, error } = useGetDoctorQuery(doctorId);
     const { data: time, refetch, isLoading: dIsLoading, isError: dIsError, error: dError } = useGetAppointmentTimeQuery({ day: selectDay, id: doctorId });
 
-    const [selectValue, setSelectValue] = useState({ paymentMethod: 'paypal', paymentType: 'creditCard' });
+    const [selectValue, setSelectValue] = useState(initialValue);
     const [IsdDisable, setIsDisable] = useState(true);
     const [IsConfirmDisable, setIsConfirmDisable] = useState(true);
 
     const handleChange = (e) => { setSelectValue({ ...selectValue, [e.target.name]: e.target.value }) }
 
     useEffect(() => {
-        const { firstName, lastName, email, phone, nameOnCard, cardNumber, expiredMonth, cardExpiredYear, cvv } = selectValue;
-        const isInputEmpty = !firstName || !lastName || !email || !phone;
+        const { firstName, lastName, email, phone, nameOnCard, cardNumber, expiredMonth, cardExpiredYear, cvv, reasonForVisit } = selectValue;
+        const isInputEmpty = !firstName || !lastName || !email || !phone || !reasonForVisit;
         const isConfirmInputEmpty = !nameOnCard || !cardNumber || !expiredMonth || !cardExpiredYear || !cvv || !isCheck;
         setIsDisable(isInputEmpty);
         setIsConfirmDisable(isConfirmInputEmpty);
     }, [selectValue, isCheck])
+
+    useEffect(() => {
+        if (createIsSuccess) {
+            message.success("Succcessfully Appointment Scheduled")
+            setSelectValue(initialValue)
+            navigation('/booking/success')
+        }
+        if (createIsError) {
+            message.error(error?.data?.message);
+        }
+    }, [createIsSuccess, createError])
 
     const handleDateChange = (_date, dateString) => {
         setSelectedDate(dateString)
@@ -102,18 +131,18 @@ const DoctorBooking = () => {
         },
         {
             title: 'Patient Information',
-            content: <PersonalInformation handleChange={handleChange} selectValue={selectValue}/>
+            content: <PersonalInformation handleChange={handleChange} selectValue={selectValue} />
         },
         {
             title: 'Payment',
-            content: <CheckoutPage 
-            handleChange={handleChange} 
-            selectValue={selectValue} 
-            isCheck={isCheck} 
-            setIsChecked={setIsChecked} 
-            data={data}
-            selectedDate={selectedDate} 
-            selectTime={selectTime}
+            content: <CheckoutPage
+                handleChange={handleChange}
+                selectValue={selectValue}
+                isCheck={isCheck}
+                setIsChecked={setIsChecked}
+                data={data}
+                selectedDate={selectedDate}
+                selectTime={selectTime}
             />,
         },
     ]
@@ -124,9 +153,7 @@ const DoctorBooking = () => {
     }))
 
     const handleConfirmSchedule = () => {
-        message.success('Processing complete!');
         const obj = {};
-
         obj.patientInfo = {
             firstName: selectValue.firstName,
             lastName: selectValue.lastName,
@@ -136,7 +163,6 @@ const DoctorBooking = () => {
             scheduleDate: selectedDate,
             scheduleTime: selectTime,
             doctorId: doctorId
-
         }
         obj.payment = {
             paymentType: selectValue.paymentType,
@@ -147,22 +173,23 @@ const DoctorBooking = () => {
             expiredMonth: selectValue.expiredMonth,
             nameOnCard: selectValue.nameOnCard
         }
-        console.log("dd", obj)
-        // navigation('/booking/success')
+        createAppointment(obj);
     }
     return (
         <>
             <Navbar />
             <BreadCrumb />
-            <Steps current={current} items={items} />
-            <div className='mb-5 mt-3 mx-3'>{steps[current].content}</div>
-            <div className='text-end mx-3' style={{ marginBottom: 48 }} >
-                {current < steps.length - 1 && (<Button type="primary"
-                    disabled={current === 0 ? (selectTime ? false : true) : IsdDisable || !selectTime}
-                    onClick={() => next()}>Next</Button>)}
+            <div style={{ marginBottom: '10rem'}}>
+                <Steps current={current} items={items} />
+                <div className='mb-5 mt-3 mx-3'>{steps[current].content}</div>
+                <div className='text-end mx-3' style={{ marginBottom: 48 }} >
+                    {current < steps.length - 1 && (<Button type="primary"
+                        disabled={current === 0 ? (selectTime ? false : true) : IsdDisable || !selectTime}
+                        onClick={() => next()}>Next</Button>)}
 
-                {current === steps.length - 1 && (<Button type="primary" disabled={IsConfirmDisable} onClick={() => handleConfirmSchedule()}>Confirm</Button>)}
-                {current > 0 && (<Button style={{ margin: '0 8px', }} onClick={() => prev()} >Previous</Button>)}
+                    {current === steps.length - 1 && (<Button type="primary" disabled={IsConfirmDisable} loading={createIsLoading} onClick={handleConfirmSchedule}>Confirm</Button>)}
+                    {current > 0 && (<Button style={{ margin: '0 8px', }} onClick={() => prev()} >Previous</Button>)}
+                </div>
             </div>
             <Footer />
         </>
