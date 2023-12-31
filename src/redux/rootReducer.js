@@ -1,6 +1,6 @@
 import { baseApi } from "./api/baseApi";
-// import authSliceReducer  from "./slice/userSlice";
+import invoiceSlice from "./feature/invoiceSlice";
 export const reducer = {
     [baseApi.reducerPath]: baseApi.reducer,
-    // auth: authSliceReducer
+    invoice: invoiceSlice
 }

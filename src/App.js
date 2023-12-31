@@ -41,8 +41,8 @@ const router = createBrowserRouter([
   { path: '/dashboard/favourite', element: <PatientFavouriteDoctor /> },
 
   { path: '/booking/:doctorId', element: <DoctorBooking /> },
-  { path: '/booking/success', element: <BookingSuccess /> },
-  { path: '/booking/invoice', element: <BookingInvoice /> },
+  { path: '/booking/success/', element: <BookingSuccess /> },
+  { path: '/booking/invoice/:id', element: <BookingInvoice /> },
 
   // Dashboard
   { path: '/admin/dashboard', element: <AdminDashboard /> },

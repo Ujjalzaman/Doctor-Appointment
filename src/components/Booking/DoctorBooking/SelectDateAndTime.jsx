@@ -16,8 +16,8 @@ const SelectDateAndTime = ({content,handleDateChange, disabledDateTime, selected
                         />
                     </div>
                     <div className="col-6">
-                        {selectedDate ? <h4>Schedule Date: {selectedDate && moment(selectedDate).format('LL')}
-                            {selectTime && 'time :' + selectTime}</h4> : "Please Select Date First"}
+                        {selectedDate ? <h4>Selected Date: {selectedDate && moment(selectedDate).format('LL')}
+                            {selectTime && 'Time :' + selectTime}</h4> : "Please Select A Date First"}
                         <div className="schedule-cont">
                             <div className="row">
                                 {dContent}
