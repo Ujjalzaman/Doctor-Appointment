@@ -4,7 +4,7 @@ import ApiError from "../../../errors/apiError";
 import httpStatus from "http-status";
 import moment from 'moment';
 
-const createAppointment = async (user: any, payload: any): Promise<{ message: string }> => {
+const createAppointment = async (user: any, payload: any): Promise<Appointments | null> => {
     const { patientInfo, payment } = payload;
     const isUserExist = await prisma.patient.findUnique({
         where: {
@@ -29,9 +29,17 @@ const createAppointment = async (user: any, payload: any): Promise<{ message: st
         patientInfo['status'] = 'pending';
     }
 
-    await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx) => {
         const appointment = await tx.appointments.create({
-            data: patientInfo
+            data: patientInfo,
+            include: {
+                doctor: {
+                    select: {
+                        firstName: true,
+                        lastName: true
+                    }
+                }
+            }
         });
         const { paymentMethod, paymentType } = payment;
         const docFee = Number(isDoctorExist.price);
@@ -49,11 +57,10 @@ const createAppointment = async (user: any, payload: any): Promise<{ message: st
                 }
             })
         }
+        return appointment;
     })
 
-    return {
-        message: 'Successfully Appointment setup'
-    };
+    return result;
 }
 
 const getAllAppointments = async (): Promise<Appointments[] | null> => {
@@ -65,6 +72,10 @@ const getAppointment = async (id: string): Promise<Appointments | null> => {
     const result = await prisma.appointments.findUnique({
         where: {
             id: id
+        },
+        include: {
+            doctor: true,
+            patient: true
         }
     });
     return result;
@@ -88,6 +99,15 @@ const getPatientAppointmentById = async (user: any): Promise<Appointments[] | nu
             doctor: true
         }
     })
+    return result;
+}
+
+const getPaymentInfoViaAppintmentId = async (id: string): Promise<any> => {
+    const result = await prisma.payment.findFirst({
+        where: {
+            appointmentId: id
+        }
+    });
     return result;
 }
 
@@ -212,5 +232,6 @@ export const AppointmentService = {
     getPatientAppointmentById,
     getDoctorAppointmentsById,
     updateAppointmentByDoctor,
-    getDoctorPatients
+    getDoctorPatients,
+    getPaymentInfoViaAppintmentId
 }
