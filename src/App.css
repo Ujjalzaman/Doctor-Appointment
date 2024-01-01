@@ -49,3 +49,7 @@ a:focus {
 	outline: none;
 	text-decoration: none;
 }
+.ant-checkbox-group{
+    display: flex !important;
+    flex-direction: column !important;
+}

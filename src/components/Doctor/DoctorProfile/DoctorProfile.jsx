@@ -681,8 +681,6 @@ const DoctorProfile = () => {
 
                 </div>
             </div>
-
-
             <Footer />
         </>
     )
