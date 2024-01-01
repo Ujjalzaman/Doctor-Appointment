@@ -105,7 +105,8 @@ const getPatientPrescriptionById = async (user: any): Promise<Prescription[] | n
             },
             appointment: {
                 select: {
-                    appointmentTime: true
+                    scheduleDate: true,
+                    scheduleTime: true
                 }
             }
         }

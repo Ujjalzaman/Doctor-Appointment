@@ -6,7 +6,6 @@ import { FaHeart } from "react-icons/fa";
 import toast,{ Toaster } from 'react-hot-toast';
 import { useEffect } from 'react';
 
-
 const PatientFavouriteDoctor = () => {
     const { data, isLoading, isError } = useGetFavouriteQuery();
     const [removeFavourite, {isLoading: FIsLoading, isError: fIsError, error: fError, isSuccess}] = useRemoveFavouriteMutation();
@@ -72,7 +71,8 @@ const PatientFavouriteDoctor = () => {
                                 <Link to={'/doctors/profile'} className="btn btn-outline-info">View Profile</Link>
                             </div>
                             <div className="col-6">
-                                <Link to={'/booking'} className="btn btn-info text-white">Book Now</Link>
+                            
+                                <Link to={`/booking/${item?.id}`} className="btn btn-info text-white">Book Now</Link>
                             </div>
                         </div>
                     </div>
