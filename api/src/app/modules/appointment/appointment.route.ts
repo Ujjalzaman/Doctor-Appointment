@@ -8,8 +8,11 @@ const router = express.Router();
 router.get('/', AppointmentController.getAllAppointment);
 
 router.get('/patient/appointments',auth(AuthUser.PATIENT), AppointmentController.getPatientAppointmentById);
+router.get('/patient/invoices',auth(AuthUser.PATIENT), AppointmentController.getPatientPaymentInfo);
+
 router.get('/doctor/appointments',auth(AuthUser.DOCTOR), AppointmentController.getDoctorAppointmentsById);
 router.get('/doctor/patients',auth(AuthUser.DOCTOR), AppointmentController.getDoctorPatients);
+
 router.get('/patient-payment-info/:id',auth(AuthUser.PATIENT), AppointmentController.getPaymentInfoViaAppintmentId);
 
 router.post('/create',auth(AuthUser.PATIENT), AppointmentController.createAppointment);

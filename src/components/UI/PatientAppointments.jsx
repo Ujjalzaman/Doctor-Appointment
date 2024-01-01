@@ -1,17 +1,176 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import img from '../../images/john.png';
 import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs'
-import { FaEye } from "react-icons/fa";
+import Tabs from 'react-bootstrap/Tabs';
 import moment from 'moment';
-import { useGetPatientAppointmentsQuery } from '../../redux/api/appointmentApi';
+import { useGetPatientAppointmentsQuery, useGetPatientInvoicesQuery } from '../../redux/api/appointmentApi';
 import { useGetPatientPrescriptionQuery } from '../../redux/api/prescriptionApi';
+import CustomTable from './component/CustomTable';
+import { Button } from 'antd';
 
 const PatientAppointments = () => {
     const [, setKey] = useState('appointment');
-    const { data } = useGetPatientAppointmentsQuery();
-    const { data: pPrescription } = useGetPatientPrescriptionQuery();
+    const { data, isLoading: pIsLoading } = useGetPatientAppointmentsQuery();
+    const { data: prescriptionData, prescriptionIsLoading } = useGetPatientPrescriptionQuery();
+    const { data: invoices, isLoading: InvoicesIsLoading } = useGetPatientInvoicesQuery();
+  
+    const InvoiceColumns = [
+        {
+            title: 'Doctor',
+            key: '1',
+            width: 150,
+            render: function (data) {
+                return (
+                    <div className="table-avatar">
+                        <a className="avatar avatar-sm mr-2 d-flex gap-2">
+                            <img className="avatar-img rounded-circle" src={img} alt="" />
+                            <div>
+                                <p className='p-0 m-0 text-nowrap'>{data?.appointment?.doctor?.firstName + ' ' + data?.appointment?.doctor?.lastName}</p>
+                                <p className='p-0 m-0'>{data?.appointment?.doctor?.designation}</p>
+                            </div>
+                        </a>
+                    </div>
+                )
+            }
+        },
+        {
+            title: 'Total Paid',
+            key: '2',
+            width: 100,
+            dataIndex: "totalAmount"
+        },
+        {
+            title: 'Paid On',
+            key: '3',
+            width: 100,
+            render: function (data) {
+                return <div>{moment(data?.createdAt).format("LL")}</div>
+            }
+        },
+        {
+            title: 'Payment Method',
+            key: '4',
+            width: 100,
+            dataIndex: "paymentMethod"
+        },
+        {
+            title: 'Payment Type',
+            key: '4',
+            width: 100,
+            dataIndex: "paymentType"
+        },
+        {
+            title: 'Action',
+            key: '5',
+            width: 100,
+            render: function (data) {
+                return (
+                    <div>
+                        <Button type='primary' href={`/booking/invoice/${data?.id}`}>View</Button>
+                    </div>
+                )
+            }
+        },
+    ];
+    const prescriptionColumns = [
+        {
+            title: 'App Doctor',
+            key: '1',
+            width: 150,
+            render: function (data) {
+                return <>
+                    <div className="table-avatar">
+                        <a className="avatar avatar-sm mr-2 d-flex gap-2">
+                            <img className="avatar-img rounded-circle" src={img} alt="" />
+                            <div>
+                                <p className='p-0 m-0 text-nowrap'>{data?.doctor?.firstName + ' ' + data?.doctor?.lastName}</p>
+                                <p className='p-0 m-0'>{data?.doctor?.designation}</p>
+                            </div>
+                        </a>
+                    </div>
+                </>
+            }
+        },
 
+        {
+            title: 'Appointment Date',
+            key: '2',
+            width: 100,
+            render: function (data) {
+                return <div>{moment(data?.appointment?.scheduleDate).format("LL")} <span className="d-block text-info">{data?.appointment?.scheduleTime}</span></div>
+            }
+        },
+        {
+            title: 'Action',
+            key: '5',
+            width: 100,
+            render: function (data) {
+                return (
+                    <div>
+                        <Button type='primary'>View</Button>
+                    </div>
+                )
+            }
+        },
+    ];
+    const appointmentColumns = [
+        {
+            title: 'Doctor',
+            key: '1',
+            width: 100,
+            render: function (data) {
+                return <>
+                    <div className="table-avatar">
+                        <a className="avatar avatar-sm mr-2 d-flex gap-2">
+                            <img className="avatar-img rounded-circle" src={img} alt="" />
+                            <div>
+                                <p className='p-0 m-0 text-nowrap'>{data?.doctor?.firstName + ' ' + data?.doctor?.lastName}</p>
+                                <p className='p-0 m-0'>{data?.doctor?.designation}</p>
+                            </div>
+                        </a>
+                    </div>
+                </>
+            }
+        },
+        {
+            title: 'App Date',
+            key: '2',
+            width: 100,
+            render: function (data) {
+                return (
+                    <div>{moment(data?.scheduleDate).format("LL")} <span className="d-block text-info">{data?.scheduleTime}</span></div>
+                )
+            }
+        },
+        {
+            title: 'Booking Date',
+            key: '3',
+            width: 100,
+            render: function (data) {
+                return <div>{moment(data?.createdAt).format("LL")}</div>
+            }
+        },
+        {
+            title: 'Status',
+            key: '4',
+            width: 100,
+            render: function (data) {
+                return <div>{data?.status}</div>
+            }
+        },
+        {
+            title: 'Action',
+            key: '5',
+            width: 100,
+            render: function (data) {
+                return (
+                    <div>
+                        <Button type='primary'>View</Button>
+                    </div>
+                )
+            }
+        },
+    ];
     return (
         <Tabs
             defaultActiveKey="appointment"
@@ -23,58 +182,14 @@ const PatientAppointments = () => {
                 <div className="appointment-tab">
                     <div className="tab-content">
                         <div className="tab-pane show active" id="upcoming-appointments">
-                            <div className="card card-table mb-0">
-                                <div className="card-body">
-                                    <div className="table-responsive">
-                                        <table className="table table-hover table-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th className='text-nowrap'>Doctor</th>
-                                                    <th className='text-nowrap'>Appt Date</th>
-                                                    <th className='text-nowrap'>Booking Date</th>
-                                                    <th className='text-nowrap'>Amount</th>
-                                                    <th className='text-nowrap'>Follow Up</th>
-                                                    <th className='text-nowrap'>Status</th>
-                                                    <th className="text-nowrap">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {
-                                                    data && data.map((item) => (
-                                                        <tr className='text-nowrap'>
-                                                            <td key={item.id}>
-                                                                <div className="table-avatar">
-                                                                    <a className="avatar avatar-sm mr-2 d-flex gap-2">
-                                                                        <img className="avatar-img rounded-circle" src={img} alt="" />
-                                                                        <div>
-                                                                            <p className='p-0 m-0 text-nowrap'>{item?.doctor?.firstName + ' ' + item?.doctor?.lastName}</p>
-                                                                            <p className='p-0 m-0'>Dental</p>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                            <td>{moment(item?.appointmentTime).format("MMM Do YY")} <span className="d-block text-info">{moment(item?.appointmentTime).format("LT")}</span></td>
-                                                            <td>{moment(item?.appointmentTime).format("MMM Do YY")}</td>
-                                                            <td>$150</td>
-                                                            <td>11 Nov 2019</td>
-                                                            <td>
-                                                                <span className="badge rounded-pill text-bg-success">Confirm</span>
-                                                            </td>
-                                                            <td>
-                                                                <div className="table-action">
-                                                                    <div className="btn btn-sm bg-info-light">
-                                                                        <FaEye /> View
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    ))
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                            <CustomTable
+                                loading={pIsLoading}
+                                columns={appointmentColumns}
+                                dataSource={data}
+                                showPagination={true}
+                                pageSize={10}
+                                showSizeChanger={true}
+                            />
                         </div>
                     </div>
                 </div>
@@ -83,50 +198,14 @@ const PatientAppointments = () => {
                 <div className="appointment-tab">
                     <div className="tab-content">
                         <div className="tab-pane show active" id="upcoming-appointments">
-                            <div className="card card-table mb-0">
-                                <div className="card-body">
-                                    <div className="table-responsive">
-                                        <table className="table table-hover table-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th className='text-nowrap'>Date</th>
-                                                    <th className='text-nowrap'>Title</th>
-                                                    <th className='text-nowrap'>App Doctor</th>
-                                                    <th className='text-nowrap'>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {
-                                                    pPrescription && pPrescription?.map((item) => (
-                                                        <tr className='text-nowrap' key={item.id}>
-                                                            <td>{moment(item?.appointment?.appointmentTime).format("MMM Do YY")}</td>
-                                                            <td>{item?.disease}</td>
-                                                            <td>
-                                                                <div className="table-avatar">
-                                                                    <a className="avatar avatar-sm mr-2 d-flex gap-2">
-                                                                        <img className="avatar-img rounded-circle" src={img} alt="" />
-                                                                        <div>
-                                                                            <p className='p-0 m-0 text-nowrap'>{item?.doctor?.firstName + ' ' + item?.doctor?.lastName}</p>
-                                                                            <p className='p-0 m-0'>{item?.doctor?.designation}</p>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div className="table-action">
-                                                                    <div className="btn btn-sm bg-info-light">
-                                                                        <FaEye /> View
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    ))
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                            <CustomTable
+                                loading={prescriptionIsLoading}
+                                columns={prescriptionColumns}
+                                dataSource={prescriptionData}
+                                showPagination={true}
+                                pageSize={10}
+                                showSizeChanger={true}
+                            />
                         </div>
                     </div>
                 </div>
@@ -135,48 +214,14 @@ const PatientAppointments = () => {
                 <div className="appointment-tab">
                     <div className="tab-content">
                         <div className="tab-pane show active" id="upcoming-appointments">
-                            <div className="card card-table mb-0">
-                                <div className="card-body">
-                                    <div className="table-responsive">
-                                        <table className="table table-hover table-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th className='text-nowrap'>Invoice No</th>
-                                                    <th className='text-nowrap'>Doctor</th>
-                                                    <th className='text-nowrap'>Amount</th>
-                                                    <th className='text-nowrap'>Paid On</th>
-                                                    <th className='text-nowrap'>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr className='text-nowrap' >
-                                                    <td>#INV-00010</td>
-                                                    <td>
-                                                        <div className="table-avatar">
-                                                            <a className="avatar avatar-sm mr-2 d-flex gap-2">
-                                                                <img className="avatar-img rounded-circle" src={img} alt="" />
-                                                                <div>
-                                                                    <p className='p-0 m-0 text-nowrap'>Dr. Ruby Perrin</p>
-                                                                    <p className='p-0 m-0'>Dental</p>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <td>150$</td>
-                                                    <td>14 Dec 2023</td>
-                                                    <td>
-                                                        <div className="table-action">
-                                                            <div className="btn btn-sm bg-info-light">
-                                                                <FaEye /> View
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                            <CustomTable
+                                loading={InvoicesIsLoading}
+                                columns={InvoiceColumns}
+                                dataSource={invoices}
+                                showPagination={true}
+                                pageSize={10}
+                                showSizeChanger={true}
+                            />
                         </div>
                     </div>
                 </div>
@@ -184,5 +229,4 @@ const PatientAppointments = () => {
         </Tabs>
     )
 }
-
 export default PatientAppointments
