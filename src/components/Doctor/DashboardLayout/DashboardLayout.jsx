@@ -8,7 +8,7 @@ const DashboardLayout = ({children}) => {
 		<>
 			<Navbar />
 			<BreadCrumb/>
-			<div className="content">
+			<div className="content" style={{marginBottom:150}}>
 				<div className="container-fluid">
 					<div className="row">
 						<div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
@@ -23,7 +23,7 @@ const DashboardLayout = ({children}) => {
 				</div>
 
 			</div>
-			<Footer />
+			<Footer/>
 		</>
 	)
 }
