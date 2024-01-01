@@ -25,11 +25,12 @@ import Specialites from './components/Admin/Specialites/Specialites';
 import AdminReviews from './components/Admin/Reviews/Reviews'
 import PatientFavouriteDoctor from './components/Doctor/PatientFavourite/PatientFavourite';
 import DoctorInvoice from './components/Doctor/Invoice/DoctorInvoice';
+import SearchDoctor from './components/Doctor/SearchDoctor/SearchDoctor';
 
-export const UserContext = createContext();
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
   { path: '/login', element: <SignInForm /> },
+  { path: '/doctors', element: <SearchDoctor /> },
   { path: '/doctors/profile', element: <DoctorProfile /> },
   
   { path: '/dashboard', element: <MainDashboard /> },
