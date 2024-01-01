@@ -24,6 +24,7 @@ import Transactions from './components/Admin/Transactions/Transactions';
 import Specialites from './components/Admin/Specialites/Specialites';
 import AdminReviews from './components/Admin/Reviews/Reviews'
 import PatientFavouriteDoctor from './components/Doctor/PatientFavourite/PatientFavourite';
+import DoctorInvoice from './components/Doctor/Invoice/DoctorInvoice';
 
 export const UserContext = createContext();
 const router = createBrowserRouter([
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
   { path: '/dashboard/change-password', element: <ChangePassword /> },
   { path: '/dashboard/profile-setting', element: <ProfileSetting /> },
   { path: '/dashboard/favourite', element: <PatientFavouriteDoctor /> },
+  { path: '/dashboard/invoices', element: <DoctorInvoice /> },
 
   { path: '/booking/:doctorId', element: <DoctorBooking /> },
   { path: '/booking/success/', element: <BookingSuccess /> },

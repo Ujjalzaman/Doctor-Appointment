@@ -24,7 +24,7 @@ const MainDashboard = () => {
                         </div>
                         :
                         <div className="col-md-12">
-                            <h4 className="mb-4 mt-5">Patient Appoinment</h4>
+                            <h4 className="mb-4 mt-5">Patient Appointment</h4>
                             <DoctorDashboardPatient />
                         </div>
                     }

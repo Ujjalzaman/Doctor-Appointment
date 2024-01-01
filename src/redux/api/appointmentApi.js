@@ -55,6 +55,13 @@ export const appointmentApi = baseApi.injectEndpoints({
                 method: 'GET'
             }),
             providesTags: [tagTypes.appointments]
+        }),
+        getDoctorInvoices : build.query({
+            query: () => ({
+                url: `${APPOINTMENT_URL}/doctor/invoices`,
+                method: 'GET'
+            }),
+            providesTags: [tagTypes.appointments]
         })
     })
 })
@@ -65,5 +72,6 @@ export const { useGetDoctorAppointmentsQuery,
     useCreateAppointmentMutation,
     useGetSingleAppointmentQuery,
     useGetAppointmentedPaymentInfoQuery,
-    useGetPatientInvoicesQuery
+    useGetPatientInvoicesQuery,
+    useGetDoctorInvoicesQuery
 } = appointmentApi;

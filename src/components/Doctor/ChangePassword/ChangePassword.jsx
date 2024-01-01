@@ -1,7 +1,7 @@
 import React from 'react';
 import './ChangePassword.css';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
-import logo from '../../../images/logo.png'
+
 const ChangePassword = () => {
     return (
         <DashboardLayout>

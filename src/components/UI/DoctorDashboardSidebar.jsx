@@ -104,6 +104,12 @@ const DoctorDashboardSidebar = () => {
                                         <span>Schedule Timings</span>
                                     </Link>
                                 </li>
+                                <li>
+                                    <Link to={'/dashboard/invoices'}>
+                                        <i className="fas fa-hourglass-start"></i>
+                                        <span>Invoices</span>
+                                    </Link>
+                                </li>
 
                                 <li>
                                     <Link to={'/dashboard/reviews'}>
