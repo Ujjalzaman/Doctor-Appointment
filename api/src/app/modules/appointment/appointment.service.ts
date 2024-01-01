@@ -137,6 +137,31 @@ const getPatientPaymentInfo = async (user: any): Promise<Payment[]> => {
     });
     return result;
 }
+const getDoctorInvoices = async(user:any): Promise<Payment[] | null> =>{
+    const { userId } = user;
+    const isUserExist = await prisma.doctor.findUnique({
+        where: { id: userId }
+    })
+    if (!isUserExist) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
+    }
+    const result = await prisma.payment.findMany({
+        where: { appointment: { doctorId: isUserExist.id } },
+        include: {
+            appointment: {
+                include: {
+                    patient: {
+                        select: {
+                            firstName: true,
+                            lastName: true
+                        }
+                    }
+                }
+            }
+        }
+    });
+    return result;
+}
 
 const deleteAppointment = async (id: string): Promise<any> => {
     const result = await prisma.appointments.delete({
@@ -165,29 +190,25 @@ const getDoctorAppointmentsById = async (user: any, filter: any): Promise<Appoin
             id: userId
         }
     })
-    if (!isDoctor) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
-    }
+    if (!isDoctor) {throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')}
 
     let andCondition: any = { doctorId: userId };
-
+    
     if (filter.sortBy == 'today') {
-        const today = moment().startOf('day');
-        const tomorrow = moment(today).add(1, 'days');
+        const today = moment().startOf('day').format('YYYY-MM-DD HH:mm:ss');
+        const tomorrow = moment(today).add(1, 'days').format('YYYY-MM-DD HH:mm:ss');
 
-        andCondition.appointmentTime = {
-            gte: today.toDate(),
-            lt: tomorrow.toDate()
+        andCondition.scheduleDate = {
+            gte: today,
+            lt: tomorrow
         }
     }
     if (filter.sortBy == 'upcoming') {
-        const todayDate = moment().startOf('day');
-        const upcomingDate = moment(todayDate).add(1, 'days');
-        andCondition.appointmentTime = {
-            gte: upcomingDate.toDate()
+        const upcomingDate = moment().startOf('day').add(1, 'days').format('YYYY-MM-DD HH:mm:ss')
+        andCondition.scheduleDate = {
+            gte: upcomingDate
         }
     }
-
     const whereConditions = andCondition ? andCondition : {}
 
     const result = await prisma.appointments.findMany({
@@ -196,7 +217,6 @@ const getDoctorAppointmentsById = async (user: any, filter: any): Promise<Appoin
             patient: true
         }
     });
-
     return result;
 }
 
@@ -261,5 +281,6 @@ export const AppointmentService = {
     updateAppointmentByDoctor,
     getDoctorPatients,
     getPaymentInfoViaAppintmentId,
-    getPatientPaymentInfo
+    getPatientPaymentInfo,
+    getDoctorInvoices
 }
