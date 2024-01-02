@@ -3,6 +3,9 @@ import prisma from "../../../shared/prisma";
 import bcrypt from 'bcrypt';
 import ApiError from "../../../errors/apiError";
 import httpStatus from "http-status";
+import { DoctorSearchableFields, IDoctorFilters } from "./doctor.interface";
+import calculatePagination, { IOption } from "../../../shared/paginationHelper";
+import { IGenericResponse } from "../../../interfaces/common";
 
 const create = async (payload: any): Promise<any> => {
     try {
@@ -29,14 +32,72 @@ const create = async (payload: any): Promise<any> => {
         });
 
         return data;
-    } catch (error:any) {
+    } catch (error: any) {
         throw new ApiError(httpStatus.BAD_REQUEST, error.message)
     }
 }
 
-const getAllDoctors = async (): Promise<Doctor[] | null> => {
-    const result = await prisma.doctor.findMany();
-    return result;
+const getAllDoctors = async (filters: IDoctorFilters, options: IOption): Promise<IGenericResponse<Doctor[]>> => {
+    const { limit, page, skip } = calculatePagination(options);
+    const { searchTerm, max, min,specialist, ...filterData } = filters;
+
+    const andCondition = [];
+    if (searchTerm) {
+        andCondition.push({
+            OR: DoctorSearchableFields.map((field) => ({
+                [field]: {
+                    contains: searchTerm,
+                    mode: 'insensitive'
+                }
+            }))
+        })
+    }
+
+    if (Object.keys(filterData).length > 0) {
+        andCondition.push({
+            AND: Object.entries(filterData).map(([key, value]) => ({
+                [key]: { equals: value }
+            }))
+        })
+    }
+
+    if (min || max) {
+        andCondition.push({
+            AND: ({
+                price: {
+                    gte: min,
+                    lte: max
+                }
+            })
+        })
+    }
+
+    if(specialist){
+        andCondition.push({
+            AND: ({
+                services: {
+                    contains: specialist
+                }
+            })
+        })
+    }
+
+    const whereCondition = andCondition.length > 0 ? { AND: andCondition } : {};
+    const result = await prisma.doctor.findMany({
+        skip,
+        take: limit,
+        where: whereCondition,
+    });
+
+    const total = await prisma.doctor.count({ where: whereCondition });
+    return {
+        meta: {
+            page,
+            limit,
+            total,
+        },
+        data: result
+    }
 }
 
 const getDoctor = async (id: string): Promise<Doctor | null> => {
