@@ -1,12 +1,10 @@
 import React from 'react'
-import { Checkbox, Button, DatePicker } from 'antd';
-import { FaSearch } from "react-icons/fa";
-import { Slider, Switch } from 'antd';
+import { Slider, Button, DatePicker, Radio } from 'antd';
+import { FaSearch, FaRedoAlt } from "react-icons/fa";
+import Search from 'antd/es/input/Search';
 
-const SearchSidebar = () => {
-  const handleDateChange = (_date, _dateString) => {
-  }
-
+const SearchSidebar = ({ setSearchTerm, setSorByGender, setSpecialist, setPriceRange, resetFilter, query }) => {
+  const handleDateChange = (_date, _dateString) => { }
   const options = [
     {
       label: 'Male',
@@ -21,15 +19,16 @@ const SearchSidebar = () => {
       value: 'shemale',
     },
   ];
+  const onSelectGender = (e) => setSorByGender(e.target.value)
 
   const specialOptions = [
     {
       label: 'Urology',
-      value: 'Urology',
+      value: 'urology',
     },
     {
       label: 'Neurology',
-      value: 'Neurology',
+      value: 'neurology',
     },
     {
       label: 'Cardiologist',
@@ -37,31 +36,37 @@ const SearchSidebar = () => {
     },
     {
       label: 'Orthopedic',
-      value: 'Orthopedic',
+      value: 'orthopedic',
     },
     {
       label: 'Dentist',
-      value: 'Dentist',
+      value: 'dentist',
     },
   ];
 
-  const onChange = (checkedValues) => {
-    console.log('checked = ', checkedValues);
-  };
+  const onSelectSepcialist = (e) => setSpecialist(e.target.value)
 
   const onRangeChange = (range) => {
-    console.log(range)
+    const obj = {
+      min: range[0],
+      max: range[1]
+    }
+    setPriceRange(obj)
+  }
+  const onSearch = (value) => {
+    setSearchTerm(value);
   }
   return (
     <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
 
       <div class="card search-filter shadow">
         <div class="card-header bg-white">
-
           <h4 class="card-title mb-0">Search Filter</h4>
         </div>
         <div class="card-body">
-          
+          <div className="mb-2">
+            <Search placeholder="Search..." onSearch={onSearch} enterButton allowClear />
+          </div>
           <div className='mb-2'>
             <DatePicker
               style={{ width: "100%" }}
@@ -72,10 +77,9 @@ const SearchSidebar = () => {
           <div className='mb-2'>
             <h5>Gender</h5>
             <div className='d-flex flex-column'>
-              <Checkbox.Group options={options} onChange={onChange} />
+              <Radio.Group options={options} onChange={onSelectGender} />
             </div>
           </div>
-
           <div className='mb-2'>
             <h5>Price Range</h5>
             <Slider range defaultValue={[50, 100]} onChange={onRangeChange} />
@@ -84,10 +88,13 @@ const SearchSidebar = () => {
           <div>
             <h5>Select Specialist</h5>
             <div className='d-flex flex-column'>
-              <Checkbox.Group options={specialOptions} defaultValue={['male']} onChange={onChange} />
+              <Radio.Group options={specialOptions} onChange={onSelectSepcialist} />
             </div>
           </div>
           <Button className='w-100 mt-4 mb-2' type="primary" shape="round" icon={<FaSearch />} size="large">Search</Button>
+          {
+            Object.keys(query).length > 4 && <Button className='w-100 mt-4 mb-2' onClick={resetFilter} type="primary" shape="round" icon={<FaRedoAlt />} size="large">Reset</Button>
+          }
         </div>
       </div>
 
