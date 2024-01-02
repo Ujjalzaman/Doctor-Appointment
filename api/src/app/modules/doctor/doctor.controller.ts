@@ -3,6 +3,8 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { Doctor } from "@prisma/client";
 import { DoctorService } from "./doctor.service";
+import pick from "../../../shared/pick";
+import { IDoctorFiltersData, IDoctorOptions } from "./doctor.interface";
 
 const createDoctor = catchAsync(async (req: Request, res: Response) => {
     await DoctorService.create(req.body);
@@ -14,8 +16,10 @@ const createDoctor = catchAsync(async (req: Request, res: Response) => {
 })
 
 const getAllDoctors = catchAsync(async (req: Request, res: Response) => {
-    const result = await DoctorService.getAllDoctors();
-    sendResponse<Doctor[]>(res, {
+    const filter = pick(req.query, IDoctorFiltersData);
+    const options = pick(req.query, IDoctorOptions);
+    const result = await DoctorService.getAllDoctors(filter, options);
+    sendResponse(res, {
         statusCode: 200,
         message: 'Successfully Retrieve doctors !!',
         success: true,
