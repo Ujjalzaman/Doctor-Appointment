@@ -1,16 +1,16 @@
-type IOption = {
-    page?: number;
-    limit?: number;
+export type IOption = {
+    page?: number | undefined;
+    limit?: number | undefined;
     sortBy?: string;
-    sortOrder?: any;
+    sortOrder?: 'asc' | 'dsc';
 }
 
 type IOptionResult = {
-    page?: number;
-    limit?: number;
+    page?: number | undefined;
+    limit?: number | undefined;
     sortBy?: string;
     sortOrder?: any;
-    skip?: number;
+    skip?: number | undefined;
 }
 
 const calculatePagination = (options: IOption): IOptionResult => {

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Checkbox, Button, DatePicker } from 'antd';
 import { FaSearch } from "react-icons/fa";
+import { Slider, Switch } from 'antd';
+
 const SearchSidebar = () => {
   const handleDateChange = (_date, _dateString) => {
   }
@@ -46,14 +48,20 @@ const SearchSidebar = () => {
   const onChange = (checkedValues) => {
     console.log('checked = ', checkedValues);
   };
+
+  const onRangeChange = (range) => {
+    console.log(range)
+  }
   return (
     <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
 
       <div class="card search-filter shadow">
         <div class="card-header bg-white">
+
           <h4 class="card-title mb-0">Search Filter</h4>
         </div>
         <div class="card-body">
+          
           <div className='mb-2'>
             <DatePicker
               style={{ width: "100%" }}
@@ -61,11 +69,16 @@ const SearchSidebar = () => {
               onChange={handleDateChange}
             />
           </div>
-          <div>
+          <div className='mb-2'>
             <h5>Gender</h5>
             <div className='d-flex flex-column'>
               <Checkbox.Group options={options} onChange={onChange} />
             </div>
+          </div>
+
+          <div className='mb-2'>
+            <h5>Price Range</h5>
+            <Slider range defaultValue={[50, 100]} onChange={onRangeChange} />
           </div>
 
           <div>

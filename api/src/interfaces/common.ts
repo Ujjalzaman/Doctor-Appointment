@@ -2,9 +2,9 @@ import { IGenericErrorMessage } from './error';
 
 export type IGenericResponse<T> = {
   meta: {
-    page: number;
-    limit: number;
-    total: number;
+    page: number | undefined;
+    limit: number | undefined;
+    total: number | undefined;
   };
   data: T;
 };
