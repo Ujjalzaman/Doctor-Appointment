@@ -57,13 +57,13 @@ const SearchSidebar = ({ setSearchTerm, setSorByGender, setSpecialist, setPriceR
     setSearchTerm(value);
   }
   return (
-    <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+    <div className="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
 
-      <div class="card search-filter shadow">
-        <div class="card-header bg-white">
-          <h4 class="card-title mb-0">Search Filter</h4>
+      <div className="card search-filter shadow">
+        <div className="card-header bg-white">
+          <h4 className="card-title mb-0">Search Filter</h4>
         </div>
-        <div class="card-body">
+        <div className="card-body">
           <div className="mb-2">
             <Search placeholder="Search..." onSearch={onSearch} enterButton allowClear />
           </div>

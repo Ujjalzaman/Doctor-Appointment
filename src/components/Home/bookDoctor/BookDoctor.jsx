@@ -8,7 +8,8 @@ import { useAddFavouriteMutation } from '../../../redux/api/favouriteApi';
 import toast, { Toaster } from 'react-hot-toast';
 
 const BookDoctor = () => {
-	const { data, isError, isLoading } = useGetDoctorsQuery();
+	const { data, isError, isLoading } = useGetDoctorsQuery({limit:3});
+	const doctors = data?.doctors;
 	const [addFavourite, { isSuccess, isLoading: FIsLoading, isError: fIsError, error }] = useAddFavouriteMutation();
 
 	const handleAddFavourite = (id) => {
@@ -27,11 +28,11 @@ const BookDoctor = () => {
 	// what to render 
 	let content = null;
 	if (!isLoading && isError) content = <div>Something Went Wrong !</div>
-	if (!isLoading && !isError && data?.length === 0) content = <div>Empty</div>
-	if (!isLoading && !isError && data?.length > 0) content =
+	if (!isLoading && !isError && doctors?.length === 0) content = <div>Empty</div>
+	if (!isLoading && !isError && doctors?.length > 0) content =
 		<>
 			{
-				data && data?.map((item) => (
+				doctors && doctors?.map((item) => (
 					<div className="profile-widget" key={item?.id}>
 						<div className="doc-img">
 							<a href="doctor-profile.html">
