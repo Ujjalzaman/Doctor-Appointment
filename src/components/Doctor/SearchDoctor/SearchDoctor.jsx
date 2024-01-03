@@ -78,9 +78,9 @@ const SearchDoctor = () => {
         <div>
             <Navbar />
             <BreadCrumb />
-            <div class="content" style={{ marginBottom: 200 }}>
-                <div class="container-fluid">
-                    <div class="row">
+            <div className="content" style={{ marginBottom: 200 }}>
+                <div className="container-fluid">
+                    <div className="row">
                         <SearchSidebar
                             setSearchTerm={setSearchTerm}
                             setSorByGender={setSorByGender}
@@ -89,7 +89,7 @@ const SearchDoctor = () => {
                             resetFilter={resetFilter}
                             query={query}
                         />
-                        <div class="col-md-12 col-lg-8 col-xl-9">
+                        <div className="col-md-12 col-lg-8 col-xl-9">
                             {content}
                             <div className='text-center mt-5 mb-5'>
                                 <Pagination

@@ -8,8 +8,8 @@ const HeaderTop = () => {
                 <h1>Your New Smile <br />Starts From Here</h1>
                 <p className="text-secondary">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore eveniet necessitatibus et iusto corrupti minima
                 </p>
-                <Link to="/appointment" className="btn btn-primary btn-lg shadow rounded"> GET STARTED</Link>
-
+                <Link to="/doctors" className="btn btn-primary shadow rounded mb-2"> GET APPOINTMENT</Link>
+                <Link to="/appointment" className="btn btn-primary shadow rounded mb-2"> GET EMERGENCY APPOINTMENT</Link>
             </div>
             <div className="col-md-6 col-sm-6 col-12">
                 <img src={chair} className="img-fluid rounded" alt="" />
