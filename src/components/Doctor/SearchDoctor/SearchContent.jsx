@@ -3,21 +3,22 @@ import img from '../../../images/doc/doctor 3.jpg';
 import { Link } from 'react-router-dom';
 import showImg from '../../../images/specialities/specialities-01.png'
 import StarRatings from 'react-star-ratings';
+import { Tag } from 'antd';
 
-const SearchContent = ({data}) => {
-    
+const SearchContent = ({ data }) => {
+    const services = data?.services?.split(',')
     return (
-        <div class="card">
-            <div class="card-body">
+        <div className="card mb-4">
+            <div className="card-body">
                 <div className='d-flex'>
                     <div className='d-flex gap-3'>
-                        <div>
-                            <img src={img} class="img-fluid" alt="User Image" style={{ maxWidth: '240', maxHeight: '240' }} />
+                        <div style={{maxWidth: 200, overflow: 'hidden' }}>
+                            <img src={img} className="img-fluid" alt="User Image" />
                         </div>
-                        <div class="doc-info-cont">
-                            <h4 class=""><Link to={'/'} style={{ textDecoration: 'none' }}>Dr. Sofia Brient</Link></h4>
-                            <p class="">MBBS, MS - General Surgery, MCh - Urology</p>
-                            <p class="doc-department"><img src={showImg} class="img-fluid" alt="Speciality" />Urology</p>
+                        <div className="doc-info-cont">
+                            <h4><Link to={'/'} style={{ textDecoration: 'none' }}>Dr. {data?.firstName + ' ' + data?.lastName}</Link></h4>
+                            <p>{data?.designation}</p>
+                            <p className="doc-department"><img src={showImg} className="img-fluid" alt="Speciality" />Urology</p>
 
                             <StarRatings
                                 rating={5}
@@ -26,11 +27,11 @@ const SearchContent = ({data}) => {
                                 name='rating'
                                 starDimension="20px"
                             />
-                            <span class="d-inline-block">(4)</span>
+                            <span className="d-inline-block">(4)</span>
 
-                            <div class="clinic-details">
-                                <p class="my-2"><i class="fas fa-map-marker-alt"></i> Louisiana, USA</p>
-                                <ul class="clinic-gallery mt-3">
+                            <div className="clinic-details">
+                                <p className="my-2"><i className="fas fa-map-marker-alt"></i> {data?.address}, {data?.country}</p>
+                                <ul className="clinic-gallery mt-3">
                                     <li>
                                         <img src={showImg} alt="Feature" style={{ maxWidth: "30px" }} />
                                     </li>
@@ -46,24 +47,26 @@ const SearchContent = ({data}) => {
                                     </li>
                                 </ul>
                             </div>
-                            <div class="clinic-services">
-                                <span>Dental Fillings</span>
-                                <span> Whitneing</span>
-                            </div>
+                            {
+                                services.map((item, id) => (
+                                    <Tag key={id + 51}>{item}</Tag>
+
+                                ))
+                            }
                         </div>
                     </div>
-                    <div class="doc-info-right">
-                        <div class="clini-infos">
+                    <div className="doc-info-right">
+                        <div className="clini-infos">
                             <ul>
-                                <li><i class="far fa-thumbs-up"></i> 97%</li>
-                                <li><i class="far fa-comment"></i> 4 Feedback</li>
-                                <li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
-                                <li><i class="far fa-money-bill-alt"></i> $150 - $250 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>
+                                <li><i className="far fa-thumbs-up"></i> 97%</li>
+                                <li><i className="far fa-comment"></i> 4 Feedback</li>
+                                <li><i className="fas fa-map-marker-alt"></i> Newyork, USA</li>
+                                <li><i className="far fa-money-bill-alt"></i> $150 - $250 <i className="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>
                             </ul>
                         </div>
-                        <div class="clinic-booking">
-                            <Link to={'/'} class="view-pro-btn" style={{ textDecoration: 'none' }}>View Profile</Link>
-                            <Link to={'/'} class="apt-btn" style={{ textDecoration: 'none' }}>Book Appointment</Link>
+                        <div className="clinic-booking">
+                            <Link to={'/doctors/profile'} className="view-pro-btn" style={{ textDecoration: 'none' }}>View Profile</Link>
+                            <Link to={`/booking/${data?.id}`} className="apt-btn" style={{ textDecoration: 'none' }}>Book Appointment</Link>
                         </div>
                     </div>
                 </div>
@@ -71,5 +74,4 @@ const SearchContent = ({data}) => {
         </div>
     )
 }
-
 export default SearchContent
