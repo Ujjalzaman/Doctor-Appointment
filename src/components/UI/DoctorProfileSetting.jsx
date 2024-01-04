@@ -4,13 +4,14 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
-import { bloodGrupOptions } from '../../constant/global';
 import useAuthCheck from '../../redux/hooks/useAuthCheck';
-import { useUpdatePatientMutation } from '../../redux/api/patientApi';
 import toast, { Toaster } from 'react-hot-toast';
 import { useUpdateDoctorMutation } from '../../redux/api/doctorApi';
+import { Button, Select, Space } from 'antd';
+import { doctorSpecialistOptions } from '../../constant/global';
 
 const DoctorProfileSetting = () => {
+    const [selectedItems, setSelectedItems] = useState([]);
     const [updateDoctor, { isLoading, isSuccess, isError, error }] = useUpdateDoctorMutation()
     const { data } = useAuthCheck();
     const { register, handleSubmit } = useForm({});
@@ -20,13 +21,9 @@ const DoctorProfileSetting = () => {
     const [showCalender, setShowCalender] = useState(false);
     const buttonRef = useRef(null);
 
-    const handleDateChange = (date) => {
-        setValue(date);
-    }
+    const handleDateChange = (date) => {setValue(date)}
 
-    const handleButtonClick = () => {
-        setShowCalender(!showCalender);
-    }
+    const handleButtonClick = () => {setShowCalender(!showCalender)}
 
     const handleClickOutSide = (event) => {
         if (buttonRef.current && !buttonRef.current.contains(event.target)) {
@@ -36,7 +33,9 @@ const DoctorProfileSetting = () => {
 
     useEffect(() => {
         if (data) {
-            setUserId(data.id);
+            const { id, services } = data;
+            setUserId(id);
+            setSelectedItems(services?.split(','))
         };
         document.addEventListener('click', handleClickOutSide);
         return () => {
@@ -55,6 +54,7 @@ const DoctorProfileSetting = () => {
             const newDate = moment(value).format()
             newObj['dateOfBirth'] = newDate;
         }
+        newObj["services"] = selectedItems.join(',');
         const changedValue = Object.fromEntries(Object.entries(newObj).filter(([key, value]) => value !== ''));
         updateDoctor({ data: changedValue, id: userId })
     };
@@ -68,15 +68,14 @@ const DoctorProfileSetting = () => {
         }
     }, [isLoading, isError, error, isSuccess])
 
-
     return (
         <div style={{ marginBottom: '10rem' }}>
-            <div className="card shadow border-0 mb-5 p-2">
+            <div className="card mb-5 p-2 shadow-sm">
                 <div className="card-body">
                     <h4 className="card-title">Update Your Information</h4>
                     <Toaster />
                     <form className="row form-row" onSubmit={handleSubmit(onSubmit)}>
-                        <div className="col-md-12 mb-3">
+                        <div className="col-md-12 mb-5">
                             <div className="form-group">
                                 <div className="change-avatar">
                                     <div className="profile-img">
@@ -94,36 +93,36 @@ const DoctorProfileSetting = () => {
                         </div>
 
                         <div className="col-md-6">
-                            <div className="form-group mb-2">
-                                <label className='form-label'>First Name <span className="text-danger">*</span></label>
+                            <div className="form-group mb-2 card-label">
+                                <label>First Name <span className="text-danger">*</span></label>
                                 <input defaultValue={data?.firstName} {...register("firstName")} className="form-control" />
                             </div>
                         </div>
 
                         <div className="col-md-6">
-                            <div className="form-group mb-2">
-                                <label className='form-label'>Last Name <span className="text-danger">*</span></label>
+                            <div className="form-group mb-2 card-label">
+                                <label>Last Name <span className="text-danger">*</span></label>
                                 <input defaultValue={data?.lastName} {...register("lastName")} className="form-control" />
                             </div>
                         </div>
 
                         <div className="col-md-6">
-                            <div className="form-group mb-2">
-                                <label className='form-label'>Email</label>
+                            <div className="form-group mb-2 card-label">
+                                <label>Email</label>
                                 <input defaultValue={data?.email} {...register("email")} className="form-control" />
 
                             </div>
                         </div>
 
                         <div className="col-md-6">
-                            <div className="form-group mb-2">
-                                <label className='form-label'>Phone Number</label>
+                            <div className="form-group mb-2 card-label">
+                                <label>Phone Number</label>
                                 <input defaultValue={data?.phone} {...register("phone")} className="form-control" />
                             </div>
                         </div>
 
                         <div className="col-md-6">
-                            <div className="form-group mb-2">
+                            <div className="form-group mb-2 card-label">
                                 <label>Gender</label>
                                 <select className="form-control select" onChange={handleChange} name='gender'>
                                     <option value={''}>Select</option>
@@ -135,8 +134,8 @@ const DoctorProfileSetting = () => {
                         </div>
 
                         <div className="col-md-6">
-                            <div className="form-group mb-2">
-                                <label className='form-label mb-0'>Date of Birth {moment(data?.dateOfBirth).format("MMM Do YY")}</label>
+                            <div className="form-group mb-2 card-label">
+                                <label>Date of Birth {moment(data?.dateOfBirth).format("MMM Do YY")}</label>
                                 <input value={value && moment(value).format("MMM Do YY")} type="text" className="form-control" name='dateOfBirth' onClick={handleButtonClick} ref={buttonRef} />
                                 {showCalender && (<Calendar className="rounded shadow border-0" onChange={handleDateChange} value={value} />)}
                             </div>
@@ -145,9 +144,9 @@ const DoctorProfileSetting = () => {
                         <div className="col-md-12">
                             <div className="card mb-2 mt-2">
                                 <div className="card-body">
-                                    <h4 className="card-title">About Me</h4>
-                                    <div className="form-group mb-2">
-                                        <label className='form-label'>Biography</label>
+                                    <h6 className="card-title text-secondary">About Me</h6>
+                                    <div className="form-group mb-2 card-label">
+                                        <label>Biography</label>
                                         <textarea defaultValue={data?.biography} {...register("biography")} className="form-control" rows={5} />
                                     </div>
                                 </div>
@@ -156,22 +155,21 @@ const DoctorProfileSetting = () => {
 
                         <div className="col-md-12">
                             <div className="card mb-2 p-3 mt-2">
-                                <h4 className="card-title">Clinic Info</h4>
+                                <h6 className="card-title text-secondary">Clinic Info</h6>
                                 <div className="row form-row">
                                     <div className="col-md-6">
-                                        <div className="form-group mb-2">
-                                            <label className='form-label'>Clinic Name</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Clinic Name</label>
                                             <input defaultValue={data?.clinicName} {...register("clinicName")} className="form-control" rows={5} />
                                         </div>
                                     </div>
 
                                     <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className='form-label'>Clinic Address</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Clinic Address</label>
                                             <input type="text" defaultValue={data?.clinicAddress} {...register("clinicAddress")} className="form-control" />
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -179,37 +177,37 @@ const DoctorProfileSetting = () => {
 
                         <div className="col-md-12">
                             <div className="card mb-2 p-3 mt-2">
-                                <h4 className="card-title">Contact Details</h4>
+                                <h6 className="card-title text-secondary">Contact Details</h6>
                                 <div className="row form-row">
                                     <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className='form-label'>Address Line</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Address Line</label>
                                             <input defaultValue={data?.address} {...register("address")} className="form-control" />
                                         </div>
                                     </div>
 
                                     <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className='form-label'>City</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>City</label>
                                             <input defaultValue={data?.city} {...register("city")} className="form-control" />
                                         </div>
                                     </div>
 
                                     <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className='form-label'>State / Province</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>State / Province</label>
                                             <input defaultValue={data?.state} {...register("state")} className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className='form-label'>Country</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Country</label>
                                             <input defaultValue={data?.country} {...register("country")} className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className='form-label'>Postal Code</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Postal Code</label>
                                             <input defaultValue={data?.postalCode} {...register("postalCode")} className="form-control" />
                                         </div>
                                     </div>
@@ -219,24 +217,14 @@ const DoctorProfileSetting = () => {
 
                         <div className="col-md-12">
                             <div className="card mb-2 p-3 mt-2">
-                                <h4 className="card-title">Pricing</h4>
-                                <div className="form-group mb-0">
-                                    <div id="pricing_select">
-                                        <div className="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="price_free" name="rating_option" className="custom-control-input" value="price_free" checked />
-                                            <label className="custom-control-label" for="price_free">Free</label>
-                                        </div>
-                                        <div className="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="price_custom" name="rating_option" value="custom_price" className="custom-control-input" />
-                                            <label className="custom-control-label" for="price_custom">Custom Price (per hour)</label>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h6 className="card-title text-secondary">Pricing</h6>
 
-                                <div className="row custom_price_cont" id="custom_price_cont" style={{ display: "none" }}>
-                                    <div className="col-md-4">
-                                        <input type="text" className="form-control" id="custom_rating_input" name="custom_rating_count" value="" placeholder="20" />
-                                        <small className="form-text text-muted">Custom price you can add</small>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Address Line</label>
+                                            <input defaultValue={data?.price} {...register("price")} className="form-control" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -244,16 +232,23 @@ const DoctorProfileSetting = () => {
 
                         <div className="col-md-12">
                             <div className="card mb-2 p-3 mt-2">
-                                <h4 className="card-title">Services and Specialization</h4>
+                                <h6 className="card-title text-secondary">Services and Specialization</h6>
                                 <div className="row form-row">
-                                    <div className="form-group">
-                                        <label className='form-label'>Services</label>
-                                        <input defaultValue={data?.services} {...register("services")} className="input-tags form-control" placeholder="Enter Services" />
-
+                                    <div className="form-group mb-2 card-label">
+                                        <label>Services</label>
+                                        <Select
+                                            mode="multiple"
+                                            allowClear
+                                            style={{ width: '100%' }}
+                                            placeholder="Please select"
+                                            value={selectedItems}
+                                            onChange={setSelectedItems}
+                                            options={doctorSpecialistOptions}
+                                        />
                                         <small className="form-text text-muted">Note : Type & Press enter to add new services</small>
                                     </div>
-                                    <div className="form-group mb-0">
-                                        <label className='form-label'>Specialization </label>
+                                    <div className="form-group mb-2 card-label">
+                                        <label>Specialization </label>
                                         <input defaultValue={data?.specialization} {...register("specialization")} className="input-tags form-control" placeholder="Enter Specialization" />
                                         <small className="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
                                     </div>
@@ -263,24 +258,24 @@ const DoctorProfileSetting = () => {
 
                         <div className="col-md-12">
                             <div className="card mb-2 p-3 mt-2">
-                                <h4 className="card-title">Education</h4>
+                                <h6 className="card-title text-secondary">Education</h6>
                                 <div className="row form-row">
                                     <div className="col-12 col-md-6 col-lg-4">
-                                        <div className="form-group mb-2">
-                                            <label className='form-label'>Degree</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Degree</label>
                                             <input defaultValue={data?.degree} {...register("degree")} className="form-control" />
                                         </div>
                                     </div>
 
                                     <div className="col-12 col-md-6 col-lg-4">
-                                        <div className="form-group mb-2">
-                                            <label className='form-label'>College/Institute</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>College/Institute</label>
                                             <input defaultValue={data?.college} {...register("college")} className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-12 col-md-6 col-lg-4">
-                                        <div className="form-group mb-2">
-                                            <label className='form-label'>Year of Completion</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Year of Completion</label>
                                             <input defaultValue={data?.completionYear} {...register("completionYear")} className="form-control" />
                                         </div>
                                     </div>
@@ -290,29 +285,29 @@ const DoctorProfileSetting = () => {
 
                         <div className="col-md-12">
                             <div className="card mb-2 p-3 mt-2">
-                                <h4 className="card-title">Experience</h4>
+                                <h6 className="card-title text-secondary">Experience</h6>
                                 <div className="row form-row">
                                     <div className="col-12 col-md-6 col-lg-4">
-                                        <div className="form-group mb-2">
-                                            <label className='form-label'>Hospital Name</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Hospital Name</label>
                                             <input defaultValue={data?.experienceHospitalName} {...register("experienceHospitalName")} className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-12 col-md-6 col-lg-4">
-                                        <div className="form-group mb-2">
-                                            <label className='form-label'>From</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>From</label>
                                             <input defaultValue={data?.expericenceStart} {...register("expericenceStart")} className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-12 col-md-6 col-lg-4">
-                                        <div className="form-group mb-2">
-                                            <label className='form-label'>To</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>To</label>
                                             <input defaultValue={data?.expericenceEnd} {...register("expericenceEnd")} className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-12 col-md-6 col-lg-4">
-                                        <div className="form-group mb-2">
-                                            <label className='form-label'>Designation</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Designation</label>
                                             <input defaultValue={data?.designation} {...register("designation")} className="form-control" />
                                         </div>
                                     </div>
@@ -322,17 +317,17 @@ const DoctorProfileSetting = () => {
 
                         <div className="col-md-12">
                             <div className="card mb-2 p-3 mt-2">
-                                <h4 className="card-title">Awards</h4>
+                                <h6 className="card-title text-secondary">Awards</h6>
                                 <div className="row form-row">
                                     <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className='form-label'>Awards</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Awards</label>
                                             <input defaultValue={data?.award} {...register("award")} className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className='form-label'>Year</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Year</label>
                                             <input defaultValue={data?.awardYear} {...register("awardYear")} className="form-control" />
                                         </div>
                                     </div>
@@ -342,17 +337,17 @@ const DoctorProfileSetting = () => {
 
                         <div className="col-md-12">
                             <div className="card mb-2 p-3 mt-2">
-                                <h4 className="card-title">Registrations</h4>
+                                <h6 className="card-title text-secondary">Registrations</h6>
                                 <div className="row form-row">
                                     <div className="col-md-6">
-                                        <div className="form-group mb-2">
-                                            <label className='form-label'>Registrations</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Registrations</label>
                                             <input defaultValue={data?.registration} {...register("registration")} className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
-                                        <div className="form-group mb-2">
-                                            <label className='form-label'>Year</label>
+                                        <div className="form-group mb-2 card-label">
+                                            <label>Year</label>
                                             <input defaultValue={data?.year} {...register("year")} className="form-control" />
                                         </div>
                                     </div>
@@ -360,8 +355,10 @@ const DoctorProfileSetting = () => {
                             </div>
                         </div>
 
-                        <div className="submit-section submit-btn-bottom mt-2">
-                            <button type="submit" className="btn btn-primary submit-btn" disabled={isLoading ? true : false}>{isLoading ? 'Saving ...' : 'Save Changes'}</button>
+                        <div className='text-center my-3'>
+                            <Button htmlType='submit' type="primary" size='large' loading={isLoading} disabled={isLoading ? true : false} >
+                            {isLoading ? 'Saving ...' : 'Save Changes'}
+                            </Button>
                         </div>
                     </form>
                 </div>
