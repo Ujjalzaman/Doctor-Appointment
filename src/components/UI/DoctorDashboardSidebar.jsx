@@ -126,6 +126,13 @@ const DoctorDashboardSidebar = () => {
                                 </li>
 
                                 <li>
+                                    <Link to={'/dashboard/blogs'}>
+                                        <i className="fas fa-user-cog"></i>
+                                        <span>Blogs (Will move to Admin)</span>
+                                    </Link>
+                                </li>
+
+                                <li>
                                     <Link to={'/dashboard/change-password'}>
                                         <i className="fas fa-lock"></i>
                                         <span>Change Password</span>
