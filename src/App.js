@@ -26,6 +26,9 @@ import AdminReviews from './components/Admin/Reviews/Reviews'
 import PatientFavouriteDoctor from './components/Doctor/PatientFavourite/PatientFavourite';
 import DoctorInvoice from './components/Doctor/Invoice/DoctorInvoice';
 import SearchDoctor from './components/Doctor/SearchDoctor/SearchDoctor';
+import Blogs from './components/Doctor/Blogs/Blogs';
+import BlogsEdit from './components/Doctor/Blogs/BlogsEdit';
+import AddBlog from './components/Doctor/Blogs/AddBlog';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -42,6 +45,9 @@ const router = createBrowserRouter([
   { path: '/dashboard/profile-setting', element: <ProfileSetting /> },
   { path: '/dashboard/favourite', element: <PatientFavouriteDoctor /> },
   { path: '/dashboard/invoices', element: <DoctorInvoice /> },
+  { path: '/dashboard/blogs', element: <Blogs /> },
+  { path: '/dashboard/blogs/:id', element: <BlogsEdit /> },
+  { path: '/dashboard/blogs/create', element: <AddBlog /> },
 
   { path: '/booking/:doctorId', element: <DoctorBooking /> },
   { path: '/booking/success/', element: <BookingSuccess /> },
