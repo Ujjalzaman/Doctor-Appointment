@@ -82,6 +82,7 @@ model Doctor {
   prescription           Prescription[]
   favourites             Favourites[]
   DoctorTimeSlot         DoctorTimeSlot[]
+  blogs                  Blogs[]
 
   @@map("Doctor")
 }
@@ -226,6 +227,17 @@ model ScheduleDay {
   endTime          String
   doctorTimeSlot   DoctorTimeSlot? @relation(fields: [doctorTimeSlotId], references: [id])
   doctorTimeSlotId String?
+}
+
+model Blogs {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  img         String?
+  userId      String
+  user        Doctor   @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 enum UserRole {
