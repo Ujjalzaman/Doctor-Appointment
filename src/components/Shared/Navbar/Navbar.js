@@ -21,7 +21,7 @@ const Navbar = () => {
                 setSticky(false)
             }
         })
-        if(authChecked){
+        if (authChecked) {
             setIsLogged(true)
         }
     }, [authChecked])
@@ -42,7 +42,7 @@ const Navbar = () => {
                 <div className="navbar-heading">
                     <h3>
                         <Link className="navbar-h" to="/">
-                            <img src={logo} style={{ maxWidth: '170px' }} alt=''/>
+                            <img src={logo} style={{ maxWidth: '170px' }} alt='' />
                         </Link>
                     </h3>
                 </div>
@@ -53,7 +53,9 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav  mb-2 mb-lg-0 ms-auto">
                         <li className="nav-item">
-                            <a className="nav-link active me-3" aria-current="page" href="/">HOME</a>
+                            <Link className="nav-link active me-3" aria-current="page" to={'/'}>
+                                HOME
+                            </Link>
                         </li>
                         <li className="nav-item active">
                             <a className="nav-link me-3" href="#doctorContaints">ABOUT</a>

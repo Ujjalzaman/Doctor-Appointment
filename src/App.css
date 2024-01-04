@@ -54,3 +54,25 @@ a:focus {
     display: flex !important;
     flex-direction: column !important;
 }
+
+.card-label > label {
+    background-color: #fff;
+    color: #959595;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 6px auto auto 8px;
+    padding: 0 7px;
+}
+.card-label > input {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .05);
+    display: block;
+    height: 50px;
+    margin-top: -13px;
+    padding: 5px 15px 0;
+    transition: border-color .3s;
+    width: 100%;
+}
