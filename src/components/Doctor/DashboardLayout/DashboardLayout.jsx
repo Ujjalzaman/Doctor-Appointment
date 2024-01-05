@@ -1,12 +1,12 @@
 import React from 'react'
-import DoctorDashboardSidebar from '../../UI/DoctorDashboardSidebar'
-import Navbar from '../../Shared/Navbar/Navbar';
+import DoctorDashboardSidebar from '../../UI/DoctorDashboardSidebar';
 import Footer from '../../Shared/Footer/Footer';
 import BreadCrumb from '../../UI/BreadCrumb';
+import Header from '../../Shared/Header/Header';
 const DashboardLayout = ({children}) => {
 	return (
 		<>
-			<Navbar />
+			<Header />
 			<BreadCrumb/>
 			<div className="content" style={{marginBottom:150}}>
 				<div className="container-fluid">

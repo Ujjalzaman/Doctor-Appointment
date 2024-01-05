@@ -1,6 +1,5 @@
 import React from 'react'
 import Footer from '../../Shared/Footer/Footer'
-import Navbar from '../../Shared/Navbar/Navbar'
 import BreadCrumb from '../../UI/BreadCrumb'
 import img from '../../../images/doc/doctor 3.jpg';
 import img2 from '../../../images/doc/doc4.jpg';
@@ -14,10 +13,12 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import { FaMapMarker } from "react-icons/fa";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { FaEnvelopeOpenText } from "react-icons/fa";
+import Header from '../../Shared/Header/Header';
+
 const DoctorProfile = () => {
     return (
         <>
-            <Navbar />
+            <Header />
             <BreadCrumb />
             <div className="content" style={{marginBottom:'7rem'}}>
                 <div className="container">

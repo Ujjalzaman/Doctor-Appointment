@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../../Shared/Navbar/Navbar';
 import BreadCrumb from '../../UI/BreadCrumb';
 import Footer from '../../Shared/Footer/Footer';
 import logo from '../../../images/logo.png';
@@ -8,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { useGetAppointmentedPaymentInfoQuery, useGetSingleAppointmentQuery } from '../../../redux/api/appointmentApi';
 import moment from 'moment';
 import { Empty } from 'antd';
+import Header from '../../Shared/Header/Header';
 
 const BookingInvoice = () => {
     const { id } = useParams();
@@ -131,7 +131,7 @@ const BookingInvoice = () => {
         </>
     return (
         <>
-            <Navbar />
+            <Header />
             <BreadCrumb />
 
             <div className="content" style={{ marginBottom: '7rem' }}>
