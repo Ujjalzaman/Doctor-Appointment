@@ -66,7 +66,7 @@ const Navbar = () => {
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link me-3 textDark" href="#BlogContaint">BLOG</a>
+                            <Link to="/blog" className="nav-link me-3 textDark">BLOG</Link>
                         </li>
 
                         <li className="nav-item">

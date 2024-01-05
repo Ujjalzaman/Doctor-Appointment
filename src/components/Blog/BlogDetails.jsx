@@ -5,6 +5,9 @@ import { Empty, message } from 'antd';
 import BlogAside from './BlogAside';
 import img from '../../images/cavity.png';
 import dayjs from 'dayjs';
+import Navbar from '../Shared/Navbar/Navbar';
+import Footer from '../Shared/Footer/Footer';
+import BlogComment from './BlogComment';
 
 const BlogDetails = () => {
     const { id } = useParams();
@@ -50,39 +53,43 @@ const BlogDetails = () => {
             </div>
         </div>
     return (
-        <div className="container-full">
-            <div className="row mx-2" style={{ marginTop: '4rem', marginBottom: '8rem' }}>
-                <div className="col-md-9">
-                    {
-                        content
-                    }
-                    <hr />
-                    <div className="d-flex justify-content-end shadow">
-                        <div className="col-md-5 col-lg-4 ml-lg-0 text-end text-md-end">
-                            <p className="text-dark rounded d-inline me-2">Share On </p>
-                            <a className="btn btn-outline-primary btn-floating m-1">
-                                <i className="ri-facebook-fill"></i>
-                            </a>
+        <>
+            <Navbar />
+            <div className="container-full">
+                <div className="row mx-2" style={{ marginTop: '4rem', marginBottom: '8rem' }}>
+                    <div className="col-md-9">
+                        {
+                            content
+                        }
+                        <hr />
+                        <div className="d-flex justify-content-end shadow">
+                            <div className="col-md-5 col-lg-4 ml-lg-0 text-end text-md-end">
+                                <p className="text-dark rounded d-inline me-2">Share On </p>
+                                <a className="btn btn-outline-primary btn-floating m-1">
+                                    <i className="ri-facebook-fill"></i>
+                                </a>
 
-                            <a className="btn btn-outline-primary btn-floating m-1" >
-                                <i className="ri-twitter-line"></i>
-                            </a>
+                                <a className="btn btn-outline-primary btn-floating m-1" >
+                                    <i className="ri-twitter-line"></i>
+                                </a>
 
-                            <a className="btn btn-outline-primary btn-floating m-1">
-                                <i className="ri-google-line"></i>
-                            </a>
-                            <a className="btn btn-outline-primary btn-floating m-1">
-                                <i className="ri-instagram-line"></i>
-                            </a>
+                                <a className="btn btn-outline-primary btn-floating m-1">
+                                    <i className="ri-google-line"></i>
+                                </a>
+                                <a className="btn btn-outline-primary btn-floating m-1">
+                                    <i className="ri-instagram-line"></i>
+                                </a>
+                            </div>
                         </div>
+                        <BlogComment/>
                     </div>
-                    {/* <BlogComments /> */}
-                </div>
-                <div className="col-md-3">
-                    <BlogAside setSearchTerm={undefined} />
+                    <div className="col-md-3">
+                        <BlogAside setSearchTerm={undefined} />
+                    </div>
                 </div>
             </div>
-        </div>
+            <Footer />
+        </>
     )
 }
 
