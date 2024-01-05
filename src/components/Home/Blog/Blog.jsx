@@ -1,6 +1,6 @@
 
 import dayjs from 'dayjs';
-import { Empty, message } from 'antd';
+import { Button, Empty, message } from 'antd';
 import { useGetAllBlogsQuery } from "../../../redux/api/blogApi";
 import img from '../../../images/chair.png'
 import { Link } from 'react-router-dom';
@@ -27,7 +27,7 @@ const Blog = () => {
 
                             <div className="card-body p-0">
                                 <div className="p-2">
-                                    <Link to={`/blog/${item?.id}`}>
+                                    <Link to={`/blog/${item?.id}`} style={{ textDecoration: 'none' }}>
                                         <h6 className="text-black text-start mb-1 text-primary">{item?.title}</h6>
                                     </Link>
                                     <div className="d-flex text-start gap-2">
@@ -68,8 +68,12 @@ const Blog = () => {
             <div className="container">
                 <div className="row p-5 align-items-center justify-content-center rounded" style={{ background: '#d7ded6' }}>
                     {content}
+                    <Link to={'/blog'} className='text-center mt-5'>
+                        <Button size='primary' type='primary'>ALL BLOGS</Button>
+                    </Link>
                 </div>
             </div>
+
         </div>
     )
 }
