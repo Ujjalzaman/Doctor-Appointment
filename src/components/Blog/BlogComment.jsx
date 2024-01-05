@@ -71,8 +71,6 @@ const BlogComment = () => {
                     </div>
                     <button className="btn btn-primary" type="submit">Comment</button>
                 </form>
-
-
             </div>
         </div>
     )

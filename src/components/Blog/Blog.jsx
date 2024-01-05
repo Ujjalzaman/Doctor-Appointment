@@ -89,7 +89,6 @@ const Blog = () => {
                                 </div>
                             </div>
                         </div>
-                        <BlogComment/>
                     </div>
                     <div className="col-md-3">
                         <BlogAside setSearchTerm={setSearchTerm} />

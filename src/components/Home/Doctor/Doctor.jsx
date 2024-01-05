@@ -4,14 +4,15 @@ import DoctorDetail from './DoctorDetail';
 import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
 
 const Doctor = () => {
-    const { data, isLoading, isError } = useGetDoctorsQuery();
+    const { data, isLoading, isError } = useGetDoctorsQuery({limit:3});
+    const doctors = data?.doctors;
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
-    if (!isLoading && !isError && data?.length === 0) content = <div>Empty</div>
-    if (!isLoading && !isError && data?.length > 0) content =
+    if (!isLoading && !isError && doctors?.length === 0) content = <div>Empty</div>
+    if (!isLoading && !isError && doctors?.length > 0) content =
         <>
             {
-                data && data.map((item, key) => (
+                doctors && doctors?.map((item, key) => (
                     <DoctorDetail key={item?.id + key} item={item}></DoctorDetail>
                 ))
             }
