@@ -31,11 +31,13 @@ import BlogsEdit from './components/Doctor/Blogs/BlogsEdit';
 import AddBlog from './components/Doctor/Blogs/AddBlog';
 import Blog from './components/Blog/Blog';
 import BlogDetails from './components/Blog/BlogDetails';
+import Contact from './components/Contact/Contact';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
   { path: '/blog', element: <Blog /> },
   { path: '/blog/:id', element: <BlogDetails /> },
+  { path: '/contact', element: <Contact /> },
   { path: '/login', element: <SignInForm /> },
 
   { path: '/doctors', element: <SearchDoctor /> },
