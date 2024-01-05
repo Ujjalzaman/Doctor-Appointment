@@ -29,10 +29,15 @@ import SearchDoctor from './components/Doctor/SearchDoctor/SearchDoctor';
 import Blogs from './components/Doctor/Blogs/Blogs';
 import BlogsEdit from './components/Doctor/Blogs/BlogsEdit';
 import AddBlog from './components/Doctor/Blogs/AddBlog';
+import Blog from './components/Blog/Blog';
+import BlogDetails from './components/Blog/BlogDetails';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
+  { path: '/blog', element: <Blog /> },
+  { path: '/blog/:id', element: <BlogDetails /> },
   { path: '/login', element: <SignInForm /> },
+
   { path: '/doctors', element: <SearchDoctor /> },
   { path: '/doctors/profile', element: <DoctorProfile /> },
   
@@ -63,7 +68,6 @@ const router = createBrowserRouter([
   { path: '/admin/transaction', element: <Transactions /> },
   { path: '/admin/specialites', element: <Specialites /> },
 
-  // { path: '/auth/review', element: <AddReview /> },
   // { path: '/appointment', element: <PrivateRoute><AppointMent /></PrivateRoute> },
 ])
 
