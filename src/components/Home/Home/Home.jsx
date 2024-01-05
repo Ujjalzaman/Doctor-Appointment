@@ -4,27 +4,31 @@ import Blog from '../Blog/Blog';
 import Doctor from '../Doctor/Doctor';
 import FeaturedService from '../FeaturedService/FeaturedService';
 import Footer from '../../Shared/Footer/Footer';
-import Header from '../Header/Header';
 import Services from '../Services/Services';
 import Testimonial from '../Testimonial/Testimonial';
 import ClinicAndSpecialities from '../ClinicAndSpecialities/ClinicAndSpecialities';
 import BookDoctor from '../bookDoctor/BookDoctor';
 import Availabe from '../AvailableFeatures/Available';
+import HeroSection from '../HeroSection/HeroSection';
+import InfoPage from '../InfoPage/InfoPage';
+import Header from '../../Shared/Header/Header';
 
 const Home = () => {
     return (
         <>
-            <Header></Header>
-            <Services></Services>
-            <ClinicAndSpecialities/>
-            <BookDoctor/>
-            <FeaturedService></FeaturedService>
-            <Appointment></Appointment>
-            <Testimonial></Testimonial>
-            <Blog></Blog>
-            <Availabe/>
-            <Doctor></Doctor>
-            <Footer/>
+            <Header />
+            <HeroSection />
+            <InfoPage />
+            <Services />
+            <ClinicAndSpecialities />
+            <BookDoctor />
+            <FeaturedService />
+            <Appointment />
+            <Testimonial />
+            <Blog />
+            <Availabe />
+            <Doctor />
+            <Footer />
         </>
     );
 };

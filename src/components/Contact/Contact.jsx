@@ -1,8 +1,8 @@
 import React from 'react'
-import Navbar from '../Shared/Navbar/Navbar'
 import Footer from '../Shared/Footer/Footer'
 import { useForm } from 'react-hook-form';
 import { Button } from 'antd';
+import Header from '../Shared/Header/Header';
 
 const Contact = () => {
     const { register, handleSubmit } = useForm({});
@@ -11,7 +11,7 @@ const Contact = () => {
     };
     return (
         <>
-            <Navbar />
+            <Header />
             <section className="container my-5 py-5 position-relative" id="ContactPage">
                 <div className="container">
                     <div className="section-header text-center text-white mb-5">
