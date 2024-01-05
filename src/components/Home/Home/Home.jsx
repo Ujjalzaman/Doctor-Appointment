@@ -1,7 +1,6 @@
 import React from 'react';
 import Appointment from '../Appointment/Appointment';
 import Blog from '../Blog/Blog';
-import Contact from '../Contact/Contact';
 import Doctor from '../Doctor/Doctor';
 import FeaturedService from '../FeaturedService/FeaturedService';
 import Footer from '../../Shared/Footer/Footer';
@@ -14,7 +13,7 @@ import Availabe from '../AvailableFeatures/Available';
 
 const Home = () => {
     return (
-        <div>
+        <>
             <Header></Header>
             <Services></Services>
             <ClinicAndSpecialities/>
@@ -25,9 +24,8 @@ const Home = () => {
             <Blog></Blog>
             <Availabe/>
             <Doctor></Doctor>
-            <Contact/>
             <Footer/>
-        </div>
+        </>
     );
 };
 
