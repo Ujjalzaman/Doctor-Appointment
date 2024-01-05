@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from '../../Shared/Navbar/Navbar'
 import Footer from '../../Shared/Footer/Footer'
 import img from '../../../images/doc/doctor 3.jpg'
 import './index.css';
@@ -16,6 +15,7 @@ import CheckoutPage from '../BookingCheckout/CheckoutPage';
 import { useCreateAppointmentMutation } from '../../../redux/api/appointmentApi';
 import { useDispatch } from 'react-redux';
 import { addInvoice } from '../../../redux/feature/invoiceSlice';
+import Header from '../../Shared/Header/Header';
 
 const DoctorBooking = () => {
     const dispatch = useDispatch();
@@ -181,7 +181,7 @@ const DoctorBooking = () => {
     }
     return (
         <>
-            <Navbar />
+            <Header />
             <BreadCrumb />
             <div style={{ marginBottom: '10rem' }}>
                 <Steps current={current} items={items} />

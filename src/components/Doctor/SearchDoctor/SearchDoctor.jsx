@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from '../../Shared/Navbar/Navbar';
 import Footer from '../../Shared/Footer/Footer';
 import BreadCrumb from '../../UI/BreadCrumb';
 import SearchSidebar from './SearchSidebar';
@@ -8,7 +7,7 @@ import { useDebounced } from '../../../utils/hooks/useDebounced';
 import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
 import { Empty } from 'antd';
 import { Pagination } from 'antd';
-
+import Header from '../../Shared/Header/Header';
 
 const SearchDoctor = () => {
     const query = {};
@@ -76,7 +75,7 @@ const SearchDoctor = () => {
 
     return (
         <div>
-            <Navbar />
+            <Header />
             <BreadCrumb />
             <div className="content" style={{ marginBottom: 200 }}>
                 <div className="container-fluid">

@@ -5,9 +5,9 @@ import { Empty, message } from 'antd';
 import BlogAside from './BlogAside';
 import img from '../../images/cavity.png';
 import dayjs from 'dayjs';
-import Navbar from '../Shared/Navbar/Navbar';
 import Footer from '../Shared/Footer/Footer';
 import BlogComment from './BlogComment';
+import Header from '../Shared/Header/Header';
 
 const BlogDetails = () => {
     const { id } = useParams();
@@ -54,7 +54,7 @@ const BlogDetails = () => {
         </div>
     return (
         <>
-            <Navbar />
+            <Header />
             <div className="container-full">
                 <div className="row mx-2" style={{ marginTop: '4rem', marginBottom: '8rem' }}>
                     <div className="col-md-9">

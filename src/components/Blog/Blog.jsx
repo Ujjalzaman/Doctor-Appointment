@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Footer from '../Shared/Footer/Footer';
-import Navbar from '../Shared/Navbar/Navbar';
 import { useGetAllBlogsQuery } from '../../redux/api/blogApi';
 import { useDebounced } from '../../redux/hooks';
 import img from '../../images/cavity.png';
@@ -9,6 +8,7 @@ import { Empty, Pagination, message } from 'antd';
 import BlogAside from './BlogAside';
 import { Link } from 'react-router-dom';
 import BlogComment from './BlogComment';
+import Header from '../Shared/Header/Header';
 
 const Blog = () => {
     const query = {};
@@ -71,7 +71,7 @@ const Blog = () => {
         </>
     return (
         <>
-            <Navbar />
+            <Header />
             <div className="container-full mx-2">
                 <div className="row">
                     <div className="col-md-9">

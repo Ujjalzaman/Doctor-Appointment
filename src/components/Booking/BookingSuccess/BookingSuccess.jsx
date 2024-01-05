@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import './BookingSuccess.css';
-import Navbar from '../../Shared/Navbar/Navbar';
 import BreadCrumb from '../../UI/BreadCrumb';
 import Footer from '../../Shared/Footer/Footer';
 import { FaCheckCircle } from "react-icons/fa";
@@ -8,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { Empty } from 'antd';
+import Header from '../../Shared/Header/Header';
 
 const BookingSuccess = () => {
     const state = useSelector((state) => state.invoice.data);
@@ -25,7 +25,7 @@ const BookingSuccess = () => {
 
     return (
         <>
-            <Navbar />
+            <Header />
             <BreadCrumb />
             <div className="content success-page-cont" style={{ marginBottom: '7rem' }}>
                 <div className="container-fluid">
