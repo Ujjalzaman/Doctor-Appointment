@@ -1,0 +1,9 @@
+.service-img img{
+    border-radius: 5px;
+    box-shadow: 0px 0px 30px 0px rgba(0, 42, 106, 0.1)
+}
+.service-content h2{
+    color: #223a66;
+    font-size: 44px;
+    font-weight: bold;
+}

@@ -21,7 +21,30 @@
 	border-radius: 100%;
 	width: 150px;
 	background: #fff;
+	transition: 0.4s ease-in;
 }
+
+.speicality-item :hover {
+	transform: scale(1.1);
+	background: rgb(221, 221, 223);
+}
+
+.speicality-item :hover > img{
+	background: none;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+
+.speicality-item:hover p{
+	transform: scale(1.1);
+	color: #1977cc;
+}
+
 .speicality-img img {
 	position: absolute;
 	top: 50%;
@@ -57,4 +80,5 @@
     font-size: 16px;
     font-weight: 500;
     margin: 30px 0 0;
+	transition: 0.4s ease-in;
 }
