@@ -11,7 +11,7 @@ const InfoPage = () => {
                 <div className="row">
                     <div className="col-lg-4 d-flex align-items-stretch">
                         <div className="content">
-                            <h3>Why Choose Medilab?</h3>
+                            <h3>Why Choose Us?</h3>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
                                 Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
