@@ -3,7 +3,7 @@
 	padding: 80px 0;
     margin: 7rem 0;
 }
-.features-slider .slick-dots, .features-img img {
+.features-img img {
     text-align: center;
     margin: 0 auto;
 }
@@ -21,18 +21,4 @@
 .feature-item p {
     font-weight: 500;
     margin: 20px 0 0;
-}
-.features-slider .slick-slide {
-	margin-right: 62px;
-}
-.features-slider .slick-center {
-    opacity: 1;
-    transform: scale(1.20);
-}
-.features-slider .slick-list {
-    padding: 16px 50px !important
-}
-.features-slider .slick-dots {
-    margin-top: 44px;
-    position: unset;
 }

@@ -78,7 +78,7 @@ const BookDoctor = () => {
 							</ul>
 							<div className="row row-sm">
 								<div className="col-6">
-									<Link to={'/doctors/profile'} className="btn  btn-outline-info btn-sm view-profile-btn">View Profile</Link>
+									<Link to={'/doctors/profile'} className="btn  btn-outline-info btn-sm view-profile-btn">Profile</Link>
 								</div>
 								<div className="col-6">
 									<Link to={`/booking/${item?.id}`} className="btn btn-sm book-btn">Book Now</Link>
