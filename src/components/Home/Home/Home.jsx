@@ -1,15 +1,17 @@
 import React from 'react';
 import Blog from '../Blog/Blog';
-import Doctor from '../Doctor/Doctor';
+import Doctor from '../OurDoctor/Doctor';
 import Footer from '../../Shared/Footer/Footer';
 import Testimonial from '../Testimonial/Testimonial';
 import ClinicAndSpecialities from '../ClinicAndSpecialities/ClinicAndSpecialities';
-import BookDoctor from '../bookDoctor/BookDoctor';
+import BookDoctor from '../BookOurDoctor/BookDoctor';
 import Availabe from '../AvailableFeatures/Available';
 import HeroSection from '../HeroSection/HeroSection';
 import InfoPage from '../InfoPage/InfoPage';
 import Header from '../../Shared/Header/Header';
 import Service from '../Services/Service';
+import Gallery from '../Gallery/Gallery';
+import OurDoctors from '../OurDoctor/OurDoctors';
 
 const Home = () => {
     return (
@@ -20,10 +22,11 @@ const Home = () => {
             <Service />
             <ClinicAndSpecialities />
             <BookDoctor />
-            <Testimonial />
             <Blog />
             <Availabe />
-            <Doctor />
+            <OurDoctors/>
+            <Testimonial />
+            <Gallery/>
             <Footer />
         </>
     );

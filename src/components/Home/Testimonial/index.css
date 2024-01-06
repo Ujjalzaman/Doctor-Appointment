@@ -1,0 +1,9 @@
+.review-img img{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+.recomended{
+    color: rgb(32, 180, 32);
+}

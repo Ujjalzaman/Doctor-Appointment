@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './index.css';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import TopHeader from '../TopHeader/TopHeader';
@@ -13,21 +13,21 @@ const Header = () => {
     const { authChecked, data } = useAuthCheck();
     const [isLoggedIn, setIsLogged] = useState(false);
     const [show, setShow] = useState(true);
-    const [lastScroll, setLastScroll] = useState(0);
+    const lastScrollRef = useRef(0);
 
     const handleScroll = () => {
         const currentScroll = window.scrollY;
-        if (currentScroll > lastScroll) {
+        if (currentScroll > lastScrollRef.current) {
             setShow(false);
         } else {
             setShow(true);
         }
-        setLastScroll(currentScroll);
+        lastScrollRef.current = currentScroll;
     }
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return (() => window.removeEventListener('scroll', handleScroll));
-    }, [lastScroll])
+    }, [])
 
     useEffect(() => { authChecked && setIsLogged(true) }, [authChecked]);
 
