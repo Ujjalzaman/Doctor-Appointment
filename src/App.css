@@ -107,3 +107,65 @@ a:focus {
     transition: border-color .3s;
     width: 100%;
 }
+
+.btn-get-started {
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 12px 35px;
+    margin-top: 30px;
+    border-radius: 50px;
+    transition: 0.5s;
+    color: #fff;
+    background: #1977cc;
+}
+
+.btn-get-started:hover {
+    background: #3291e6;
+}
+.section-title h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    position: relative;
+    color: #2c4964;
+}
+.section-title h2::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 120px;
+    height: 1px;
+    background: #ddd;
+    bottom: 1px;
+    left: calc(50% - 60px);
+}
+.section-title h2::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: #1977cc;
+    bottom: 0;
+    left: calc(50% - 20px);
+}
+.more-btn {
+    display: inline-block;
+    border: 1px solid #3291e6;
+    padding: 6px 30px 8px 30px;
+    color: #3291e6;
+    border-radius: 50px;
+    transition: all ease-in-out 0.4s;
+}
+.more-btn .icon {
+    font-size: 14px;
+}
+.more-btn:hover {
+    color: #fff;
+    background: #3291e6;
+}
