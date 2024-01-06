@@ -7,18 +7,18 @@ import './index.css';
 
 const Availabe = () => {
 	return (
-		<section className="section section-features">
+		<section className="container section-features">
 			<div className="container-fluid">
 				<div className="row">
 					<div className="col-md-5 features-img">
 						<img src={img} className="img-fluid" alt="" />
 					</div>
 					<div className="col-md-7">
-						<div className="section-header">
-							<h2 className="mt-2">Availabe Features in Our Clinic</h2>
-							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+						<div className='mb-4 section-title text-center'>
+							<h2 className='text-uppercase'>Availabe Service</h2>
+							<p className='m-0'>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
 						</div>
-						<div className="features-slider slider d-flex justify-content-center align-items-center gap-4">
+						<div className="d-flex justify-content-center align-items-center gap-4">
 
 							<div className="feature-item text-center">
 								<img src={img4} className="img-fluid" alt="" />

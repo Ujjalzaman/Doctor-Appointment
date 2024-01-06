@@ -1,14 +1,14 @@
 
 import dayjs from 'dayjs';
-import { Button, Empty, message } from 'antd';
+import { Empty, message } from 'antd';
 import { useGetAllBlogsQuery } from "../../../redux/api/blogApi";
 import img from '../../../images/chair.png'
 import { Link } from 'react-router-dom';
+import { truncate } from '../../../utils/truncate';
 
 const Blog = () => {
     const { data, isError, isLoading } = useGetAllBlogsQuery({ limit: 3 });
     const blogData = data?.blogs;
-
     let content = null;
 
     if (isLoading) content = <div>Loading...</div>
@@ -18,7 +18,7 @@ const Blog = () => {
         <>
             {
                 blogData?.map((item) => (
-                    <div className="col-md-4 col-sm-12 mb-3" style={{ maxWidth: '18rem' }} key={item?.id}>
+                    <div className="col-md-4 col-sm-12 mb-3 custom-blog-card" key={item?.id}>
                         <div className="card shadow text-center border-0 rounded-bottom">
 
                             <div className="flex-column p-0 border-0 d-flex justify-content-center align-items-center" style={{ height: '11rem', overflow: 'hidden' }}>
@@ -28,13 +28,12 @@ const Blog = () => {
                             <div className="card-body p-0">
                                 <div className="p-2">
                                     <Link to={`/blog/${item?.id}`} style={{ textDecoration: 'none' }}>
-                                        <h6 className="text-black text-start mb-1 text-primary">{item?.title}</h6>
+                                        <h6 className="text-black text-start mb-1 text-primary">{truncate(item?.title, 60)}</h6>
                                     </Link>
                                     <div className="d-flex text-start gap-2">
                                         <div className="d-flex gap-1 text-muted align-items-center justify-content-center">
                                             <i className="ri-user-3-line"></i>
-                                            {/* <span className="form-text">{item?.user?.name}</span> */}
-                                            <span className="form-text">Ujjal zaman</span>
+                                            <span className="form-text">{item?.user?.firstName + ' ' + item?.user?.lastName}</span>
                                         </div>
                                         <div className="d-flex gap-1 text-muted align-items-center justify-content-center">
                                             <i className="ri-calendar-line"></i>
@@ -44,8 +43,7 @@ const Blog = () => {
                                     <hr className="my-1 p-0" />
                                 </div>
                                 <div className="px-2">
-                                    {/* <p className="form-text text-start">{truncate(item?.description, 180)}</p> */}
-                                    <p className="form-text text-start">{item?.description}</p>
+                                    <p className="form-text text-start">{truncate(item?.description, 180)}</p>
                                 </div>
                                 <div className="mt-1 mb-3 text-start">
                                     <Link to={`blog/${item?.id}`}>
@@ -60,20 +58,19 @@ const Blog = () => {
         </>
 
     return (
-        <div className="mx-5" style={{ marginTop: "8.5rem", marginBottom: '7rem' }}>
-            <div className="mb-5 text-center">
-                <h3 style={{ fontWeight: "900" }} className="text-center text-uppercase p-0">OUR BLOG</h3>
-                <p className="form-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat, mollitia!</p>
+        <div className="container" style={{ marginTop: "8.5rem", marginBottom: '7rem' }}>
+            <div className='mb-5 section-title text-center'>
+                <h2>OUR BLOG</h2>
+                <p className='m-0'>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
             </div>
             <div className="container">
-                <div className="row p-5 align-items-center justify-content-center rounded" style={{ background: '#d7ded6' }}>
+                <div className="row py-5 align-items-center justify-content-center rounded" style={{ background: '#f8f9fa' }}>
                     {content}
-                    <Link to={'/blog'} className='text-center mt-5'>
-                        <Button size='primary' type='primary'>ALL BLOGS</Button>
-                    </Link>
+                    <div className='text-center mt-5'>
+                        <Link to={'/blog'} className='more-btn'>See More</Link>
+                    </div>
                 </div>
             </div>
-
         </div>
     )
 }

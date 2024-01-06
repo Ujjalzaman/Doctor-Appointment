@@ -169,3 +169,11 @@ a:focus {
     color: #fff;
     background: #3291e6;
 }
+.custom-blog-card:hover {
+    transform: scale(1.1);
+}
+
+.custom-blog-card {
+    transition: 0.5s ease-in;
+    max-width: 18rem;
+}

@@ -1,0 +1,15 @@
+.gallery{
+    margin-top: 3rem;
+    margin-bottom: 8rem;
+}
+.gallery .gallery-item {
+    overflow: hidden;
+    border-right: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+}
+.gallery .gallery-item img {
+    transition: all ease-in-out 0.4s;
+}
+.gallery .gallery-item:hover img {
+    transform: scale(1.1);
+}
