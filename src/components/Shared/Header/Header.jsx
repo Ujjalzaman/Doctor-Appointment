@@ -67,7 +67,7 @@ const Header = () => {
                         <ul>
                             <li><Link to={'/'} className="nav-link scrollto active">Home</Link></li>
                             <li><Link to={'/about'} className="nav-link scrollto" >About</Link></li>
-                            <li><a className="nav-link scrollto">Services</a></li>
+                            <li><Link to={'/service'} className="nav-link scrollto">Service</Link></li>
                             <li><Link to={'/doctors'} className="nav-link scrollto">Doctors</Link></li>
                             <li><Link to={'/contact'} className="nav-link scrollto" href="#contact">Contact</Link></li>
                             <li><Link to={'/blog'} className="nav-link scrollto" href="#contact">Blog</Link></li>

@@ -1,28 +1,3 @@
-.about-us {
-    background: url("../../images/img/banner.jpg") no-repeat 50% 50%;
-    background-size: cover;
-    position: relative;
-    margin-top: 88px;
-    padding: 120px 0px 70px 0px;
-    position: relative;
-}
-.overlay:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.9;
-    background: #223a66;
-}
-.about-title h2 {
-    color: #223a66;
-    font-size: 3rem;
-    font-weight: bold;
-}
 .award-img {
     height: 120px;
     margin-bottom: 10px;
