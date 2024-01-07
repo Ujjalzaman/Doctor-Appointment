@@ -149,29 +149,29 @@
 }
 .clinic-booking a {
     background-color: #fff;
-    border: 2px solid #20c0f3;
+    border: 2px solid #1977cc;
     border-radius: 4px;
-    color: #20c0f3;
+    color: #1977cc;
     display: block;
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 1px;
-    padding: 10px 20px;
+    padding: 5px 10px;
     text-align: center;
     text-transform: uppercase;
     width: 100%;
 }
 .clinic-booking a.view-pro-btn:hover, .clinic-booking a.view-pro-btn:focus {
-	background: #20c0f3; 
+	background: #1977cc; 
 	color: #fff;
 }
 .clinic-booking a.apt-btn {
-    background-color: #20c0f3;
+    background-color: #1977cc;
     color: #fff;
 }
 .clinic-booking a.apt-btn:hover, .clinic-booking a.apt-btn:focus {
-	background-color: #0db9f2;
-	border-color: #0db9f2;
+	background-color: #1977cc;
+	border-color: #1977cc;
 	color: #fff;
 }
 .load-more {

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Footer from '../../Shared/Footer/Footer';
-import BreadCrumb from '../../UI/BreadCrumb';
 import SearchSidebar from './SearchSidebar';
 import SearchContent from './SearchContent';
 import { useDebounced } from '../../../utils/hooks/useDebounced';
@@ -8,6 +7,7 @@ import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
 import { Empty } from 'antd';
 import { Pagination } from 'antd';
 import Header from '../../Shared/Header/Header';
+import SubHeader from '../../Shared/SubHeader';
 
 const SearchDoctor = () => {
     const query = {};
@@ -76,8 +76,8 @@ const SearchDoctor = () => {
     return (
         <div>
             <Header />
-            <BreadCrumb />
-            <div className="content" style={{ marginBottom: 200 }}>
+            <SubHeader title='Doctors' subtitle='Lorem ipsum dolor sit amet.' />
+            <div className="container" style={{ marginBottom: 200, marginTop: 80 }}>
                 <div className="container-fluid">
                     <div className="row">
                         <SearchSidebar
