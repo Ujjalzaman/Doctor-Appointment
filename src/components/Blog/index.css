@@ -1,21 +1,18 @@
-.contactForm {
-    padding: 1rem;
+.blog-title{
+    color: #2c4964;
+    font-weight: 600;
 }
-.contactForm input,
-.contactForm textarea {
-    width: 100%;
-    margin: 0.5rem 0;
-    padding: 1rem 0.8rem;
-    border-radius: 0.3rem;
-    border: 1px solid #bebebe;
-    color: #000;
+.categories-title h6, .categories-title .icon{
+    color: #05335c;
 }
-.contactForm input:focus,
-.contactForm textarea:focus {
-    outline: none !important;
-    border: 1px solid #7054F2;
-    background-color: rgb(243, 240, 255);
+.categories-title{
+    color: #1977cc;
+    cursor: pointer;
+    transition: 0.6s ease-in;
 }
-.contactForm textarea {
-    height: 120px;
+.categories-title:hover > h6{
+    color: #7054F2;
+}
+.categories-title:hover > .icon{
+    color: #7054F2;
 }
