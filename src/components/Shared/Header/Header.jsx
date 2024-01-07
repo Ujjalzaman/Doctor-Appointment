@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import TopHeader from '../TopHeader/TopHeader';
@@ -13,16 +13,17 @@ const Header = () => {
     const { authChecked, data } = useAuthCheck();
     const [isLoggedIn, setIsLogged] = useState(false);
     const [show, setShow] = useState(true);
-    const lastScrollRef = useRef(0);
+    // const lastScrollRef = useRef(0);
 
     const handleScroll = () => {
         const currentScroll = window.scrollY;
-        if (currentScroll > lastScrollRef.current) {
+        // if (currentScroll > lastScrollRef.current) { // Undo scroll up effect
+        if (currentScroll > 50) {
             setShow(false);
         } else {
             setShow(true);
         }
-        lastScrollRef.current = currentScroll;
+        // lastScrollRef.current = currentScroll;
     }
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -65,7 +66,7 @@ const Header = () => {
                     <nav id="navbar" className="navbar order-last order-lg-0">
                         <ul>
                             <li><Link to={'/'} className="nav-link scrollto active">Home</Link></li>
-                            <li><a className="nav-link scrollto" >About</a></li>
+                            <li><Link to={'/about'} className="nav-link scrollto" >About</Link></li>
                             <li><a className="nav-link scrollto">Services</a></li>
                             <li><Link to={'/doctors'} className="nav-link scrollto">Doctors</Link></li>
                             <li><Link to={'/contact'} className="nav-link scrollto" href="#contact">Contact</Link></li>
@@ -80,7 +81,7 @@ const Header = () => {
                                 </Popover>
                             </div>
                         }
-                        <FaBars className='mobile-nav-toggle'/>
+                        <FaBars className='mobile-nav-toggle' />
                     </nav>
 
                     <a href="#appointment" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span> Appointment</a>
