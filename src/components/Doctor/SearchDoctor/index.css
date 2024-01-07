@@ -1,0 +1,10 @@
+.doc-img-fluid img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    object-position: top;
+}
+.doc-info a{
+    color: #1977cc !important;
+}

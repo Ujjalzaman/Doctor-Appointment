@@ -7,12 +7,12 @@
 }
 
 a {
-    color: #1977cc;
+    color: #05335c;
     text-decoration: none !important;
 }
 
 a:hover {
-    color: #3291e6;
+    color: rgb(20, 104, 177);
     text-decoration: none;
 }
 
