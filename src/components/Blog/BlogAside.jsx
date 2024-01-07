@@ -1,11 +1,27 @@
 import React from 'react'
 import { useGetAllBlogsQuery } from '../../redux/api/blogApi';
-import { Empty, Input, message } from 'antd';
-import img from '../../images/cavity.png';
+import { Empty, message } from 'antd';
+import img from '../../images/chair.png';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+import Search from 'antd/es/input/Search';
+import { FaAngleDoubleRight } from "react-icons/fa";
+import { truncate } from '../../utils/truncate';
+import './index.css';
+
+const categories = [
+    "Professional Development",
+    "Global Health Perspectives",
+    "Professional Development",
+    "Mental Health Awareness",
+    "Pediatric Care",
+    "Women's Health",
+    "Nutrition and Dietetics",
+    "Medical Education and Training"
+]
 
 const BlogAside = ({ setSearchTerm }) => {
+
     const { data, isError, isLoading } = useGetAllBlogsQuery({ limit: 4 });
     const blogData = data?.blogs
     let content = null;
@@ -15,14 +31,14 @@ const BlogAside = ({ setSearchTerm }) => {
         <>
             {blogData && blogData?.map((item, index) => (
                 <div className="d-flex gap-2 align-items-center mb-2" key={item?.id + index}>
-                    
-                        <div style={{ minHeight: '4rem', overflow: 'hidden' }}>
-                            <img src={img} alt={item?.title} width={90} height={90} className="w-100 h-100 rounded image-hover object-fit-cover" />
-                        </div>
-                    
+
+                    <div style={{ maxWidth: '4rem' }}>
+                        <img src={img} alt={item?.title} className="w-100 h-100 rounded image-hover object-fit-cover" />
+                    </div>
+
                     <div className="p-2">
                         <Link to={`/blog/${item?.id}`}>
-                            <h6 className="text-black text-start mb-1 text-primary"> {item?.title}</h6>
+                            <h6 className="text-black text-start mb-1 text-primary"> {truncate(item?.title, 18)}</h6>
                         </Link>
                         <Link to={`/blog/${item?.id}`}>
                             <div className="d-flex text-start gap-2">
@@ -36,61 +52,41 @@ const BlogAside = ({ setSearchTerm }) => {
                 </div>
             ))}
         </>
+
+
     return (
-        <div>
-            {setSearchTerm !== undefined &&
-                <div className="mb-4">
-                    <h5 className="mb-3" style={{ fontWeight: '900' }}>SEARCH</h5>
-                    <div className="form-group has-search">
-                        <i className="ri-search-line form-control-feedback"></i>
-                        <Input type="text" className="form-control" placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)} />
-                    </div>
-                </div>
-            }
+        <div className='p-3' style={{ background: '#f8f9fa' }}>
+
             <div className="mb-4">
-                <h5 className="mb-3" style={{ fontWeight: '900' }}>CATEGORIES</h5>
-                <ul className="px-0">
-                    <li className="d-flex gap-2 align-items-center">
-                        <i className="ri-arrow-drop-right-line" style={{ fontSize: '2rem' }}></i>
-                        <span>Pc & Mac Repair</span>
-                    </li>
-                    <li className="d-flex gap-2 align-items-center">
-                        <i className="ri-arrow-drop-right-line" style={{ fontSize: '2rem' }}></i>
-                        <span>Pc & Mac Repair</span>
-                    </li>
-                    <li className="d-flex gap-2 align-items-center">
-                        <i className="ri-arrow-drop-right-line" style={{ fontSize: '2rem' }}></i>
-                        <span>Pc & Mac Repair</span>
-                    </li>
-                    <li className="d-flex gap-2 align-items-center">
-                        <i className="ri-arrow-drop-right-line" style={{ fontSize: '2rem' }}></i>
-                        <span>Pc & Mac Repair</span>
-                    </li>
-                    <li className="d-flex gap-2 align-items-center">
-                        <i className="ri-arrow-drop-right-line" style={{ fontSize: '2rem' }}></i>
-                        <span>Pc & Mac Repair</span>
-                    </li>
-                    <li className="d-flex gap-2 align-items-center">
-                        <i className="ri-arrow-drop-right-line" style={{ fontSize: '2rem' }}></i>
-                        <span>Pc & Mac Repair</span>
-                    </li>
-                </ul>
+                <h5 className="blog-title">SEARCH</h5>
+                <Search placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)} style={{ width: "100%" }} />
             </div>
 
             <div className="mb-4">
-                <h5 className="mb-3" style={{ fontWeight: '900' }}>RECEN POSTS</h5>
+                <h5 className="blog-title">CATEGORIES</h5>
+                {
+                    categories.map((item, index) => (
+                        <div className="my-2 d-flex gap-2 align-items-center categories-title" key={index}>
+                            <FaAngleDoubleRight className='icon' /><h6 className='my-2'>{item}</h6>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <div className="mb-4">
+                <h5 className="blog-title">RECEN POSTS</h5>
                 {content}
             </div>
 
             <div className="mb-4">
                 <h5 className="mb-3" style={{ fontWeight: '900' }}>TAGS</h5>
                 <div className="d-flex flex-wrap gap-3">
-                    <button className="btn text-black px-3 py-1 btn-sm" style={{ background: '#cbcaca' }}>Repair</button>
-                    <button className="btn text-black px-3 py-1 btn-sm" style={{ background: '#cbcaca' }}>Dissembing</button>
-                    <button className="btn text-black px-3 py-1 btn-sm" style={{ background: '#cbcaca' }}>Installation</button>
-                    <button className="btn text-black px-3 py-1 btn-sm" style={{ background: '#cbcaca' }}>SmartPhone</button>
-                    <button className="btn text-black px-3 py-1 btn-sm" style={{ background: '#cbcaca' }}>Data Recovery</button>
-                    <button className="btn text-black px-3 py-1 btn-sm" style={{ background: '#cbcaca' }}>Display</button>
+                    {
+                        Array(6).fill(null).map((_item, index) => (
+                            <button key={index + 2} className="btn text-black px-3 py-1 btn-sm" style={{ background: '#e5e5e5' }}>{'tags' + index}</button>
+
+                        ))
+                    }
                 </div>
             </div>
         </div>

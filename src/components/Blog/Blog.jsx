@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import Footer from '../Shared/Footer/Footer';
 import { useGetAllBlogsQuery } from '../../redux/api/blogApi';
 import { useDebounced } from '../../redux/hooks';
-import img from '../../images/cavity.png';
+import img from '../../images/chair.png';
 import dayjs from 'dayjs';
 import { Empty, Pagination, message } from 'antd';
 import BlogAside from './BlogAside';
 import { Link } from 'react-router-dom';
-import BlogComment from './BlogComment';
 import Header from '../Shared/Header/Header';
+import SubHeader from '../Shared/SubHeader';
+import { truncate } from '../../utils/truncate';
+import { FaRegUser, FaBusinessTime } from "react-icons/fa";
 
 const Blog = () => {
     const query = {};
@@ -34,7 +36,7 @@ const Blog = () => {
         <>
             {
                 blogData && blogData?.map((item, index) => (
-                    <div className="col-md-4 mb-3" style={{ maxWidth: '25rem' }} key={item?.id + index}>
+                    <div className="col-md-4 col-sm-12" style={{ maxWidth: '25rem' }} key={item?.id + index}>
                         <div className="card shadow text-center border-0 rounded-bottom">
 
                             <div className="flex-column p-0 border-0 d-flex justify-content-center align-items-center" style={{ height: '11rem', overflow: 'hidden' }}>
@@ -42,25 +44,27 @@ const Blog = () => {
                             </div>
                             <div className="card-body p-0">
                                 <div className="p-2">
-                                    <h6 className="text-black text-start mb-1 text-primary">{item?.title}</h6>
+                                    <Link to={`/blog/${item?.id}`}>
+                                        <h6 className="text-start mb-1 text-capitalize" style={{ color: '#05335c' }}>{truncate(item?.title, 60)}</h6>
+                                    </Link>
                                     <div className="d-flex text-start gap-2">
                                         <div className="d-flex gap-1 text-muted align-items-center justify-content-center">
-                                            <i className="ri-user-3-line"></i>
+                                            <FaRegUser className='form-text' />
                                             <span className="form-text">Ujjal zaman</span>
                                         </div>
                                         <div className="d-flex gap-1 text-muted align-items-center justify-content-center">
-                                            <i className="ri-calendar-line"></i>
+                                            <FaBusinessTime className='form-text' />
                                             <span className="form-text">{dayjs(item?.createdAt).format('MMM D, YYYY hh:mm A')}</span>
                                         </div>
                                     </div>
                                     <hr className="my-1 p-0" />
                                 </div>
                                 <div className="px-2">
-                                    <p className="form-text text-start">{item?.description}</p>
+                                    <p className="form-text text-start text-capitalize">{truncate(item?.description, 200)}</p>
                                 </div>
                                 <div className="mt-1 mb-3 text-start">
                                     <Link to={`/blog/${item?.id}`}>
-                                        <button className="btn btn-link border-0 text-primary">Read More</button>
+                                        <button className="btn btn-link border-0" style={{ color: '#1977cc' }}>Read More</button>
                                     </Link>
                                 </div>
                             </div>
@@ -72,25 +76,27 @@ const Blog = () => {
     return (
         <>
             <Header />
-            <div className="container-full mx-2">
+            <SubHeader title='Blog' subtitle='Lorem ipsum dolor sit amet.' />
+
+            <div className="container-fluid" style={{ marginTop: 150, marginBottom: 100 }}>
                 <div className="row">
-                    <div className="col-md-9">
-                        <div className="container">
-                            <div className="row p-5 container container align-items-center justify-content-center rounded" style={{ background: '#d7ded6', marginTop: '5rem', marginBottom: '8rem' }}>
+                    <div className="col-md-9 col-sm-12">
+                        <div className="p-3 py-5 mx-3 rounded" style={{ backgroundColor: '#f8f9fa' }}>
+                            <div className="row">
                                 {content}
-                                <div className="text-center mt-5">
-                                    <Pagination
-                                        defaultCurrent={size}
-                                        total={meta?.total}
-                                        showSizeChanger={true}
-                                        showPrevNextJumpers={true}
-                                        pageSize={size}
-                                    />
-                                </div>
+                            </div>
+                            <div className="text-center mt-5">
+                                <Pagination
+                                    defaultCurrent={size}
+                                    total={meta?.total}
+                                    showSizeChanger={true}
+                                    showPrevNextJumpers={true}
+                                    pageSize={size}
+                                />
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-3 col-sm-12">
                         <BlogAside setSearchTerm={setSearchTerm} />
                     </div>
                 </div>
