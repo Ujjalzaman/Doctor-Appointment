@@ -17,7 +17,7 @@ const SearchContent = ({ data }) => {
                         <img src={img} className="img-fluid" alt="User Image" />
                     </div>
                     <div className="doc-info">
-                        <h5 className='mb-0'><Link to={'/'}>Dr. {data?.firstName + ' ' + data?.lastName}</Link></h5>
+                        <h5 className='mb-0'><Link to={`/doctors/profile/${data?.id}`}>Dr. {data?.firstName + ' ' + data?.lastName}</Link></h5>
                         <p className='m-0 form-text'>{data?.designation}</p>
                         <p className="doc-department m-0"><img src={showImg} className="img-fluid" alt="Speciality" />Urology</p>
 
@@ -71,7 +71,7 @@ const SearchContent = ({ data }) => {
                         </ul>
                     </div>
                     <div className="clinic-booking">
-                        <Link to={'/doctors/profile'} className="view-pro-btn">View Profile</Link>
+                        <Link to={`/doctors/profile/${data?.id}`} className="view-pro-btn">View Profile</Link>
                         <Link to={`/booking/${data?.id}`} className="apt-btn">Book Appointment</Link>
                     </div>
                 </div>
