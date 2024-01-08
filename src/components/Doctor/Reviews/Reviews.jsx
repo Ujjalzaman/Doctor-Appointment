@@ -30,10 +30,12 @@ const Reviews = () => {
                                         </div>
                                         <div className="">
                                             <StarRatings
-                                                rating={Number(item?.star)}
-                                                starRatedColor="yellow"
+                                                rating={5}
+                                                starRatedColor="#f4c150"
                                                 numberOfStars={5}
                                                 name='rating'
+                                                starDimension="15px"
+                                                starSpacing="2px"
                                             />
                                         </div>
                                     </div>

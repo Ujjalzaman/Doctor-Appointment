@@ -28,35 +28,36 @@ const DoctorProfile = () => {
         {
             key: '1',
             label: 'Overview',
-            children: <OverView/>,
+            children: <OverView />,
         },
         {
             key: '2',
             label: 'Locations',
-            children: <Location/>,
+            children: <Location />,
         },
         {
             key: '3',
             label: 'Reviews',
-            children: <Review/>,
+            children: <Review />,
         },
         {
             key: '4',
             label: 'Availability',
-            children: <Availibility/>,
+            children: <Availibility />,
         },
     ];
+
+    
     return (
         <>
             <Header />
             <SubHeader title='Doctor Details' subtitle='Lorem ipsum dolor sit amet.' />
             <div className="container" style={{ marginBottom: '4rem', marginTop: '6rem' }}>
                 {content}
-                <div className='p-4 rounded' style={{ marginBottom: '7rem', backgroundColor:'#f3f3f3' }}>
+                <div className='p-4 rounded' style={{ marginBottom: '7rem', backgroundColor: '#f3f3f3' }}>
                     <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
                 </div>
             </div>
-
             <Footer />
         </>
     )

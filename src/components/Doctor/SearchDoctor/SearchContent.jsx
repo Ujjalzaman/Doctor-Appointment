@@ -11,7 +11,7 @@ const SearchContent = ({ data }) => {
     const services = data?.services?.split(',')
     return (
         <div className="mb-4 rounded" style={{ background: '#f3f3f3' }}>
-            <div className='d-flex p-3'>
+            <div className='d-flex p-3 justify-content-between'>
                 <div className='d-flex gap-3'>
                     <div className='doc-img-fluid d-flex align-items-center'>
                         <img src={img} className="img-fluid" alt="User Image" />
@@ -61,7 +61,7 @@ const SearchContent = ({ data }) => {
                         }
                     </div>
                 </div>
-                <div className="doc-info-right">
+                <div className="doc-info-right me-3">
                     <div className="clini-infos">
                         <ul>
                             <li><FaRegThumbsUp />  97%</li>
