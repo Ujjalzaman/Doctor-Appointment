@@ -29,6 +29,7 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "^5.0.1",
     "react-star-ratings": "^2.3.0",
+    "react-vertical-timeline-component": "^3.6.0",
     "sweetalert": "^2.1.2",
     "web-vitals": "^1.1.0"
   },
@@ -49,8 +50,7 @@
       "no-empty-pattern": "off",
       "no-sparse-arrays": "off",
       "react-hooks/exhaustive-deps": "off",
-      "jsx-a11y/img-redundant-alt": "off",
-      "jsx-a11y/alt-text":"off"
+      "jsx-a11y/img-redundant-alt": "off"
     }
   },
   "browserslist": {

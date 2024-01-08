@@ -61,7 +61,7 @@
 .footer-contact-info .footer-address span {
 	margin-right: 20px;
 }
-.footer-contact-info .footer-address span i.fa-map-marker-alt {
+.footer-contact-info .footer-address span .icon .fa-map-marker-alt {
 	font-size: 20px;
 }
 .footer-contact-info p i {
