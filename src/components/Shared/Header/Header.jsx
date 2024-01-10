@@ -66,11 +66,12 @@ const Header = () => {
                     <nav id="navbar" className="navbar order-last order-lg-0">
                         <ul>
                             <li><Link to={'/'} className="nav-link scrollto active">Home</Link></li>
-                            <li><Link to={'/about'} className="nav-link scrollto" >About</Link></li>
+                            <li><Link to={'/about'} className="nav-link scrollto">About</Link></li>
                             <li><Link to={'/service'} className="nav-link scrollto">Service</Link></li>
                             <li><Link to={'/doctors'} className="nav-link scrollto">Doctors</Link></li>
-                            <li><Link to={'/contact'} className="nav-link scrollto" href="#contact">Contact</Link></li>
-                            <li><Link to={'/blog'} className="nav-link scrollto" href="#contact">Blog</Link></li>
+                            <li><Link to={'/contact'} className="nav-link scrollto">Contact</Link></li>
+                            <li><Link to={'/blog'} className="nav-link scrollto">Blog</Link></li>
+                            {!isLoggedIn && <li><Link to={'/login'} className="nav-link scrollto">Login</Link></li>}
                         </ul>
                         {isLoggedIn &&
                             <div>

@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './DoctorDashboardPatient';
 import img from '../../images/john.png';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs'
-import { FaEye } from "react-icons/fa";
-import { useGetDoctorAppointmentsQuery } from '../../redux/api/appointmentApi';
+import { FaEye, FaCheck, FaTimes } from "react-icons/fa";
+import { useGetDoctorAppointmentsQuery, useUpdateAppointmentMutation } from '../../redux/api/appointmentApi';
 import moment from 'moment';
 import CustomTable from './component/CustomTable';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 
 const DoctorDashboardPatient = () => {
     const [key, setKey] = useState('upcoming');
@@ -17,6 +17,25 @@ const DoctorDashboardPatient = () => {
         refetch();
     }
     const { data, refetch, isLoading } = useGetDoctorAppointmentsQuery({ sortBy: key });
+    const [updateAppointment, { isError, isSuccess, error }] = useUpdateAppointmentMutation();
+
+    const updatedApppointmentStatus = (data, type) => {
+        const changeObj = {
+            status: type
+        }
+        if (data.id) {
+            updateAppointment({id: data.id, data: changeObj})
+        }
+    }
+
+    useEffect(() => {
+        if (isSuccess) {
+            message.success("Succcessfully Appointment Updated")
+        }
+        if (isError) {
+            message.error(error?.data?.message);
+        }
+    }, [isSuccess, isError, error])
 
     const upcomingColumns = [
         {
@@ -60,11 +79,17 @@ const DoctorDashboardPatient = () => {
             key: '5',
             width: 100,
             render: function (data) {
+                // console.log(data)
                 return (
                     <div className='d-flex gap-2'>
-                        <Button type='primary'>View</Button>
-                        <Button type='primary'>Accept</Button>
-                        <Button type='primary'>Cancel</Button>
+                        <Button type="primary" shape="circle" icon={<FaEye />} size="medium" />
+                        {
+                            data?.status === 'pending' &&
+                            <>
+                                <Button type="primary" icon={<FaCheck />} size="medium" onClick={() => updatedApppointmentStatus(data, 'accept')}>Accept</Button>
+                                <Button type='primary' icon={<FaTimes />} danger onClick={() => updatedApppointmentStatus(data, 'cancel')}>Cancel</Button>
+                            </>
+                        }
                     </div>
                 )
             }

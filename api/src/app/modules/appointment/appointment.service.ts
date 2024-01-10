@@ -172,7 +172,7 @@ const deleteAppointment = async (id: string): Promise<any> => {
     return result;
 }
 
-const updateAppointment = async (id: string, payload: Partial<Appointments>): Promise<Appointments> => {
+const updateAppointment = async (id: string, payload: Partial<Appointments>): Promise<Appointments> => {    
     const result = await prisma.appointments.update({
         data: payload,
         where: {
