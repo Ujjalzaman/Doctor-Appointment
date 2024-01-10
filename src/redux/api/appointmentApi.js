@@ -5,15 +5,23 @@ const APPOINTMENT_URL = '/appointment'
 
 export const appointmentApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        createAppointment : build.mutation({
-            query: (data) =>({
+        createAppointment: build.mutation({
+            query: (data) => ({
                 url: `${APPOINTMENT_URL}/create`,
                 method: 'POST',
                 data: data
             }),
             invalidatesTags: [tagTypes.appointments]
         }),
-        getPatientAppointments : build.query({
+        updateAppointment: build.mutation({
+            query: ({ id, data }) => ({
+                url: `${APPOINTMENT_URL}/${id}`,
+                method: 'PATCH',
+                data: data
+            }),
+            invalidatesTags: [tagTypes.appointments]
+        }),
+        getPatientAppointments: build.query({
             query: () => ({
                 url: `${APPOINTMENT_URL}/patient/appointments`,
                 method: 'GET'
@@ -22,19 +30,19 @@ export const appointmentApi = baseApi.injectEndpoints({
         }),
         getSingleAppointment: build.query({
             query: (id) => ({
-                url:`${APPOINTMENT_URL}/${id}`,
+                url: `${APPOINTMENT_URL}/${id}`,
                 method: 'GET'
             }),
             providesTags: [tagTypes.appointments]
         }),
         getAppointmentedPaymentInfo: build.query({
             query: (id) => ({
-                url:`${APPOINTMENT_URL}/patient-payment-info/${id}`,
+                url: `${APPOINTMENT_URL}/patient-payment-info/${id}`,
                 method: 'GET'
             }),
             providesTags: [tagTypes.appointments]
         }),
-        getDoctorAppointments : build.query({
+        getDoctorAppointments: build.query({
             query: (arg) => ({
                 url: `${APPOINTMENT_URL}/doctor/appointments`,
                 method: 'GET',
@@ -42,21 +50,21 @@ export const appointmentApi = baseApi.injectEndpoints({
             }),
             providesTags: [tagTypes.appointments]
         }),
-        getDoctorPatients : build.query({
+        getDoctorPatients: build.query({
             query: () => ({
                 url: `${APPOINTMENT_URL}/doctor/patients`,
                 method: 'GET'
             }),
             providesTags: [tagTypes.appointments]
         }),
-        getPatientInvoices : build.query({
+        getPatientInvoices: build.query({
             query: () => ({
                 url: `${APPOINTMENT_URL}/patient/invoices`,
                 method: 'GET'
             }),
             providesTags: [tagTypes.appointments]
         }),
-        getDoctorInvoices : build.query({
+        getDoctorInvoices: build.query({
             query: () => ({
                 url: `${APPOINTMENT_URL}/doctor/invoices`,
                 method: 'GET'
@@ -66,12 +74,13 @@ export const appointmentApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetDoctorAppointmentsQuery, 
-    useGetPatientAppointmentsQuery, 
-    useGetDoctorPatientsQuery ,
+export const { useGetDoctorAppointmentsQuery,
+    useGetPatientAppointmentsQuery,
+    useGetDoctorPatientsQuery,
     useCreateAppointmentMutation,
     useGetSingleAppointmentQuery,
     useGetAppointmentedPaymentInfoQuery,
     useGetPatientInvoicesQuery,
-    useGetDoctorInvoicesQuery
+    useGetDoctorInvoicesQuery,
+    useUpdateAppointmentMutation
 } = appointmentApi;
