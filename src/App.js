@@ -5,7 +5,7 @@ import Home from './components/Home/Home/Home';
 import SignInForm from './components/Login/SignInForm';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import DoctorBooking from './components/Booking/DoctorBooking/DoctorBooking';
-import BookingSuccess from './components/Booking/BookingSuccess/BookingSuccess';
+import BookingSuccess from './components/Booking/BookingSuccess';
 import BookingInvoice from './components/Booking/BookingInvoice/BookingInvoice';
 import DoctorProfile from './components/Doctor/DoctorProfile/DoctorProfile';
 import Appointments from './components/Doctor/Appointments/Appointments';
