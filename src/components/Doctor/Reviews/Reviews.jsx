@@ -1,8 +1,7 @@
 import React from 'react';
 import './Reviews.css';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
-import img from '../../../images/ema.png';
-import img2 from '../../../images/john.png';
+import img from '../../../images/doc/doctor 3.jpg';
 import { useGetDoctorReviewsQuery } from '../../../redux/api/reviewsApi';
 import { FaRegThumbsUp } from "react-icons/fa";
 import moment from 'moment';
@@ -18,69 +17,42 @@ const Reviews = () => {
         <>
             {
                 data && data.map((item, key) => (
-                    <ul className="comments-list" key={item?.id + key}>
-                        <li>
-                            <div className="comment">
-                                <img className="avatar rounded-circle" alt="" src={img} />
-                                <div className="comment-body">
-                                    <div className="meta-data d-flex">
-                                        <div>
-                                            <span className="comment-author">{item?.patient?.firstName + ' ' + item?.patient?.lastName}</span>
-                                            <span className="comment-date">Reviewed {moment(item?.createdAt).startOf('day').fromNow()}</span>
-                                        </div>
-                                        <div className="">
-                                            <StarRatings
-                                                rating={5}
-                                                starRatedColor="#f4c150"
-                                                numberOfStars={5}
-                                                name='rating'
-                                                starDimension="15px"
-                                                starSpacing="2px"
-                                            />
-                                        </div>
-                                    </div>
-                                    <p className="recommended"><FaRegThumbsUp /> {item?.isRecommended ? 'I recommend the doctor' : 'I do not recommend the doctor'}</p>
-                                    <p className="comment-content">{item?.description}</p>
-                                    <div className="comment-reply">
-                                        <a className="comment-btn">
-                                            <i className="fas fa-reply"></i> Reply
-                                        </a>
-                                    </div>
+                    <div className='mb-4' key={item?.id + key}>
+                        <div className='d-flex gap-3 justify-content-between'>
+                            <div className='d-flex gap-4'>
+                                <div className='review-img'>
+                                    <img className="" alt="" src={img} />
+                                </div>
+                                <div>
+                                    <h5 className="text-nowrap">{item?.patient?.firstName + ' ' + item?.patient?.lastName}</h5>
+                                    <p className="text-success"><FaRegThumbsUp /> {item?.isRecommended ? 'I recommend the doctor' : 'I do not recommend the doctor'}</p>
                                 </div>
                             </div>
 
-                            {
-                                item?.response &&
-                                <ul className="comments-reply">
-                                    <li>
-                                        <div className="comment">
-                                            <img className="avatar rounded-circle" alt="" src={img2} />
-                                            <div className="comment-body">
-                                                <div className="meta-data">
-                                                    <span className="comment-author">Dr. {item?.doctor?.firstName + ' ' + item?.doctor?.lastName}</span>
-                                                </div>
-                                                <p className="comment-content">
-                                                    {item?.response}
-                                                </p>
-                                                <div className="comment-reply">
-                                                    <a className="comment-btn" href="#">
-                                                        <i className="fas fa-reply"></i> Reply
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            }
-
-                        </li>
-                    </ul>
+                            <div className='text-end'>
+                                <div>
+                                    <StarRatings
+                                        rating={5}
+                                        starRatedColor="#f4c150"
+                                        numberOfStars={5}
+                                        name='rating'
+                                        starDimension="15px"
+                                        starSpacing="2px"
+                                    />
+                                </div>
+                                <div className="">Reviewed {moment(item?.createdAt).startOf('day').fromNow()}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <p className="mx-2 form-text">{item?.description}</p>
+                        </div>
+                    </div>
                 ))
             }
         </>
     return (
         <DashboardLayout>
-            <div className='doc-review review-listing'>
+            <div className="w-100 mb-3 rounded py-3 px-2" style={{ background: '#f8f9fa' }}>
                 {content}
             </div>
         </DashboardLayout>

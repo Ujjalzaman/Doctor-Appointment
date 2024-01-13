@@ -66,14 +66,16 @@ const DoctorInvoice = () => {
     ];
     return (
         <DashboardLayout>
-            <CustomTable
-                loading={isLoading}
-                columns={columns}
-                dataSource={data}
-                showPagination={true}
-                pageSize={10}
-                showSizeChanger={true}
-            />
+            <div className="w-100 mb-3 rounded" style={{ background: '#f8f9fa' }}>
+                <CustomTable
+                    loading={isLoading}
+                    columns={columns}
+                    dataSource={data}
+                    showPagination={true}
+                    pageSize={10}
+                    showSizeChanger={true}
+                />
+            </div>
         </DashboardLayout>
     )
 }
