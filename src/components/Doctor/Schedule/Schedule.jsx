@@ -1,4 +1,3 @@
-import './Schedule.css';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import React, { useEffect, useState } from 'react';
 import { Space, Tag, Button, Empty } from 'antd';
@@ -140,7 +139,7 @@ const Schedule = () => {
         setAddTimeSlot([...addTimeSlot, { id: newId }])
         e.preventDefault();
     }
-
+    
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
     if (!isLoading && !isError && data?.length === 0) content = <Empty />

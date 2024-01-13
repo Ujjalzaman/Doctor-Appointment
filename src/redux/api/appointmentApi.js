@@ -74,7 +74,8 @@ export const appointmentApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetDoctorAppointmentsQuery,
+export const { 
+    useGetDoctorAppointmentsQuery,
     useGetPatientAppointmentsQuery,
     useGetDoctorPatientsQuery,
     useCreateAppointmentMutation,

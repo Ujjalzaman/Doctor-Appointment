@@ -1,49 +1,40 @@
 import React from 'react';
-import './MyPatients.css';
-import img from '../../../images/john.png';
+import img from '../../../images/doc/doctor 3.jpg';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import { useGetDoctorPatientsQuery } from '../../../redux/api/appointmentApi';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
+import { FaClock, FaEnvelope, FaLocationArrow, FaPhoneAlt } from "react-icons/fa";
 
 const MyPatients = () => {
-    const {data, isLoading, isError} = useGetDoctorPatientsQuery();
+    const { data, isLoading, isError } = useGetDoctorPatientsQuery();
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
     if (!isLoading && !isError && data?.length === 0) content = <div>Empty</div>
     if (!isLoading && !isError && data?.length > 0) content =
-    <>
-        {data && data?.map((item) => (
-            <div className="card widget-profile pat-widget-profile">
-                        <div className="card-body">
-                            <div className="pro-widget-content">
-                                <div className="profile-info-widget">
-                                    <a href="" className="booking-doc-img">
-                                        <img src={img} alt=""/>
-                                    </a>
-                                    <div className="profile-det-info">
-                                        <h3><a href="">{item?.firstName + ' ' + item?.lastName}</a></h3>
-
-                                        <div className="patient-details">
-                                            <h5><b>Patient ID :</b> P0016</h5>
-                                            <h5 className="mb-0"><i className="fas fa-map-marker-alt"></i>{item?.address + ',' + item?.country}</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="patient-info">
-                                <ul>
-                                    <li>Phone <span>{item?.mobile}</span></li>
-                                    <li>Age <span>{moment(item?.dateOfBirth, "YYYYMMDD").fromNow()}</span>, <span>{item?.gender}</span></li>
-                                    <li>Blood Group <span>{item?.bloodGroup}</span></li>
-                                </ul>
+        <>
+            {data && data?.map((item) => (
+                <div className="w-100 mb-3 rounded p-3 text-center" style={{ background: '#f8f9fa' }}>
+                    <div className="">
+                        <Link to={'/'} className="my-3 patient-img">
+                            <img src={img} alt="" />
+                        </Link>
+                        <div className="patients-info mt-4">
+                            <h5>{item?.firstName + ' ' + item?.lastName}</h5>
+                            <div className="info">
+                                <p><FaClock className='icon' /> {moment(item?.appointmentTime).format("MMM Do YY")} </p>
+                                <p><FaLocationArrow className='icon' /> {item?.address}</p>
+                                <p><FaEnvelope className='icon' /> {item?.email}</p>
+                                <p><FaPhoneAlt className='icon' /> {item?.mobile}</p>
                             </div>
                         </div>
                     </div>
-        ))}
-    </>
+                </div>
+            ))}
+        </>
     return (
         <DashboardLayout>
-            <div className="row row-grid">
+            <div className="row">
                 <div className="col-md-6 col-lg-4 col-xl-3">
                     {content}
                 </div>

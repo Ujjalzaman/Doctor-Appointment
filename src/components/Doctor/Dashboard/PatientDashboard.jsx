@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import img from '../../images/john.png';
+import img from '../../../images/john.png';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import moment from 'moment';
-import { useGetPatientAppointmentsQuery, useGetPatientInvoicesQuery } from '../../redux/api/appointmentApi';
-import { useGetPatientPrescriptionQuery } from '../../redux/api/prescriptionApi';
-import CustomTable from './component/CustomTable';
+import { useGetPatientAppointmentsQuery, useGetPatientInvoicesQuery } from '../../../redux/api/appointmentApi';
+import { useGetPatientPrescriptionQuery } from '../../../redux/api/prescriptionApi';
 import { Button } from 'antd';
+import CustomTable from '../../UI/component/CustomTable';
 
-const PatientAppointments = () => {
+const PatientDashboard = () => {
     const [, setKey] = useState('appointment');
     const { data, isLoading: pIsLoading } = useGetPatientAppointmentsQuery();
     const { data: prescriptionData, prescriptionIsLoading } = useGetPatientPrescriptionQuery();
@@ -229,4 +229,4 @@ const PatientAppointments = () => {
         </Tabs>
     )
 }
-export default PatientAppointments
+export default PatientDashboard;

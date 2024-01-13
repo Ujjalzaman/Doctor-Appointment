@@ -5,6 +5,7 @@ import { Button } from 'antd';
 import moment from 'moment';
 import img from '../../../images/john.png';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
+import { FaEye } from "react-icons/fa";
 
 const DoctorInvoice = () => {
     const { data, isLoading } = useGetDoctorInvoicesQuery();
@@ -25,10 +26,12 @@ const DoctorInvoice = () => {
             }
         },
         {
-            title: 'Total Paid',
+            title: 'Paid',
             key: '2',
             width: 100,
-            dataIndex: "totalAmount"
+            render: function (data) {
+                return <div>{data?.totalAmount} $</div>
+            }
         },
         {
             title: 'Paid On',
@@ -39,15 +42,15 @@ const DoctorInvoice = () => {
             }
         },
         {
-            title: 'Payment Method',
+            title: <div className='text-nowrap'>Payment Method</div>,
             key: '4',
-            width: 100,
+            width: 150,
             dataIndex: "paymentMethod"
         },
         {
-            title: 'Payment Type',
+            title: <div className='text-nowrap'>Payment Type</div>,
             key: '4',
-            width: 100,
+            width: 120,
             dataIndex: "paymentType"
         },
         {
@@ -56,9 +59,7 @@ const DoctorInvoice = () => {
             width: 100,
             render: function (data) {
                 return (
-                    <div>
-                        <Button type='primary' href={`/booking/invoice/${data?.id}`}>View</Button>
-                    </div>
+                    <Button type="primary" shape="circle" icon={<FaEye />} size="medium" href={`/booking/invoice/${data?.id}`} />
                 )
             }
         },
