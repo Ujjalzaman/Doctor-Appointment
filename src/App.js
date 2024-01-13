@@ -8,7 +8,6 @@ import DoctorBooking from './components/Booking/DoctorBooking/DoctorBooking';
 import BookingSuccess from './components/Booking/BookingSuccess/BookingSuccess';
 import BookingInvoice from './components/Booking/BookingInvoice/BookingInvoice';
 import DoctorProfile from './components/Doctor/DoctorProfile/DoctorProfile';
-import MainDashboard from './components/Doctor/Dashboard/Dashboard';
 import Appointments from './components/Doctor/Appointments/Appointments';
 import MyPatients from './components/Doctor/MyPatients/MyPatients';
 import Reviews from './components/Doctor/Reviews/Reviews';
@@ -34,6 +33,7 @@ import BlogDetails from './components/Blog/BlogDetails';
 import Contact from './components/Contact/Contact';
 import About from './components/About/About';
 import Service from './components/Service/Service';
+import Dashboard from './components/Doctor/Dashboard/dashboard';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
   { path: '/doctors', element: <SearchDoctor /> },
   { path: '/doctors/profile/:id', element: <DoctorProfile /> },
   
-  { path: '/dashboard', element: <MainDashboard /> },
+  { path: '/dashboard', element: <Dashboard /> },
   { path: '/dashboard/my-patients', element: <MyPatients /> },
   { path: '/dashboard/reviews', element: <Reviews /> },
   { path: '/dashboard/schedule', element: <Schedule /> },

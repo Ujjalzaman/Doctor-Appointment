@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-import img from '../../images/john.png';
+import img from '../../../images/doc/doctor 3.jpg';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
-import { bloodGrupOptions } from '../../constant/global';
-import useAuthCheck from '../../redux/hooks/useAuthCheck';
-import { useUpdatePatientMutation } from '../../redux/api/patientApi';
 import toast, { Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
+import { bloodGrupOptions } from '../../../constant/global';
+import { useUpdatePatientMutation } from '../../../redux/api/patientApi';
+import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 
 const PatientProfileSetting = () => {
     const { data } = useAuthCheck();
@@ -75,19 +76,19 @@ const PatientProfileSetting = () => {
         <div style={{ marginBottom: '10rem' }}>
             <div className="card shadow border-0 mb-5 p-2">
                 <div className="card-body">
-                    <h4 className="card-title">Update Your Information</h4>
+                    <h5 className="card-title">Update Your Information</h5>
                     <div>
                         <Toaster />
                         <form className="row form-row" onSubmit={handleSubmit(onSubmit)}>
                             <div className="col-md-12">
                                 <div className="form-group">
-                                    <div className="change-avatar">
-                                        <div className="profile-img">
+                                    <div>
+                                        <Link to={'/'} className="my-3 patient-img">
                                             <img src={img} alt="" />
-                                        </div>
-                                        <div className="upload-img">
+                                        </Link>
+                                        <div className="mt-3">
                                             <div className="change-photo-btn">
-                                                <span><i className="fa fa-upload"></i> Upload Photo</span>
+                                                <span>Upload Photo</span>
                                                 <input type="file" className="upload" />
                                             </div>
                                             <small className="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
@@ -150,7 +151,6 @@ const PatientProfileSetting = () => {
                                         name='bloodGroup'
                                         value={selectBloodGroup}
                                     >
-                                        {/* <option value={''}>Select</option> */}
                                         {
                                             bloodGrupOptions.map((option, index) => (
                                                 <option key={index} value={option.value} className='text-capitalize'>{option.label}</option>
