@@ -1,0 +1,8 @@
+.fav-img img{
+    border: 6px solid #efefef;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    height: 120px;
+    width: 120px;
+}

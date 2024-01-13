@@ -126,6 +126,7 @@ a:focus {
 .btn-get-started:hover {
     background: #3291e6;
 }
+
 .section-title h2 {
     text-align: center;
     font-size: 32px;
@@ -134,6 +135,7 @@ a:focus {
     position: relative;
     color: #2c4964;
 }
+
 .section-title h2::before {
     content: "";
     position: absolute;
@@ -144,6 +146,7 @@ a:focus {
     bottom: 1px;
     left: calc(50% - 60px);
 }
+
 .section-title h2::after {
     content: "";
     position: absolute;
@@ -154,6 +157,7 @@ a:focus {
     bottom: 0;
     left: calc(50% - 20px);
 }
+
 .more-btn {
     display: inline-block;
     border: 1px solid #3291e6;
@@ -162,13 +166,16 @@ a:focus {
     border-radius: 50px;
     transition: all ease-in-out 0.4s;
 }
+
 .more-btn .icon {
     font-size: 14px;
 }
+
 .more-btn:hover {
     color: #fff;
     background: #3291e6;
 }
+
 .custom-blog-card:hover {
     transform: scale(1.1);
 }
@@ -176,4 +183,12 @@ a:focus {
 .custom-blog-card {
     transition: 0.5s ease-in;
     max-width: 18rem;
+}
+
+.text-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #2c4964;
 }

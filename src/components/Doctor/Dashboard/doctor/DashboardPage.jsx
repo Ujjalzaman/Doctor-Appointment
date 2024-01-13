@@ -79,7 +79,6 @@ const DashboardPage = () => {
             key: '5',
             width: 100,
             render: function (data) {
-                // console.log(data)
                 return (
                     <div className='d-flex gap-2'>
                         <Button type="primary" shape="circle" icon={<FaEye />} size="medium" />
