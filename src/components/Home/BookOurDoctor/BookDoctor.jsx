@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
 import { FaLocationArrow, FaCheckCircle, FaRegHeart, FaDollarSign, FaClock } from "react-icons/fa";
 import { useAddFavouriteMutation } from '../../../redux/api/favouriteApi';
-import toast, { Toaster } from 'react-hot-toast';
 import StarRatings from 'react-star-ratings';
+import { message } from 'antd';
 
 const BookDoctor = () => {
 	const { data, isError, isLoading } = useGetDoctorsQuery({ limit: 10 });
@@ -17,16 +17,14 @@ const BookDoctor = () => {
 		addFavourite({ doctorId: id });
 	};
 
-
 	useEffect(() => {
 		if (!FIsLoading && fIsError) {
-			toast.error(error?.data?.message)
+			message.error(error?.data?.message)
 		}
 		if (isSuccess) {
-			toast.success('Successfully Favourite Adde')
+			message.success('Successfully Favourite Adde')
 		}
 	}, [isSuccess, fIsError, FIsLoading, error?.data?.message])
-
 
 	// what to render 
 	let content = null;
@@ -81,7 +79,7 @@ const BookDoctor = () => {
 									<Link to={'/doctors/profile'} className="btn  btn-outline-info btn-sm view-profile-btn">Profile</Link>
 								</div>
 								<div className="col-6">
-									<Link to={`/booking/${item?.id}`} className="btn btn-sm book-btn">Book Now</Link>
+									<Link to={`/booking/${item?.id}`} className="btn btn-sm book-btn">Book</Link>
 								</div>
 							</div>
 						</div>
@@ -108,7 +106,6 @@ const BookDoctor = () => {
 						<div className="d-flex justify-content-center align-items-center gap-3 border-0">
 							{content}
 						</div>
-						<Toaster />
 					</div>
 				</div>
 			</div>

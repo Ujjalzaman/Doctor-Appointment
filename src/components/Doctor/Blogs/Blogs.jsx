@@ -39,21 +39,18 @@ const Blogs = () => {
     const columns = [
         {
             title: 'Title',
-            dataIndex: 'title',
             sorter: true,
             key: 1,
             render: function (data) {
-                return data
+                return data && truncate(data.title, 30)
             }
-            // && truncate(data, 30)
         },
         {
             title: 'Description',
-            dataIndex: 'description',
             sorter: true,
             key: 2,
             render: function (data) {
-                return data
+                return data && truncate(data.description, 30)
             }
         },
         {
@@ -70,7 +67,7 @@ const Blogs = () => {
             key: 4,
             render: function (data) {
                 return (
-                    <>
+                    <div className='d-flex'>
                         <Link to={`/blogs/${data.id}`}>
                             <Button type='primary' className="bg-primary" style={{ margin: "5px 5px" }}>
                                 <FaRegEye />
@@ -84,7 +81,7 @@ const Blogs = () => {
                         <Button onClick={() => deleteHandler(data.id)} type='primary' style={{ margin: "5px 5px" }} danger>
                             <FaRegTimesCircle />
                         </Button>
-                    </>
+                    </div>
                 )
             }
         },
@@ -119,10 +116,11 @@ const Blogs = () => {
     }
     return (
         <DashboardLayout>
-            <Link to={`/dashboard/blogs/create`} className='d-flex justify-content-end'>
-                <Button type="primary" size='middle'>Add Blog</Button>
-            </Link>
-            <div style={{ marginTop: '10px' }}>
+            <div className="w-100 mb-3 rounded" style={{ background: '#f8f9fa' }}>
+                <Link to={`/dashboard/blogs/create`} className='d-flex justify-content-end p-3'>
+                    <Button type="primary" size='middle'>Add Blog</Button>
+                </Link>
+
                 <CustomTable
                     loading={isLoading}
                     columns={columns}

@@ -1,10 +1,9 @@
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import React, { useEffect, useState } from 'react';
-import { Space, Tag, Button, Empty } from 'antd';
+import { Space, Tag, Button, Empty, message } from 'antd';
 import { useCreateTimeSlotMutation, useGetDoctorTimeSlotQuery, useUpdateTimeSlotMutation } from '../../../redux/api/timeSlotApi';
 import { FaWindowClose, FaPlus } from "react-icons/fa";
 import UseModal from '../../UI/UseModal';
-import toast, { Toaster } from 'react-hot-toast';
 import TimePicer from '../../UI/form/TimePicer';
 import TabForm from '../../UI/form/TabForm';
 
@@ -16,7 +15,7 @@ const Schedule = () => {
     const [UpdateTimeSlot, { isError: uIsError, error: uError, isLoading: UIsLoading, isSuccess: uIsSuccess }] = useUpdateTimeSlotMutation();
     const { data, refetch, isLoading, isError } = useGetDoctorTimeSlotQuery({ day: key });
     const [createTimeSlot, { isError: AIsError, error, isLoading: AIsLoading, isSuccess }] = useCreateTimeSlotMutation();
-    
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const showModal = () => { setIsModalOpen(!isModalOpen) };
@@ -40,10 +39,10 @@ const Schedule = () => {
 
     useEffect(() => {
         if (!UIsLoading && uIsError) {
-            toast.error(uError?.data?.message)
+            message.error(uError?.data?.message)
         }
         if (uIsSuccess) {
-            toast.success('Successfully Favourite Removed')
+            message.success('Successfully Favourite Removed')
         }
     }, [uIsSuccess, uIsError, UIsLoading, uError?.data?.message])
 
@@ -97,10 +96,10 @@ const Schedule = () => {
     };
     useEffect(() => {
         if (!AIsLoading && AIsError) {
-            toast.error(error?.data?.message)
+            message.error(error?.data?.message)
         }
         if (isSuccess) {
-            toast.success('Successfully Add Time Slots')
+            message.success('Successfully Add Time Slots')
         }
     }, [isSuccess, AIsError, error?.data?.message, AIsLoading])
 
@@ -139,7 +138,7 @@ const Schedule = () => {
         setAddTimeSlot([...addTimeSlot, { id: newId }])
         e.preventDefault();
     }
-    
+
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
     if (!isLoading && !isError && data?.length === 0) content = <Empty />
@@ -165,11 +164,14 @@ const Schedule = () => {
             }
         </>
     return (
-        <DashboardLayout>
-            <Toaster />
-            <h4 className="card-title">Schedule Timings</h4>
-            <TabForm content={content} data={data} handleOnSelect={handleOnSelect} showEditModal={showEditModal} showModal={showModal}/>
-            
+        <>
+            <DashboardLayout>
+                <div className="w-100 mb-3 rounded p-3" style={{ background: '#f8f9fa', height:'90vh' }}>
+                    <h5 className='text-title'>Schedule Timings</h5>
+                    <TabForm content={content} data={data} handleOnSelect={handleOnSelect} showEditModal={showEditModal} showModal={showModal} />
+                </div>
+            </DashboardLayout >
+
             <UseModal title="Edit Time Slots"
                 isModaOpen={isEditModalOpen}
                 handleOk={handleEditOk}
@@ -247,7 +249,7 @@ const Schedule = () => {
                     </div>
                 </form>
             </UseModal>
-        </DashboardLayout >
+        </>
     )
 }
 export default Schedule;

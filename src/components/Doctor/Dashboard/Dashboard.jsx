@@ -14,13 +14,13 @@ const Dashboard = () => {
 
                 <div className="row">
                     {role === 'patient' ?
-                        <div className="col-md-12">
-                            <h4 className="mb-4">My Appointments</h4>
+                        <div className="col-md-12 rounded" style={{ background: '#f8f9fa' }}>
+                            <h5 className="text-title my-3">My Appointments</h5>
                             <PatientDashboard />
                         </div>
                         :
-                        <div className="col-md-12" style={{ background: '#f8f9fa' }}>
-                            <h5 className="my-2">Appointments</h5>
+                        <div className="col-md-12 rounded" style={{ background: '#f8f9fa' }}>
+                            <h5 className="text-title">Appointments</h5>
                             <DashboardPage />
                         </div>
                     }
