@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Footer from '../../Shared/Footer/Footer'
 import img from '../../../images/doc/doctor 3.jpg'
 import './index.css';
-import BreadCrumb from '../../UI/BreadCrumb';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Empty, Button, message, Steps } from 'antd';
 import { useGetDoctorQuery } from '../../../redux/api/doctorApi';
 import { FaArchway } from "react-icons/fa";
 import { useGetAppointmentTimeQuery } from '../../../redux/api/timeSlotApi';
 import moment from 'moment';
-import SelectDateAndTime from './SelectDateAndTime';
-import PersonalInformation from '../BookingCheckout/PersonalInformation';
+import SelectDateAndTime from '../SelectDateAndTime';
+import PersonalInformation from '../PersonalInformation';
 import CheckoutPage from '../BookingCheckout/CheckoutPage';
 import { useCreateAppointmentMutation } from '../../../redux/api/appointmentApi';
 import { useDispatch } from 'react-redux';
@@ -104,19 +103,13 @@ const DoctorBooking = () => {
     if (!isLoading && !isError && data?.id === undefined) content = <Empty />
     if (!isLoading && !isError && data?.id) content =
         <>
-            <div className="card shadow-sm mb-3">
-                <div className="card-body">
-                    <div className="booking-doc-info">
-                        <a href="doctor-profile.html" className="booking-doc-img">
-                            <img src={img} alt="" />
-                        </a>
-                        <div className="booking-info">
-                            <h4>
-                                <Link to={'/doctors/profile'} style={{ textDecoration: 'none' }}>Dr. {data?.firstName + ' ' + data?.lastName}</Link>
-                            </h4>
-                            <p className=" mb-0"><FaArchway /> {data?.specialization + ',' + data?.experienceHospitalName}</p>
-                        </div>
-                    </div>
+            <div className="booking-doc-img my-3 mb-3 rounded">
+                <Link to={`/doctors/${data?.id}`}>
+                    <img src={img} alt="" />
+                </Link>
+                <div className='text-start'>
+                    <Link to={`/doctors/${data?.id}`} style={{ textDecoration: 'none' }}>Dr. {data?.firstName + ' ' + data?.lastName}</Link>
+                    <p className="form-text mb-0"><FaArchway /> {data?.specialization + ',' + data?.experienceHospitalName}</p>
                 </div>
             </div>
         </>
@@ -182,11 +175,10 @@ const DoctorBooking = () => {
     return (
         <>
             <Header />
-            <BreadCrumb />
-            <div style={{ marginBottom: '10rem' }}>
+            <div className="container" style={{ marginBottom: '12rem', marginTop: '8rem' }}>
                 <Steps current={current} items={items} />
                 <div className='mb-5 mt-3 mx-3'>{steps[current].content}</div>
-                <div className='text-end mx-3' style={{ marginBottom: 48 }} >
+                <div className='text-end mx-3' >
                     {current < steps.length - 1 && (<Button type="primary"
                         disabled={current === 0 ? (selectTime ? false : true) : IsdDisable || !selectTime}
                         onClick={() => next()}>Next</Button>)}
