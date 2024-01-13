@@ -86,7 +86,7 @@ a:focus {
 }
 
 .card-label>label {
-    background-color: #fff;
+    background-color: #f8f9fa;
     color: #959595;
     display: inline-block;
     font-size: 13px;
