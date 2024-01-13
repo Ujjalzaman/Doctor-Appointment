@@ -1,12 +1,11 @@
 import React from 'react';
-import './ProfileSetting.css';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
-import PatientProfileSetting from '../../UI/PatientProfileSetting';
-import DoctorProfileSetting from '../../UI/DoctorProfileSetting';
+import PatientProfileSetting from './PatientProfileSetting';
+import DoctorProfileSetting from './DoctorProfileSetting';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 
 const ProfileSetting = () => {
-    const { data, role } = useAuthCheck();
+    const { role } = useAuthCheck();
     return (
         <DashboardLayout>
             {role === 'doctor' ? <DoctorProfileSetting />: <PatientProfileSetting/>}

@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import './DoctorDashboardPatient';
-import img from '../../images/john.png';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs'
+import img from '../../../../images/john.png';
 import { FaEye, FaCheck, FaTimes } from "react-icons/fa";
-import { useGetDoctorAppointmentsQuery, useUpdateAppointmentMutation } from '../../redux/api/appointmentApi';
+import { useGetDoctorAppointmentsQuery, useUpdateAppointmentMutation } from '../../../../redux/api/appointmentApi';
 import moment from 'moment';
-import CustomTable from './component/CustomTable';
 import { Button, message } from 'antd';
+import CustomTable from '../../../UI/component/CustomTable';
+import { Tabs } from 'antd';
 
-const DoctorDashboardPatient = () => {
-    const [key, setKey] = useState('upcoming');
+const DashboardPage = () => {
+    const [sortBy, setSortBy] = useState("upcoming");
+    const { data, refetch, isLoading } = useGetDoctorAppointmentsQuery({ sortBy });
+    const [updateAppointment, { isError, isSuccess, error }] = useUpdateAppointmentMutation();
 
     const handleOnselect = (value) => {
-        setKey(value === 'upcoming' ? 'today' : 'upcoming')
-        refetch();
+        // eslint-disable-next-line eqeqeq
+        setSortBy(value == 1 ? 'upcoming': value == 2 ? 'today' : sortBy)
+        refetch()
     }
-    const { data, refetch, isLoading } = useGetDoctorAppointmentsQuery({ sortBy: key });
-    const [updateAppointment, { isError, isSuccess, error }] = useUpdateAppointmentMutation();
+
 
     const updatedApppointmentStatus = (data, type) => {
         const changeObj = {
             status: type
         }
         if (data.id) {
-            updateAppointment({id: data.id, data: changeObj})
+            updateAppointment({ id: data.id, data: changeObj })
         }
     }
 
@@ -39,7 +39,7 @@ const DoctorDashboardPatient = () => {
 
     const upcomingColumns = [
         {
-            title: 'Patient Nam',
+            title: 'Patient Name',
             key: '1',
             width: 100,
             render: function (data) {
@@ -96,47 +96,36 @@ const DoctorDashboardPatient = () => {
         },
     ];
 
+    const items = [
+        {
+            key: '1',
+            label: 'upcoming',
+            children: <CustomTable
+                loading={isLoading}
+                columns={upcomingColumns}
+                dataSource={data}
+                showPagination={true}
+                pageSize={10}
+                showSizeChanger={true}
+            />,
+        },
+        {
+            key: '2',
+            label: 'today',
+            children: <CustomTable
+                loading={isLoading}
+                columns={upcomingColumns}
+                dataSource={data}
+                showPagination={true}
+                pageSize={10}
+                showSizeChanger={true}
+            />,
+        },
+    ];
+
     return (
-        <Tabs
-            defaultActiveKey="upcoming"
-            id="uncontrolled-tab"
-            className="mb-3"
-            onSelect={(k) => handleOnselect(k)}
-        >
-            <Tab eventKey="upcoming" title="Upcoming">
-                <div className="appointment-tab">
-                    <div className="tab-content">
-                        <div className="tab-pane show active" id="upcoming-appointments">
-                            <CustomTable
-                                loading={isLoading}
-                                columns={upcomingColumns}
-                                dataSource={data}
-                                showPagination={true}
-                                pageSize={10}
-                                showSizeChanger={true}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </Tab>
-            <Tab eventKey="today" title="Today">
-                <div className="appointment-tab">
-                    <div className="tab-content">
-                        <div className="tab-pane show active" id="upcoming-appointments">
-                            <CustomTable
-                                loading={isLoading}
-                                columns={upcomingColumns}
-                                dataSource={data}
-                                showPagination={true}
-                                pageSize={10}
-                                showSizeChanger={true}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </Tab>
-        </Tabs>
+        <Tabs defaultActiveKey="1" items={items} onChange={handleOnselect} />
     )
 }
 
-export default DoctorDashboardPatient;
+export default DashboardPage;

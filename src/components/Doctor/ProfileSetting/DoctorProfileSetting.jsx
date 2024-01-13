@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
-import img from '../../images/john.png';
+import img from '../../../images/doc/doctor 3.jpg';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
-import useAuthCheck from '../../redux/hooks/useAuthCheck';
 import toast, { Toaster } from 'react-hot-toast';
-import { useUpdateDoctorMutation } from '../../redux/api/doctorApi';
-import { Button, Select, Space } from 'antd';
-import { doctorSpecialistOptions } from '../../constant/global';
+import { Button, Select } from 'antd';
+import { Link } from 'react-router-dom';
+import { useUpdateDoctorMutation } from '../../../redux/api/doctorApi';
+import useAuthCheck from '../../../redux/hooks/useAuthCheck';
+import { doctorSpecialistOptions } from '../../../constant/global';
 
 const DoctorProfileSetting = () => {
     const [selectedItems, setSelectedItems] = useState([]);
@@ -21,9 +22,9 @@ const DoctorProfileSetting = () => {
     const [showCalender, setShowCalender] = useState(false);
     const buttonRef = useRef(null);
 
-    const handleDateChange = (date) => {setValue(date)}
+    const handleDateChange = (date) => { setValue(date) }
 
-    const handleButtonClick = () => {setShowCalender(!showCalender)}
+    const handleButtonClick = () => { setShowCalender(!showCalender) }
 
     const handleClickOutSide = (event) => {
         if (buttonRef.current && !buttonRef.current.contains(event.target)) {
@@ -72,18 +73,18 @@ const DoctorProfileSetting = () => {
         <div style={{ marginBottom: '10rem' }}>
             <div className="card mb-5 p-2 shadow-sm">
                 <div className="card-body">
-                    <h4 className="card-title">Update Your Information</h4>
+                    <h5 className="card-title">Update Your Information</h5>
                     <Toaster />
                     <form className="row form-row" onSubmit={handleSubmit(onSubmit)}>
                         <div className="col-md-12 mb-5">
                             <div className="form-group">
                                 <div className="change-avatar">
-                                    <div className="profile-img">
+                                    <Link to={'/'} className="my-3 patient-img">
                                         <img src={img} alt="" />
-                                    </div>
-                                    <div className="upload-img">
-                                        <div className="change-photo-btn">
-                                            <span><i className="fa fa-upload"></i> Upload Photo</span>
+                                    </Link>
+                                    <div className='mt-3'>
+                                        <div >
+                                            <span> Upload Photo</span>
                                             <input type="file" className="upload" />
                                         </div>
                                         <small className="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
@@ -357,7 +358,7 @@ const DoctorProfileSetting = () => {
 
                         <div className='text-center my-3'>
                             <Button htmlType='submit' type="primary" size='large' loading={isLoading} disabled={isLoading ? true : false} >
-                            {isLoading ? 'Saving ...' : 'Save Changes'}
+                                {isLoading ? 'Saving ...' : 'Save Changes'}
                             </Button>
                         </div>
                     </form>

@@ -1,12 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DashboardLayout from '../DashboardLayout/DashboardLayout'
-import img from '../../../images/john.png';
+import img from '../../../images/doc/doctor 3.jpg';
 import './Appointments.css';
-import { useGetDoctorAppointmentsQuery } from '../../../redux/api/appointmentApi';
+import { useGetDoctorAppointmentsQuery, useUpdateAppointmentMutation } from '../../../redux/api/appointmentApi';
 import moment from 'moment';
+import { Button, message } from 'antd';
+import { FaEye, FaCheck, FaTimes } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import { FaClock, FaEnvelope, FaLocationArrow, FaPhoneAlt } from "react-icons/fa";
 
 const Appointments = () => {
     const { data, isError, isLoading } = useGetDoctorAppointmentsQuery({});
+    const [updateAppointment, { isError: updateIsError, isSuccess, error }] = useUpdateAppointmentMutation();
+
+    const updatedApppointmentStatus = (data, type) => {
+        const changeObj = {
+            status: type
+        }
+        if (data.id) {
+            updateAppointment({ id: data.id, data: changeObj })
+        }
+    }
+
+    useEffect(() => {
+        if (isSuccess) {
+            message.success("Succcessfully Appointment Updated")
+        }
+        if (isError) {
+            message.error(error?.data?.message);
+        }
+    }, [isSuccess, updateIsError, error])
+
+
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
     if (!isLoading && !isError && data?.length === 0) content = <div>Empty</div>
@@ -14,32 +39,31 @@ const Appointments = () => {
         <>
             {
                 data && data.map((item) => (
-                    <div className="appointments">
-                        <div className="appointment-list">
-                            <div className="profile-info-widget">
-                                <a href="#" className="booking-doc-img">
+                    <div className="w-100 mb-3 rounded p-3" style={{ background: '#f8f9fa' }}>
+                        <div className="d-flex justify-content-between align-items-center">
+                            <div className="d-flex align-items-center gap-3">
+                                <Link to={`/`} className="patient-img">
                                     <img src={img} alt="" />
-                                </a>
-                                <div className="profile-det-info">
-                                    <h3><a href="patient-profile.html">{item?.patient?.firstName + ' ' + item?.patient?.lastName}</a></h3>
-                                    <div className="patient-details">
-                                        <h5><i className="far fa-clock"></i> {moment(item?.appointmentTime).format("MMM Do YY")} </h5>
-                                        <h5><i className="fas fa-map-marker-alt"></i> {item?.patient?.address}</h5>
-                                        <h5><i className="fas fa-envelope"></i> {item?.patient?.email}</h5>
-                                        <h5 className="mb-0"><i className="fas fa-phone"></i> {item?.patient?.mobile}</h5>
+                                </Link>
+                                <div className="patients-info">
+                                    <h5>{item?.patient?.firstName + ' ' + item?.patient?.lastName}</h5>
+                                    <div className="info">
+                                        <p><FaClock className='icon' /> {moment(item?.appointmentTime).format("MMM Do YY")} </p>
+                                        <p><FaLocationArrow className='icon' /> {item?.patient?.address}</p>
+                                        <p><FaEnvelope className='icon' /> {item?.patient?.email}</p>
+                                        <p><FaPhoneAlt className='icon' /> {item?.patient?.mobile}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="appointment-action">
-                                <a href="#" className="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-                                    <i className="far fa-eye"></i> View
-                                </a>
-                                <a className="btn btn-sm bg-success-light">
-                                    <i className="fas fa-check"></i> Accept
-                                </a>
-                                <a className="btn btn-sm bg-danger-light">
-                                    <i className="fas fa-times"></i> Cancel
-                                </a>
+                            <div className='d-flex gap-2'>
+                                <Button type="primary" shape="circle" icon={<FaEye />} size="medium" />
+                                {
+                                    item?.status === 'pending' &&
+                                    <>
+                                        <Button type="primary" icon={<FaCheck />} size="medium" onClick={() => updatedApppointmentStatus(data, 'accept')}>Accept</Button>
+                                        <Button type='primary' icon={<FaTimes />} danger onClick={() => updatedApppointmentStatus(data, 'cancel')}>Cancel</Button>
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>

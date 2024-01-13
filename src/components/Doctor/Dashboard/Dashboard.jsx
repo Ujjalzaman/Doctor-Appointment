@@ -1,31 +1,27 @@
 import React from 'react'
-import DashboardLayout from '../DashboardLayout/DashboardLayout'
-import DoctorDashCard from '../../UI/DoctorDashCard'
-import useAuthCheck from '../../../redux/hooks/useAuthCheck'
-import PatientAppointments from '../../UI/PatientAppointments'
-import DoctorDashboardPatient from '../../UI/DoctorDashboardPatient'
+import DoctorDashCard from './doctor/DoctorDashCard';
+import useAuthCheck from '../../../redux/hooks/useAuthCheck';
+import DashboardLayout from '../DashboardLayout/DashboardLayout';
+import DashboardPage from './doctor/DashboardPage';
+import PatientDashboard from './PatientDashboard';
 
-const MainDashboard = () => {
+const Dashboard = () => {
     const { role } = useAuthCheck();
     return (
         <>
             <DashboardLayout>
-                <div className="row">
-                    <div className="col-md-12">
-                        {role === 'doctor' && <DoctorDashCard />}
-                    </div>
-                </div>
+                {role === 'doctor' && <DoctorDashCard /> }
 
                 <div className="row">
                     {role === 'patient' ?
                         <div className="col-md-12">
                             <h4 className="mb-4">My Appointments</h4>
-                            <PatientAppointments />
+                            <PatientDashboard />
                         </div>
                         :
-                        <div className="col-md-12">
-                            <h4 className="mb-4 mt-5">Patient Appointment</h4>
-                            <DoctorDashboardPatient />
+                        <div className="col-md-12" style={{ background: '#f8f9fa' }}>
+                            <h5 className="my-2">Appointments</h5>
+                            <DashboardPage />
                         </div>
                     }
 
@@ -35,4 +31,4 @@ const MainDashboard = () => {
     )
 }
 
-export default MainDashboard
+export default Dashboard;
