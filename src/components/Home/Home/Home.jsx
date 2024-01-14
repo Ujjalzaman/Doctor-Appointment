@@ -1,6 +1,5 @@
 import React from 'react';
 import Blog from '../Blog/Blog';
-import Doctor from '../OurDoctor/Doctor';
 import Footer from '../../Shared/Footer/Footer';
 import Testimonial from '../Testimonial/Testimonial';
 import ClinicAndSpecialities from '../ClinicAndSpecialities/ClinicAndSpecialities';
