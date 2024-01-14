@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './index.css';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import TopHeader from '../TopHeader/TopHeader';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import img from '../../../images/logo.png';
 import img2 from '../../../images/doc/doctor 3.jpg';
 import { Button, Popover, message } from 'antd';
@@ -65,12 +65,12 @@ const Header = () => {
 
                     <nav id="navbar" className="navbar order-last order-lg-0">
                         <ul>
-                            <li><Link to={'/'} className="nav-link scrollto active">Home</Link></li>
-                            <li><Link to={'/about'} className="nav-link scrollto">About</Link></li>
-                            <li><Link to={'/service'} className="nav-link scrollto">Service</Link></li>
-                            <li><Link to={'/doctors'} className="nav-link scrollto">Doctors</Link></li>
-                            <li><Link to={'/contact'} className="nav-link scrollto">Contact</Link></li>
-                            <li><Link to={'/blog'} className="nav-link scrollto">Blog</Link></li>
+                            <li><NavLink to={'/'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""} >Home</NavLink></li>
+                            <li><NavLink to={'/about'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""}>About</NavLink></li>
+                            <li><NavLink to={'/service'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""}>Service</NavLink></li>
+                            <li><NavLink to={'/doctors'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""}>Doctors</NavLink></li>
+                            <li><NavLink to={'/contact'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""}>Contact</NavLink></li>
+                            <li><NavLink to={'/blog'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""}>Blog</NavLink></li>
                             {!isLoggedIn && <li><Link to={'/login'} className="nav-link scrollto">Login</Link></li>}
                         </ul>
                         {isLoggedIn &&
@@ -85,7 +85,7 @@ const Header = () => {
                         <FaBars className='mobile-nav-toggle' />
                     </nav>
 
-                    <a href="#appointment" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span> Appointment</a>
+                    <Link to={'/appointment'} className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span> Appointment</Link>
                 </div>
             </header>
         </>
