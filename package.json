@@ -31,6 +31,7 @@
     "react-star-ratings": "^2.3.0",
     "react-vertical-timeline-component": "^3.6.0",
     "sweetalert": "^2.1.2",
+    "swiper": "^11.0.5",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
