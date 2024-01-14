@@ -21,9 +21,6 @@ const DoctorProfile = () => {
     if (!isLoading && !isError && data?.id === undefined) content = <Empty />
     if (!isLoading && !isError && data?.id) content = <SearchContent data={data} />
 
-    const onChange = (key) => {
-        console.log(key);
-    };
     const items = [
         {
             key: '1',
@@ -38,7 +35,7 @@ const DoctorProfile = () => {
         {
             key: '3',
             label: 'Reviews',
-            children: <Review />,
+            children: <Review doctorId={id}/>,
         },
         {
             key: '4',
@@ -55,7 +52,7 @@ const DoctorProfile = () => {
             <div className="container" style={{ marginBottom: '4rem', marginTop: '6rem' }}>
                 {content}
                 <div className='p-4 rounded' style={{ marginBottom: '7rem', backgroundColor: '#f3f3f3' }}>
-                    <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+                    <Tabs defaultActiveKey="1" items={items} />
                 </div>
             </div>
             <Footer />
