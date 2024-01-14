@@ -35,7 +35,7 @@ const getSingleReview = catchAsync(async (req: Request, res: Response) => {
 })
 
 const getDoctorReviews = catchAsync(async (req: Request, res: Response) => {
-    const result = await ReviewService.getDoctorReviews(req.user);
+    const result = await ReviewService.getDoctorReviews(req.params.id);
     sendResponse<Reviews[]>(res, {
         statusCode: 200,
         message: 'Successfully Retrieve review !!',

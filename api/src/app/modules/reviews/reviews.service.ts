@@ -12,8 +12,16 @@ const create = async (user: any, payload: Reviews): Promise<Reviews> => {
     if (!isUserExist) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Patient Account is not found !!')
     }
-    if (isUserExist) {
-        payload.patientId = user.userId
+    const isDoctorExist = await prisma.doctor.findUnique({
+        where: {
+            id: payload.doctorId
+        }
+    })
+    if(isUserExist){
+        payload.patientId = isUserExist.id;
+    }
+    if (!isDoctorExist) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
     }
     const result = await prisma.reviews.create({
         data: payload
@@ -42,7 +50,6 @@ const getAllReviews = async (): Promise<Reviews[] | null> => {
 }
 
 const getSingleReview = async (id: string): Promise<Reviews | null> => {
-    console.log(id)
     const result = await prisma.reviews.findUnique({
         where: {
             id: id
@@ -65,10 +72,10 @@ const getSingleReview = async (id: string): Promise<Reviews | null> => {
     return result;
 }
 
-const getDoctorReviews = async (user: any): Promise<Reviews[] | null> => {
+const getDoctorReviews = async (id: string): Promise<Reviews[] | null> => {
     const isUserExist = await prisma.doctor.findUnique({
         where: {
-            id: user.userId
+            id: id
         }
     })
     if (!isUserExist) {
