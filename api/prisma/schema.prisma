@@ -78,11 +78,11 @@ model Doctor {
   createdAt              DateTime         @default(now())
   updatedAt              DateTime         @updatedAt
   appointments           Appointments[]
-  Reviews                Reviews[]
   prescription           Prescription[]
   favourites             Favourites[]
   DoctorTimeSlot         DoctorTimeSlot[]
   blogs                  Blogs[]
+  reviews                Reviews[]
 
   @@map("Doctor")
 }
@@ -135,7 +135,7 @@ model Reviews {
   id String @id @default(uuid())
 
   doctorId String
-  doctor   Doctor @relation(fields: [doctorId], references: [id])
+  doctor   Doctor? @relation(fields: [doctorId], references: [id])
 
   patientId String
   patient   Patient @relation(fields: [patientId], references: [id])

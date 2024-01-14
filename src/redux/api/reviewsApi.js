@@ -21,7 +21,7 @@ export const reviewApi = baseApi.injectEndpoints({
         }),
         getDoctorReviews: build.query({
             query: (id) => ({
-                url: `${REVIEW_URL}/doctor-review`,
+                url: `${REVIEW_URL}/doctor-review/${id}`,
                 method: 'GET'
             }),
             providesTags: [tagTypes.reviews]
@@ -34,7 +34,7 @@ export const reviewApi = baseApi.injectEndpoints({
             }),
             providesTags: [tagTypes.reviews]
         }),
-        createReview: build.query({
+        createReview: build.mutation({
             query: ({ data }) => ({
                 url: `${REVIEW_URL}/`,
                 method: 'POST',
@@ -61,7 +61,7 @@ export const reviewApi = baseApi.injectEndpoints({
 })
 
 export const {
-    useCreateReviewQuery,
+    useCreateReviewMutation,
     useDeleteReviewQuery,
     useGetAllReviewsQuery,
     useGetDoctorReviewsQuery,
