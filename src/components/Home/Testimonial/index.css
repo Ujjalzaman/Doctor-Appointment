@@ -1,9 +1,13 @@
 .review-img img{
-    height: 50px;
-    width: 50px;
+    height: 40px !important;
+    width: 40px !important;
+    border-radius: 50%;
     object-fit: cover;
-    border-radius: 50px;
+    object-position: top;
 }
 .recomended{
-    color: rgb(32, 180, 32);
+    color: #20b420;
+}
+.swiper {
+    width: inherit !important;
 }

@@ -5,6 +5,14 @@ import img from '../../../images/doc/doc4.jpg';
 import StarRatings from 'react-star-ratings';
 import { truncate } from '../../../utils/truncate';
 import { FaCheckDouble } from "react-icons/fa";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+import 'swiper/css/navigation';
 
 const Testimonial = () => {
     const { data, isLoading, isError } = useGetAllReviewsQuery();
@@ -14,12 +22,12 @@ const Testimonial = () => {
     if (!isLoading && !isError && data?.length > 0) content =
         <>
             {
-                data && data.slice(0, 2)?.map((item, key) => (
-                    <div className="col-md-6">
-                        <div className="card shadow p-3 border-0" key={item?.id + key}>
+                data && data.slice(0, 10)?.map((item, key) => (
+                    <SwiperSlide key={item.id + key}>
+                        <div className="card shadow p-3 border-0 my-5" key={item?.id + key} style={{ maxWidth: '600px' }}>
                             <div className='d-flex gap-2'>
                                 <div className='review-img'>
-                                    <img src={img} alt="" className='img-fluid shadow' />
+                                    <img src={img} alt="" className='shadow' />
                                 </div>
                                 <div>
                                     <h5 className='my-0'>dolor asperiores illum possimus sint</h5>
@@ -29,7 +37,7 @@ const Testimonial = () => {
 
                             <p className="text-start text-secondary"> {truncate(item?.description, 150)}</p>
                             <div>
-                                <p className='recomended'><FaCheckDouble/> Recomended</p>
+                                <p className='recomended'><FaCheckDouble /> Recomended</p>
                                 <StarRatings
                                     rating={5}
                                     starRatedColor="#f4c150"
@@ -41,18 +49,29 @@ const Testimonial = () => {
                                 />
                             </div>
                         </div>
-                    </div>
+                    </SwiperSlide>
                 ))
             }
         </>
     return (
-        <div className="container" style={{ marginTop: 80, marginBottom: 100 }}>
+        <div className="container" style={{ marginTop: "10rem", marginBottom: "10rem" }}>
             <div className='mb-5 section-title text-center'>
                 <h2>TESTIMONIAL</h2>
                 <p className='m-0 text-secondary'>What Our Patients Says.</p>
             </div>
             <div className="row d-flex justify-content-center">
-                {content}
+                <Swiper
+                    spaceBetween={10}
+                    slidesPerView={2}
+                    modules={[Navigation, Autoplay]}
+                    navigation={true}
+                    loop={true}
+                    centeredSlides={true}
+                    autoplay={{ delay: 2000, disableOnInteraction: false }}
+                >
+                    {content}
+                </Swiper>
+
             </div>
         </div>
     );
