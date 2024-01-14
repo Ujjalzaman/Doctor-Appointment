@@ -31,8 +31,8 @@ const PatientFavouriteDoctor = () => {
     if (!isLoading && !isError && data?.length > 0) content =
         <>
             {data && data?.map((item) => (
-                <div className="col-md-6 col-sm-12 mb-4" key={item?.id}>
-                    <div className='rounded p-2 position-relative' style={{ background: '#f8f9fa' }}>
+                <div className="col-md-4 col-sm-12 mb-4 mx-2 rounded shadow-sm" key={item?.id} style={{ background: '#f8f9fa', maxWidth: '20rem' }}>
+                    <div className='rounded position-relative'>
                         <div className='fav-img my-3 d-flex justify-content-center'>
                             <img alt="" src={img} />
                         </div>
@@ -40,7 +40,7 @@ const PatientFavouriteDoctor = () => {
                             <FaBookmark />
                         </div>
 
-                        <div>
+                        <div className='p-2'>
                             <h5 className="d-flex align-items-center gap-2 mb-0" style={{ color: '#1977cc' }}>
                                 <Link to={`/doctors/profile/${item?.doctor?.id}`}>
                                     {item?.doctor?.firstName + ' ' + item?.doctor?.lastName}
@@ -82,7 +82,7 @@ const PatientFavouriteDoctor = () => {
         </>
     return (
         <DashboardLayout>
-            <div className="row mb-3 rounded" >
+            <div className="row">
                 {content}
             </div>
         </DashboardLayout>

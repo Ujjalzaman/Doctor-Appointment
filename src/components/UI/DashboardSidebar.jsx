@@ -1,7 +1,7 @@
 import React from 'react';
 import img from '../../images/doc/doc4.jpg';
 import './DashboardSidebar.css';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useAuthCheck from '../../redux/hooks/useAuthCheck';
 import {
     FaTable,
@@ -50,103 +50,103 @@ const DashboardSidebar = () => {
                 {
                     role === 'patient' ?
                         <ul>
-                            <li className="active">
-                                <Link to={'/dashboard'}>
+                            <li>
+                                <NavLink to={'/dashboard'} activeClassName="active" end>
                                     <FaTable className="icon" />
                                     <span>Dashboard</span>
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to={'/dashboard/favourite'}>
+                                <NavLink to={'/dashboard/favourite'} activeClassName="active">
                                     <FaHouseUser className="icon" />
                                     <span>Favourites</span>
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to={'/dashboard/profile-setting'}>
+                                <NavLink to={'/dashboard/profile-setting'} activeClassName="active">
                                     <FaUserCog className="icon" />
                                     <span>Profile Settings</span>
-                                </Link>
+                                </NavLink>
                             </li>
 
                             <li>
-                                <Link to={'/dashboard/change-password'}>
+                                <NavLink to={'/dashboard/change-password'} activeClassName="active">
                                     <FaLock className="icon" />
                                     <span>Change Password</span>
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <a href="">
+                                <NavLink to={'/'}>
                                     <FaSignOutAlt className="icon" />
                                     <span>Logout</span>
-                                </a>
+                                </NavLink>
                             </li>
                         </ul>
                         :
                         <ul>
                             <li className="active">
-                                <Link to={'/dashboard'}>
+                                <NavLink to={'/dashboard'} activeClassName="active" end>
                                     <FaTable className="icon" />
                                     <span>Dashboard</span>
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to={'/dashboard/appointments'}>
+                                <NavLink to={'/dashboard/appointments'} activeClassName="active">
                                     <FaCalendarDay className="icon" />
                                     <span>Appointments</span>
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to={'/dashboard/my-patients'}>
+                                <NavLink to={'/dashboard/my-patients'} activeClassName="active">
                                     <FaUserInjured className="icon" />
                                     <span>My Patients</span>
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to={'/dashboard/schedule'}>
+                                <NavLink to={'/dashboard/schedule'} activeClassName="active">
                                     <FaCalendarDay className="icon" />
                                     <span>Schedule Timings</span>
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to={'/dashboard/invoices'}>
+                                <NavLink to={'/dashboard/invoices'} activeClassName="active">
                                     <FaHourglassStart className="icon" />
                                     <span>Invoices</span>
-                                </Link>
+                                </NavLink>
                             </li>
 
                             <li>
-                                <Link to={'/dashboard/reviews'}>
+                                <NavLink to={'/dashboard/reviews'} activeClassName="active">
                                     <FaRegStar className="icon" />
                                     <span>Reviews</span>
-                                </Link>
+                                </NavLink>
                             </li>
 
                             <li>
-                                <Link to={'/dashboard/profile-setting'}>
+                                <NavLink to={'/dashboard/profile-setting'} activeClassName="active">
                                     <FaUserCog className="icon" />
                                     <span>Profile Settings</span>
-                                </Link>
+                                </NavLink>
                             </li>
 
                             <li>
-                                <Link to={'/dashboard/blogs'}>
+                                <NavLink to={'/dashboard/blogs'} activeClassName="active">
                                     <FaBlog className="icon" />
                                     <span>Blogs (Will move to Admin)</span>
-                                </Link>
+                                </NavLink>
                             </li>
 
                             <li>
-                                <Link to={'/dashboard/change-password'}>
+                                <NavLink to={'/dashboard/change-password'} activeClassName="active">
                                     <FaLock className="icon" />
                                     <span>Change Password</span>
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to={'/dashboard/change-password'}>
+                                <NavLink to={'/'}>
                                     <FaSignOutAlt className="icon" />
                                     <span>Logout</span>
-                                </Link>
+                                </NavLink>
                             </li>
                         </ul>
                 }

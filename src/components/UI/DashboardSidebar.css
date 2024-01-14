@@ -39,6 +39,10 @@
 .dashboard-menu > ul > li:hover > a{
     transform: scale(1.05);
 }
+.active {
+    color: #1977cc !important;
+    background: #fff;
+}
 
 .dashboard-menu ul li a .icon {
     font-size: 16px;
