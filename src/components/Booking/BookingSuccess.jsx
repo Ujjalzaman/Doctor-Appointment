@@ -1,49 +1,71 @@
 import React, { useEffect } from 'react';
 import Footer from '../Shared/Footer/Footer';
-import { FaCheckCircle } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { FaBriefcase, FaCalendarCheck, FaRegClock, FaLocationArrow, FaCalendarAlt, FaLink } from "react-icons/fa";
+import { useNavigate, useParams } from 'react-router-dom';
+
 import moment from 'moment';
 import { Empty } from 'antd';
 import Header from '../Shared/Header/Header';
+import { useGetSingleAppointmentQuery } from '../../redux/api/appointmentApi';
 
 const BookingSuccess = () => {
-    const state = useSelector((state) => state.invoice.data);
-    const mettingEndTime = state.scheduleTime && moment(state.scheduleTime, 'hh:mm a').add(30, 'minutes').format('hh:mm a')
+    const { id } = useParams();
+    const { data } = useGetSingleAppointmentQuery(id);
+
     const navigate = useNavigate();
 
     useEffect(() => {
         const timeOut = setTimeout(() => {
-            if (!state.id) {
+            if (!data?.id) {
                 navigate('/');
             }
         }, 5000)
         return () => clearTimeout(timeOut)
-    }, [navigate, state])
+    }, [navigate, data])
 
     return (
         <>
             <Header />
-            <div className="d-flex flex-column justify-content-center align-items-center text-center" style={{marginTop: '8rem', marginBottom: '5rem', height: '60vh' }}>
+            <div className="container mx-auto d-flex justify-content-center align-items-center text-center">
                 {
-                    state.id ?
+                    data?.id ?
 
-                        <div className='rounded p-3' style={{background: "#f8f9fa"}}>
-                            <FaCheckCircle style={{ fontSize: '5rem' }} className='text-info' />
-                            <h4s>Appointment booked Successfully!</h4s>
-                            <p>Appointment booked with <strong>Dr. {state?.doctor?.firstName + ' ' + state?.doctor?.firstName}</strong><br /> on <strong>{moment(state?.scheduleDate).format('LL') + '  ' + state?.scheduleTime + '  to  ' + mettingEndTime}</strong></p>
-                            <Link to={`/booking/invoice/${state?.id}`} className="btn btn-primary">
-                                View Invoice
-                            </Link>
+                        <div className=" p-3" style={{ marginTop: '8rem', marginBottom: '5rem', height: '60vh', background: '#f8f9fa', maxWidth: '400px' }}>
+                            <div className='border-bottom my-2'>
+                                <FaCalendarCheck style={{ fontSize: '2.5rem' }} className='text-success' />
+                                <h6 className='py-2'>Meeting is scheduled</h6>
+                                <p className='text-secondary border rounded-pill form-text text-success border-success'>Check your Inbox an email with all details!</p>
+                            </div>
+
+                            <div className='card border-0 p-3 rounded mb-5'>
+                                <div className='d-flex gap-3 mb-1'>
+                                    <FaBriefcase style={{ fontSize: '1rem' }} />
+                                    <p>With Doctor</p>
+                                </div>
+                                <div className='d-flex gap-3 mb-1'>
+                                    <FaRegClock style={{ fontSize: '1rem' }} />
+                                    <p>30 Min</p>
+                                </div>
+                                <div className='d-flex gap-3 mb-1'>
+                                    <div><FaLocationArrow style={{ fontSize: '1rem' }} /></div>
+                                    <p className='text-start'>Sylhet, Bangladesh<br /><span className="form-text">1020BD, Amertam, NorthEast,Srimongol</span></p>
+                                </div>
+                                <div className='d-flex gap-3 mb-2'>
+                                    <div><FaLink style={{ fontSize: '1rem' }} /></div>
+                                    <div><a href='/' target='_blank'>https://example.com</a></div>
+                                </div>
+                                <div className='d-flex gap-3'>
+                                    <div><FaCalendarAlt style={{ fontSize: '1rem' }} /> </div>
+                                    <p>{(data.scheduleDate && data.scheduleTime) && moment(data.scheduleDate).format('LL') + ' ' + data.scheduleTime}</p>
+                                </div>
+                            </div>
                         </div>
-
                         :
-                        <div className='rounded p-3 d-flex flex-column justify-content-center align-items-center' style={{background: "#f8f9fa"}}>
-                            <h4>You will be redirect to homepage !</h4>
+                        <div className='rounded p-3 d-flex flex-column justify-content-center align-items-center' style={{ background: "#f8f9fa",marginTop: '8rem', marginBottom: '5rem' }} >
                             <Empty />
+                            <h6 className='p-2 my-3'>You will be redirect to homepage !</h6>
                         </div>
                 }
-
             </div>
             <Footer />
         </>

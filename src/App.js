@@ -34,6 +34,7 @@ import Contact from './components/Contact/Contact';
 import About from './components/About/About';
 import Service from './components/Service/Service';
 import Dashboard from './components/Doctor/Dashboard/dashboard';
+import AppointmentPage from './components/Appointment/AppointmentPage';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -43,10 +44,11 @@ const router = createBrowserRouter([
   { path: '/about', element: <About /> },
   { path: '/service', element: <Service /> },
   { path: '/login', element: <SignInForm /> },
+  { path: '/appointment', element: <AppointmentPage /> },
 
   { path: '/doctors', element: <SearchDoctor /> },
   { path: '/doctors/profile/:id', element: <DoctorProfile /> },
-  
+
   { path: '/dashboard', element: <Dashboard /> },
   { path: '/dashboard/my-patients', element: <MyPatients /> },
   { path: '/dashboard/reviews', element: <Reviews /> },
@@ -61,7 +63,7 @@ const router = createBrowserRouter([
   { path: '/dashboard/blogs/create', element: <AddBlog /> },
 
   { path: '/booking/:doctorId', element: <DoctorBooking /> },
-  { path: '/booking/success/', element: <BookingSuccess /> },
+  { path: '/booking/success/:id', element: <BookingSuccess /> },
   { path: '/booking/invoice/:id', element: <BookingInvoice /> },
 
   // Dashboard
