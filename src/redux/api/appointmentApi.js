@@ -13,6 +13,14 @@ export const appointmentApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [tagTypes.appointments]
         }),
+        createAppointmentByUnauthenticateUser: build.mutation({
+            query: (data) => ({
+                url: `${APPOINTMENT_URL}/create-un-authenticate`,
+                method: 'POST',
+                data: data
+            }),
+            invalidatesTags: [tagTypes.appointments]
+        }),
         updateAppointment: build.mutation({
             query: ({ id, data }) => ({
                 url: `${APPOINTMENT_URL}/${id}`,
@@ -83,5 +91,6 @@ export const {
     useGetAppointmentedPaymentInfoQuery,
     useGetPatientInvoicesQuery,
     useGetDoctorInvoicesQuery,
-    useUpdateAppointmentMutation
+    useUpdateAppointmentMutation,
+    useCreateAppointmentByUnauthenticateUserMutation
 } = appointmentApi;

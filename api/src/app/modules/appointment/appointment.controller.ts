@@ -13,6 +13,16 @@ const createAppointment = catchAsync(async (req: Request, res: Response) => {
         data: result
     })
 })
+const createAppointmentByUnAuthenticateUser = catchAsync(async (req: Request, res: Response) => {
+    const result = await AppointmentService.createAppointmentByUnAuthenticateUser(req.body);
+    sendResponse(res, {
+        statusCode: 200,
+        message: 'Successfully Appointment Created !!',
+        success: true,
+        data: result
+    })
+})
+
 
 const getAllAppointment = catchAsync(async (req: Request, res: Response) => {
     const result = await AppointmentService.getAllAppointments();
@@ -136,5 +146,6 @@ export const AppointmentController = {
     getDoctorPatients,
     getPaymentInfoViaAppintmentId,
     getPatientPaymentInfo,
-    getDoctorInvoices
+    getDoctorInvoices,
+    createAppointmentByUnAuthenticateUser
 }

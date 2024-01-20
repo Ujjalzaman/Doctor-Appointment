@@ -17,7 +17,7 @@ export const genderOptions = gender.map((data) => {
 export const daysArray = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
 export const doctorSpecialistArray = [
-    { id: 1, value: "cardiologist" },
+    { id: 1, value: "Cardiologist" },
     { id: 2, value: "Dermatologist" },
     { id: 3, value: "Orthopedic Surgeon", },
     { id: 4, value: "Gynecologist" },
@@ -27,7 +27,7 @@ export const doctorSpecialistArray = [
     { id: 8, value: "Endocrinologist" },
     { id: 9, value: "Gastroenterologist" },
     { id: 10, value: "Pulmonologist" },
-    { id: 11, value: "orthopedic" }
+    { id: 11, value: "Orthopedic" }
 ]
 
 export const doctorSpecialistOptions = doctorSpecialistArray.map(data => {
@@ -35,4 +35,25 @@ export const doctorSpecialistOptions = doctorSpecialistArray.map(data => {
         label: data.value,
         value: data.value
     }
-})
+});
+
+export const doctorTimeSlot = [
+    "08:00 AM",
+    "08:30 AM",
+    "09:00 AM",
+    "09:30 AM",
+    "10:00 AM",
+    "10:30 AM",
+    "11:00 AM",
+    "11:30 AM",
+    "01:00 PM",
+    "01:30 PM",
+    "02:00 PM",
+    "02:30 PM",
+    "03:00 PM",
+    "03:30 PM",
+    "04:00 PM",
+    "04:30 PM",
+    "05:00 PM"
+]
+
