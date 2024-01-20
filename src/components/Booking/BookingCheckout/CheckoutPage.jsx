@@ -9,13 +9,15 @@ const CheckoutPage = ({ handleChange, selectValue, isCheck, setIsChecked, data, 
         setIsChecked(!isCheck)
     }
 
-    const vat = (15 / 100) * (Number(data?.price) + 10)
+    let price = data.price ? data.price : 60;
+
+    const vat = (15 / 100) * (Number(price))
     return (
         <div className="container mt-5">
             <div className="row">
                 <div className="col-md-7" >
                     <div className="rounded p-3" style={{ background: "#f8f9fa" }}>
-                        
+
                         <div className='row'>
                             <div className="col-md-6 mb-2">
                                 <label className="payment-radio credit-card-option">
@@ -110,10 +112,10 @@ const CheckoutPage = ({ handleChange, selectValue, isCheck, setIsChecked, data, 
 
                 <div className="col-md-5 col-sm-12">
                     <div className="rounded p-3" style={{ background: "#f8f9fa" }}>
-                        <Link to={`/doctors/profile/${data?.id}`} className="booking-doc-img d-flex justify-content-center mb-2">
+                        {data && <Link to={`/doctors/profile/${data?.id}`} className="booking-doc-img d-flex justify-content-center mb-2">
                             <img src={img} alt="" />
-                        </Link>
-                        <div className='doc-title-info mt-3 mb-3'>
+                        </Link>}
+                        {data && <div className='doc-title-info mt-3 mb-3'>
                             <h5 className='mt-3 text-center' style={{
                                 fontSize: "22px", fontWeight: 700,
                             }}>Dr. {data?.firstName + ' ' + data?.lastName}</h5>
@@ -121,8 +123,7 @@ const CheckoutPage = ({ handleChange, selectValue, isCheck, setIsChecked, data, 
                                 <p className='form-text mb-0'>{data?.designation}</p>
                                 <p className='form-text mb-0'>{data?.clinicAddress}</p>
                             </div>
-                        </div>
-
+                        </div>}
 
                         <div className="booking-item-wrap">
                             <ul className="booking-date">
@@ -130,7 +131,7 @@ const CheckoutPage = ({ handleChange, selectValue, isCheck, setIsChecked, data, 
                                 <li>Time <span>{selectTime}</span></li>
                             </ul>
                             <ul className="booking-fee">
-                                <li>Consulting Fee <span>${data?.price}</span></li>
+                                <li>Consulting Fee <span>${price}</span></li>
                                 <li>Booking Fee <span>$10</span></li>
                                 <li>Vat (Including 15%) <span>$ {vat}</span></li>
                             </ul>
@@ -138,7 +139,7 @@ const CheckoutPage = ({ handleChange, selectValue, isCheck, setIsChecked, data, 
                             <ul className="booking-total">
                                 <li className='d-flex justify-content-between'>
                                     <span className='fw-bold'>Total</span>
-                                    <span className="total-cost" style={{ color: '#1977cc' }}>${(Number(data?.price) + vat)}</span>
+                                    <span className="total-cost" style={{ color: '#1977cc' }}>${(Number(price) + 10 + vat)}</span>
                                 </li>
                             </ul>
                         </div>

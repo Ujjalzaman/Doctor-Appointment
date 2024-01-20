@@ -63,6 +63,38 @@ const createAppointment = async (user: any, payload: any): Promise<Appointments 
     return result;
 }
 
+const createAppointmentByUnAuthenticateUser = async (payload: any): Promise<Appointments | null> => {
+    const { patientInfo, payment } = payload;
+    
+    patientInfo['patientId'] = patientInfo.patientId && patientInfo.patientId;
+
+    patientInfo['status'] = 'pending';
+   
+    const result = await prisma.$transaction(async (tx) => {
+        const appointment = await tx.appointments.create({
+            data: patientInfo,
+        });
+        const { paymentMethod, paymentType } = payment;
+        const vat = (15 / 100) * (60 + 10)
+        if (appointment.id) {
+            await tx.payment.create({
+                data: {
+                    appointmentId: appointment.id,
+                    bookingFee: 10,
+                    paymentMethod: paymentMethod,
+                    paymentType: paymentType,
+                    vat: vat,
+                    DoctorFee: 60,
+                    totalAmount: (vat + 60),
+                }
+            })
+        }
+        return appointment;
+    })
+
+    return result;
+}
+
 const getAllAppointments = async (): Promise<Appointments[] | null> => {
     const result = await prisma.appointments.findMany();
     return result;
@@ -282,5 +314,6 @@ export const AppointmentService = {
     getDoctorPatients,
     getPaymentInfoViaAppintmentId,
     getPatientPaymentInfo,
-    getDoctorInvoices
+    getDoctorInvoices,
+    createAppointmentByUnAuthenticateUser
 }

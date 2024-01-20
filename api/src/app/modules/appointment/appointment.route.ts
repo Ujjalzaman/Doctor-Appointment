@@ -17,6 +17,7 @@ router.get('/doctor/patients',auth(AuthUser.DOCTOR), AppointmentController.getDo
 router.get('/patient-payment-info/:id',auth(AuthUser.PATIENT), AppointmentController.getPaymentInfoViaAppintmentId);
 
 router.post('/create',auth(AuthUser.PATIENT), AppointmentController.createAppointment);
+router.post('/create-un-authenticate', AppointmentController.createAppointmentByUnAuthenticateUser);
 
 router.get('/:id', AppointmentController.getAppointment);
 
