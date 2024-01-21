@@ -6,6 +6,9 @@ import httpStatus from "http-status";
 import { DoctorSearchableFields, IDoctorFilters } from "./doctor.interface";
 import calculatePagination, { IOption } from "../../../shared/paginationHelper";
 import { IGenericResponse } from "../../../interfaces/common";
+import { Request } from "express";
+import { IUpload } from "../../../interfaces/file";
+import { CloudinaryHelper } from "../../../helpers/uploadHelper";
 
 const create = async (payload: any): Promise<any> => {
     try {
@@ -125,12 +128,22 @@ const deleteDoctor = async (id: string): Promise<any> => {
     return result;
 }
 
-const updateDoctor = async (id: string, payload: Partial<Doctor>): Promise<Doctor> => {
-    const result = await prisma.doctor.update({
-        data: payload,
-        where: {
-            id: id
+const updateDoctor = async (req: Request): Promise<Doctor> => {
+    const file = req.file as IUpload;
+    const id = req.params.id as string;
+    const user = JSON.parse(req.body.data);
+
+    if(file){
+        const uploadImage = await CloudinaryHelper.uploadFile(file);
+        if(uploadImage){
+            user.img = uploadImage.secure_url
+        }else{
+            throw new ApiError(httpStatus.EXPECTATION_FAILED, 'Failed to Upload Image');
         }
+    }
+    const result = await prisma.doctor.update({
+        where:{id},
+        data: user  
     })
     return result;
 }

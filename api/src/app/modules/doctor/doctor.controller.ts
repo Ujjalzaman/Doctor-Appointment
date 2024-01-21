@@ -48,7 +48,7 @@ const deleteDoctor = catchAsync(async (req: Request, res: Response) => {
 })
 
 const updateDoctor = catchAsync(async (req: Request, res: Response) => {
-    const result = await DoctorService.updateDoctor(req.params.id, req.body);
+    const result = await DoctorService.updateDoctor(req);
     sendResponse<Doctor>(res, {
         statusCode: 200,
         message: 'Successfully Updated Doctor !!',
