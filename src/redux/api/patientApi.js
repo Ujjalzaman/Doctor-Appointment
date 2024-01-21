@@ -15,7 +15,10 @@ export const patientApi = baseApi.injectEndpoints({
             query: ({ data, id }) => ({
                 url: `${PAT_URL}/${id}`,
                 method: 'PATCH',
-                data: data
+                data: data,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
             }),
             invalidatesTags: [tagTypes.patient]
         })
