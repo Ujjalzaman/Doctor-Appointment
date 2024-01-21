@@ -2,6 +2,7 @@ import React from 'react'
 import { Slider, Button, DatePicker, Radio } from 'antd';
 import { FaSearch, FaRedoAlt } from "react-icons/fa";
 import Search from 'antd/es/input/Search';
+import { doctorSpecialistOptions } from '../../../constant/global';
 
 const SearchSidebar = ({ setSearchTerm, setSorByGender, setSpecialist, setPriceRange, resetFilter, query }) => {
   const handleDateChange = (_date, _dateString) => { }
@@ -20,29 +21,6 @@ const SearchSidebar = ({ setSearchTerm, setSorByGender, setSpecialist, setPriceR
     },
   ];
   const onSelectGender = (e) => setSorByGender(e.target.value)
-
-  const specialOptions = [
-    {
-      label: 'Urology',
-      value: 'urology',
-    },
-    {
-      label: 'Neurology',
-      value: 'neurology',
-    },
-    {
-      label: 'Cardiologist',
-      value: 'Cardiologist',
-    },
-    {
-      label: 'Orthopedic',
-      value: 'orthopedic',
-    },
-    {
-      label: 'Dentist',
-      value: 'dentist',
-    },
-  ];
 
   const onSelectSepcialist = (e) => setSpecialist(e.target.value)
 
@@ -89,7 +67,7 @@ const SearchSidebar = ({ setSearchTerm, setSorByGender, setSpecialist, setPriceR
         <div className='mb-3'>
           <h6 style={{ color: '#05335c' }}>Select Specialist</h6>
           <div className='d-flex flex-column'>
-            <Radio.Group options={specialOptions} onChange={onSelectSepcialist} />
+            <Radio.Group options={doctorSpecialistOptions} onChange={onSelectSepcialist} />
           </div>
         </div>
 
