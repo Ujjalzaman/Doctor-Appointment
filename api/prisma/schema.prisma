@@ -211,7 +211,7 @@ model DoctorTimeSlot {
 
   doctorId       String
   doctor         Doctor        @relation(fields: [doctorId], references: [id])
-  day            Day?          @unique
+  day            Day?
   timeSlot       ScheduleDay[]
   weekDay        String?
   maximumPatient Int?
