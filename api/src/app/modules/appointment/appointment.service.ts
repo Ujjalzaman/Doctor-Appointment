@@ -138,6 +138,30 @@ const getPaymentInfoViaAppintmentId = async (id: string): Promise<any> => {
     const result = await prisma.payment.findFirst({
         where: {
             appointmentId: id
+        },
+        include:{
+            appointment:{
+                include:{
+                    patient:{
+                        select:{
+                            firstName: true,
+                            lastName: true,
+                            address: true,
+                            country: true,
+                            city: true
+                        }
+                    },
+                    doctor:{
+                        select:{
+                            firstName: true,
+                            lastName: true,
+                            address: true,
+                            country: true,
+                            city: true
+                        }
+                    }
+                }
+            }
         }
     });
     return result;

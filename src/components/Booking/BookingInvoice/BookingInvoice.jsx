@@ -4,20 +4,20 @@ import Footer from '../../Shared/Footer/Footer';
 import logo from '../../../images/logo.png';
 import './BookingInvoice.css';
 import { useParams } from 'react-router-dom';
-import { useGetAppointmentedPaymentInfoQuery, useGetSingleAppointmentQuery } from '../../../redux/api/appointmentApi';
+import { useGetAppointmentedPaymentInfoQuery } from '../../../redux/api/appointmentApi';
 import moment from 'moment';
 import { Empty } from 'antd';
 import Header from '../../Shared/Header/Header';
 
 const BookingInvoice = () => {
     const { id } = useParams();
-    const { data, isError, isLoading } = useGetSingleAppointmentQuery(id);
-    const {data: paymentData} = useGetAppointmentedPaymentInfoQuery(data?.id)
+    const {data, isLoading, isError} = useGetAppointmentedPaymentInfoQuery(id)
+
     let content = null;
     if (isLoading) content = <div>Loading ...</div>
     if (!isLoading && isError) content = <div>Something went Wrong!</div>
-    if (!isLoading && !isError && !data && !paymentData) content = <Empty />
-    if (!isLoading && !isError && data && paymentData) content =
+    if (!isLoading && !isError && !data) content = <Empty />
+    if (!isLoading && !isError && data) content =
         <>
             <div className="col-lg-8 offset-lg-2">
                 <div className="invoice-content">
@@ -43,9 +43,9 @@ const BookingInvoice = () => {
                                 <div className="invoice-info">
                                     <strong className="customer-text">Invoice From</strong>
                                     <p className="invoice-details invoice-details-two">
-                                        Dr.{data?.doctor?.firstName + ' ' + data?.doctor?.lastName} <br />
-                                        {data?.doctor?.address}, {data?.doctor?.city},<br />
-                                        {data?.doctor?.country} <br />
+                                        Dr.{data?.appointment?.doctor?.firstName + ' ' + data?.appointment?.doctor?.lastName} <br />
+                                        {data?.appointment?.doctor?.address}, {data?.appointment?.doctor?.city},<br />
+                                        {data?.appointment?.doctor?.country} <br />
                                     </p>
                                 </div>
                             </div>
@@ -53,9 +53,9 @@ const BookingInvoice = () => {
                                 <div className="invoice-info invoice-info2">
                                     <strong className="customer-text">Invoice To</strong>
                                     <p className="invoice-details">
-                                    {data?.patient?.firstName + ' ' + data?.patient?.lastName} <br />
-                                    {data?.patient?.address}, {data?.patient?.city} ,<br />
-                                    {data?.patient?.country} <br />
+                                    {data?.appointment?.patient?.firstName + ' ' + data?.appointment?.patient?.lastName} <br />
+                                    {data?.appointment?.patient?.address}, {data?.appointment?.patient?.city} ,<br />
+                                    {data?.appointment?.patient?.country} <br />
                                     </p>
                                 </div>
                             </div>
@@ -67,9 +67,9 @@ const BookingInvoice = () => {
                                 <div className="invoice-info">
                                     <strong className="customer-text">Payment Method</strong>
                                     <p className="invoice-details invoice-details-two">
-                                        {paymentData?.paymentType} <br />
+                                        {data?.paymentType} <br />
                                         XXXXXXXXXXXX-2541 <br />
-                                        {paymentData?.paymentMethod}<br />
+                                        {data?.paymentMethod}<br />
                                     </p>
                                 </div>
                             </div>
@@ -91,9 +91,9 @@ const BookingInvoice = () => {
                                         <tbody>
                                             <tr>
                                                 <td>General Consultation</td>
-                                                <td className="text-center">${paymentData?.DoctorFee}</td>
-                                                <td className="text-center">${paymentData?.vat}</td>
-                                                <td className="text-right">${paymentData?.totalAmount}</td>
+                                                <td className="text-center">${data?.DoctorFee}</td>
+                                                <td className="text-center">${data?.vat}</td>
+                                                <td className="text-right">${data?.totalAmount}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -105,7 +105,7 @@ const BookingInvoice = () => {
                                         <tbody>
                                             <tr>
                                                 <th>Subtotal:</th>
-                                                <td><span>${paymentData?.totalAmount}</span></td>
+                                                <td><span>${data?.totalAmount}</span></td>
                                             </tr>
                                             <tr>
                                                 <th>Discount:</th>
@@ -113,7 +113,7 @@ const BookingInvoice = () => {
                                             </tr>
                                             <tr>
                                                 <th>Total Amount:</th>
-                                                <td><span>${paymentData?.totalAmount}</span></td>
+                                                <td><span>${data?.totalAmount}</span></td>
                                             </tr>
                                         </tbody>
                                     </table>
