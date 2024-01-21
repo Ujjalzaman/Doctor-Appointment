@@ -6,9 +6,11 @@ import { useGetDoctorReviewsQuery } from '../../../redux/api/reviewsApi';
 import { FaRegThumbsUp } from "react-icons/fa";
 import moment from 'moment';
 import StarRatings from 'react-star-ratings';
+import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 
 const Reviews = () => {
-    const { data, isError, isLoading } = useGetDoctorReviewsQuery();
+    const {data: loginInfo} = useAuthCheck();
+    const { data, isError, isLoading } = useGetDoctorReviewsQuery(loginInfo?.id);
 
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>

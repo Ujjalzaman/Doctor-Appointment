@@ -42,7 +42,7 @@ const Schedule = () => {
             message.error(uError?.data?.message)
         }
         if (uIsSuccess) {
-            message.success('Successfully Favourite Removed')
+            message.success('Successfully Slot Updated')
         }
     }, [uIsSuccess, uIsError, UIsLoading, uError?.data?.message])
 

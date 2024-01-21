@@ -14,20 +14,51 @@ const createTimeSlot = async (user: any, payload: any): Promise<DoctorTimeSlot |
     if (!isDoctor) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
     }
-    const result = await prisma.doctorTimeSlot.create({
-        data: {
-            day: payload.day,
-            doctorId: isDoctor.id,
-            maximumPatient: payload.maximumPatient,
-            weekDay: payload.weekDay,
-            timeSlot: {
-                create: payload.timeSlot.map((item: any) => ({
-                    startTime: item.startTime,
-                    endTime: item.endTime
-                }))
+
+    const result = await prisma.$transaction(async (tx) => {
+        const isAlreadyExist = await tx.doctorTimeSlot.findFirst({
+            where:{
+                doctorId: isDoctor.id,
+                day: payload.day
             }
+        })
+        if(isAlreadyExist){
+            throw new ApiError(404, 'Time Slot Already Exist Please update or try another day')
         }
+
+        const createTimeSlot = await tx.doctorTimeSlot.create({
+            data: {
+                day: payload.day,
+                doctorId: isDoctor.id,
+                maximumPatient: payload.maximumPatient,
+                weekDay: payload.weekDay,
+                timeSlot: {
+                    create: payload.timeSlot.map((item: any) => ({
+                        startTime: item.startTime,
+                        endTime: item.endTime
+                    }))
+                }
+            }
+        });
+
+        return createTimeSlot;
     })
+    // const tx = await prisma.$transaction(async() =>())
+
+    // const result = await prisma.doctorTimeSlot.create({
+    //     data: {
+    //         day: payload.day,
+    //         doctorId: isDoctor.id,
+    //         maximumPatient: payload.maximumPatient,
+    //         weekDay: payload.weekDay,
+    //         timeSlot: {
+    //             create: payload.timeSlot.map((item: any) => ({
+    //                 startTime: item.startTime,
+    //                 endTime: item.endTime
+    //             }))
+    //         }
+    //     }
+    // })
     return result;
 }
 
@@ -145,7 +176,7 @@ const updateTimeSlot = async (user: any, id: string, payload: any): Promise<{ me
     }
 }
 
-const getAppointmentTimeOfEachDoctor = async (id: string, filter:any): Promise<any> => {
+const getAppointmentTimeOfEachDoctor = async (id: string, filter: any): Promise<any> => {
     const doctorTimSlot = await prisma.doctorTimeSlot.findMany({
         where: {
             doctorId: id
@@ -161,7 +192,7 @@ const getAppointmentTimeOfEachDoctor = async (id: string, filter:any): Promise<a
     })
 
     const generateTimeSlot = (timeSlot: any) => {
-        const selectedTime :any[] = [];
+        const selectedTime: any[] = [];
         timeSlot.forEach((item: any) => {
             const interval = 30;
             const newTimeSlots: any[] = [];
@@ -182,7 +213,7 @@ const getAppointmentTimeOfEachDoctor = async (id: string, filter:any): Promise<a
                     startDate.add(interval, 'minutes');
                 }
             })
-            if(filter.day){
+            if (filter.day) {
                 const newTime = newTimeSlots.filter((item) => item.day === filter.day);
                 selectedTime.push(newTime);
             }
