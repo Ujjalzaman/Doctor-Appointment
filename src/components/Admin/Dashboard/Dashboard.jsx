@@ -1,6 +1,6 @@
 import React from 'react'
 import AdminLayout from '../AdminLayout/AdminLayout'
-import userImg from '../../../images/john.png';
+import userImg from '../../../images/p-placeholder.jpg';
 import './Dashboard.css';
 
 const AdminDashboard = () => {
