@@ -2,7 +2,7 @@ import React from 'react'
 import SubHeader from '../Shared/SubHeader'
 import Footer from '../Shared/Footer/Footer'
 import Header from '../Shared/Header/Header'
-import img from '../../images/baby.png'
+import img from '../../images/features/baby.png'
 import { Link } from 'react-router-dom'
 import doctorBg from '../../images/img/doctors-bg.jpg';
 

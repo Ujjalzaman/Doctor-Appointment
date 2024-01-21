@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from '../../images/logo.png';
-import userImg from '../../images/john.png';
+import userImg from '../../images/p-placeholder.jpg';
 import './AdminHeader.css';
 
 const AdminHeader = () => {
