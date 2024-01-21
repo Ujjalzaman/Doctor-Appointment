@@ -59,7 +59,7 @@ const DoctorInvoice = () => {
             width: 100,
             render: function (data) {
                 return (
-                    <Button type="primary" shape="circle" icon={<FaEye />} size="medium" href={`/booking/invoice/${data?.id}`} />
+                    <Button type="primary" shape="circle" icon={<FaEye />} size="medium" href={`/booking/invoice/${data?.appointmentId}`} />
                 )
             }
         },
