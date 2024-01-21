@@ -192,3 +192,37 @@ a:focus {
     text-transform: uppercase;
     color: #2c4964;
 }
+
+.change-photo-btn {
+    background-color: #1977cc;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 auto;
+    padding: 5px 10px;
+    position: relative;
+    transition: .6s ease-in;
+    text-align: center;
+}
+
+.change-photo-btn:hover {
+    background-color: #094b85;
+    border-radius: 50px;
+    color: #fff;
+}
+
+.change-photo-btn input.upload {
+    bottom: 0;
+    cursor: pointer;
+    filter: alpha(opacity=0);
+    left: 0;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}

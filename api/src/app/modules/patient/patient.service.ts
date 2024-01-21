@@ -1,6 +1,11 @@
 import { Patient, UserRole } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import { create } from "./patientService";
+import { IUpload } from "../../../interfaces/file";
+import { Request } from "express";
+import { CloudinaryHelper } from "../../../helpers/uploadHelper";
+import ApiError from "../../../errors/apiError";
+import httpStatus from "http-status";
 const createPatient = async (payload: any): Promise<any> => {
     const result = await create(payload)
     return result;
@@ -36,12 +41,22 @@ const deletePatient = async (id: string): Promise<any> => {
     return result;
 }
 
-const updatePatient = async (id: string, payload: Partial<Patient>): Promise<Patient> => {
-    const result = await prisma.patient.update({
-        data: payload,
-        where: {
-            id: id
+// : Promise<Patient>
+const updatePatient = async (req: Request): Promise<Patient | null> => {
+    const file = req.file as IUpload;
+    const id = req.params.id as string;
+    const user = JSON.parse(req.body.data)
+    if (file) {
+        const uploadImage = await CloudinaryHelper.uploadFile(file);
+        if (uploadImage) {
+            user.img = uploadImage.secure_url
+        } else {
+            throw new ApiError(httpStatus.EXPECTATION_FAILED, 'Failed to updateImage !!')
         }
+    }
+    const result = await prisma.patient.update({
+        where: { id },
+        data: user
     })
     return result;
 }

@@ -30,7 +30,10 @@ export const doctorApi = baseApi.injectEndpoints({
             query: ({ data, id }) => ({
                 url: `${DOC_URL}/${id}`,
                 method: 'PATCH',
-                data: data
+                data: data,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
             }),
             invalidatesTags: [tagTypes.doctor]
         })

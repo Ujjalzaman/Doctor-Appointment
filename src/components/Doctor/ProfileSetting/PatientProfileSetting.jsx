@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import img from '../../../images/doc/doctor 3.jpg';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
@@ -9,6 +8,8 @@ import { bloodGrupOptions } from '../../../constant/global';
 import { useUpdatePatientMutation } from '../../../redux/api/patientApi';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import { message } from 'antd';
+import ImageUpload from '../../UI/form/ImageUpload';
+import pImage from '../../../images/p-placeholder.jpg'
 
 const PatientProfileSetting = () => {
     const { data } = useAuthCheck();
@@ -20,6 +21,8 @@ const PatientProfileSetting = () => {
     const [showCalendar, setShowCalendar] = useState(false);
     const buttonRef = useRef(null);
     const [updatePatient, { isSuccess, isError, error, isLoading }] = useUpdatePatientMutation();
+
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const handleDateChange = (date) => {
         setValue(date);
@@ -68,7 +71,13 @@ const PatientProfileSetting = () => {
             newObj['dateOfBirth'] = newDate;
         }
         const changedValue = Object.fromEntries(Object.entries(newObj).filter(([key, value]) => value !== ''));
-        updatePatient({ data: changedValue, id: userId })
+        
+        const formData = new FormData();
+        selectedImage && formData.append('file', selectedImage);
+        const changeData = JSON.stringify(changedValue);
+        formData.append('data', changeData)
+        
+        updatePatient({ data: formData, id: userId })
     };
 
 
@@ -81,14 +90,12 @@ const PatientProfileSetting = () => {
                         <div className="form-group">
                             <div className='change-avatar d-flex gap-2 align-items-center'>
                                 <Link to={'/'} className="my-3 patient-img">
-                                    <img src={img} alt="" />
+                                    {/* <img src={selectedImage ? selectedImage : data?.img} alt="" /> */}
+                                    <img src={selectedImage ? selectedImage : data?.img || pImage} alt="" />
+
                                 </Link>
                                 <div className="mt-3">
-                                    <div>
-                                        <span>Upload Photo</span>
-                                        <input type="file" className="upload" />
-                                    </div>
-                                    <small className="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                    <ImageUpload setSelectedImage={setSelectedImage} />
                                 </div>
                             </div>
                         </div>
