@@ -14,7 +14,7 @@ router.get('/doctor/invoices',auth(AuthUser.DOCTOR), AppointmentController.getDo
 router.get('/doctor/appointments',auth(AuthUser.DOCTOR), AppointmentController.getDoctorAppointmentsById);
 router.get('/doctor/patients',auth(AuthUser.DOCTOR), AppointmentController.getDoctorPatients);
 
-router.get('/patient-payment-info/:id',auth(AuthUser.PATIENT), AppointmentController.getPaymentInfoViaAppintmentId);
+router.get('/patient-payment-info/:id',auth(AuthUser.PATIENT, AuthUser.DOCTOR), AppointmentController.getPaymentInfoViaAppintmentId);
 
 router.post('/create',auth(AuthUser.PATIENT), AppointmentController.createAppointment);
 router.post('/create-un-authenticate', AppointmentController.createAppointmentByUnAuthenticateUser);

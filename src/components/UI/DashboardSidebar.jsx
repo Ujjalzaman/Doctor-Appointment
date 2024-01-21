@@ -84,67 +84,67 @@ const DashboardSidebar = () => {
                         </ul>
                         :
                         <ul>
-                            <li className="active">
+                            <li>
                                 <NavLink to={'/dashboard'} activeClassName="active" end>
                                     <FaTable className="icon" />
                                     <span>Dashboard</span>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/dashboard/appointments'} activeClassName="active">
+                                <NavLink to={'/dashboard/appointments'} activeClassName="active" end >
                                     <FaCalendarDay className="icon" />
                                     <span>Appointments</span>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/dashboard/my-patients'} activeClassName="active">
+                                <NavLink to={'/dashboard/my-patients'} activeClassName="active" end>
                                     <FaUserInjured className="icon" />
                                     <span>My Patients</span>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/dashboard/schedule'} activeClassName="active">
+                                <NavLink to={'/dashboard/schedule'} activeClassName="active" end>
                                     <FaCalendarDay className="icon" />
                                     <span>Schedule Timings</span>
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/dashboard/invoices'} activeClassName="active">
+                                <NavLink to={'/dashboard/invoices'} activeClassName="active" end>
                                     <FaHourglassStart className="icon" />
                                     <span>Invoices</span>
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink to={'/dashboard/reviews'} activeClassName="active">
+                                <NavLink to={'/dashboard/reviews'} activeClassName="active" end>
                                     <FaRegStar className="icon" />
                                     <span>Reviews</span>
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink to={'/dashboard/profile-setting'} activeClassName="active">
+                                <NavLink to={'/dashboard/profile-setting'} activeClassName="active" end>
                                     <FaUserCog className="icon" />
                                     <span>Profile Settings</span>
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink to={'/dashboard/blogs'} activeClassName="active">
+                                <NavLink to={'/dashboard/blogs'} activeClassName="active" end>
                                     <FaBlog className="icon" />
                                     <span>Blogs (Will move to Admin)</span>
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink to={'/dashboard/change-password'} activeClassName="active">
+                                <NavLink to={'/dashboard/change-password'} activeClassName="active" end>
                                     <FaLock className="icon" />
                                     <span>Change Password</span>
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink to={'/'}>
-                                    <FaSignOutAlt className="icon" />
+                                    <FaSignOutAlt className="icon" end />
                                     <span>Logout</span>
                                 </NavLink>
                             </li>
