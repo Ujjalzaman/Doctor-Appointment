@@ -1,5 +1,4 @@
 import React from 'react';
-import img from '../../../images/doc/doctor 3.jpg';
 import { Link } from 'react-router-dom';
 import showImg from '../../../images/specialities/specialities-01.png'
 import StarRatings from 'react-star-ratings';
@@ -14,7 +13,7 @@ const SearchContent = ({ data }) => {
             <div className='d-flex p-3 justify-content-between'>
                 <div className='d-flex gap-3'>
                     <div className='doc-img-fluid d-flex align-items-center'>
-                        <img src={img} className="img-fluid" alt="User Image" />
+                        { data?.img && <img src={data?.img} className="img-fluid" alt="User Image" />}
                     </div>
                     <div className="doc-info">
                         <h5 className='mb-0'><Link to={`/doctors/profile/${data?.id}`}>Dr. {data?.firstName + ' ' + data?.lastName}</Link></h5>
@@ -76,7 +75,6 @@ const SearchContent = ({ data }) => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

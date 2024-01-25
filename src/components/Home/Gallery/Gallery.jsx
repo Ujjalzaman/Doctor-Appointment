@@ -27,7 +27,7 @@ const Gallery = () => {
                                 <div class="col-lg-3 col-md-4 col-sm-12" key={index + 55}>
                                     <div class="gallery-item">
                                         <div class="galelry-lightbox d-flex justify-content-center align-items-center">
-                                            <Image src={item} alt="" class="h-100 w-100" />
+                                            <Image src={item} alt="" class="w-100" style={{objectFit:'cover',maxHeight:'280px', minHeight:'280px'}}/>
                                         </div>
                                     </div>
                                 </div>
