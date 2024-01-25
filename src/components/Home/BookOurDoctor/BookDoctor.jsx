@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import './BookDoctor.css';
-import img from '../../../images/doc/doctor 3.jpg';
 import { Link } from 'react-router-dom';
 import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
 import { FaLocationArrow, FaCheckCircle, FaRegHeart, FaDollarSign, FaClock } from "react-icons/fa";
@@ -46,7 +45,7 @@ const BookDoctor = () => {
 						<div className="profile-widget">
 							<div className="doc-img">
 								<Link to={'/doctors/profile'}>
-									<img className="img-fluid" alt="" src={img} />
+									{item?.img && <img className="img-fluid" alt="" src={item?.img} />}
 								</Link>
 								<a style={{ cursor: 'pointer' }} className="position-absolute top-0 end-0 me-2" onClick={() => handleAddFavourite(item?.id)}>
 									<FaRegHeart />
@@ -59,7 +58,7 @@ const BookDoctor = () => {
 									</Link>
 									<FaCheckCircle className='verified' />
 								</h3>
-								<p className="speciality">MBBS, MD - General Medicine, DNB - Cardiology</p>
+								<p className="speciality">{item?.designation}, {item?.specialization}</p>
 								<div className="w-100 d-flex align-items-center">
 									<StarRatings
 										rating={5}
@@ -117,7 +116,7 @@ const BookDoctor = () => {
 								navigation={true}
 								loop={true}
 								centeredSlides={true}
-								autoplay={{delay:2000,disableOnInteraction: false}}
+								autoplay={{ delay: 2000, disableOnInteraction: false }}
 							>
 								{content}
 							</Swiper>

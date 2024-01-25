@@ -9,7 +9,7 @@ import { useUpdatePatientMutation } from '../../../redux/api/patientApi';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import { message } from 'antd';
 import ImageUpload from '../../UI/form/ImageUpload';
-import pImage from '../../../images/p-placeholder.jpg'
+import pImage from '../../../images/avatar.jpg'
 
 const PatientProfileSetting = () => {
     const { data } = useAuthCheck();

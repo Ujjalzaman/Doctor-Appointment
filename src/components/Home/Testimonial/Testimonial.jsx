@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import { useGetAllReviewsQuery } from '../../../redux/api/reviewsApi';
-import img from '../../../images/doc/doc4.jpg';
+import img from '../../../images/avatar.jpg';
 import StarRatings from 'react-star-ratings';
 import { truncate } from '../../../utils/truncate';
 import { FaCheckDouble } from "react-icons/fa";

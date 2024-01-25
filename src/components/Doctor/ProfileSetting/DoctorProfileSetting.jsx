@@ -9,7 +9,7 @@ import { useUpdateDoctorMutation } from '../../../redux/api/doctorApi';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import { doctorSpecialistOptions } from '../../../constant/global';
 import ImageUpload from '../../UI/form/ImageUpload';
-import dImage from '../../../images/d-placeholder.jpg'
+import dImage from '../../../images/avatar.jpg'
 
 const DoctorProfileSetting = () => {
     const [selectedItems, setSelectedItems] = useState([]);
