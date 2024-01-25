@@ -4,9 +4,9 @@ import SocialSignUp from './SocialSignUp';
 import { useForm } from "react-hook-form";
 import Spinner from 'react-bootstrap/Spinner';
 import { useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';
 import { Toast } from 'react-bootstrap';
 import { useUserLoginMutation } from '../../redux/api/authApi';
+import { message } from 'antd';
 
 const SignIn = ({ handleResponse }) => {
     const [infoError, setInfoError] = useState('');
@@ -17,7 +17,7 @@ const SignIn = ({ handleResponse }) => {
     setTimeout(() => {
         setShow(false);
     }, 10000)
-    const [userLogin, {isError, isLoading, isSuccess, data, error}] = useUserLoginMutation();
+    const [userLogin, {isError, isLoading, isSuccess, error}] = useUserLoginMutation();
 
     const onSubmit = async (event) => {
         userLogin({...event})
@@ -27,11 +27,7 @@ const SignIn = ({ handleResponse }) => {
             setInfoError(error?.data?.message)
         }
         if(isSuccess){
-            swal({
-                icon: 'success',
-                text: `Successfully Logged In`,
-                timer: 2000
-            })
+            message.success('Successfully Logged in');
             navigate("/")
         }
     }, [isError, error, isSuccess, navigate])
@@ -40,17 +36,17 @@ const SignIn = ({ handleResponse }) => {
         <form className="sign-in-form" onSubmit={handleSubmit(onSubmit)}>
             <Toast show={show} onClose={() => setShow(!show)} className="signInToast">
                 <Toast.Header>
-                    <strong className="mr-auto">Important Info</strong>
+                    <strong className="mr-auto">Demo credential</strong>
                 </Toast.Header>
-                <Toast.Body>Use this account to sign in as a admin <br />
+                <Toast.Body>Use this account to sign in as a doctor <br />
                     <hr />
                     <div className='bg-dark text-white p-2 px-3 rounded'>
-                        email : Admin@gmail.com <br />
-                        password : 1234 <br />
+                        email : doctor@gmail.com <br />
+                        password : 123456 <br />
                     </div>
                     <hr />
                     <div className='bg-primary p-2 rounded text-white'>
-                        Please Don't abuse the facility
+                        Please do not abuse the facility
                     </div>
                 </Toast.Body>
             </Toast>

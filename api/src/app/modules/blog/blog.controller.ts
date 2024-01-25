@@ -7,7 +7,7 @@ import httpStatus from "http-status";
 import pick from "../../../shared/pick";
 
 const createBlog = catchAsync(async (req: Request, res: Response) => {
-    const result = await BlogService.createBlog(req.user, req.body);
+    const result = await BlogService.createBlog(req);
     sendResponse<Blogs>(res, {
         statusCode: httpStatus.OK,
         message: "Blog Created Successfully",
@@ -39,7 +39,7 @@ const getBlog = catchAsync(async (req: Request, res: Response) => {
 })
 
 const updateBlog = catchAsync(async (req: Request, res: Response) => {
-    const result = await BlogService.updateBlog(req.params.id, req.body);
+    const result = await BlogService.updateBlog(req);
     sendResponse<Blogs>(res, {
         statusCode: httpStatus.OK,
         message: "Blog Updated Successfully",
