@@ -5,9 +5,15 @@ import { Blogs } from "@prisma/client";
 import { IBlogFilters, blogSearchablFields } from "./blog.interface";
 import calculatePagination, { IOption } from "../../../shared/paginationHelper";
 import { IGenericResponse } from "../../../interfaces/common";
+import { Request } from "express";
+import { IUpload } from "../../../interfaces/file";
+import { CloudinaryHelper } from "../../../helpers/uploadHelper";
 
+const createBlog = async (req: Request): Promise<Blogs> => {
+    const user = req.user as any;
+    const file = req.file as IUpload;
+    const data = JSON.parse(req.body.data);
 
-const createBlog = async (user: any, payload: Blogs): Promise<Blogs> => {
     const isUserExist = await prisma.doctor.findUnique({
         where: {
             id: user.userId
@@ -17,12 +23,17 @@ const createBlog = async (user: any, payload: Blogs): Promise<Blogs> => {
         throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
     }
     if (isUserExist) {
-        payload.userId = isUserExist.id
+        data.userId = isUserExist.id
     }
-    const result = await prisma.blogs.create({
-        data: payload,
-    })
-    return result
+    if (file) {
+        const uploadImage = await CloudinaryHelper.uploadFile(file);
+        if (uploadImage) {
+            data.img = uploadImage.secure_url;
+        } else {
+            throw new ApiError(httpStatus.EXPECTATION_FAILED, 'Failed to Updated Image');
+        }
+    }
+    return await prisma.blogs.create({ data });
 }
 
 const getAllBlogs = async (filters: IBlogFilters, options: IOption): Promise<IGenericResponse<Blogs[]>> => {
@@ -103,13 +114,22 @@ const deleteBlog = async (id: string): Promise<Blogs | null> => {
     return result;
 }
 
-const updateBlog = async (id: string, payload: Partial<Blogs>): Promise<Blogs | null> => {
+const updateBlog = async (req: Request): Promise<Blogs | null> => {
+    const file = req.file as IUpload;
+    const id = req.params.id as string;
+    const blogData = JSON.parse(req.body.data);
+    if (file) {
+        const uploadImage = await CloudinaryHelper.uploadFile(file);
+        if (uploadImage) {
+            blogData.img = uploadImage.secure_url;
+        } else {
+            throw new ApiError(httpStatus.EXPECTATION_FAILED, 'Failed to Updated Image');
+        }
+    }
     const result = await prisma.blogs.update({
-        where: {
-            id: id
-        },
-        data: payload
-    })
+        where: { id },
+        data: blogData
+    });
     return result;
 }
 

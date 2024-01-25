@@ -1,16 +1,16 @@
 import { FaCloudUploadAlt } from "react-icons/fa";
 
-const ImageUpload = ({ setSelectedImage }) => {
+const ImageUpload = ({ setSelectedImage, setFile }) => {
   const handleFileChange = (event) => {
     const files = event.target.files;
 
     if (files && files.length > 0) {
-      const file = files[0];
-
       const reader = new FileReader();
-      reader.onload = () => {
+      const file = files[0];
+      setFile(file);
+      reader.onload = () =>{
         setSelectedImage(reader.result);
-      };
+      }
       reader.readAsDataURL(file);
     }
   }
