@@ -3,14 +3,13 @@ import { useParams } from 'react-router-dom'
 import { useGetSingleBlogQuery } from '../../redux/api/blogApi';
 import { Empty, message } from 'antd';
 import BlogAside from './BlogAside';
-import img from '../../images/chair.png';
-import dayjs from 'dayjs';
 import Footer from '../Shared/Footer/Footer';
 import BlogComment from './BlogComment';
 import Header from '../Shared/Header/Header';
 import SubHeader from '../Shared/SubHeader';
 import { FaRegUser, FaBusinessTime } from "react-icons/fa";
 import { FaFacebookSquare, FaInstagramSquare, FaLinkedin } from "react-icons/fa";
+import moment from 'moment';
 
 const BlogDetails = () => {
     const { id } = useParams();
@@ -23,7 +22,7 @@ const BlogDetails = () => {
         <div className="card shadow-sm text-center border-0 rounded-bottom">
 
             <div className="flex-column card-header p-0 border-0 d-flex justify-content-center align-items-center" style={{ overflow: 'hidden', maxHeight: '40rem' }}>
-                <img src={img} alt="blog Image" width={800} height={500} className="image-hover w-100 rounded-top" style={{ objectFit: 'cover' }} />
+                {data?.img && <img src={data?.img} alt="blog Image" width={800} height={500} className="image-hover w-100 rounded-top" style={{ objectFit: 'cover' }} />}
             </div>
 
             <div className="card-body p-0">
@@ -32,11 +31,11 @@ const BlogDetails = () => {
                     <div className="d-flex text-start gap-2">
                         <div className="d-flex gap-1 text-muted align-items-center justify-content-center">
                             <FaRegUser className='form-text' />
-                            <span className="form-text">Ujjal zaman</span>
+                            <span className="form-text">{data?.user?.firstName + ' ' + data?.user?.lastName}</span>
                         </div>
                         <div className="d-flex gap-1 text-muted align-items-center justify-content-center">
                             <FaBusinessTime className='form-text' />
-                            <span className="form-text">{dayjs(data?.cretedAt).format('MMM D, YYYY hh:mm A')}</span>
+                            <span className="form-text">{moment(data?.cretedAt).format('LL')}</span>
                         </div>
                     </div>
                     <hr className="my-1 p-0" />

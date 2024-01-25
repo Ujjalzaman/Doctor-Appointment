@@ -2,7 +2,6 @@
 import dayjs from 'dayjs';
 import { Empty, message } from 'antd';
 import { useGetAllBlogsQuery } from "../../../redux/api/blogApi";
-import img from '../../../images/chair.png'
 import { Link } from 'react-router-dom';
 import { truncate } from '../../../utils/truncate';
 
@@ -22,7 +21,7 @@ const Blog = () => {
                         <div className="card shadow text-center border-0 rounded-bottom">
 
                             <div className="flex-column p-0 border-0 d-flex justify-content-center align-items-center" style={{ height: '11rem', overflow: 'hidden' }}>
-                                <img src={img} alt="blog Image" width={300} height={300} className="w-100 h-100 rounded-top image-hover object-fit-cover" />
+                                {item?.img && <img src={item?.img} alt="blog Image" width={300} height={300} className="w-100 h-100 rounded-top image-hover" style={{objectFit:'cover'}}/>}
                             </div>
 
                             <div className="card-body p-0">

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import Footer from '../Shared/Footer/Footer';
 import { useGetAllBlogsQuery } from '../../redux/api/blogApi';
 import { useDebounced } from '../../redux/hooks';
-import img from '../../images/chair.png';
-import dayjs from 'dayjs';
 import { Empty, Pagination, message } from 'antd';
 import BlogAside from './BlogAside';
 import { Link } from 'react-router-dom';
@@ -11,6 +9,7 @@ import Header from '../Shared/Header/Header';
 import SubHeader from '../Shared/SubHeader';
 import { truncate } from '../../utils/truncate';
 import { FaRegUser, FaBusinessTime } from "react-icons/fa";
+import moment from 'moment';
 
 const Blog = () => {
     const query = {};
@@ -36,11 +35,11 @@ const Blog = () => {
         <>
             {
                 blogData && blogData?.map((item, index) => (
-                    <div className="col-md-4 col-sm-12" style={{ maxWidth: '25rem' }} key={item?.id + index}>
+                    <div className="col-md-4 col-sm-12 mb-5" style={{ maxWidth: '25rem' }} key={item?.id + index}>
                         <div className="card shadow text-center border-0 rounded-bottom">
 
                             <div className="flex-column p-0 border-0 d-flex justify-content-center align-items-center" style={{ height: '11rem', overflow: 'hidden' }}>
-                                <img src={img} alt="blog Image" width={300} height={300} className="w-100 h-100 rounded-top image-hover object-fit-cover" />
+                                <img src={item?.img} alt="blog Image" width={300} height={300} className="w-100 h-100 rounded-top image-hover" style={{objectFit:'contain'}}/>
                             </div>
                             <div className="card-body p-0">
                                 <div className="p-2">
@@ -50,11 +49,11 @@ const Blog = () => {
                                     <div className="d-flex text-start gap-2">
                                         <div className="d-flex gap-1 text-muted align-items-center justify-content-center">
                                             <FaRegUser className='form-text' />
-                                            <span className="form-text">Ujjal zaman</span>
+                                            <span className="form-text">{item?.user.firstName + ' ' + item?.user.firstName }</span>
                                         </div>
                                         <div className="d-flex gap-1 text-muted align-items-center justify-content-center">
                                             <FaBusinessTime className='form-text' />
-                                            <span className="form-text">{dayjs(item?.createdAt).format('MMM D, YYYY hh:mm A')}</span>
+                                            <span className="form-text">{moment(item?.createdAt).format('LL')}</span>
                                         </div>
                                     </div>
                                     <hr className="my-1 p-0" />

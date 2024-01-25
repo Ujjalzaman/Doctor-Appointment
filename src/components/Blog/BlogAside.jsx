@@ -1,13 +1,12 @@
 import React from 'react'
 import { useGetAllBlogsQuery } from '../../redux/api/blogApi';
 import { Empty, message } from 'antd';
-import img from '../../images/chair.png';
-import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import Search from 'antd/es/input/Search';
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { truncate } from '../../utils/truncate';
 import './index.css';
+import moment from 'moment';
 
 const categories = [
     "Professional Development",
@@ -21,7 +20,6 @@ const categories = [
 ]
 
 const BlogAside = ({ setSearchTerm }) => {
-
     const { data, isError, isLoading } = useGetAllBlogsQuery({ limit: 4 });
     const blogData = data?.blogs
     let content = null;
@@ -32,8 +30,8 @@ const BlogAside = ({ setSearchTerm }) => {
             {blogData && blogData?.map((item, index) => (
                 <div className="d-flex gap-2 align-items-center mb-2" key={item?.id + index}>
 
-                    <div style={{ maxWidth: '4rem' }}>
-                        <img src={img} alt={item?.title} className="w-100 h-100 rounded image-hover object-fit-cover" />
+                    <div style={{ maxWidth: '4rem', height:'80px', overflow:'hidden' }}>
+                        <img src={item?.img} alt={item?.title} className="w-100 h-100 rounded image-hover object-fit-cover" />
                     </div>
 
                     <div className="p-2">
@@ -44,7 +42,7 @@ const BlogAside = ({ setSearchTerm }) => {
                             <div className="d-flex text-start gap-2">
                                 <div className="d-flex gap-1 text-muted align-items-center justify-content-center">
                                     <i className="ri-calendar-line"></i>
-                                    <span className="form-text">{dayjs(item?.createdAt).format('MMM D, YYYY hh:mm A')}</span>
+                                    <span className="form-text">{moment(item?.createdAt).format('LL')}</span>
                                 </div>
                             </div>
                         </Link>

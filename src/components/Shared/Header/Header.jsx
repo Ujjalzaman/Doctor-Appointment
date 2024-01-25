@@ -4,7 +4,7 @@ import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import TopHeader from '../TopHeader/TopHeader';
 import { Link, NavLink } from 'react-router-dom';
 import img from '../../../images/logo.png';
-import img2 from '../../../images/doc/doctor 3.jpg';
+import avatar from '../../../images/avatar.jpg';
 import { Button, Popover, message } from 'antd';
 import { loggedOut } from '../../../service/auth.service';
 import { FaBars } from "react-icons/fa";
@@ -14,7 +14,6 @@ const Header = () => {
     const [isLoggedIn, setIsLogged] = useState(false);
     const [show, setShow] = useState(true);
     // const lastScrollRef = useRef(0);
-
     const handleScroll = () => {
         const currentScroll = window.scrollY;
         // if (currentScroll > lastScrollRef.current) { // Undo scroll up effect
@@ -77,7 +76,7 @@ const Header = () => {
                             <div>
                                 <Popover content={content}>
                                     <div className='profileImage'>
-                                        <img src={img2} alt="" className="profileImage shadow img-fluid" />
+                                        <img src={data?.img ? data?.img : avatar} alt="" className="profileImage shadow img-fluid" />
                                     </div>
                                 </Popover>
                             </div>
