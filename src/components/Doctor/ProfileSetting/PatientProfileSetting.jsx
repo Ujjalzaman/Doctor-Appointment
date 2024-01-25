@@ -23,6 +23,7 @@ const PatientProfileSetting = () => {
     const [updatePatient, { isSuccess, isError, error, isLoading }] = useUpdatePatientMutation();
 
     const [selectedImage, setSelectedImage] = useState(null);
+    const [file, setFile] = useState(null);
 
     const handleDateChange = (date) => {
         setValue(date);
@@ -73,7 +74,7 @@ const PatientProfileSetting = () => {
         const changedValue = Object.fromEntries(Object.entries(newObj).filter(([key, value]) => value !== ''));
         
         const formData = new FormData();
-        selectedImage && formData.append('file', selectedImage);
+        selectedImage && formData.append('file', file);
         const changeData = JSON.stringify(changedValue);
         formData.append('data', changeData)
         
@@ -90,12 +91,10 @@ const PatientProfileSetting = () => {
                         <div className="form-group">
                             <div className='change-avatar d-flex gap-2 align-items-center'>
                                 <Link to={'/'} className="my-3 patient-img">
-                                    {/* <img src={selectedImage ? selectedImage : data?.img} alt="" /> */}
                                     <img src={selectedImage ? selectedImage : data?.img || pImage} alt="" />
-
                                 </Link>
                                 <div className="mt-3">
-                                    <ImageUpload setSelectedImage={setSelectedImage} />
+                                    <ImageUpload setSelectedImage={setSelectedImage} setFile={setFile}/>
                                 </div>
                             </div>
                         </div>
