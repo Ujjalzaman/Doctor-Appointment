@@ -3,6 +3,7 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { Reviews } from "@prisma/client";
 import { ReviewService } from "./reviews.service";
+import pick from "../../../shared/pick";
 
 const creatReview = catchAsync(async (req: Request, res: Response) => {
     const result = await ReviewService.create(req.user, req.body);
@@ -15,7 +16,7 @@ const creatReview = catchAsync(async (req: Request, res: Response) => {
 })
 
 const getAllReview = catchAsync(async (req: Request, res: Response) => {
-    const result = await ReviewService.getAllReviews();
+    const result = await ReviewService.getAllReviews(req.query);
     sendResponse<Reviews[]>(res, {
         statusCode: 200,
         message: 'Successfully Retrieve review !!',
