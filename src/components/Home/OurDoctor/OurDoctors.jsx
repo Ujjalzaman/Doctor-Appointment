@@ -1,11 +1,10 @@
 import './index.css';
-import img from '../../../images/doc/doctor 3.jpg'
 import { FaFacebookSquare, FaInstagramSquare, FaLinkedin } from "react-icons/fa";
 import { Empty } from 'antd';
 import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
 
 const OurDoctors = () => {
-    const { data, isLoading, isError } = useGetDoctorsQuery({ limit: 20 });
+    const { data, isLoading, isError } = useGetDoctorsQuery({ limit: 4 });
     const doctors = data?.doctors;
 
     let content = null;
@@ -18,12 +17,12 @@ const OurDoctors = () => {
                     <div class="col-lg-6 mt-3" key={key + 2}>
                         <div class="member d-flex align-items-start">
                             <div class="pic">
-                                <img src={img} class="img-fluid" alt="" />
+                                {item.img && <img src={item.img} class="img-fluid" alt="" />}
                             </div>
                             <div class="member-info">
                                 <h4>{item?.firstName + ' ' + item?.lastName}</h4>
-                                <span>Chief Medical Officer</span>
-                                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                                <span>{item?.designation}</span>
+                                <p>{item?.specialization}</p>
                                 <div class="social">
                                     <a><FaFacebookSquare className='icon' /></a>
                                     <a><FaInstagramSquare className='icon' /></a>

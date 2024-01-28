@@ -2,6 +2,7 @@ import { Reviews } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/apiError";
 import httpStatus from "http-status";
+import calculatePagination, { IOption } from "../../../shared/paginationHelper";
 
 const create = async (user: any, payload: Reviews): Promise<Reviews> => {
     const isUserExist = await prisma.patient.findUnique({
@@ -29,19 +30,23 @@ const create = async (user: any, payload: Reviews): Promise<Reviews> => {
     return result
 }
 
-const getAllReviews = async (): Promise<Reviews[] | null> => {
+const getAllReviews = async (options: IOption): Promise<Reviews[] | null> => {
+    const limit = Number(options.limit) || 10;
     const result = await prisma.reviews.findMany({
+        take: limit,
         include: {
             doctor: {
                 select: {
                     firstName: true,
-                    lastName: true
+                    lastName: true,
+                    img: true
                 }
             },
             patient: {
                 select: {
                     firstName: true,
-                    lastName: true
+                    lastName: true,
+                    img: true
                 }
             }
         }
