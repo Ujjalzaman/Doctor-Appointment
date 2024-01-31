@@ -9,7 +9,7 @@ const CheckoutPage = ({ handleChange, selectValue, isCheck, setIsChecked, data, 
         setIsChecked(!isCheck)
     }
 
-    let price = data.price ? data.price : 60;
+    let price = data?.price ? data.price : 60;
 
     const vat = (15 / 100) * (Number(price))
     return (

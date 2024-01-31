@@ -88,22 +88,25 @@ model Doctor {
 }
 
 model Appointments {
-  id        String  @id @default(uuid())
+  id        String   @id @default(uuid())
   patientId String?
   patient   Patient? @relation(fields: [patientId], references: [id])
   doctorId  String?
   doctor    Doctor?  @relation(fields: [doctorId], references: [id])
 
-  firstName      String?
-  lastName       String?
-  email          String?
-  phone          String?
-  address        String?
-  description    String?
-  scheduleDate   String?
-  scheduleTime   String?
-  reasonForVisit String?
-  status         String?
+  trackingId         String?             @unique
+  firstName          String?
+  lastName           String?
+  email              String?
+  phone              String?
+  address            String?
+  description        String?
+  scheduleDate       String?
+  scheduleTime       String?
+  reasonForVisit     String?
+  status             AppointmentStatus?  @default(pending)
+  paymentStatus      paymentStatus?      @default(unpaid)
+  prescriptionStatus prescriptionStatus? @default(notIssued)
 
   patientType PatientType @default(normal)
   followUp    DateTime?
@@ -256,11 +259,6 @@ enum Day {
   friday
 }
 
-enum PaidType {
-  online
-  cash
-}
-
 enum Gender {
   male
   female
@@ -269,4 +267,26 @@ enum Gender {
 enum PatientType {
   emergency
   normal
+}
+
+enum prescriptionStatus {
+  issued
+  notIssued
+}
+
+enum paymentStatus {
+  paid
+  unpaid
+}
+
+enum AppointmentStatus {
+  pending
+  scheduled
+  cancel
+  confirmed
+  InProgress
+  Completed
+  FollowUp
+  Scheduled
+  archived
 }

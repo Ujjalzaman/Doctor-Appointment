@@ -59,17 +59,6 @@ const DoctorBooking = () => {
         setIsConfirmDisable(isConfirmInputEmpty);
     }, [selectValue, isCheck])
 
-    useEffect(() => {
-        if (createIsSuccess) {
-            message.success("Succcessfully Appointment Scheduled")
-            setSelectValue(initialValue);
-            dispatch(addInvoice({ ...appointmentData }))
-            navigation('/booking/success')
-        }
-        if (createIsError) {
-            message.error(error?.data?.message);
-        }
-    }, [createIsSuccess, createError])
 
     const handleDateChange = (_date, dateString) => {
         setSelectedDate(dateString)
@@ -172,6 +161,18 @@ const DoctorBooking = () => {
         }
         createAppointment(obj);
     }
+
+    useEffect(() => {
+        if (createIsSuccess) {
+            message.success("Succcessfully Appointment Scheduled")
+            setSelectValue(initialValue);
+            dispatch(addInvoice({ ...appointmentData }))
+            navigation(`/booking/   success/${appointmentData.id}`)
+        }
+        if (createIsError) {
+            message.error(error?.data?.message);
+        }
+    }, [createIsSuccess, createError])
     return (
         <>
             <Header />
