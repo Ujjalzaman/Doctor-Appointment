@@ -1,4 +1,4 @@
-import { Appointments, Patient, Payment } from "@prisma/client";
+import { Appointments, Patient, Payment, paymentStatus } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/apiError";
 import httpStatus from "http-status";
@@ -26,10 +26,24 @@ const createAppointment = async (user: any, payload: any): Promise<Appointments 
 
     if (isUserExist) {
         patientInfo['patientId'] = isUserExist.id;
-        patientInfo['status'] = 'pending';
+        patientInfo['paymentStatus'] = paymentStatus.paid;
     }
-
     const result = await prisma.$transaction(async (tx) => {
+        const previousAppointment = await tx.appointments.findFirst({
+            orderBy: { createdAt: 'desc' },
+            take: 1
+        });
+        const appointmentLastNumber = (previousAppointment?.trackingId ?? '').slice(-3);
+        const lastDigit = (Number(appointmentLastNumber) + 1 || 0).toString().padStart(3, '0');
+
+        // Trcking Id To be ==> First 3 Letter Of User  + current year + current month + current day + unique number (Matched Previous Appointment).
+        const first3DigitName = isUserExist?.firstName?.slice(0, 3).toUpperCase();
+        const year = moment().year();
+        const month = (moment().month() + 1).toString().padStart(2, '0');
+        const day = (moment().dayOfYear()).toString().padStart(2, '0');
+        const trackingId = first3DigitName + year + month + day + lastDigit || '001';
+        patientInfo['trackingId'] = trackingId;
+
         const appointment = await tx.appointments.create({
             data: patientInfo,
             include: {
@@ -59,18 +73,28 @@ const createAppointment = async (user: any, payload: any): Promise<Appointments 
         }
         return appointment;
     })
-
     return result;
 }
 
 const createAppointmentByUnAuthenticateUser = async (payload: any): Promise<Appointments | null> => {
     const { patientInfo, payment } = payload;
-    
     patientInfo['patientId'] = patientInfo.patientId && patientInfo.patientId;
 
-    patientInfo['status'] = 'pending';
-   
     const result = await prisma.$transaction(async (tx) => {
+        const previousAppointment = await tx.appointments.findFirst({
+            orderBy: { createdAt: 'desc' },
+            take: 1
+        });
+
+        const appointmentLastNumber = (previousAppointment?.trackingId ?? '').slice(-3);
+        const lastDigit = (Number(appointmentLastNumber) + 1).toString().padStart(3, '0')
+        // Trcking Id To be ==> UNU - 'Un Authenticate User  + current year + current month + current day + unique number (Matched Previous Appointment).
+        const year = moment().year();
+        const month = (moment().month() + 1).toString().padStart(2, '0');
+        const day = (moment().dayOfYear()).toString().padStart(2, '0');
+        const trackingId = 'UNU' + year + month + day + lastDigit || '0001';
+        patientInfo['trackingId'] = trackingId;
+
         const appointment = await tx.appointments.create({
             data: patientInfo,
         });
@@ -113,6 +137,40 @@ const getAppointment = async (id: string): Promise<Appointments | null> => {
     return result;
 }
 
+const getAppointmentByTrackingId = async (data: any): Promise<Appointments | null> => {
+    const {id} = data;
+    
+    const result = await prisma.appointments.findUnique({
+        where: {
+            trackingId: id
+        },
+        include: {
+            doctor: {
+                select: {
+                    firstName: true,
+                    lastName: true,
+                    designation: true, 
+                    college: true,
+                    degree: true,
+                    img: true
+                },
+            },
+            patient: {
+                select: {
+                    firstName: true,
+                    lastName: true,
+                    address: true,
+                    city: true,
+                    country: true,
+                    state: true,
+                    img: true
+                }
+            }
+        }
+    });
+    return result;
+}
+
 const getPatientAppointmentById = async (user: any): Promise<Appointments[] | null> => {
     const { userId } = user;
     const isPatient = await prisma.patient.findUnique({
@@ -139,11 +197,11 @@ const getPaymentInfoViaAppintmentId = async (id: string): Promise<any> => {
         where: {
             appointmentId: id
         },
-        include:{
-            appointment:{
-                include:{
-                    patient:{
-                        select:{
+        include: {
+            appointment: {
+                include: {
+                    patient: {
+                        select: {
                             firstName: true,
                             lastName: true,
                             address: true,
@@ -151,8 +209,8 @@ const getPaymentInfoViaAppintmentId = async (id: string): Promise<any> => {
                             city: true
                         }
                     },
-                    doctor:{
-                        select:{
+                    doctor: {
+                        select: {
                             firstName: true,
                             lastName: true,
                             address: true,
@@ -193,7 +251,7 @@ const getPatientPaymentInfo = async (user: any): Promise<Payment[]> => {
     });
     return result;
 }
-const getDoctorInvoices = async(user:any): Promise<Payment[] | null> =>{
+const getDoctorInvoices = async (user: any): Promise<Payment[] | null> => {
     const { userId } = user;
     const isUserExist = await prisma.doctor.findUnique({
         where: { id: userId }
@@ -228,7 +286,7 @@ const deleteAppointment = async (id: string): Promise<any> => {
     return result;
 }
 
-const updateAppointment = async (id: string, payload: Partial<Appointments>): Promise<Appointments> => {    
+const updateAppointment = async (id: string, payload: Partial<Appointments>): Promise<Appointments> => {
     const result = await prisma.appointments.update({
         data: payload,
         where: {
@@ -246,10 +304,10 @@ const getDoctorAppointmentsById = async (user: any, filter: any): Promise<Appoin
             id: userId
         }
     })
-    if (!isDoctor) {throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')}
+    if (!isDoctor) { throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!') }
 
     let andCondition: any = { doctorId: userId };
-    
+
     if (filter.sortBy == 'today') {
         const today = moment().startOf('day').format('YYYY-MM-DD HH:mm:ss');
         const tomorrow = moment(today).add(1, 'days').format('YYYY-MM-DD HH:mm:ss');
@@ -296,10 +354,10 @@ const getDoctorPatients = async (user: any): Promise<Patient[]> => {
 
     //extract patients from the appointments table
     const patientIds = patients.map(appointment => appointment.patientId);
-
     const patientList = await prisma.patient.findMany({
         where: {
             id: {
+                // @ts-ignore
                 in: patientIds
             }
         }
@@ -339,5 +397,6 @@ export const AppointmentService = {
     getPaymentInfoViaAppintmentId,
     getPatientPaymentInfo,
     getDoctorInvoices,
-    createAppointmentByUnAuthenticateUser
+    createAppointmentByUnAuthenticateUser,
+    getAppointmentByTrackingId
 }

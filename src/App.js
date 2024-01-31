@@ -35,6 +35,7 @@ import About from './components/About/About';
 import Service from './components/Service/Service';
 import Dashboard from './components/Doctor/Dashboard/dashboard';
 import AppointmentPage from './components/Appointment/AppointmentPage';
+import TrackAppointment from './components/TrackAppointment/TrackAppointment';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
   { path: '/service', element: <Service /> },
   { path: '/login', element: <SignInForm /> },
   { path: '/appointment', element: <AppointmentPage /> },
+  {path: '/track-appointment', element: <TrackAppointment/>},
 
   { path: '/doctors', element: <SearchDoctor /> },
   { path: '/doctors/profile/:id', element: <DoctorProfile /> },
