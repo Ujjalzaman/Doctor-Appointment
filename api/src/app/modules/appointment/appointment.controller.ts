@@ -44,6 +44,16 @@ const getAppointment = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+const getAppointmentByTrackingId = catchAsync(async (req: Request, res: Response) => {
+    const result = await AppointmentService.getAppointmentByTrackingId(req.body);
+    sendResponse<Appointments>(res, {
+        statusCode: 200,
+        message: 'Successfully Get Appointment !!',
+        success: true,
+        data: result,
+    })
+})
+
 const deleteAppointment = catchAsync(async (req: Request, res: Response) => {
     const result = await AppointmentService.deleteAppointment(req.params.id);
     sendResponse<Appointments>(res, {
@@ -147,5 +157,6 @@ export const AppointmentController = {
     getPaymentInfoViaAppintmentId,
     getPatientPaymentInfo,
     getDoctorInvoices,
-    createAppointmentByUnAuthenticateUser
+    createAppointmentByUnAuthenticateUser,
+    getAppointmentByTrackingId
 }
