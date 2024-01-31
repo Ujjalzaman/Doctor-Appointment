@@ -7,7 +7,7 @@ import moment from 'moment';
 import { Button, message } from 'antd';
 import { FaEye, FaCheck, FaTimes } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import { FaClock, FaEnvelope, FaLocationArrow, FaPhoneAlt } from "react-icons/fa";
+import { FaClock, FaEnvelope, FaLocationArrow, FaPhoneAlt, FaBriefcaseMedical } from "react-icons/fa";
 
 const Appointments = () => {
     const { data, isError, isLoading } = useGetDoctorAppointmentsQuery({});
@@ -30,7 +30,6 @@ const Appointments = () => {
             message.error(error?.data?.message);
         }
     }, [isSuccess, updateIsError, error])
-
 
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
@@ -57,6 +56,9 @@ const Appointments = () => {
                             </div>
                             <div className='d-flex gap-2'>
                                 <Button type="primary" shape="circle" icon={<FaEye />} size="medium" />
+                                <Link to={`/dashboard/appointment/treatment/${item.id}`}>
+                                    <Button type="primary" icon={<FaBriefcaseMedical />} size="medium">Treatment</Button>
+                                </Link>
                                 {
                                     item?.status === 'pending' &&
                                     <>

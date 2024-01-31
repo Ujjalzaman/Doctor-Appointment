@@ -36,6 +36,7 @@ import Service from './components/Service/Service';
 import Dashboard from './components/Doctor/Dashboard/dashboard';
 import AppointmentPage from './components/Appointment/AppointmentPage';
 import TrackAppointment from './components/TrackAppointment/TrackAppointment';
+import Treatment from './components/Doctor/Treatment/Treatment';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -56,6 +57,8 @@ const router = createBrowserRouter([
   { path: '/dashboard/reviews', element: <Reviews /> },
   { path: '/dashboard/schedule', element: <Schedule /> },
   { path: '/dashboard/appointments', element: <Appointments /> },
+  { path: '/dashboard/appointment/treatment/:id', element: <Treatment /> },
+
   { path: '/dashboard/change-password', element: <ChangePassword /> },
   { path: '/dashboard/profile-setting', element: <ProfileSetting /> },
   { path: '/dashboard/favourite', element: <PatientFavouriteDoctor /> },
