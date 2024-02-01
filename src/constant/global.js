@@ -57,3 +57,22 @@ export const doctorTimeSlot = [
     "05:00 PM"
 ]
 
+const appointmentStatus = [
+    "pending",
+    "scheduled",
+    "cancel",
+    "confirmed",
+    "InProgress",
+    "Completed",
+    "FollowUp",
+    "Scheduled",
+    "archived"
+]
+
+export const appointemntStatusOption = appointmentStatus.map((item) => {
+    return {
+        lebel: item,
+        value: item
+    }
+})
+
