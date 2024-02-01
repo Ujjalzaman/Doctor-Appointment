@@ -1,0 +1,18 @@
+.btn-status {
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.btn-st-danger {
+    background: #f1000048;
+    color: #6e0000;
+}
+.btn-st-success {
+    background: #016b2163;
+    color: #ffffff;
+}
+.bg-gray-g{
+    background-color: #f8f9fa;
+}
