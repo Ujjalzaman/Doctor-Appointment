@@ -172,7 +172,6 @@ model Prescription {
   daignosis    String?
 
   disease    String
-  bronchitis String
   test       String?
 
   medicines Medicine[]

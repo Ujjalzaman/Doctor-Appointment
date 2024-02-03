@@ -103,6 +103,12 @@ const DashboardSidebar = () => {
                                 </NavLink>
                             </li>
                             <li>
+                                <NavLink to={'/dashboard/prescription'} activeClassName="active" end>
+                                    <FaUserInjured className="icon" />
+                                    <span>Prescription</span>
+                                </NavLink>
+                            </li>
+                            <li>
                                 <NavLink to={'/dashboard/schedule'} activeClassName="active" end>
                                     <FaCalendarDay className="icon" />
                                     <span>Schedule Timings</span>

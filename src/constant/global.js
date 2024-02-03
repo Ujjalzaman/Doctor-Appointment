@@ -139,38 +139,6 @@ const medical_diseases = [
     "Celiac Disease"
 ];
 
-const bronchitisList = [
-    "Acute Bronchitis",
-    "Chronic Bronchitis",
-    "Infectious Bronchitis",
-    "Viral Bronchitis",
-    "Bacterial Bronchitis",
-    "Allergic Bronchitis",
-    "Non-infectious Bronchitis",
-    "Smoker's Cough",
-    "Chest Cold",
-    "Respiratory Infection",
-    "COPD Exacerbation",
-    "Productive Cough",
-    "Wheezing",
-    "Shortness of Breath",
-    "Chest Discomfort",
-    "Mucous Production",
-    "Respiratory Distress",
-    "Bronchospasm",
-    "Airway Inflammation",
-    "Persistent Cough",
-    "Throat Irritation",
-    "Chest Congestion",
-    "Fever",
-    "Fatigue",
-    "Malaise",
-    "Breathing Difficulty",
-    "Green or Yellow Sputum",
-    "Rhonchi",
-    "Crackles"
-];
-
 const medicalCheckupList = [
     "Physical Examination",
     "Blood Pressure Measurement",
@@ -255,10 +223,6 @@ export const DiagnosisOptions = medical_diagnoses.map((item) => {
 })
 
 export const DiseaseOptions = medical_diseases.map((item) => {
-    return { label: item, value: item }
-})
-
-export const BronchitisOptions = bronchitisList.map((item) => {
     return { label: item, value: item }
 })
 

@@ -72,7 +72,33 @@ const getPrescriptionById = async (id: string): Promise<Prescription | null> => 
             id: id
         },
         include: {
-            medicines: true
+            medicines: true,
+            appointment: true,
+            doctor: {
+                select: {
+                    firstName: true,
+                    lastName: true,
+                    designation: true,
+                    email: true,
+                    college: true,
+                    address: true,
+                    country: true,
+                    state: true,
+                    specialization: true
+                }
+            },
+            patient: {
+                select: {
+                    firstName: true,
+                    lastName: true,
+                    gender: true,
+                    dateOfBirth: true,
+                    email: true,
+                    bloodGroup: true,
+                    address: true,
+
+                }
+            }
         }
     });
     return result;
