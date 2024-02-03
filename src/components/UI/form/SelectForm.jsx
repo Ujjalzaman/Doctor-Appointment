@@ -1,13 +1,18 @@
 import { Select } from 'antd'
 import React from 'react'
 
-const SelectForm = ({ showSearch, onChange, onSearch, filterOption, options, placeholder="Select" }) => {
+const SelectForm = ({ showSearch, options, setSelectData, mode=false }) => {
+    const onChange = (value) => {
+        setSelectData(value)
+    };
+    const filterOption = (input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
     return (
         <Select
+            mode={mode ?"tags" : undefined}
+            tokenSeparators={mode ? [','] : undefined}
             showSearch={showSearch}
-            placeholder={placeholder}
+            placeholder="Select"
             onChange={onChange}
-            onSearch={onSearch}
             filterOption={filterOption}
             options={options}
             style={{ width: '100%' }}
