@@ -27,14 +27,14 @@ export const prescriptionApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [tagTypes.prescription]
         }),
-        deletePrescription: build.query({
+        deletePrescription: build.mutation({
             query: () => ({
                 url: `${PRESCRIPTION_URL}/`,
                 method: 'DELETE',
             }),
             invalidatesTags: [tagTypes.prescription]
         }),
-        updatePrescription: build.query({
+        updatePrescription: build.mutation({
             query: ({ id, data }) => ({
                 url: `${PRESCRIPTION_URL}/${id}`,
                 method: 'PATCH',
@@ -63,7 +63,7 @@ export const {
     useCreatePrescriptionMutation,
     useGetAllPrescriptionsQuery,
     useGetPrescriptionQuery,
-    useDeletePrescriptionQuery,
+    useDeletePrescriptionMutation,
     useGetDoctorPrescriptionQuery,
     useGetPatientPrescriptionQuery,
     useUpdatePrescriptionQuery

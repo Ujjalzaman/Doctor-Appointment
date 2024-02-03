@@ -6,7 +6,7 @@ import { Button, DatePicker, Space, message } from "antd";
 import dayjs from 'dayjs';
 import { useEffect, useState } from "react";
 import './index.css';
-import { BronchitisOptions, DatePickerSinglePresets, DiagnosisOptions, DiseaseOptions, DosageOptions, FrequencyOptions, MedicalCheckupOptions, PatientStatus, appointemntStatusOption } from "../../../constant/global";
+import { DatePickerSinglePresets, DiagnosisOptions, DiseaseOptions, DosageOptions, FrequencyOptions, MedicalCheckupOptions, PatientStatus, appointemntStatusOption } from "../../../constant/global";
 import SelectForm from "../../UI/form/SelectForm";
 import TextArea from "antd/es/input/TextArea";
 import InputAutoCompleteForm from "../../UI/form/InputAutoCompleteForm";
@@ -23,16 +23,15 @@ const Treatment = () => {
     const [patientStatus, setPatientStatus] = useState('');
     const [daignosis, setDaignosis] = useState([]);
     const [disease, setDisease] = useState([]);
-    const [bronchitis, setBronchitis] = useState([]);
     const [medicalCheckup, setMedicalCheckup] = useState([]);
     const [instruction, setInstruction] = useState('');
     const [followUpDate, setFollowUpdate] = useState('');
     const [medicineList, setMedicineList] = useState([{ id: 1 }]);
 
     useEffect(() => {
-        const isInputEmpty = !selectAppointmentStatus || !patientStatus || !instruction || !followUpDate || !daignosis.length === 0 || !disease.length === 0 || !bronchitis.length === 0 || !medicalCheckup.length === 0;
+        const isInputEmpty = !selectAppointmentStatus || !patientStatus || !instruction || !followUpDate || !daignosis.length === 0 || !disease.length === 0 || !medicalCheckup.length === 0;
         setIsDisable(isInputEmpty);
-    }, [selectAppointmentStatus, patientStatus, followUpDate, instruction, medicineList, daignosis, disease, bronchitis, medicalCheckup]);
+    }, [selectAppointmentStatus, patientStatus, followUpDate, instruction, medicineList, daignosis, disease, medicalCheckup]);
 
     const [createPrescription, { isSuccess, isLoading, isError, error }] = useCreatePrescriptionMutation();
 
@@ -58,7 +57,6 @@ const Treatment = () => {
 
         daignosis.length && (obj["daignosis"] = daignosis.join(','))
         disease.length && (obj["disease"] = disease.join(','))
-        bronchitis.length && (obj["bronchitis"] = bronchitis.join(','))
         medicalCheckup.length && (obj["test"] = medicalCheckup.join(','))
         obj.followUpdate = followUpDate;
         obj.instruction = instruction;
@@ -78,7 +76,6 @@ const Treatment = () => {
             setPatientStatus("");
             setDaignosis([]);
             setDisease([]);
-            setBronchitis([]);
             setMedicalCheckup([]);
             setInstruction('');
             setFollowUpdate('');
@@ -190,20 +187,6 @@ const Treatment = () => {
                                         />
                                     </div>
                                 </div>
-
-                                <div className="col-md-6">
-                                    <div className="form-group mb-3">
-                                        <div>
-                                            <label>Bronchitis</label>
-                                        </div>
-                                        <SelectForm
-                                            mode={true}
-                                            options={BronchitisOptions}
-                                            setSelectData={setBronchitis}
-                                        />
-                                    </div>
-                                </div>
-
                             </div>
 
                         </div>
