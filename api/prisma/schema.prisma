@@ -104,12 +104,11 @@ model Appointments {
   scheduleDate       String?
   scheduleTime       String?
   reasonForVisit     String?
-  status             AppointmentStatus?  @default(pending)
+  status             String?  @default("pending")
   paymentStatus      paymentStatus?      @default(unpaid)
   prescriptionStatus prescriptionStatus? @default(notIssued)
-
-  patientType PatientType @default(normal)
-  followUp    DateTime?
+  isFollowUp         Boolean? @default(false)
+  patientType        String?
 
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
@@ -166,13 +165,15 @@ model Prescription {
   appointmentId String
   appointment   Appointments @relation(fields: [appointmentId], references: [id])
 
-  instructions String?
+  followUpdate String?
+  instruction  String?
   isFullfilled Boolean @default(false)
   isArchived   Boolean @default(false)
   daignosis    String?
 
   disease    String
   bronchitis String
+  test       String?
 
   medicines Medicine[]
 
@@ -187,11 +188,10 @@ model Medicine {
   prescriptionId String
   prescription   Prescription @relation(fields: [prescriptionId], references: [id])
 
-  quantity  Int?
+  medicine  String?
   dosage    String?
   frequency String?
-  startDate DateTime?
-  endDate   DateTime?
+  duration  String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -264,11 +264,6 @@ enum Gender {
   female
 }
 
-enum PatientType {
-  emergency
-  normal
-}
-
 enum prescriptionStatus {
   issued
   notIssued
@@ -277,16 +272,4 @@ enum prescriptionStatus {
 enum paymentStatus {
   paid
   unpaid
-}
-
-enum AppointmentStatus {
-  pending
-  scheduled
-  cancel
-  confirmed
-  InProgress
-  Completed
-  FollowUp
-  Scheduled
-  archived
 }

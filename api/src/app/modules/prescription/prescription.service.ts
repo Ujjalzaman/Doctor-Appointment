@@ -3,56 +3,53 @@ import ApiError from "../../../errors/apiError";
 import prisma from "../../../shared/prisma";
 import { Prescription } from "@prisma/client";
 
-const createPrescription = async (user: any, paylaod: any): Promise<{ message: string }> => {
+const createPrescription = async (user: any, paylaod: any): Promise<{message: string}> => {
+    const { medicine, ...others } = paylaod;
     const { userId } = user;
     const isDoctor = await prisma.doctor.findUnique({
         where: {
             id: userId
         }
     })
-    if (!isDoctor) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
-    }
-    const isPatient = await prisma.patient.findUnique({
-        where: {
-            id: paylaod.patientId
-        }
-    })
-    if (!isPatient) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Patient Account is not found !!')
-    }
+    if (!isDoctor) { throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!') }
+
     const isAppointment = await prisma.appointments.findUnique({
         where: {
             id: paylaod.appointmentId
         }
     })
-    if (!isAppointment) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Appopintment is not found !!')
-    }
-    paylaod.doctorId = isDoctor.id;
+    if (!isAppointment) { throw new ApiError(httpStatus.NOT_FOUND, 'Appopintment is not found !!') }
+
     await prisma.$transaction(async (tx) => {
+        const {status, patientType, ...rest} = others;
         await tx.appointments.update({
             where: {
                 id: isAppointment.id
             },
             data: {
-                status: 'complete',
-                followUp: paylaod.followUpDate,
+                isFollowUp: paylaod.followUpDate ? true : false,
+                status: status || undefined,
+                patientType: patientType || undefined,
+                prescriptionStatus: "issued"
             }
         })
-
-        const medicines = paylaod.medicines;
+        
         const prescription = await tx.prescription.create({
             data: {
-                ...paylaod,
+                ...rest,
+                doctorId: isDoctor.id,
+                patientId: isAppointment.patientId,
                 medicines: undefined
             }
         });
 
-        const medicinePromise = medicines.map((medicine: any) =>
+        const medicinePromise = medicine.map((medicine: any) =>
             tx.medicine.create({
                 data: {
-                    ...medicine,
+                    dosage: medicine.dosage,
+                    duration: medicine.duration,
+                    frequency: medicine.frequency,
+                    medicine: medicine.medicine,
                     prescriptionId: prescription.id
                 }
             })

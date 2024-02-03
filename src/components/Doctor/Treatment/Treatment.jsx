@@ -1,10 +1,10 @@
 import DashboardLayout from "../DashboardLayout/DashboardLayout";
 import img from '../../../images/doc/doctor 3.jpg';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaClock, FaEnvelope, FaLocationArrow, FaPhoneAlt, FaPlus, FaRegTrashAlt } from "react-icons/fa";
-import { Button, DatePicker, Space } from "antd";
+import { Button, DatePicker, Space, message } from "antd";
 import dayjs from 'dayjs';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './index.css';
 import { BronchitisOptions, DatePickerSinglePresets, DiagnosisOptions, DiseaseOptions, DosageOptions, FrequencyOptions, MedicalCheckupOptions, PatientStatus, appointemntStatusOption } from "../../../constant/global";
 import SelectForm from "../../UI/form/SelectForm";
@@ -13,9 +13,12 @@ import InputAutoCompleteForm from "../../UI/form/InputAutoCompleteForm";
 import { useForm } from "react-hook-form";
 import SelectFormForMedicine from "../../UI/form/SelectFormForMedicine";
 import MedicineRangePickerForm from "../../UI/form/MedicineRangePickerForm";
+import { useCreatePrescriptionMutation } from "../../../redux/api/prescriptionApi";
 
 const Treatment = () => {
-    const { handleSubmit } = useForm({});
+    const { id } = useParams();
+    const { handleSubmit } = useForm();
+    const [isDisable, setIsDisable] = useState(true);
     const [selectAppointmentStatus, setSelectAppointmentStatus] = useState('');
     const [patientStatus, setPatientStatus] = useState('');
     const [daignosis, setDaignosis] = useState([]);
@@ -24,7 +27,14 @@ const Treatment = () => {
     const [medicalCheckup, setMedicalCheckup] = useState([]);
     const [instruction, setInstruction] = useState('');
     const [followUpDate, setFollowUpdate] = useState('');
-    const [medicineList, setMedicineList] = useState([{ id: 1, medicine: '' }]);
+    const [medicineList, setMedicineList] = useState([{ id: 1 }]);
+
+    useEffect(() => {
+        const isInputEmpty = !selectAppointmentStatus || !patientStatus || !instruction || !followUpDate || !daignosis.length === 0 || !disease.length === 0 || !bronchitis.length === 0 || !medicalCheckup.length === 0;
+        setIsDisable(isInputEmpty);
+    }, [selectAppointmentStatus, patientStatus, followUpDate, instruction, medicineList, daignosis, disease, bronchitis, medicalCheckup]);
+
+    const [createPrescription, { isSuccess, isLoading, isError, error }] = useCreatePrescriptionMutation();
 
     const addField = (e) => {
         e.preventDefault();
@@ -45,16 +55,36 @@ const Treatment = () => {
         const obj = {};
         obj.status = selectAppointmentStatus;
         obj.patientType = patientStatus;
-        obj.daignosis = daignosis;
-        obj.disease = disease;
-        obj.bronchitis = bronchitis;
-        obj.test = medicalCheckup;
-        obj.followUpDate = followUpDate;
-        obj.instruction = instruction;
-        obj.medicine = medicineList
 
-        console.log(obj)
+        daignosis.length && (obj["daignosis"] = daignosis.join(','))
+        disease.length && (obj["disease"] = disease.join(','))
+        bronchitis.length && (obj["bronchitis"] = bronchitis.join(','))
+        medicalCheckup.length && (obj["test"] = medicalCheckup.join(','))
+        obj.followUpdate = followUpDate;
+        obj.instruction = instruction;
+        obj.medicine = medicineList;
+        obj.appointmentId = id;
+
+        createPrescription({ data: obj });
     }
+
+    useEffect(() => {
+        if (!isLoading && isError) {
+            message.error(error?.data?.message);
+        }
+        if (isSuccess) {
+            message.success('Successfully Changed Saved !');
+            setSelectAppointmentStatus("");
+            setPatientStatus("");
+            setDaignosis([]);
+            setDisease([]);
+            setBronchitis([]);
+            setMedicalCheckup([]);
+            setInstruction('');
+            setFollowUpdate('');
+            setMedicineList([{ id: 1 }]);
+        }
+    }, [isLoading, isError, error, isSuccess])
 
     return (
         <DashboardLayout>
@@ -248,7 +278,7 @@ const Treatment = () => {
                                                         medicineList={medicineList}
                                                         setMedicineList={setMedicineList}
                                                     />
-                                                    
+
                                                 </Space>
                                             </div>
                                         </div>
@@ -290,7 +320,7 @@ const Treatment = () => {
                     </div>
 
                     <div className='text-center my-3'>
-                        <Button htmlType='submit' type="primary" size='large'>
+                        <Button htmlType='submit' type="primary" size='large' disabled={isDisable} loading={isLoading}>
                             Submit
                         </Button>
                     </div>

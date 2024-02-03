@@ -10,29 +10,29 @@ export const prescriptionApi = baseApi.injectEndpoints({
                 url: `${PRESCRIPTION_URL}`,
                 method: 'GET'
             }),
-            providesTags: [tagTypes.favourite]
+            providesTags: [tagTypes.prescription]
         }),
         getPrescription: build.query({
             query: (id) => ({
                 url: `${PRESCRIPTION_URL}/${id}`,
                 method: 'GET'
             }),
-            providesTags: [tagTypes.favourite]
+            providesTags: [tagTypes.prescription]
         }),
-        createPrescription: build.query({
+        createPrescription: build.mutation({
             query: ({ data }) => ({
                 url: `${PRESCRIPTION_URL}/create`,
                 method: 'POST',
                 data: data
             }),
-            invalidatesTags: [tagTypes.favourite]
+            invalidatesTags: [tagTypes.prescription]
         }),
         deletePrescription: build.query({
             query: () => ({
                 url: `${PRESCRIPTION_URL}/`,
                 method: 'DELETE',
             }),
-            invalidatesTags: [tagTypes.favourite]
+            invalidatesTags: [tagTypes.prescription]
         }),
         updatePrescription: build.query({
             query: ({ id, data }) => ({
@@ -40,27 +40,27 @@ export const prescriptionApi = baseApi.injectEndpoints({
                 method: 'PATCH',
                 data: data
             }),
-            invalidatesTags: [tagTypes.favourite]
+            invalidatesTags: [tagTypes.prescription]
         }),
         getDoctorPrescription: build.query({
             query: () => ({
                 url: `${PRESCRIPTION_URL}/doctor/prescription`,
                 method: 'GET'
             }),
-            providesTags: [tagTypes.favourite]
+            providesTags: [tagTypes.prescription]
         }),
         getPatientPrescription: build.query({
             query: () => ({
                 url: `${PRESCRIPTION_URL}/patient/prescription`,
                 method: 'GET'
             }),
-            providesTags: [tagTypes.favourite]
+            providesTags: [tagTypes.prescription]
         })
     })
 })
 
 export const {
-    useCreatePrescriptionQuery,
+    useCreatePrescriptionMutation,
     useGetAllPrescriptionsQuery,
     useGetPrescriptionQuery,
     useDeletePrescriptionQuery,
