@@ -60,6 +60,51 @@ const createPrescription = async (user: any, paylaod: any): Promise<{message: st
         message: "Successfully Prescription Created"
     }
 }
+// Update Prescription and Appointment table 
+const updatePrescriptionAndAppointment = async (user: any, paylaod: any): Promise<{message: string}> => {
+    const {status, patientType,followUpdate,prescriptionId, ...others} = paylaod;
+    const { userId } = user;
+    const isDoctor = await prisma.doctor.findUnique({
+        where: {
+            id: userId
+        }
+    })
+    if (!isDoctor) { throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!') }
+
+    const isPrescribed = await prisma.prescription.findUnique({
+        where: {
+            id: prescriptionId
+        }
+    })
+    if (!isPrescribed) { throw new ApiError(httpStatus.NOT_FOUND, 'Prescription is not found !!') }
+
+    await prisma.$transaction(async (tx) => {
+        
+        await tx.appointments.update({
+            where: {
+                id: isPrescribed.appointmentId
+            },
+            data: {
+                isFollowUp: followUpdate ? true : false,
+                status: status,
+                patientType: patientType,
+            }
+        })
+        
+        await tx.prescription.update({
+            where: {
+                id: prescriptionId
+            },
+            data: {
+                ...others,
+            }
+        });
+
+    })
+    return {
+        message: "Successfully Prescription Updated"
+    }
+}
 
 const getAllPrescriptions = async (): Promise<Prescription[] | null> => {
     const result = await prisma.prescription.findMany();
@@ -96,7 +141,8 @@ const getPrescriptionById = async (id: string): Promise<Prescription | null> => 
                     email: true,
                     bloodGroup: true,
                     address: true,
-
+                    img: true,
+                    city: true,
                 }
             }
         }
@@ -185,5 +231,6 @@ export const PrescriptionService = {
     getPatientPrescriptionById,
     deletePrescription,
     getPrescriptionById,
-    getAllPrescriptions
+    getAllPrescriptions,
+    updatePrescriptionAndAppointment
 }

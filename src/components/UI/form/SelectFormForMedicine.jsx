@@ -1,6 +1,6 @@
 import { Select } from 'antd';
 
-const SelectFormForMedicine = ({ id, options, medicineList, setMedicineList, keyName }) => {
+const SelectFormForMedicine = ({ id, options, medicineList, setMedicineList, keyName, defaultValue=undefined }) => {
 
     const onChange = (value) => {
         const findObj = medicineList.find((item) => item.id === id);
@@ -27,6 +27,7 @@ const SelectFormForMedicine = ({ id, options, medicineList, setMedicineList, key
             options={options}
             style={{ width: '100%' }}
             size='large'
+            defaultValue={defaultValue}
         />
     )
 }
