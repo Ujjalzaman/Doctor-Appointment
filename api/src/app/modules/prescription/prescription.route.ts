@@ -15,5 +15,6 @@ router.post('/create', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionContro
 
 router.delete('/:', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionController.deletePrescription);
 router.patch('/', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionController.updatePrescription);
+router.patch('/update-prescription-appointment', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionController.updatePrescriptionAndAppointment);
 
 export const PrescriptionRouter = router;

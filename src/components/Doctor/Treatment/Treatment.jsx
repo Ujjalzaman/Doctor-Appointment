@@ -1,7 +1,6 @@
 import DashboardLayout from "../DashboardLayout/DashboardLayout";
-import img from '../../../images/doc/doctor 3.jpg';
-import { Link, useParams } from "react-router-dom";
-import { FaClock, FaEnvelope, FaLocationArrow, FaPhoneAlt, FaPlus, FaRegTrashAlt } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
+import { FaPlus, FaRegTrashAlt } from "react-icons/fa";
 import { Button, DatePicker, Space, message } from "antd";
 import dayjs from 'dayjs';
 import { useEffect, useState } from "react";
@@ -14,9 +13,13 @@ import { useForm } from "react-hook-form";
 import SelectFormForMedicine from "../../UI/form/SelectFormForMedicine";
 import MedicineRangePickerForm from "../../UI/form/MedicineRangePickerForm";
 import { useCreatePrescriptionMutation } from "../../../redux/api/prescriptionApi";
+import { useGetSingleAppointmentQuery } from "../../../redux/api/appointmentApi";
+import TreatmentOverview from "./TreatmentOverview";
 
 const Treatment = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
+    const { data } = useGetSingleAppointmentQuery(id)
     const { handleSubmit } = useForm();
     const [isDisable, setIsDisable] = useState(true);
     const [selectAppointmentStatus, setSelectAppointmentStatus] = useState('');
@@ -80,51 +83,13 @@ const Treatment = () => {
             setInstruction('');
             setFollowUpdate('');
             setMedicineList([{ id: 1 }]);
+            navigate('/dashboard/prescription')
         }
     }, [isLoading, isError, error, isSuccess])
 
     return (
         <DashboardLayout>
-
-            <div className="w-100 mb-3 rounded p-3 text-center d-flex justify-content-between bg-gray-g">
-                <div className="container row">
-                    <div className="col-5 p-2 rounded text-white border border-success">
-                        <Link to={'/'} className="my-3 patient-img">
-                            <img src={img} alt="" style={{ height: '90px', width: '90px' }} />
-                        </Link>
-                        <div className="patients-info mt-3">
-                            <h5>Ujjal zaman</h5>
-                            <div className="info">
-                                <p><FaClock className='icon' /> 26 February 2024 </p>
-                                <p><FaLocationArrow className='icon' /> Styleht, bangladesh, 3214 dhaka</p>
-                                <p><FaEnvelope className='icon' /> ujjalz@gmail.com</p>
-                                <p><FaPhoneAlt className='icon' /> +88017510415</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-7 px-5">
-                        <h5>Patient Overview</h5>
-                        <hr />
-                        <div className="p-2 rounded" style={{ background: 'rgb(218 218 219)' }}>
-                            <p className="form-text text-start m-0">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto cupiditate assumenda dolor, cum dolorum aspernatur in esse velit quidem qui.</p>
-                        </div>
-
-                        <div className="text-start mt-3">
-                            <h6>Patient Type : <span className="btn-status btn-st-danger">Emergency</span></h6>
-                            <h6>Current Status : <span className="btn-status btn-st-success">Pending</span></h6>
-                            <h6>Payment Status : <span className="btn-status btn-st-success">Paid</span></h6>
-                            <h6>Prescription Status : <span className="btn-status btn-st-danger">Not Issued</span></h6>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div className="w-100 mb-3 rounded p-2 text-start bg-gray-g">
-                <Link to={'/'}>Show Previous Medical History ? </Link>
-            </div>
-
+            <TreatmentOverview data={data} />
             <div className="w-100 mb-3 rounded p-3 bg-gray-g">
                 <div className="text-center mb-2 d-flex justify-content-center">
                     <h5 className="border-success border-bottom w-25 pb-2 border-5">Start Treatment</h5>
@@ -309,7 +274,6 @@ const Treatment = () => {
                     </div>
                 </form>
             </div>
-
         </DashboardLayout>
     )
 }
