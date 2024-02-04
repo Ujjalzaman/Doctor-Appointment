@@ -4,7 +4,7 @@ const mockVal = (str, repeat = 1) => ({
     value: str.repeat(repeat),
 });
 
-const InputAutoCompleteForm = ({ id, medicineList,setMedicineList }) => {
+const InputAutoCompleteForm = ({ id, medicineList,setMedicineList, defaultValue=undefined }) => {
     const [options, setOptions] = useState([]);
     const getPanelValue = (searchText) => !searchText ? [] : [mockVal(searchText), mockVal(searchText, 2), mockVal(searchText, 3)];
 
@@ -31,6 +31,7 @@ const InputAutoCompleteForm = ({ id, medicineList,setMedicineList }) => {
             onSearch={(text) => setOptions(getPanelValue(text))}
             size='large'
             placeholder="Medicine..."
+            defaultValue={defaultValue}
         />
     )
 }

@@ -7,6 +7,7 @@ export const tagTypes = {
     reviews: 'reviews',
     timeSlot: 'timeSlot',
     blogs: 'blogs',
+    medicine: 'medicine',
 }
 
 export const tagTypeList = [
@@ -17,5 +18,6 @@ export const tagTypeList = [
     tagTypes.doctor,
     tagTypes.reviews,
     tagTypes.timeSlot,
-    tagTypes.blogs
+    tagTypes.blogs,
+    tagTypes.medicine,
 ]

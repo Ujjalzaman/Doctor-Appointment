@@ -39,6 +39,7 @@ import TrackAppointment from './components/TrackAppointment/TrackAppointment';
 import Treatment from './components/Doctor/Treatment/Treatment';
 import Prescription from './components/Doctor/Prescription/Prescription';
 import PrescriptionView from './components/Doctor/Prescription/PrescriptionView';
+import TreatmentEdit from './components/Doctor/Treatment/TreatmentEdit';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -62,6 +63,7 @@ const router = createBrowserRouter([
   { path: '/dashboard/prescription', element: <Prescription /> },
   { path: '/dashboard/prescription/:id', element: <PrescriptionView /> },
   { path: '/dashboard/appointment/treatment/:id', element: <Treatment /> },
+  { path: '/dashboard/appointment/treatment/edit/:id', element: <TreatmentEdit /> },
 
   { path: '/dashboard/change-password', element: <ChangePassword /> },
   { path: '/dashboard/profile-setting', element: <ProfileSetting /> },

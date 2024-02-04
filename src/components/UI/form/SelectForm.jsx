@@ -1,7 +1,7 @@
 import { Select } from 'antd'
 import React from 'react'
 
-const SelectForm = ({ showSearch, options, setSelectData, mode=false }) => {
+const SelectForm = ({ showSearch, options, setSelectData, mode=false, defaultValue=undefined }) => {
     const onChange = (value) => {
         setSelectData(value)
     };
@@ -17,6 +17,7 @@ const SelectForm = ({ showSearch, options, setSelectData, mode=false }) => {
             options={options}
             style={{ width: '100%' }}
             size='large'
+            defaultValue={defaultValue}
         />
     )
 }

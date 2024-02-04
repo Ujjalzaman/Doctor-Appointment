@@ -56,7 +56,7 @@ const Prescription = () => {
                                 <FaRegEye />
                             </Button>
                         </Link>
-                        <Link to={``}>
+                        <Link to={`/dashboard/appointment/treatment/edit/${data.id}`}>
                             <Button type='primary' className="bg-primary" style={{ margin: "5px 5px" }}>
                                 <FaEdit />
                             </Button>
