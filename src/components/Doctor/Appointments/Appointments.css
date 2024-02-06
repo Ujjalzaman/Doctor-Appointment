@@ -38,3 +38,9 @@
 .patient-img img:hover {
     transform: scale(1.1);
 }
+.appointment-status > p{
+    font-size: 14px;
+    font-weight: 600;
+    color: #757575;
+    margin-bottom: 3px;
+}
