@@ -6,6 +6,7 @@ import moment from 'moment';
 import img from '../../../images/avatar.jpg';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import { FaEye } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const DoctorInvoice = () => {
     const { data, isLoading } = useGetDoctorInvoicesQuery();
@@ -59,7 +60,9 @@ const DoctorInvoice = () => {
             width: 100,
             render: function (data) {
                 return (
-                    <Button type="primary" shape="circle" icon={<FaEye />} size="medium" href={`/booking/invoice/${data?.appointmentId}`} />
+                    <Link to={`/booking/invoice/${data?.appointmentId}`}>
+                        <Button type="primary" shape="circle" icon={<FaEye />} size="medium" />
+                    </Link>
                 )
             }
         },

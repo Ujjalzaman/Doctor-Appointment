@@ -107,7 +107,15 @@ const updatePrescriptionAndAppointment = async (user: any, paylaod: any): Promis
 }
 
 const getAllPrescriptions = async (): Promise<Prescription[] | null> => {
-    const result = await prisma.prescription.findMany();
+    const result = await prisma.prescription.findMany({
+        include: {
+            appointment: {
+                select: {
+                    trackingId: true
+                }
+            }
+        }
+    });
     return result;
 }
 
@@ -118,7 +126,14 @@ const getPrescriptionById = async (id: string): Promise<Prescription | null> => 
         },
         include: {
             medicines: true,
-            appointment: true,
+            appointment: {
+                select: {
+                    scheduleDate: true,
+                    scheduleTime: true,
+                    status: true,
+                    trackingId: true,
+                }
+            },
             doctor: {
                 select: {
                     firstName: true,
@@ -175,7 +190,9 @@ const getPatientPrescriptionById = async (user: any): Promise<Prescription[] | n
             appointment: {
                 select: {
                     scheduleDate: true,
-                    scheduleTime: true
+                    scheduleTime: true,
+                    status: true,
+                    trackingId: true
                 }
             }
         }

@@ -1,6 +1,6 @@
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import CustomTable from '../../UI/component/CustomTable';
-import { Button, message } from 'antd';
+import { Button, Tag, message } from 'antd';
 import { FaRegEye, FaEdit, FaRegTimesCircle } from "react-icons/fa";
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
@@ -13,14 +13,13 @@ const Prescription = () => {
     const columns = [
         {
             title: 'Appointment Id',
-            dataIndex: "appointmentId",
+            dataIndex: "appointment",
             key: 1,
-        },
-        {
-            title: 'Bronchitis',
-            sorter: true,
-            dataIndex: "bronchitis",
-            key: 2,
+            render: ({trackingId}) =>{
+                return (
+                    <Tag color="#f50">{trackingId}</Tag>
+                )
+            }
         },
         {
             title: 'Disease',
@@ -33,7 +32,15 @@ const Prescription = () => {
             dataIndex: "followUpdate",
             key: 4,
             render: function (data) {
-                return data && dayjs(data).format('MMM D, YYYY hh:mm A');
+                return <Tag color="#87d068">{dayjs(data).format('MMM D, YYYY hh:mm A')}</Tag>;
+            }
+        },
+        {
+            title: 'Archived',
+            dataIndex: "isArchived",
+            key: 4,
+            render: function ({isArchived}) {
+                return <Tag color={isArchived ? "#f50" : "#108ee9"}>{isArchived ? "Yes" :"Under Treatment"}</Tag>;
             }
         },
         {
@@ -52,16 +59,16 @@ const Prescription = () => {
                 return (
                     <div className='d-flex'>
                         <Link to={`/dashboard/prescription/${data.id}`}>
-                            <Button type='primary' className="bg-primary" style={{ margin: "5px 5px" }}>
+                            <Button type='primary' size='small' className="bg-primary" style={{ margin: "5px 5px" }}>
                                 <FaRegEye />
                             </Button>
                         </Link>
                         <Link to={`/dashboard/appointment/treatment/edit/${data.id}`}>
-                            <Button type='primary' className="bg-primary" style={{ margin: "5px 5px" }}>
+                            <Button type='primary' size='small' className="bg-primary" style={{ margin: "5px 5px" }}>
                                 <FaEdit />
                             </Button>
                         </Link>
-                        <Button onClick={() => deleteHandler(data.id)} type='primary' style={{ margin: "5px 5px" }} danger>
+                        <Button onClick={() => deleteHandler(data.id)} size='small' type='primary' style={{ margin: "5px 5px" }} danger>
                             <FaRegTimesCircle />
                         </Button>
                     </div>
