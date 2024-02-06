@@ -4,7 +4,6 @@ import { FaPlus, FaRegTrashAlt } from "react-icons/fa";
 import { Button, DatePicker, Space, message } from "antd";
 import dayjs from 'dayjs';
 import { useEffect, useState } from "react";
-import './index.css';
 import { DatePickerSinglePresets, DiagnosisOptions, DiseaseOptions, DosageOptions, FrequencyOptions, MedicalCheckupOptions, PatientStatus, appointemntStatusOption } from "../../../constant/global";
 import SelectForm from "../../UI/form/SelectForm";
 import TextArea from "antd/es/input/TextArea";

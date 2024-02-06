@@ -10,7 +10,6 @@ import './index.css';
 const PrescriptionView = () => {
     const { id } = useParams();
     const { data, isLoading, isError, error } = useGetPrescriptionQuery(id);
-    console.log(data)
 
     const columns = [
         {

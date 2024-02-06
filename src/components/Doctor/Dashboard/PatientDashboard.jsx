@@ -3,14 +3,17 @@ import img from '../../../images/doc/doctor 3.jpg';
 import moment from 'moment';
 import { useGetPatientAppointmentsQuery, useGetPatientInvoicesQuery } from '../../../redux/api/appointmentApi';
 import { useGetPatientPrescriptionQuery } from '../../../redux/api/prescriptionApi';
-import { Button, Tabs } from 'antd';
+import { Button, Tabs, Tag } from 'antd';
 import CustomTable from '../../UI/component/CustomTable';
+import { Link } from 'react-router-dom';
+import dayjs from 'dayjs';
+import { FaRegEye } from "react-icons/fa";
 
 const PatientDashboard = () => {
     const { data, isLoading: pIsLoading } = useGetPatientAppointmentsQuery();
     const { data: prescriptionData, prescriptionIsLoading } = useGetPatientPrescriptionQuery();
     const { data: invoices, isLoading: InvoicesIsLoading } = useGetPatientInvoicesQuery();
-
+    
     const InvoiceColumns = [
         {
             title: 'Doctor',
@@ -62,9 +65,10 @@ const PatientDashboard = () => {
             width: 100,
             render: function (data) {
                 return (
-                    <div>
-                        <Button type='primary' href={`/booking/invoice/${data?.id}`}>View</Button>
-                    </div>
+                    <Link to={`/booking/invoice/${data?.appointment?.id}`}>
+                        <Button type='primary' size='medium'>View</Button>
+
+                    </Link>
                 )
             }
         },
@@ -88,6 +92,16 @@ const PatientDashboard = () => {
                 </>
             }
         },
+        {
+            title: 'Appointment Id',
+            dataIndex: "appointment",
+            key: 1,
+            render: ({trackingId}) =>{
+                return (
+                    <Tag color="#f50">{trackingId}</Tag>
+                )
+            }
+        },
 
         {
             title: 'Appointment Date',
@@ -98,13 +112,41 @@ const PatientDashboard = () => {
             }
         },
         {
+            title: 'Follow-Update',
+            dataIndex: "followUpdate",
+            key: 4,
+            render: function (data) {
+                return <Tag color="#87d068">{dayjs(data).format('MMM D, YYYY hh:mm A')}</Tag>;
+            }
+        },
+        {
+            title: 'Archived',
+            dataIndex: "isArchived",
+            key: 4,
+            render: function ({isArchived}) {
+                return <Tag color={isArchived ? "#f50" : "#108ee9"}>{isArchived ? "Yes" :"Under Treatment"}</Tag>;
+            }
+        },
+        {
             title: 'Action',
             key: 13,
             width: 100,
             render: function (data) {
                 return (
-                    <div>
-                        <Button type='primary'>View</Button>
+                    <div className='d-flex'>
+                        <Link to={`/dashboard/prescription/${data.id}`}>
+                            <Button type='primary' size='small' className="bg-primary" style={{ margin: "5px 5px" }}>
+                                <FaRegEye />
+                            </Button>
+                        </Link>
+                        {/* <Link to={`/dashboard/appointment/treatment/edit/${data.id}`}>
+                            <Button type='primary' size='small' className="bg-primary" style={{ margin: "5px 5px" }}>
+                                <FaEdit />
+                            </Button>
+                        </Link> */}
+                        {/* <Button onClick={() => deleteHandler(data.id)} size='small' type='primary' style={{ margin: "5px 5px" }} danger>
+                            <FaRegTimesCircle />
+                        </Button> */}
                     </div>
                 )
             }
@@ -152,7 +194,7 @@ const PatientDashboard = () => {
             key: 24,
             width: 100,
             render: function (data) {
-                return <div>{data?.status}</div>
+                return <Tag color="#f50">{data?.status}</Tag>
             }
         },
         {

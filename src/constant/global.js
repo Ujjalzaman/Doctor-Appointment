@@ -66,7 +66,6 @@ const appointmentStatus = [
     "InProgress",
     "Completed",
     "FollowUp",
-    "Scheduled",
     "archived"
 ]
 
