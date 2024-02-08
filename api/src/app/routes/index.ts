@@ -10,6 +10,7 @@ import { FavouriteRouter } from '../modules/favourites/favourites.route';
 import { DoctorTimeSlotRouter } from '../modules/doctorTimeSlot/doctorTimeSlot.route';
 import { BlogRoutes } from '../modules/blog/blog.route';
 import { MedicineRouter } from '../modules/medicines/medicine.route';
+import { ContactRouter } from '../modules/contact/contact.route';
 
 const router = express.Router();
 
@@ -49,9 +50,14 @@ const moduleRoutes = [
     {
         path: '/blogs',
         route: BlogRoutes,
-    },{
+    },
+    {
         path: '/medicine',
         route: MedicineRouter
+    },
+    {
+        path: '/contact',
+        route: ContactRouter
     }
 ]
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
