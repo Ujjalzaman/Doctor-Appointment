@@ -33,6 +33,7 @@
     "mongodb": "^3.6.6",
     "mongoose": "^6.7.1",
     "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.9",
     "winston": "^3.10.0",
     "winston-daily-rotate-file": "^4.7.1",
     "zod": "^3.21.4"
@@ -46,6 +47,7 @@
     "@types/jsonwebtoken": "^9.0.2",
     "@types/multer": "^1.4.11",
     "@types/node": "^20.10.1",
+    "@types/nodemailer": "^6.4.14",
     "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",

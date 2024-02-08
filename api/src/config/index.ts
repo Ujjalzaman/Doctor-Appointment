@@ -18,5 +18,6 @@ export default {
         name: process.env.CLOUND_NAME,
         key: process.env.API_KEY,
         secret: process.env.API_SECRET
-    }
+    },
+    emailPass: process.env.EMAIL_PASS
 }
