@@ -52,7 +52,7 @@ const BookingSuccess = () => {
                                 </div>
                                 <div className='d-flex gap-3 mb-2'>
                                     <div><FaLink style={{ fontSize: '1rem' }} /></div>
-                                    <div><a href='/' target='_blank'>https://example.com</a></div>
+                                    <div><a href='https://meet.google.com/udx-kieq-sng' target='_blank'>https://meet.google.com/udx-kieq-sng</a></div>
                                 </div>
                                 <div className='d-flex gap-3'>
                                     <div><FaCalendarAlt style={{ fontSize: '1rem' }} /> </div>

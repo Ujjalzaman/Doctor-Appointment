@@ -40,6 +40,7 @@ import Treatment from './components/Doctor/Treatment/Treatment';
 import Prescription from './components/Doctor/Prescription/Prescription';
 import PrescriptionView from './components/Doctor/Prescription/PrescriptionView';
 import TreatmentEdit from './components/Doctor/Treatment/TreatmentEdit';
+import ViewAppointment from './components/Doctor/Appointments/ViewAppointment';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
   { path: '/dashboard/reviews', element: <Reviews /> },
   { path: '/dashboard/schedule', element: <Schedule /> },
   { path: '/dashboard/appointments', element: <Appointments /> },
+  { path: '/dashboard/appointments/:id', element: <ViewAppointment /> },
   { path: '/dashboard/prescription', element: <Prescription /> },
   { path: '/dashboard/prescription/:id', element: <PrescriptionView /> },
   { path: '/dashboard/appointment/treatment/:id', element: <Treatment /> },

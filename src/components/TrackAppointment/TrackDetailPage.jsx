@@ -32,7 +32,7 @@ const TrackDetailPage = ({ data, setShowInfo }) => {
                       {data?.patient?.img ? <img src={data?.patient?.img} alt='' /> : <img src={img} alt='' />}
                     </div>
                     <div className='text-start'>
-                      <h6 className='mb-0 text-white'>{data?.patient.fristName + ' ' + data?.patient.lastName}</h6>
+                      <h6 className='mb-0 text-white'>{data?.patient.firstName + ' ' + data?.patient.lastName}</h6>
                       <p className='form-text text-white'>{data?.patient?.address + ',' + data?.patient?.city}<br /> {data?.patient?.state + ',' + data?.patient?.country}</p>
                     </div>
                   </div>
@@ -47,7 +47,7 @@ const TrackDetailPage = ({ data, setShowInfo }) => {
                       {data?.doctor?.img ? <img src={data?.doctor?.img} alt='' /> : <img src={img} alt='' />}
                     </div>
                     <div className='text-start'>
-                      <h6 className='mb-0 text-white'>{data?.doctor.fristName + ' ' + data?.doctor.lastName}</h6>
+                      <h6 className='mb-0 text-white'>{data?.doctor.firstName + ' ' + data?.doctor.lastName}</h6>
                       <p className='form-text text-white'>{data?.doctor?.designation}</p>
                     </div>
                   </div>
