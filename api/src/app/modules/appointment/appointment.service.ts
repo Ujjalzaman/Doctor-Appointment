@@ -3,8 +3,10 @@ import prisma from "../../../shared/prisma";
 import ApiError from "../../../errors/apiError";
 import httpStatus from "http-status";
 import moment from 'moment';
+import { EmailtTransporter } from "../../../helpers/emailTransporter";
 
-const createAppointment = async (user: any, payload: any): Promise<Appointments | null> => {
+const createAppointment = async (user: any, payload: any): Promise<Appointments | null | any> => {
+
     const { patientInfo, payment } = payload;
     const isUserExist = await prisma.patient.findUnique({
         where: {
@@ -47,12 +49,8 @@ const createAppointment = async (user: any, payload: any): Promise<Appointments 
         const appointment = await tx.appointments.create({
             data: patientInfo,
             include: {
-                doctor: {
-                    select: {
-                        firstName: true,
-                        lastName: true
-                    }
-                }
+                doctor: true,
+                patient: true
             }
         });
         const { paymentMethod, paymentType } = payment;
@@ -71,8 +69,41 @@ const createAppointment = async (user: any, payload: any): Promise<Appointments 
                 }
             })
         }
+
+        const pathName = "../../../template/appointment.html"
+        const appointmentObj = {
+            created: moment(appointment.createdAt).format('LL'),
+            trackingId: appointment.trackingId,
+            patientType: appointment.patientType,
+            status: appointment.status,
+            paymentStatus: appointment.paymentStatus,
+            prescriptionStatus: appointment.prescriptionStatus,
+            scheduleDate:moment(appointment.scheduleDate).format('LL'),
+            scheduleTime:appointment.scheduleTime,
+            doctorImg: appointment?.doctor?.img,
+            doctorFirstName: appointment?.doctor?.firstName,
+            doctorLastName: appointment?.doctor?.lastName,
+            specialization:appointment?.doctor?.specialization,
+            designation:appointment?.doctor?.designation,
+            college:appointment?.doctor?.college,
+            patientImg:appointment?.patient?.img,
+            patientfirstName:appointment?.patient?.firstName,
+            patientLastName:appointment?.patient?.lastName,
+            dateOfBirth: moment().diff(moment(appointment?.patient?.dateOfBirth), 'years'),
+            bloodGroup:appointment?.patient?.bloodGroup,
+            city:appointment?.patient?.city,
+            state:appointment?.patient?.state,
+            country:appointment?.patient?.country
+        }
+        const replacementObj = appointmentObj;
+        const firstName = appointment?.firstName;
+        const lastName = appointment?.lastName;
+        const subject = `Appointment Confirm With Dr ${appointment?.doctor?.firstName + ' ' + appointment?.doctor?.lastName} at ${appointment.scheduleDate} + ' ' + ${appointment.scheduleTime}`
+        const fromMail = "ujjalzaman+doctor@gmail.com"
+        const toMail = `${appointment.email + ',' + appointment.doctor?.email}`;
+        EmailtTransporter({ pathName, replacementObj, firstName, lastName, fromMail, toMail, subject })
         return appointment;
-    })
+    });
     return result;
 }
 
@@ -113,6 +144,25 @@ const createAppointmentByUnAuthenticateUser = async (payload: any): Promise<Appo
                 }
             })
         }
+
+        const appointmentObj = {
+            created: moment(appointment.createdAt).format('LL'),
+            trackingId: appointment.trackingId,
+            patientType: appointment.patientType,
+            status: appointment.status,
+            paymentStatus: appointment.paymentStatus,
+            prescriptionStatus: appointment.prescriptionStatus,
+            scheduleDate:moment(appointment.scheduleDate).format('LL'),
+            scheduleTime:appointment.scheduleTime,
+        }
+        const pathName = "../../../template/meeting.html"
+        const replacementObj = appointmentObj;
+        const firstName = appointment?.firstName;
+        const lastName = appointment?.lastName;
+        const subject = `Appointment Confirm With at ${appointment.scheduleDate} + ' ' + ${appointment.scheduleTime}`
+        const fromMail = "ujjalzaman+doctor@gmail.com"
+        const toMail = `${appointment.email}`;
+        EmailtTransporter({ pathName, replacementObj, firstName, lastName, fromMail, toMail, subject })
         return appointment;
     })
 
@@ -138,8 +188,8 @@ const getAppointment = async (id: string): Promise<Appointments | null> => {
 }
 
 const getAppointmentByTrackingId = async (data: any): Promise<Appointments | null> => {
-    const {id} = data;
-    
+    const { id } = data;
+
     const result = await prisma.appointments.findUnique({
         where: {
             trackingId: id
@@ -149,7 +199,7 @@ const getAppointmentByTrackingId = async (data: any): Promise<Appointments | nul
                 select: {
                     firstName: true,
                     lastName: true,
-                    designation: true, 
+                    designation: true,
                     college: true,
                     degree: true,
                     img: true
