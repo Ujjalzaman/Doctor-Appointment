@@ -203,9 +203,9 @@ const PatientDashboard = () => {
             width: 100,
             render: function (data) {
                 return (
-                    <div>
+                    <Link to={`/dashboard/appointments/${data.id}`}>
                         <Button type='primary'>View</Button>
-                    </div>
+                    </Link>
                 )
             }
         },
