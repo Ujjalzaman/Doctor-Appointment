@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment</title>
+</head>
+<body>
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td colspan="2" style="background: #f2f4fe; padding: 1rem; border-radius: 0.25rem;">
+                <p style="margin-bottom: 0; font-weight: bold;">Creation Date : {{created}}</p>
+                <p style="margin-bottom: 0; font-weight: bold;">Tracking Id: {{trackingId}}</p>
+            </td>
+            <td colspan="2" style="background: #f2f4fe; padding: 1rem; border-radius: 0.25rem;">
+                <p style="margin-bottom: 0; font-weight: bold;">Patient Type : {{patientType}}</p>
+                <p style="margin-bottom: 0; font-weight: bold;">Current Status: {{status}}</p>
+                <p style="margin-bottom: 0; font-weight: bold;">Payment: {{paymentStatus}}</p>
+                <p style="margin-bottom: 0; font-weight: bold;">Prescription Status: {{prescriptionStatus}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="background: #dcdcdc; padding: 1rem; border-radius: 0.25rem;">
+                <h4 style="text-align: center; font-weight: bold;">APPOINTMENT INFORMATION</h4>
+                <p><strong>Place of Meeting:</strong> ONLINE</p>
+                <p><strong>Meeting Link:</strong> <a href="https://meet.google.com/udx-kieq-sng" target="_blank">https://meet.google.com/udx-kieq-sng</a></p>
+                <p><strong>Meeting Date:</strong> {{scheduleDate}}</p>
+                <p><strong>Meeting Time:</strong> {{scheduleTime}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="background: #dcdcdc; padding: 1rem; border-radius: 0.25rem;">
+                <h4 style="text-align: center; font-weight: bold;">DOCTOR INFORMATION</h4>
+                <div style="display: flex; gap: 1rem;">
+                    <div>
+                        <img src="{{doctorImg}}" alt="" style="border: 2px solid #ffbc21; width: 80px; height: 80px; border-radius: 50%; object-fit: cover; object-position: top;">
+                    </div>
+                    <div>
+                        <p><strong>{{doctorFirstName}} {{doctorLastName}}</strong></p>
+                        <p>{{specializationn}}</p>
+                        <p>{{designation}}</p>
+                        <p>{{college}}</p>
+                    </div>
+                </div>
+            </td>
+            <td colspan="2" style="background: #dcdcdc; padding: 1rem; border-radius: 0.25rem;">
+                <h4 style="text-align: center; font-weight: bold;">PATIENT INFORMATION</h4>
+                <div style="display: flex; gap: 1rem;">
+                    <div>
+                        <img src="{{patientImg}}" alt="" style="border: 2px solid #ffbc21; width: 80px; height: 80px; border-radius: 50%; object-fit: cover; object-position: top;">
+                    </div>
+                    <div>
+                        <p><strong>{{patientfirstName}} {{patientLastName}}</strong></p>
+                        <p>Age: {{dateOfBirth}}</p>
+                        <p>Blood Group: {{bloodGroup}}</p>
+                        <p>{{city}}, {{state}}, {{country}}</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
