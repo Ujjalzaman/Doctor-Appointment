@@ -32,6 +32,7 @@
     "react-vertical-timeline-component": "^3.6.0",
     "sweetalert": "^2.1.2",
     "swiper": "^11.0.5",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
