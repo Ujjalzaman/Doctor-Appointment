@@ -9,7 +9,37 @@ import { IGenericResponse } from "../../../interfaces/common";
 import { Request } from "express";
 import { IUpload } from "../../../interfaces/file";
 import { CloudinaryHelper } from "../../../helpers/uploadHelper";
+import moment from "moment";
+import { EmailtTransporter } from "../../../helpers/emailTransporter";
+const { v4: uuidv4 } = require('uuid');
 
+const sendVerificationEmail = async (data: Doctor) => {
+    const currentUrl = "http://localhost:5000/api/v1/auth/";
+    const uniqueString = uuidv4() + data.id;
+    const uniqueStringHashed = await bcrypt.hashSync(uniqueString, 12);
+
+    const url = currentUrl + 'user/verify/' + data.id + '/' + uniqueString
+    const currentTime = moment();
+    const expiresDate = moment(currentTime).add(6, 'hours')
+    const verficationData = await prisma.userVerfication.create({
+        data: {
+            userId: data.id,
+            expiresAt: expiresDate.toDate(),
+            uniqueString: uniqueStringHashed
+        }
+    })
+    if (verficationData) {
+        const pathName = "../../../template/verify.html"
+        const obj = {
+            link: url
+        }
+        const replacementObj = obj;
+        const subject = "Email Verification"
+        const fromMail = "ujjalzaman+doctor@gmail.com"
+        const toMail = data.email;
+        EmailtTransporter({ pathName, replacementObj, fromMail, toMail, subject })
+    }
+}
 const create = async (payload: any): Promise<any> => {
     try {
         const data = await prisma.$transaction(async (tx) => {
@@ -33,7 +63,9 @@ const create = async (payload: any): Promise<any> => {
                 };
             }
         });
-
+        if (data?.doctor.id) {
+            sendVerificationEmail(data.doctor)
+        }
         return data;
     } catch (error: any) {
         throw new ApiError(httpStatus.BAD_REQUEST, error.message)
@@ -42,7 +74,7 @@ const create = async (payload: any): Promise<any> => {
 
 const getAllDoctors = async (filters: IDoctorFilters, options: IOption): Promise<IGenericResponse<Doctor[]>> => {
     const { limit, page, skip } = calculatePagination(options);
-    const { searchTerm, max, min,specialist, ...filterData } = filters;
+    const { searchTerm, max, min, specialist, ...filterData } = filters;
 
     const andCondition = [];
     if (searchTerm) {
@@ -75,7 +107,7 @@ const getAllDoctors = async (filters: IDoctorFilters, options: IOption): Promise
         })
     }
 
-    if(specialist){
+    if (specialist) {
         andCondition.push({
             AND: ({
                 services: {
@@ -133,17 +165,17 @@ const updateDoctor = async (req: Request): Promise<Doctor> => {
     const id = req.params.id as string;
     const user = JSON.parse(req.body.data);
 
-    if(file){
+    if (file) {
         const uploadImage = await CloudinaryHelper.uploadFile(file);
-        if(uploadImage){
+        if (uploadImage) {
             user.img = uploadImage.secure_url
-        }else{
+        } else {
             throw new ApiError(httpStatus.EXPECTATION_FAILED, 'Failed to Upload Image');
         }
     }
     const result = await prisma.doctor.update({
-        where:{id},
-        data: user  
+        where: { id },
+        data: user
     })
     return result;
 }
