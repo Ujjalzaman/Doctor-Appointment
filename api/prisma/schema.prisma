@@ -17,6 +17,16 @@ model Auth {
   @@map("Auth")
 }
 
+model UserVerfication {
+  id     String @id @default(uuid())
+  userId String
+  uniqueString String?
+  expiresAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Patient {
   id           String         @id @default(uuid())
   firstName    String
@@ -75,6 +85,7 @@ model Doctor {
   experienceHospitalName String?
   expericenceStart       String?
   expericenceEnd         String?
+  verified               Boolean?         @default(false)
   createdAt              DateTime         @default(now())
   updatedAt              DateTime         @updatedAt
   appointments           Appointments[]
@@ -104,10 +115,10 @@ model Appointments {
   scheduleDate       String?
   scheduleTime       String?
   reasonForVisit     String?
-  status             String?  @default("pending")
+  status             String?             @default("pending")
   paymentStatus      paymentStatus?      @default(unpaid)
   prescriptionStatus prescriptionStatus? @default(notIssued)
-  isFollowUp         Boolean? @default(false)
+  isFollowUp         Boolean?            @default(false)
   patientType        String?
 
   createdAt    DateTime       @default(now())
@@ -171,8 +182,8 @@ model Prescription {
   isArchived   Boolean @default(false)
   daignosis    String?
 
-  disease    String
-  test       String?
+  disease String
+  test    String?
 
   medicines Medicine[]
 

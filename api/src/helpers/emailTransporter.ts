@@ -1,15 +1,14 @@
 import fs from 'fs';
 import handlebars from 'handlebars';
-import nodemailer from 'nodemailer';
-import config from '../config';
 import ApiError from '../errors/apiError';
 import httpStatus from 'http-status';
+import { Transporter } from './Transporter';
 
 type IEmailProps = {
     pathName: string;
     replacementObj: any,
-    firstName: string | null,
-    lastName: string | null,
+    firstName?: string | null,
+    lastName?: string | null,
     fromMail: string,
     toMail: string,
     subject: string,
@@ -25,14 +24,6 @@ export const EmailtTransporter = ({pathName,replacementObj,firstName, lastName, 
             }
         })
     }
-    
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: "ujjalzaman@gmail.com",
-            pass: config.emailPass
-        }
-    });
 
     readHtmlFile(__dirname + `${pathName}`, function(err:any, html:any){
         if(err){
@@ -48,7 +39,7 @@ export const EmailtTransporter = ({pathName,replacementObj,firstName, lastName, 
             html: htmlToSend
         };
 
-        transporter.sendMail(mailOptions, function (error: any, info: any) {
+        Transporter.sendMail(mailOptions, function (error: any, info: any) {
             if (error) {
                 console.log(error)
                 throw new ApiError(httpStatus.NO_CONTENT, "Unable to send message !")
