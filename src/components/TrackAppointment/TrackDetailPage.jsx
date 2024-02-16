@@ -9,6 +9,11 @@ import moment from 'moment';
 import { Button } from 'antd';
 
 const TrackDetailPage = ({ data, setShowInfo }) => {
+  console.log(data)
+  const patinetFirstName = data?.patient?.firstName ? data?.patient?.firstName : data?.firstName;
+  const patinetLastName = data?.patient?.lastName ? data?.patient?.lastName : data?.lastName
+  const doctorFirstName = data?.patient?.firstName ? data?.patient?.firstName : 'Not Setup yet'
+  const doctorLastName = data?.patient?.lastName ? data?.patient?.lastName : ''
   return (
     <>
       <div className="container mb-2" style={{ marginTop: '8rem' }}>
@@ -32,8 +37,8 @@ const TrackDetailPage = ({ data, setShowInfo }) => {
                       {data?.patient?.img ? <img src={data?.patient?.img} alt='' /> : <img src={img} alt='' />}
                     </div>
                     <div className='text-start'>
-                      <h6 className='mb-0 text-white'>{data?.patient.firstName + ' ' + data?.patient.lastName}</h6>
-                      <p className='form-text text-white'>{data?.patient?.address + ',' + data?.patient?.city}<br /> {data?.patient?.state + ',' + data?.patient?.country}</p>
+                      <h6 className='mb-0 text-white'>{patinetFirstName + ' ' + patinetLastName}</h6>
+                      <p className='form-text text-white'>{data?.patient?.address && data?.patient?.address + ',' + data?.patient?.city && data?.patient?.city}<br /> {data?.patient?.state + ',' + data?.patient?.country && data?.patient?.country}</p>
                     </div>
                   </div>
                 </div>
@@ -47,7 +52,7 @@ const TrackDetailPage = ({ data, setShowInfo }) => {
                       {data?.doctor?.img ? <img src={data?.doctor?.img} alt='' /> : <img src={img} alt='' />}
                     </div>
                     <div className='text-start'>
-                      <h6 className='mb-0 text-white'>{data?.doctor.firstName + ' ' + data?.doctor.lastName}</h6>
+                      <h6 className='mb-0 text-white'>{doctorFirstName + ' ' + doctorLastName}</h6>
                       <p className='form-text text-white'>{data?.doctor?.designation}</p>
                     </div>
                   </div>

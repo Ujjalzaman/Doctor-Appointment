@@ -23,7 +23,7 @@ const Contact = () => {
         if(isError && error){
             message.error(error?.data?.message);
         }
-    }, [])
+    }, [isSuccess, isError, error])
     return (
         <>
             <Header />
