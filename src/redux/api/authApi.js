@@ -33,7 +33,27 @@ export const authApi = baseApi.injectEndpoints({
                 data,
             }),
         }),
+        resetPassword: build.mutation({
+            query: (data) => ({
+                url: `${AUTH_URL}/reset-password`,
+                method: 'POST',
+                data,
+            }),
+        }),
+        resetConfirm: build.mutation({
+            query: (data) => ({
+                url: `${AUTH_URL}/reset-password/confirm`,
+                method: 'POST',
+                data,
+            }),
+        }),
     })
 })
 
-export const { useUserLoginMutation, useDoctorSignUpMutation, usePatientSignUpMutation } = authApi
+export const { 
+    useUserLoginMutation, 
+    useDoctorSignUpMutation, 
+    usePatientSignUpMutation,
+    useResetPasswordMutation, 
+    useResetConfirmMutation
+} = authApi

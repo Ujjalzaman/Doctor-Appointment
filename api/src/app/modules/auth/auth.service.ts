@@ -72,8 +72,9 @@ const ResetPassword = async (payload: any): Promise<{ message: string }> => {
         const clientUrl = "http://localhost:3000/reset-password/"
         const uniqueString = uuidv4() + isUserExist.id;
         const uniqueStringHashed = await bcrypt.hashSync(uniqueString, 12);
+        const encodedUniqueStringHashed = uniqueStringHashed.replace(/\//g, '-');
 
-        const resetLink = clientUrl + isUserExist.id + '/' + uniqueStringHashed;
+        const resetLink = clientUrl + isUserExist.id + '/' + encodedUniqueStringHashed;
         const currentTime = moment();
         const expiresTime = moment(currentTime).add(4, 'hours');
 
