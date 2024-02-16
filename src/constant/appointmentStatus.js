@@ -6,10 +6,8 @@ export const appointStatusDsc = {
         scheduled: 'Changed to "Scheduled" to indicate an appointment that is scheduled',
         Completed: "If the appointment has been successfully concluded.",
         Canceled: "If the appointment is canceled by either the patient or the healthcare provider.",
-        Completed: 'If the appointment is successfully completed.',
         'Follow-up Scheduled': 'If a follow-up appointment is scheduled.',
         cancel: 'If the appointment cannot be completed for some reason.',
-        'Follow-up Scheduled': 'If a follow-up appointment is recommended and scheduled.',
         archived: 'If the appointment is closed and moved to historical records.',
         InProgress: 'Lorem ipsum dollar sumit',
         confirmed : 'When the patient and doctor confirms the appointment.',
@@ -20,5 +18,3 @@ export const appointStatusDsc = {
         notIssued: "Set to 'not_issued' to represent that a prescription has not been issued yet."
     }
 }
-
-const appointmentStatusOption = ['pending', 'scheduled', 'cancel', 'confirmed', 'In Progress', 'Completed', 'Follow-up Scheduled', 'archived'];

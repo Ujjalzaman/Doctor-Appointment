@@ -41,6 +41,7 @@ import Prescription from './components/Doctor/Prescription/Prescription';
 import PrescriptionView from './components/Doctor/Prescription/PrescriptionView';
 import TreatmentEdit from './components/Doctor/Treatment/TreatmentEdit';
 import ViewAppointment from './components/Doctor/Appointments/ViewAppointment';
+import ForgotPassword from './components/Login/ForgotPassword';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
   { path: '/about', element: <About /> },
   { path: '/service', element: <Service /> },
   { path: '/login', element: <SignInForm /> },
+  { path: '/reset-password/:userId/:uniqueString', element: <ForgotPassword /> },
   { path: '/appointment', element: <AppointmentPage /> },
   {path: '/track-appointment', element: <TrackAppointment/>},
 
