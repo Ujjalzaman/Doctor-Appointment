@@ -5,6 +5,9 @@ import httpStatus from 'http-status';
 import { JwtHelper } from '../../../helpers/jwtHelper';
 import config from '../../../config';
 import { Secret } from 'jsonwebtoken';
+import moment from 'moment';
+import { EmailtTransporter } from '../../../helpers/emailTransporter';
+const { v4: uuidv4 } = require('uuid');
 
 type ILginResponse = {
     accessToken?: string;
@@ -57,7 +60,108 @@ const VerificationUser = async (user: any): Promise<ILginResponse> => {
     return { accessToken, user: { role, userId } }
 }
 
+const ResetPassword = async (payload: any): Promise<{ message: string }> => {
+    const { email } = payload;
+    const isUserExist = await prisma.auth.findUnique({
+        where: { email: email }
+    })
+    if (!isUserExist) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User is not Exist !");
+    }
+    if (isUserExist) {
+        const clientUrl = "http://localhost:3000/reset-password/"
+        const uniqueString = uuidv4() + isUserExist.id;
+        const uniqueStringHashed = await bcrypt.hashSync(uniqueString, 12);
+
+        const resetLink = clientUrl + isUserExist.id + '/' + uniqueStringHashed;
+        const currentTime = moment();
+        const expiresTime = moment(currentTime).add(4, 'hours');
+
+        await prisma.$transaction(async (tx) => {
+
+            //Check if the forgotPassword record exists before attempting reset
+            const existingForgotPassword = await tx.forgotPassword.findUnique({
+                where: { id: isUserExist.id }
+            });
+            if (existingForgotPassword) {
+                await tx.forgotPassword.delete({
+                    where: { id: isUserExist.id }
+                })
+            }
+
+            const forgotPassword = await tx.forgotPassword.create({
+                data: {
+                    userId: isUserExist.id,
+                    expiresAt: expiresTime.toDate(),
+                    uniqueString: resetLink
+                }
+            });
+            if (forgotPassword) {
+                const pathName = "../../../template/resetPassword.html";
+                const obj = {
+                    link: resetLink
+                };
+                const replacementObj = obj;
+                const subject = "Request to Reset Password";
+                const fromMail = "ujjalzaman+doctor@gmail.com"
+                const toMail = isUserExist.email;
+                EmailtTransporter({ pathName, replacementObj, fromMail, toMail, subject })
+            }
+            return forgotPassword;
+        });
+    }
+
+    return {
+        message: "Password Reset Successfully !!"
+    };
+}
+
+const PassworResetConfirm = async (payload: any): Promise<any> => {
+    const { userId, uniqueString, password } = payload;
+
+    await prisma.$transaction(async (tx) => {
+        const isUserExist = await tx.auth.findUnique({
+            where: { id: userId }
+        });
+
+        if (!isUserExist) { throw new ApiError(httpStatus.NOT_FOUND, "User is not Exist !") };
+        const resetLink = `http://localhost:3000/reset-password/${isUserExist.id}/${uniqueString}`
+        const getForgotRequest = await tx.forgotPassword.findFirst({
+            where: {
+                userId: userId as string,
+                uniqueString: resetLink
+            }
+        })
+        if (!getForgotRequest) { throw new ApiError(httpStatus.NOT_FOUND, "Forgot Request was not found or Invalid !") };
+
+        const expiresAt = moment(getForgotRequest.expiresAt);
+        const currentTime = moment();
+        if (expiresAt.isBefore(currentTime)) {
+            throw new ApiError(httpStatus.NOT_FOUND, "Forgot Request has been expired !")
+        } else {
+            await tx.auth.update({
+                where: {
+                    id: userId
+                },
+                data: {
+                    password: password && await bcrypt.hashSync(password, 12)
+                }
+            });
+            await prisma.forgotPassword.delete({
+                where: {
+                    id: getForgotRequest.id
+                }
+            })
+        }
+    });
+    return {
+        message: "Password Changed Successfully !!"
+    }
+}
+
 export const AuthService = {
     loginUser,
-    VerificationUser
+    VerificationUser,
+    ResetPassword,
+    PassworResetConfirm
 }
