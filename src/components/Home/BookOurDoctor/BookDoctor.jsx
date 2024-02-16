@@ -44,7 +44,7 @@ const BookDoctor = () => {
 					<SwiperSlide key={item.id}>
 						<div className="profile-widget">
 							<div className="doc-img">
-								<Link to={'/doctors/profile'}>
+								<Link to={`/doctors/profile/${item?.id}`}>
 									{item?.img && <img className="img-fluid" alt="" src={item?.img} />}
 								</Link>
 								<a style={{ cursor: 'pointer' }} className="position-absolute top-0 end-0 me-2" onClick={() => handleAddFavourite(item?.id)}>
@@ -53,7 +53,7 @@ const BookDoctor = () => {
 							</div>
 							<div className="pro-content">
 								<h3 className="title">
-									<Link to={'/doctors/profile'}>
+									<Link to={`/doctors/profile/${item?.id}`}>
 										<a>{item?.firstName + ' ' + item?.lastName}</a>
 									</Link>
 									<FaCheckCircle className='verified' />
@@ -116,7 +116,7 @@ const BookDoctor = () => {
 								navigation={true}
 								loop={true}
 								centeredSlides={true}
-								autoplay={{ delay: 2000, disableOnInteraction: false }}
+								autoplay={{ delay: 5000, disableOnInteraction: false }}
 							>
 								{content}
 							</Swiper>
