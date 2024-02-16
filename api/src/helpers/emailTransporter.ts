@@ -33,7 +33,7 @@ export const EmailtTransporter = ({pathName,replacementObj,firstName, lastName, 
         const template = handlebars.compile(html);
         const htmlToSend = template(replacementObj);
         var mailOptions = {
-            from: `"${firstName + ' ' + lastName}" <${fromMail}>`,
+            from: `<${fromMail}>`,
             to: toMail,
             subject: subject,
             html: htmlToSend
