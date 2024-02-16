@@ -27,6 +27,18 @@ model UserVerfication {
   updatedAt DateTime @updatedAt
 }
 
+model ForgotPassword {
+  id     String @id @default(uuid())
+  userId String
+  uniqueString String?
+  expiresAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("forgot-password")
+}
+
 model Patient {
   id           String         @id @default(uuid())
   firstName    String
