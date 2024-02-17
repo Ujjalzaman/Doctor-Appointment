@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import img from '../../../../images/avatar.jpg';
-import { FaEye, FaCheck, FaTimes } from "react-icons/fa";
+import { FaEye, FaCheck, FaTimes, FaBriefcaseMedical } from "react-icons/fa";
 import { useGetDoctorAppointmentsQuery, useUpdateAppointmentMutation } from '../../../../redux/api/appointmentApi';
 import moment from 'moment';
 import { Button, message } from 'antd';
 import CustomTable from '../../../UI/component/CustomTable';
 import { Tabs } from 'antd';
+import { Link } from 'react-router-dom';
 
 const DashboardPage = () => {
     const [sortBy, setSortBy] = useState("upcoming");
@@ -14,7 +15,7 @@ const DashboardPage = () => {
 
     const handleOnselect = (value) => {
         // eslint-disable-next-line eqeqeq
-        setSortBy(value == 1 ? 'upcoming': value == 2 ? 'today' : sortBy)
+        setSortBy(value == 1 ? 'upcoming' : value == 2 ? 'today' : sortBy)
         refetch()
     }
 
@@ -81,7 +82,18 @@ const DashboardPage = () => {
             render: function (data) {
                 return (
                     <div className='d-flex gap-2'>
-                        <Button type="primary" shape="circle" icon={<FaEye />} size="medium" />
+                        {
+                            data.prescriptionStatus === 'notIssued'
+                                ?
+                                <Link to={`/dashboard/appointment/treatment/${data?.id}`}>
+                                    <Button type="primary" icon={<FaBriefcaseMedical />} size="small">Treatment</Button>
+                                </Link>
+
+                                :
+                                <Link to={`/dashboard/prescription/${data?.prescription[0]?.id}`}>
+                                    <Button type="primary" shape="circle" icon={<FaEye />} size="small" />
+                                </Link>
+                        }
                         {
                             data?.status === 'pending' &&
                             <>
