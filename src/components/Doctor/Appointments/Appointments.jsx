@@ -78,12 +78,10 @@ const Appointments = () => {
                                         <Link to={`/dashboard/appointment/treatment/${item?.id}`}>
                                             <Button type="primary" icon={<FaBriefcaseMedical />} size="small">Treatment</Button>
                                         </Link>
-
                                         :
                                         <Link to={`/dashboard/prescription/${item?.prescription[0]?.id}`}>
                                             <Button type="primary" shape="circle" icon={<FaEye />} size="small" />
                                         </Link>
-
                                 }
                                 {
                                     item?.isFollowUp && <Link to={`/dashboard/appointment/treatment/edit/${item?.prescription[0]?.id}`}>
