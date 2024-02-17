@@ -1,5 +1,5 @@
 import React from 'react';
-import img from '../../images/doc/doc4.jpg';
+import img from '../../images/avatar.jpg';
 import './DashboardSidebar.css';
 import { Link, NavLink } from 'react-router-dom';
 import useAuthCheck from '../../redux/hooks/useAuthCheck';
@@ -23,7 +23,7 @@ const DashboardSidebar = () => {
                 {
                     role === 'doctor' ?
                         <div className="profile-info text-center">
-                            <Link to={'/'}><img src={img} alt="" /></Link>
+                            <Link to={'/'}><img src={data?.img ? data?.img : img} alt="" /></Link>
                             <div className='profile-details'>
                                 <h5 className='mb-0'>{data?.firstName + " " + data?.lastName}</h5>
                                 <div>
@@ -33,7 +33,7 @@ const DashboardSidebar = () => {
                         </div>
                         :
                         <div className="profile-info text-center">
-                            <Link to={'/'}><img src={img} alt="" /></Link>
+                            <Link to={'/'}><img src={data?.img ? data?.img : img} alt="" /></Link>
                             <div className='profile-details'>
                                 <h5 className='mb-0'>{data?.firstName + " " + data?.lastName}</h5>
                                 <div className='mt-2'>
