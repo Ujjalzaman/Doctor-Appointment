@@ -5,7 +5,8 @@ import Header from '../../Shared/Header/Header';
 import Footer from '../../Shared/Footer/Footer';
 import moment from 'moment';
 import './index.css';
-import { Tag } from 'antd';
+import { Button, Tag, Tooltip } from 'antd';
+import { clickToCopyClipBoard } from '../../../utils/copyClipBoard';
 
 const ViewAppointment = () => {
     const { id } = useParams();
@@ -20,7 +21,11 @@ const ViewAppointment = () => {
                 <div className='d-flex justify-content-between rounded p-2' style={{ background: '#f2f4fe' }}>
                     <div>
                         <p className='form-text text-black mb-0'>Creation Date : <Tag bordered={false} color="volcano">{moment(data?.createdAt).format('LL')}</Tag></p>
-                        <p>Tracking Id : <Tag color="#108ee9">{data?.trackingId}</Tag></p>
+                        <Tooltip title="Copy Tracking Id">
+                            <Button>
+                                <h6>Tracking<Tag color="#87d068" className='ms-2 text-uppercase' onClick={() => clickToCopyClipBoard(data?.trackingId)}>{data?.trackingId}</Tag></h6>
+                            </Button>
+                        </Tooltip>
                     </div>
 
                     <div style={{ fontWeight: 500 }}>
@@ -46,17 +51,20 @@ const ViewAppointment = () => {
 
                 <div>
                     <h4 className='text-center my-3 fw-bold text-secondary'>DOCTOR INFOMATION</h4>
-                    <div className='border border-light-subtle rounded p-3 d-flex gap-3'>
-                        <div>
-                            <img src={data?.doctor?.img} alt="" style={{ border: '2px solid #ffbc21', width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'top' }} />
+                    {
+                        data?.doctor &&
+                        <div className='border border-light-subtle rounded p-3 d-flex gap-3'>
+                            <div>
+                                <img src={data?.doctor?.img} alt="" style={{ border: '2px solid #ffbc21', width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'top' }} />
+                            </div>
+                            <div>
+                                <h4 className="mb-1">{data?.doctor?.firstName && data?.doctor?.firstName + ' ' + data?.doctor?.lastName && data?.doctor?.lastName}</h4>
+                                <p className="mb-1">{data?.doctor?.specialization}</p>
+                                <p className="mb-1 form-text">{data?.doctor?.designation}</p>
+                                <p className="mb-1 form-text">{data?.doctor?.college}</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 className="mb-1">{data?.doctor?.firstName + ' ' + data?.doctor?.lastName}</h4>
-                            <p className="mb-1">{data?.doctor?.specialization}</p>
-                            <p className="mb-1 form-text">{data?.doctor?.designation}</p>
-                            <p className="mb-1 form-text">{data?.doctor?.college}</p>
-                        </div>
-                    </div>
+                    }
                 </div>
 
                 <div>

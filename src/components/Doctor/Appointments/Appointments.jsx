@@ -8,6 +8,7 @@ import { Button, message, Tag, Tooltip } from 'antd';
 import { FaEye, FaCheck, FaTimes } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { FaClock, FaEnvelope, FaLocationArrow, FaPhoneAlt, FaBriefcaseMedical } from "react-icons/fa";
+import { clickToCopyClipBoard } from '../../../utils/copyClipBoard';
 
 const Appointments = () => {
     const { data, isError, isLoading } = useGetDoctorAppointmentsQuery({});
@@ -20,16 +21,6 @@ const Appointments = () => {
         if (id) {
             updateAppointment({ id, data: changeObj })
         }
-    }
-
-    const clickToCopyClipBoard = (id) => {
-        const textField = document.createElement('textarea');
-        textField.innerText = id;
-        document.body.appendChild(textField);
-        textField.select();
-        document.execCommand('copy');
-        document.body.removeChild(textField);
-        message.success("Copied To Clipboard")
     }
 
     useEffect(() => {
