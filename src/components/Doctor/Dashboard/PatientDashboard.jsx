@@ -3,11 +3,12 @@ import img from '../../../images/doc/doctor 3.jpg';
 import moment from 'moment';
 import { useGetPatientAppointmentsQuery, useGetPatientInvoicesQuery } from '../../../redux/api/appointmentApi';
 import { useGetPatientPrescriptionQuery } from '../../../redux/api/prescriptionApi';
-import { Button, Tabs, Tag } from 'antd';
+import { Button, Tabs, Tag, Tooltip } from 'antd';
 import CustomTable from '../../UI/component/CustomTable';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { FaRegEye } from "react-icons/fa";
+import { clickToCopyClipBoard } from '../../../utils/copyClipBoard';
 
 const PatientDashboard = () => {
     const { data, isLoading: pIsLoading } = useGetPatientAppointmentsQuery();
@@ -98,7 +99,11 @@ const PatientDashboard = () => {
             key: 1,
             render: ({trackingId}) =>{
                 return (
-                    <Tag color="#f50">{trackingId}</Tag>
+                    <Tooltip title="Copy Tracking Id">
+                            <Button>
+                                <h6><Tag color="#87d068" className='ms-2 text-uppercase' onClick={() => clickToCopyClipBoard(trackingId)}>{trackingId}</Tag></h6>
+                            </Button>
+                        </Tooltip>
                 )
             }
         },
