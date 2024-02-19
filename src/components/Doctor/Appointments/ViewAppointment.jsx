@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { useGetSingleAppointmentQuery } from '../../../redux/api/appointmentApi';
 import Header from '../../Shared/Header/Header';
@@ -7,8 +7,11 @@ import moment from 'moment';
 import './index.css';
 import { Button, Tag, Tooltip } from 'antd';
 import { clickToCopyClipBoard } from '../../../utils/copyClipBoard';
+import { FaPrint } from "react-icons/fa";
+import ReactToPrint from "react-to-print";
 
 const ViewAppointment = () => {
+    const ref = useRef();
     const { id } = useParams();
     const { data, isLoading, isError } = useGetSingleAppointmentQuery(id);
 
@@ -17,7 +20,7 @@ const ViewAppointment = () => {
     if (isLoading && !isError) content = <h2>Loading...</h2>
     if (!isLoading && !isError && data?.id) content =
         <>
-            <page size="A4" className="container mx-auto border border-primary-subtle p-3 pb-3" style={{ margin: '10rem 7rem' }}>
+            <page size="A4" className="container mx-auto border border-primary-subtle p-3 pb-3">
                 <div className='d-flex justify-content-between rounded p-2' style={{ background: '#f2f4fe' }}>
                     <div>
                         <p className='form-text text-black mb-0'>Creation Date : <Tag bordered={false} color="volcano">{moment(data?.createdAt).format('LL')}</Tag></p>
@@ -43,7 +46,7 @@ const ViewAppointment = () => {
                     </h4>
                     <div className='border border-light-subtle rounded p-3'>
                         <p className='mb-1'>Place of Meeting : <Tag bordered={false} color="#f50">ONLINE</Tag></p>
-                        <p className='mb-1'>Meeting Link : <a href="https://meet.google.com/udx-kieq-sng" target='_blank'  rel='noreferrer'>https://meet.google.com/udx-kieq-sng</a></p>
+                        <p className='mb-1'>Meeting Link : <a href="https://meet.google.com/udx-kieq-sng" target='_blank' rel='noreferrer'>https://meet.google.com/udx-kieq-sng</a></p>
                         <p className='mb-1'>Meeting Date : <Tag bordered={false} color="orange">{moment(data?.scheduleDate).format('LL')}</Tag></p>
                         <p className='mb-1'>Meeting Time : <Tag bordered={false} color="orange">{data?.scheduleTime}</Tag></p>
                     </div>
@@ -92,7 +95,18 @@ const ViewAppointment = () => {
     return (
         <>
             <Header />
-            {content}
+            <div style={{ margin: '10rem 7rem' }}>
+                <div className="d-flex justify-content-end mb-4" style={{ marginRight: '8rem' }}>
+                    <ReactToPrint
+                        bodyClass="print-agreement"
+                        content={() => ref.current}
+                        trigger={() => (<Button type="primary" icon={<FaPrint />}> Print</Button>)}
+                    />
+                </div>
+                <div ref={ref}>
+                    {content}
+                </div>
+            </div>
             <Footer />
         </>
     )

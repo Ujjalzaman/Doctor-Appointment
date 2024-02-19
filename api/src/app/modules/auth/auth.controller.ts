@@ -64,18 +64,28 @@ const VerifyUser = catchAsync(async (req: Request, res: Response) => {
         if (getVerficationUser) {
             const expiresAt = moment(getVerficationUser.expiresAt);
             const currentTime = moment();
-            if (expiresAt.isBefore(currentTime)) {
-                await prisma.doctor.update({
-                    where: {
-                        id: isUserExist.id
-                    },
-                    data: {
-                        verified: true
-                    }
+            // check currenttime is before then expires Time
+            const isWithinNext6Hours = currentTime.isBefore(expiresAt);
+
+            if (isWithinNext6Hours) {
+                await prisma.$transaction(async (tx) => {
+                    await tx.doctor.update({
+                        where: {
+                            id: isUserExist.id
+                        },
+                        data: {
+                            verified: true
+                        }
+                    });
+                    await tx.userVerfication.delete({
+                        where: {
+                            id: getVerficationUser.id
+                        }
+                    })
                 })
-                res.redirect('/api/v1/auth/expired/link');
-            } else {
                 res.redirect('/api/v1/auth/verified');
+            } else {
+                res.redirect('/api/v1/auth/expired/link');
             }
         }
     } catch (error) {
