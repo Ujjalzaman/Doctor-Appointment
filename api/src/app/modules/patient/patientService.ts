@@ -14,23 +14,29 @@ export const create = async (payload: any): Promise<any> => {
             });
 
             if (patient) {
-                const auth = await tx.auth.create({
-                    data: {
-                        email: patient.email,
-                        password: password && await bcrypt.hashSync(password, 12),
-                        role: UserRole.patient,
-                        userId: patient.id
-                    },
-                });
-                return {
-                    patient,
-                    auth,
-                };
+                // Check Email existing
+                const existEmail = await tx.auth.findUnique({ where: { email: patient.email } });
+                if (existEmail) {
+                    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Email Already Exist !!")
+                } else {
+                    const auth = await tx.auth.create({
+                        data: {
+                            email: patient.email,
+                            password: password && await bcrypt.hashSync(password, 12),
+                            role: UserRole.patient,
+                            userId: patient.id
+                        },
+                    });
+                    return {
+                        patient,
+                        auth,
+                    };
+                }
             }
         });
 
         return data;
-    } catch (error:any) {
+    } catch (error: any) {
         throw new ApiError(httpStatus.BAD_REQUEST, error.message)
     }
 };

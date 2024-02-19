@@ -4,12 +4,16 @@ import Footer from "../../Shared/Footer/Footer";
 import Header from "../../Shared/Header/Header";
 import { useGetPrescriptionQuery } from "../../../redux/api/prescriptionApi";
 import moment from "moment";
-import { Empty, Table } from "antd";
+import { Empty, Table, Button } from "antd";
 import './index.css';
+import { useRef } from "react";
+import { FaPrint } from "react-icons/fa";
+import ReactToPrint from "react-to-print";
 
 const PrescriptionView = () => {
+    const ref = useRef();
     const { id } = useParams();
-    const { data, isLoading, isError, error } = useGetPrescriptionQuery(id);
+    const { data, isLoading, isError } = useGetPrescriptionQuery(id);
 
     const columns = [
         {
@@ -142,7 +146,14 @@ const PrescriptionView = () => {
             <Header />
 
             <div className="content" style={{ marginTop: '10rem', marginBottom: '7rem' }}>
-                <div className="container-fluid">
+                <div className="d-flex justify-content-end" style={{ marginRight: '8rem' }}>
+                    <ReactToPrint
+                        bodyClass="print-agreement"
+                        content={() => ref.current}
+                        trigger={() => (<Button type="primary" icon={<FaPrint />}> Print</Button>)}
+                    />
+                </div>
+                <div className="container-fluid" ref={ref}>
                     <div className="row">
                         {content}
                     </div>

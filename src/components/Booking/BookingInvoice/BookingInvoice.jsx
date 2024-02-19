@@ -1,17 +1,19 @@
-import React from 'react';
-import BreadCrumb from '../../UI/BreadCrumb';
 import Footer from '../../Shared/Footer/Footer';
 import logo from '../../../images/logo.png';
 import './BookingInvoice.css';
 import { useParams } from 'react-router-dom';
 import { useGetAppointmentedPaymentInfoQuery } from '../../../redux/api/appointmentApi';
 import moment from 'moment';
-import { Empty } from 'antd';
+import { Empty, Button } from 'antd';
 import Header from '../../Shared/Header/Header';
+import { useRef } from "react";
+import { FaPrint } from "react-icons/fa";
+import ReactToPrint from "react-to-print";
 
 const BookingInvoice = () => {
+    const ref = useRef();
     const { id } = useParams();
-    const {data, isLoading, isError} = useGetAppointmentedPaymentInfoQuery(id)
+    const { data, isLoading, isError } = useGetAppointmentedPaymentInfoQuery(id)
 
     let content = null;
     if (isLoading) content = <div>Loading ...</div>
@@ -43,9 +45,9 @@ const BookingInvoice = () => {
                                 <div className="invoice-info">
                                     <strong className="customer-text">Invoice From</strong>
                                     <p className="invoice-details invoice-details-two">
-                                        Dr.{data?.appointment?.doctor?.firstName + ' ' + data?.appointment?.doctor?.lastName} <br />
-                                        {data?.appointment?.doctor?.address}, {data?.appointment?.doctor?.city},<br />
-                                        {data?.appointment?.doctor?.country} <br />
+                                        Dr. {data?.appointment?.doctor?.firstName ? `${data?.appointment?.doctor?.firstName} ${data?.appointment?.doctor?.lastName}`: ' Of DoctorOnCall'} <br />
+                                        {data?.appointment?.doctor?.address ? data?.appointment?.doctor?.address : "Sylhet, Dhaka ,BD,3214"}, {data?.appointment?.doctor?.city && data?.appointment?.doctor?.city},<br />
+                                        {data?.appointment?.doctor?.country && data?.appointment?.doctor?.country} <br />
                                     </p>
                                 </div>
                             </div>
@@ -53,9 +55,9 @@ const BookingInvoice = () => {
                                 <div className="invoice-info invoice-info2">
                                     <strong className="customer-text">Invoice To</strong>
                                     <p className="invoice-details">
-                                    {data?.appointment?.patient?.firstName + ' ' + data?.appointment?.patient?.lastName} <br />
-                                    {data?.appointment?.patient?.address}, {data?.appointment?.patient?.city} ,<br />
-                                    {data?.appointment?.patient?.country} <br />
+                                        {data?.appointment?.patient?.firstName + ' ' + data?.appointment?.patient?.lastName} <br />
+                                        {data?.appointment?.patient?.address}, {data?.appointment?.patient?.city} ,<br />
+                                        {data?.appointment?.patient?.country} <br />
                                     </p>
                                 </div>
                             </div>
@@ -132,10 +134,15 @@ const BookingInvoice = () => {
     return (
         <>
             <Header />
-            <BreadCrumb />
-
-            <div className="content" style={{ marginBottom: '7rem' }}>
-                <div className="container-fluid">
+            <div className="content" style={{ marginBottom: '7rem', marginTop:'10rem' }}>
+                <div className="d-flex justify-content-end mb-4" style={{ marginRight: '8rem' }}>
+                    <ReactToPrint
+                        bodyClass="print-agreement"
+                        content={() => ref.current}
+                        trigger={() => (<Button type="primary" icon={<FaPrint />}> Print</Button>)}
+                    />
+                </div>
+                <div className="container-fluid" ref={ref}>
                     <div className="row">
                         {content}
                     </div>
