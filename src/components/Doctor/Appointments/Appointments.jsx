@@ -68,10 +68,11 @@ const Appointments = () => {
                                     <p> Is Paid - <Tag color="#87d068" className='text-uppercase'>{item?.paymentStatus}</Tag></p>
                                     <p> Prescribed - <Tag color="#2db7f5" className='text-uppercase'>{item?.prescriptionStatus}</Tag></p>
                                 </div>
-                                <div>
-                                </div>
                             </div>
                             <div className='d-flex gap-2'>
+                                <Link to={`/dashboard/appointments/${item?.id}`}>
+                                    <Button type="primary" icon={<FaEye />} size="small">View</Button>
+                                </Link>
                                 {
                                     item.prescriptionStatus === 'notIssued'
                                         ?
@@ -80,7 +81,7 @@ const Appointments = () => {
                                         </Link>
                                         :
                                         <Link to={`/dashboard/prescription/${item?.prescription[0]?.id}`}>
-                                            <Button type="primary" shape="circle" icon={<FaEye />} size="small" />
+                                            <Button type="primary" icon={<FaEye />} size="small" >Prescription</Button>
                                         </Link>
                                 }
                                 {

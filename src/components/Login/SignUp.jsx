@@ -4,6 +4,7 @@ import SocialSignUp from './SocialSignUp';
 import Spinner from 'react-bootstrap/Spinner'
 import swal from 'sweetalert';
 import { useDoctorSignUpMutation, usePatientSignUpMutation } from '../../redux/api/authApi';
+import { message } from 'antd';
 
 // password regex
 // ^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$
@@ -37,29 +38,39 @@ const SignUp = ({ setSignUp }) => {
     const handleSignUpSuccess = () => {
         setLoading(false);
         setUser(formField)
-        setSignUp(false)
-        swal({
-            icon: 'success',
-            text: `Successfully ${userType === 'doctor' ? 'Doctor' : 'Patient'} Account Created Please Login`,
-            timer: 2000
-        })
     }
     useEffect(() => {
         // doctor account
         if (dIsError && dError) {
-            setLoading(false)
-            setInfoError(dError.data.message)
+            message.error("Email Already Exist !!")
+            setLoading(false);
         }
+
         if (!dIsError && dIsSuccess) {
             handleSignUpSuccess();
+            setLoading(false);
+            setLoading(false);
+            swal({
+                icon: 'success',
+                text: `Successfully Account Created Please Verify Your email`,
+                timer: 5000
+            })
         }
+
         // Patient account
         if (pIsError && pError) {
-            setLoading(false)
-            setInfoError(pError.data.message)
+            message.error("Email Already Exist !!")
+            setLoading(false);
         }
         if (!pIsError && pIsSuccess) {
             handleSignUpSuccess();
+            setLoading(false);
+            setSignUp(false);
+            swal({
+                icon: 'success',
+                text: `Successfully ${userType === 'doctor' ? 'Doctor' : 'Patient'} Account Created Please Login`,
+                timer: 2000
+            })
         }
 
     }, [dIsError, dError, pError, pIsError, , pIsLoading, dIsLoading, pData, dData, setSignUp, setLoading, dIsSuccess])

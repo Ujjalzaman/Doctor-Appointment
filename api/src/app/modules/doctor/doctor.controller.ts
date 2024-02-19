@@ -7,11 +7,12 @@ import pick from "../../../shared/pick";
 import { IDoctorFiltersData, IDoctorOptions } from "./doctor.interface";
 
 const createDoctor = catchAsync(async (req: Request, res: Response) => {
-    await DoctorService.create(req.body);
+    const result = await DoctorService.create(req.body);
     sendResponse(res, {
         statusCode: 200,
         message: 'Successfully Doctor Created !!',
-        success: true
+        success: true,
+        data: result
     })
 })
 

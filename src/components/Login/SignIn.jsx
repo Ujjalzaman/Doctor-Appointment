@@ -36,6 +36,7 @@ const SignIn = ({ handleResponse }) => {
     useMessageEffect(resetIsLoading, resetIsSuccess, resetIsError, resetError, "Successfully Reset Password, Please check your Email!!")
     useEffect(() => {
         if (isError) {
+            message.error(error?.data?.message)
             setInfoError(error?.data?.message)
         }
         if (isSuccess) {

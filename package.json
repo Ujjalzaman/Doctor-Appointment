@@ -29,6 +29,7 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "^5.0.1",
     "react-star-ratings": "^2.3.0",
+    "react-to-print": "^2.15.1",
     "react-vertical-timeline-component": "^3.6.0",
     "sweetalert": "^2.1.2",
     "swiper": "^11.0.5",
