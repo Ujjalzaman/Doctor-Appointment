@@ -1,8 +1,34 @@
-const PersonalInformation = ({ handleChange, selectValue }) => {
-    const { firstName, lastName, email, phone, reasonForVisit, description, address } = selectValue
+import { Checkbox, message } from 'antd';
+import { useEffect, useState } from 'react';
+import useAuthCheck from '../../redux/hooks/useAuthCheck';
+
+const PersonalInformation = ({ handleChange, selectValue, setPatientId =() =>{} }) => {
+    const { firstName, lastName, email, phone, reasonForVisit, description, address } = selectValue;
+    const [checked, setChecked] = useState(false);
+    const { data } = useAuthCheck();
+
+    const onChange = (e) => {
+        setChecked(e.target.checked);
+    };
+
+    useEffect(() =>{
+        if(checked){
+            if(data.id){
+                setPatientId(data.id);
+                message.success("User Has Found !")
+            }else{
+                message.error("User is not Found, Please Login!")
+            }
+        }
+    }, [checked, data, setPatientId])
+
     return (
         <form className="rounded p-3 mt-5" style={{ background: "#f8f9fa" }}>
             <div className="row">
+                <Checkbox checked={checked} onChange={onChange}>
+                    Allready Have an Account ?
+                </Checkbox>
+
                 <div className="col-md-6 col-sm-12">
                     <div className="form-group card-label mb-3">
                         <label>First Name</label>
