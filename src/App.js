@@ -33,7 +33,6 @@ import BlogDetails from './components/Blog/BlogDetails';
 import Contact from './components/Contact/Contact';
 import About from './components/About/About';
 import Service from './components/Service/Service';
-import Dashboard from './components/Doctor/Dashboard/dashboard';
 import AppointmentPage from './components/Appointment/AppointmentPage';
 import TrackAppointment from './components/TrackAppointment/TrackAppointment';
 import Treatment from './components/Doctor/Treatment/Treatment';
@@ -42,6 +41,7 @@ import PrescriptionView from './components/Doctor/Prescription/PrescriptionView'
 import TreatmentEdit from './components/Doctor/Treatment/TreatmentEdit';
 import ViewAppointment from './components/Doctor/Appointments/ViewAppointment';
 import ForgotPassword from './components/Login/ForgotPassword';
+import Dashboard from './components/Doctor/Dashboard/Dashboard';
 
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
