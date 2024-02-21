@@ -1,8 +1,9 @@
-import { Schema, model } from "mongoose";
-import { IAdmin, IAdminModel } from "./admin.interface";
-import { BloodGroup } from "../../../constants";
-
-const AdminSchema = new Schema<IAdmin, IAdminModel>({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AdminModel = void 0;
+const mongoose_1 = require("mongoose");
+const constants_1 = require("../../../constants");
+const AdminSchema = new mongoose_1.Schema({
     name: {
         firstName: {
             type: String,
@@ -21,7 +22,7 @@ const AdminSchema = new Schema<IAdmin, IAdminModel>({
     },
     bloodGroup: {
         type: String,
-        enum: BloodGroup
+        enum: constants_1.BloodGroup
     },
     email: {
         type: String,
@@ -41,4 +42,4 @@ const AdminSchema = new Schema<IAdmin, IAdminModel>({
         virtuals: true,
     }
 });
-export const AdminModel = model<IAdmin, IAdminModel>('Admin', AdminSchema);
+exports.AdminModel = (0, mongoose_1.model)('Admin', AdminSchema);
