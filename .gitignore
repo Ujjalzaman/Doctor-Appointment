@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 api/logs/winston
+api/dist
 
 # testing
 /coverage
