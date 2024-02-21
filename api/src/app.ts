@@ -17,7 +17,7 @@ app.use(express.static('public'));
 app.use('/api/v1', router);
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof ApiError) {
-        res.status(err.statusCode).json({ sucess: false, message: err.message })
+        res.status(err.statusCode).json({ success: false, message: err.message })
     } else {
         res.status(httpStatus.NOT_FOUND).json({
             success: false,
