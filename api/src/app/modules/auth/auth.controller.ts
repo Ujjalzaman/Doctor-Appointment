@@ -46,50 +46,46 @@ const PasswordResetConfirm = catchAsync(async (req: Request, res: Response) => {
 })
 
 const VerifyUser = catchAsync(async (req: Request, res: Response) => {
-    try {
-        const { userId } = req.params;
-        const isUserExist = await prisma.doctor.findUnique({
-            where: {
-                id: userId
-            }
-        })
-        if (!isUserExist) {
-            throw new ApiError(httpStatus.NOT_FOUND, "User is not found !!");
+    const { userId } = req.params;
+    const isUserExist = await prisma.doctor.findUnique({
+        where: {
+            id: userId
         }
-        const getVerficationUser = await prisma.userVerfication.findFirst({
-            where: {
-                userId: userId
-            }
-        })
-        if (getVerficationUser) {
-            const expiresAt = moment(getVerficationUser.expiresAt);
-            const currentTime = moment();
-            // check currenttime is before then expires Time
-            const isWithinNext6Hours = currentTime.isBefore(expiresAt);
+    })
+    if (!isUserExist) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User is not found !!");
+    }
+    const getVerficationUser = await prisma.userVerfication.findFirst({
+        where: {
+            userId: userId
+        }
+    })
+    if (getVerficationUser) {
+        const expiresAt = moment(getVerficationUser.expiresAt);
+        const currentTime = moment();
+        // check currenttime is before then expires Time
+        const isWithinNext6Hours = currentTime.isBefore(expiresAt);
 
-            if (isWithinNext6Hours) {
-                await prisma.$transaction(async (tx) => {
-                    await tx.doctor.update({
-                        where: {
-                            id: isUserExist.id
-                        },
-                        data: {
-                            verified: true
-                        }
-                    });
-                    await tx.userVerfication.delete({
-                        where: {
-                            id: getVerficationUser.id
-                        }
-                    })
+        if (isWithinNext6Hours) {
+            await prisma.$transaction(async (tx) => {
+                await tx.doctor.update({
+                    where: {
+                        id: isUserExist.id
+                    },
+                    data: {
+                        verified: true
+                    }
+                });
+                await tx.userVerfication.delete({
+                    where: {
+                        id: getVerficationUser.id
+                    }
                 })
-                res.redirect('/api/v1/auth/verified');
-            } else {
-                res.redirect('/api/v1/auth/expired/link');
-            }
+            })
+            res.redirect('/api/v1/auth/verified');
+        } else {
+            res.redirect('/api/v1/auth/expired/link');
         }
-    } catch (error) {
-        throw new ApiError(httpStatus.NOT_FOUND, "Internal Server Error");
     }
 })
 

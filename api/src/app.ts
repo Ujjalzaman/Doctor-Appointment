@@ -4,6 +4,7 @@ import CookieParser from 'cookie-parser';
 import httpStatus from 'http-status';
 import ApiError from './errors/apiError';
 import router from './app/routes';
+import config from './config';
 
 const app: Application = express();
 
@@ -15,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.get('/', (req: Request, res: Response) => {
-    res.send('Welcome to DoctoOnCall API!')
+    res.send(config.clientUrl)
 })
 
 app.use('/api/v1', router);

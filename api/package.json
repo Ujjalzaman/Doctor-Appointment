@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node-dev --respawn --transpile-only src/server.ts",
     "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
-    "build": "tsc",
+    "build": "tsc && copyfiles -u 1 template/* dist/template",
     "lint:fix": "eslint . --fix",
     "postinstall": "prisma generate",
     "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
