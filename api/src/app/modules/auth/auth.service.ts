@@ -8,6 +8,7 @@ import { Secret } from 'jsonwebtoken';
 import moment from 'moment';
 import { EmailtTransporter } from '../../../helpers/emailTransporter';
 const { v4: uuidv4 } = require('uuid');
+import * as path from 'path';
 
 type ILginResponse = {
     accessToken?: string;
@@ -80,7 +81,7 @@ const ResetPassword = async (payload: any): Promise<{ message: string }> => {
         throw new ApiError(httpStatus.NOT_FOUND, "User is not Exist !");
     }
     if (isUserExist) {
-        const clientUrl = "http://localhost:3000/reset-password/"
+        const clientUrl = `${config.clientUrl}/reset-password/`
         const uniqueString = uuidv4() + isUserExist.id;
         const uniqueStringHashed = await bcrypt.hashSync(uniqueString, 12);
         const encodedUniqueStringHashed = uniqueStringHashed.replace(/\//g, '-');
@@ -109,7 +110,7 @@ const ResetPassword = async (payload: any): Promise<{ message: string }> => {
                 }
             });
             if (forgotPassword) {
-                const pathName = "../../../template/resetPassword.html";
+                const pathName = path.join(__dirname, '../../../../template/resetPassword.html')
                 const obj = {
                     link: resetLink
                 };
@@ -137,7 +138,7 @@ const PassworResetConfirm = async (payload: any): Promise<any> => {
         });
 
         if (!isUserExist) { throw new ApiError(httpStatus.NOT_FOUND, "User is not Exist !") };
-        const resetLink = `http://localhost:3000/reset-password/${isUserExist.id}/${uniqueString}`
+        const resetLink = `${config.clientUrl}/reset-password/${isUserExist.id}/${uniqueString}`
         const getForgotRequest = await tx.forgotPassword.findFirst({
             where: {
                 userId: userId as string,
