@@ -137,11 +137,11 @@ const SignUp = ({ setSignUp }) => {
             <h2 className="title">Sign Up</h2>
             <div className="input-field">
                 <span className="fIcon"><FaUser /></span>
-                <input placeholder="Name" name="firstName" type="text" onChange={(e) => hanldeOnChange(e)} value={user.firstName} />
+                <input placeholder="First Name" name="firstName" type="text" onChange={(e) => hanldeOnChange(e)} value={user.firstName} />
             </div>
             <div className="input-field">
                 <span className="fIcon"><FaUser /></span>
-                <input placeholder="Name" name="lastName" type="text" onChange={(e) => hanldeOnChange(e)} value={user.lastName} />
+                <input placeholder="Last Name" name="lastName" type="text" onChange={(e) => hanldeOnChange(e)} value={user.lastName} />
             </div>
             <div className="input-field">
                 <span className="fIcon"><FaEnvelope /></span>

@@ -4,6 +4,7 @@ import ApiError from "../../../errors/apiError";
 import httpStatus from "http-status";
 import moment from 'moment';
 import { EmailtTransporter } from "../../../helpers/emailTransporter";
+import * as path from 'path';
 
 const createAppointment = async (user: any, payload: any): Promise<Appointments | null | any> => {
 
@@ -69,8 +70,7 @@ const createAppointment = async (user: any, payload: any): Promise<Appointments 
                 }
             })
         }
-
-        const pathName = "../../../template/appointment.html"
+        const pathName = path.join(__dirname, '../../../../template/appointment.html')
         const appointmentObj = {
             created: moment(appointment.createdAt).format('LL'),
             trackingId: appointment.trackingId,
@@ -155,7 +155,7 @@ const createAppointmentByUnAuthenticateUser = async (payload: any): Promise<Appo
             scheduleDate:moment(appointment.scheduleDate).format('LL'),
             scheduleTime:appointment.scheduleTime,
         }
-        const pathName = "../../../template/meeting.html"
+        const pathName = path.join(__dirname, '../../../../template/meeting.html')
         const replacementObj = appointmentObj;
         const firstName = appointment?.firstName;
         const lastName = appointment?.lastName;
