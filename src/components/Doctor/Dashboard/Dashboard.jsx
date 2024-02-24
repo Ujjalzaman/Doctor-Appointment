@@ -10,15 +10,16 @@ const Dashboard = () => {
     return (
         <>
             <DashboardLayout>
-                {role === 'doctor' && <DoctorDashCard /> }
+                {role === 'doctor' && <DoctorDashCard />}
 
                 <div className="row">
-                    {role === 'patient' ?
+                    {role === 'patient' &&
                         <div className="col-md-12 rounded" style={{ background: '#f8f9fa' }}>
                             <h5 className="text-title my-3">My Appointments</h5>
                             <PatientDashboard />
                         </div>
-                        :
+                    }
+                    {role === 'doctor' &&
                         <div className="col-md-12 rounded" style={{ background: '#f8f9fa' }}>
                             <h5 className="text-title">Appointments</h5>
                             <DashboardPage />
