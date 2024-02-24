@@ -17,12 +17,12 @@ const ImageUpload = ({ setSelectedImage, setFile }) => {
 
   return (
     <>
-      <div class="change-photo-btn">
+      <div className="change-photo-btn">
         <span className="d-flex align-items-center justify-content-center gap-2"><FaCloudUploadAlt className="icon" style={{ fontSize: '2rem' }} /> Upload Photo</span>
-        <input type="file" class="upload" onChange={handleFileChange} />
+        <input type="file" className="upload" onChange={handleFileChange} />
       </div>
       <div>
-        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+        <small className="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
       </div>
     </>
   );

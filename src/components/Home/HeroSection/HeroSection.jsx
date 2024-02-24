@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
     return (
-        <section id="hero" class="d-flex align-items-center">
+        <section id="hero" className="d-flex align-items-center">
             <div className="container">
                 <div>
                     <small>TOTAL HEALTH CARE SOLUTION</small>

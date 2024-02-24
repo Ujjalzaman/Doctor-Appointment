@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -9,7 +7,8 @@ import { useUpdatePatientMutation } from '../../../redux/api/patientApi';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import { message } from 'antd';
 import ImageUpload from '../../UI/form/ImageUpload';
-import pImage from '../../../images/avatar.jpg'
+import pImage from '../../../images/avatar.jpg';
+import { DatePicker } from 'antd';
 
 const PatientProfileSetting = () => {
     const { data } = useAuthCheck();
@@ -17,24 +16,13 @@ const PatientProfileSetting = () => {
     const [userId, setUserId] = useState('');
     const [selectBloodGroup, setSelectBloodGroup] = useState('');
     const [selectValue, setSelectValue] = useState({})
-    const [value, setValue] = useState(undefined);
-    const [showCalendar, setShowCalendar] = useState(false);
-    const buttonRef = useRef(null);
     const [updatePatient, { isSuccess, isError, error, isLoading }] = useUpdatePatientMutation();
-
+    const [date, setDate] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
     const [file, setFile] = useState(null);
 
-    const handleDateChange = (date) => {
-        setValue(date);
-    };
-    const handleButtonClick = () => {
-        setShowCalendar(!showCalendar);
-    };
-    const handleClickOutside = (event) => {
-        if (buttonRef.current && !buttonRef.current.contains(event.target)) {
-            setShowCalendar(false);
-        }
+    const onChange = (date, dateString) => { 
+        setDate(moment(dateString).format());
     };
 
     useEffect(() => {
@@ -42,10 +30,6 @@ const PatientProfileSetting = () => {
             setUserId(data.id)
             setSelectBloodGroup(data?.bloodGroup)
         }
-        document.addEventListener('click', handleClickOutside);
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
     }, [data]);
 
     useEffect(() => {
@@ -67,20 +51,14 @@ const PatientProfileSetting = () => {
     const onSubmit = (data) => {
         const obj = data
         const newObj = { ...obj, ...selectValue };
-        if (value) {
-            const newDate = moment(value).format()
-            newObj['dateOfBirth'] = newDate;
-        }
+        date && (newObj['dob'] = date);
         const changedValue = Object.fromEntries(Object.entries(newObj).filter(([key, value]) => value !== ''));
-        
         const formData = new FormData();
         selectedImage && formData.append('file', file);
         const changeData = JSON.stringify(changedValue);
         formData.append('data', changeData)
-        
         updatePatient({ data: formData, id: userId })
     };
-
 
     return (
         <div style={{ marginBottom: '10rem' }}>
@@ -120,14 +98,12 @@ const PatientProfileSetting = () => {
                     </div>
 
                     <div className="col-md-6">
-                        <div className="form-group mb-2 rounded border-0 card-label">
-                            {data?.dateOfBirth &&
-                                <label>Current Date of Birth {moment(data?.dateOfBirth).format("MMM Do YY")}</label>
-                            }
-                            <input value={value && moment(value).format("MMM Do YY")} type="text" className="form-control" name='dateOfBirth' onClick={handleButtonClick} ref={buttonRef} />
-                            {showCalendar && (<Calendar className="p-2 rounded shadow border-0 brand-bg" onChange={handleDateChange} value={value} />)}
+                        <div className="form-group mb-2 card-label">
+                            <label>Date of Birth {moment(data?.dob).format('LL')}</label>
+                            <DatePicker onChange={onChange} format={"YYYY-MM-DD"} style={{ width: '100%', padding: '6px' }} />
                         </div>
                     </div>
+
                     <div className="col-md-6">
                         <div className="form-group mb-2 card-label">
                             <label>Phone Number</label>
