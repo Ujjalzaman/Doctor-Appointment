@@ -148,7 +148,6 @@ const DoctorBooking = () => {
             lastName: selectValue.lastName,
             email: selectValue.email,
             phone: selectValue.phone,
-            patientId: selectValue.patientId,
             scheduleDate: selectedDate,
             scheduleTime: selectTime,
             doctorId: doctorId,
