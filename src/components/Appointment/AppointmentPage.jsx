@@ -63,7 +63,7 @@ const AppointmentPage = () => {
       lastName: selectValue.lastName,
       email: selectValue.email,
       phone: selectValue.phone,
-      patientId: role !== '' ? data.id : undefined,
+      patientId: role !== '' && role === 'patient' ? data.id : undefined,
       scheduleDate: selectedDate,
       scheduleTime: selectTime,
     }
