@@ -62,6 +62,7 @@
     height: 100px;
     width: 100px;
     border: 6px solid #efefef;
+    object-fit: cover;
 }
 .profile-details h5{
     font-size: 18px;

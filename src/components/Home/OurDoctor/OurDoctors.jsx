@@ -14,16 +14,16 @@ const OurDoctors = () => {
         <>
             {
                 doctors && doctors?.map((item, key) => (
-                    <div class="col-lg-6 mt-3" key={key + 2}>
-                        <div class="member d-flex align-items-start">
-                            <div class="pic">
-                                {item.img && <img src={item.img} class="img-fluid" alt="" />}
+                    <div className="col-lg-6 mt-3" key={key + 2}>
+                        <div className="member d-flex align-items-start">
+                            <div className="pic">
+                                {item.img && <img src={item.img} className="img-fluid" alt="" />}
                             </div>
-                            <div class="member-info">
+                            <div className="member-info">
                                 <h4>{item?.firstName + ' ' + item?.lastName}</h4>
                                 <span>{item?.designation}</span>
                                 <p>{item?.specialization}</p>
-                                <div class="social">
+                                <div className="social">
                                     <a><FaFacebookSquare className='icon' /></a>
                                     <a><FaInstagramSquare className='icon' /></a>
                                     <a><FaLinkedin className='icon' /></a>
@@ -35,14 +35,14 @@ const OurDoctors = () => {
             }
         </>
     return (
-        <section id="doctors" class="doctors">
-            <div class="container">
-                <div class="section-title text-center mb-3">
+        <section id="doctors" className="doctors">
+            <div className="container">
+                <div className="section-title text-center mb-3">
                     <h2>OUR DOCTORS</h2>
                     <p className='form-text'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus, adipisci?</p>
                 </div>
 
-                <div class="row">
+                <div className="row">
                     {content}
                 </div>
             </div>
