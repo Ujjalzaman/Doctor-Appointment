@@ -1,17 +1,7 @@
 .page-header {
 	margin-bottom: 1.875rem;
 }
-.page-header .breadcrumb {
-    background-color: transparent;
-    color: #6c757d;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 0;
-    padding: 0;
-}
-.page-header .breadcrumb a {
-	color: #333;
-}
+
 .page-title {
     color: #333;
     margin-bottom: 5px;
@@ -32,17 +22,6 @@
 }
 .page-header {
 	margin-bottom: 1.875rem;
-}
-.page-header .breadcrumb {
-    background-color: transparent;
-    color: #6c757d;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 0;
-    padding: 0;
-}
-.page-header .breadcrumb a {
-	color: #333;
 }
 .page-title {
     color: #333;

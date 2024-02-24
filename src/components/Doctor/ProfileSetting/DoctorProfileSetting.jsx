@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import React, { useEffect, useState } from 'react'
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import { Button, Select, message } from 'antd';
@@ -9,7 +7,8 @@ import { useUpdateDoctorMutation } from '../../../redux/api/doctorApi';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import { doctorSpecialistOptions } from '../../../constant/global';
 import ImageUpload from '../../UI/form/ImageUpload';
-import dImage from '../../../images/avatar.jpg'
+import dImage from '../../../images/avatar.jpg';
+import { DatePicker } from 'antd';
 
 const DoctorProfileSetting = () => {
     const [selectedItems, setSelectedItems] = useState([]);
@@ -18,54 +17,36 @@ const DoctorProfileSetting = () => {
     const { register, handleSubmit } = useForm({});
     const [userId, setUserId] = useState('');
     const [selectValue, setSelectValue] = useState({});
-    const [value, setValue] = useState(undefined);
-    const [showCalender, setShowCalender] = useState(false);
+    const [date, setDate] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
     const [file, setFile] = useState(null);
-
-    const buttonRef = useRef(null);
-
-    const handleDateChange = (date) => { setValue(date) }
-
-    const handleButtonClick = () => { setShowCalender(!showCalender) }
-
-    const handleClickOutSide = (event) => {
-        if (buttonRef.current && !buttonRef.current.contains(event.target)) {
-            setShowCalender(false);
-        }
-    }
 
     useEffect(() => {
         if (data) {
             const { id, services } = data;
             setUserId(id);
-            setSelectedItems(services?.split(','))
+            setSelectedItems(services?.split(','));
         };
-        document.addEventListener('click', handleClickOutSide);
-        return () => {
-            document.removeEventListener('click', handleClickOutSide);
-        }
     }, [data]);
 
     const handleChange = (e) => {
         setSelectValue({ ...selectValue, [e.target.name]: e.target.value })
     }
+    const onChange = (date, dateString) => { 
+        setDate(moment(dateString).format());
+    };
 
     const onSubmit = (data) => {
         const obj = data
         const newObj = { ...obj, ...selectValue };
-        if (value) {
-            const newDate = moment(value).format()
-            newObj['dateOfBirth'] = newDate;
-        }
+        date && (newObj['dob'] = date);
         newObj["services"] = selectedItems.join(',');
         const changedValue = Object.fromEntries(Object.entries(newObj).filter(([key, value]) => value !== ''));
-        
         const formData = new FormData();
         selectedImage && formData.append('file', file);
         const changeData = JSON.stringify(changedValue);
         formData.append('data', changeData)
-        
+
         updateDoctor({ data: formData, id: userId })
     };
 
@@ -76,7 +57,7 @@ const DoctorProfileSetting = () => {
         if (isSuccess) {
             message.success('Successfully Changed Saved !')
         }
-    }, [isLoading, isError, error, isSuccess])
+    }, [isLoading, isError, error, isSuccess]);
 
     return (
         <div style={{ marginBottom: '10rem' }}>
@@ -90,7 +71,7 @@ const DoctorProfileSetting = () => {
                                     <img src={selectedImage ? selectedImage : data?.img || dImage} alt="" />
                                 </Link>
                                 <div className='mt-3'>
-                                    <ImageUpload setSelectedImage={setSelectedImage} setFile={setFile}/>
+                                    <ImageUpload setSelectedImage={setSelectedImage} setFile={setFile} />
                                 </div>
                             </div>
                         </div>
@@ -139,9 +120,8 @@ const DoctorProfileSetting = () => {
 
                     <div className="col-md-6">
                         <div className="form-group mb-2 card-label">
-                            <label>Date of Birth {moment(data?.dateOfBirth).format("MMM Do YY")}</label>
-                            <input value={value && moment(value).format("MMM Do YY")} type="text" className="form-control" name='dateOfBirth' onClick={handleButtonClick} ref={buttonRef} />
-                            {showCalender && (<Calendar className="rounded shadow border-0" onChange={handleDateChange} value={value} />)}
+                            <label>Date of Birth {moment(data?.dob).format('LL')}</label>
+                            <DatePicker onChange={onChange} format={"YYYY-MM-DD"} style={{ width: '100%', padding: '6px' }} />
                         </div>
                     </div>
 

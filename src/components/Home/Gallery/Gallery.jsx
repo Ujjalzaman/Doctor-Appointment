@@ -13,23 +13,23 @@ import { Image } from 'antd';
 const Gallery = () => {
     const imageArray = [img2,img3,img4,img5,img6,img7, img8, img9]
     return (
-        <section class="gallery container">
-            <div class="text-center mb-5">
-                <div class="section-title mb-3">
+        <section className="gallery container">
+            <div className="text-center mb-5">
+                <div className="section-title mb-3">
                     <h2>Gallery</h2>
                     <p>Lorem ipsum dolor sit amet.</p>
                 </div>
             </div>
 
-            <div class="container-fluid">
-                <div class="row g-0">
+            <div className="container-fluid">
+                <div className="row g-0">
                     <Image.PreviewGroup>
                         {
                             imageArray.map((item, index) => (
-                                <div class="col-lg-3 col-md-4 col-sm-12" key={index + 55}>
-                                    <div class="gallery-item">
-                                        <div class="galelry-lightbox d-flex justify-content-center align-items-center">
-                                            <Image src={item} alt="" class="w-100" style={{objectFit:'cover',maxHeight:'280px', minHeight:'280px'}}/>
+                                <div className="col-lg-3 col-md-4 col-sm-12" key={index + 55}>
+                                    <div className="gallery-item">
+                                        <div className="galelry-lightbox d-flex justify-content-center align-items-center">
+                                            <Image src={item} alt="" className="w-100" style={{objectFit:'cover',maxHeight:'280px', minHeight:'280px'}}/>
                                         </div>
                                     </div>
                                 </div>
