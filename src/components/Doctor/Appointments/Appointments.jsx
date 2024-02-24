@@ -4,7 +4,7 @@ import img from '../../../images/doc/doctor 3.jpg';
 import './Appointments.css';
 import { useGetDoctorAppointmentsQuery, useUpdateAppointmentMutation } from '../../../redux/api/appointmentApi';
 import moment from 'moment';
-import { Button, message, Tag, Tooltip } from 'antd';
+import { Button, Empty, message, Tag, Tooltip } from 'antd';
 import { FaEye, FaCheck, FaTimes } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { FaClock, FaEnvelope, FaLocationArrow, FaPhoneAlt, FaBriefcaseMedical } from "react-icons/fa";
@@ -34,7 +34,7 @@ const Appointments = () => {
 
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
-    if (!isLoading && !isError && data?.length === 0) content = <div>Empty</div>
+    if (!isLoading && !isError && data?.length === 0) content = <Empty/>
     if (!isLoading && !isError && data?.length > 0) content =
         <>
             {

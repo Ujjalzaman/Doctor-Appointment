@@ -5,12 +5,13 @@ import { useGetDoctorPatientsQuery } from '../../../redux/api/appointmentApi';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { FaClock, FaEnvelope, FaLocationArrow, FaPhoneAlt } from "react-icons/fa";
+import { Empty } from 'antd';
 
 const MyPatients = () => {
     const { data, isLoading, isError } = useGetDoctorPatientsQuery();
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
-    if (!isLoading && !isError && data?.length === 0) content = <div>Empty</div>
+    if (!isLoading && !isError && data?.length === 0) content = <Empty/>
     if (!isLoading && !isError && data?.length > 0) content =
         <>
             {data && data?.map((item) => (

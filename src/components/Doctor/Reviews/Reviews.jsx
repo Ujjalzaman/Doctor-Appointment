@@ -7,6 +7,7 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import moment from 'moment';
 import StarRatings from 'react-star-ratings';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
+import { Empty } from 'antd';
 
 const Reviews = () => {
     const {data: loginInfo} = useAuthCheck();
@@ -14,7 +15,7 @@ const Reviews = () => {
 
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
-    if (!isLoading && !isError && data?.length === 0) content = <div>Empty</div>
+    if (!isLoading && !isError && data?.length === 0) content = <Empty/>
     if (!isLoading && !isError && data?.length > 0) content =
         <>
             {
