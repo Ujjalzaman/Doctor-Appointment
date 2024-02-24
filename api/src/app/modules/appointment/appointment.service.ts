@@ -6,31 +6,32 @@ import moment from 'moment';
 import { EmailtTransporter } from "../../../helpers/emailTransporter";
 import * as path from 'path';
 
-const createAppointment = async (user: any, payload: any): Promise<Appointments | null | any> => {
+const createAppointment = async (payload: any): Promise<Appointments | null | any> => {
 
     const { patientInfo, payment } = payload;
-    const isUserExist = await prisma.patient.findUnique({
-        where: {
-            id: user.userId
+    
+    if(patientInfo.patientId){
+        const isUserExist = await prisma.patient.findUnique({
+            where: {
+                id: patientInfo.patientId
+            }
+        })
+        if (!isUserExist) {
+            patientInfo['patientId'] = null
         }
-    })
-    if (!isUserExist) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Patient Account is not found !!')
     }
 
     const isDoctorExist = await prisma.doctor.findUnique({
         where: {
             id: patientInfo.doctorId
         }
-    })
+    });
+
     if (!isDoctorExist) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Doctor Account is not found !!')
     }
-
-    if (isUserExist) {
-        patientInfo['patientId'] = isUserExist.id;
-        patientInfo['paymentStatus'] = paymentStatus.paid;
-    }
+    patientInfo['paymentStatus'] = paymentStatus.paid;
+  
     const result = await prisma.$transaction(async (tx) => {
         const previousAppointment = await tx.appointments.findFirst({
             orderBy: { createdAt: 'desc' },
@@ -40,7 +41,7 @@ const createAppointment = async (user: any, payload: any): Promise<Appointments 
         const lastDigit = (Number(appointmentLastNumber) + 1 || 0).toString().padStart(3, '0');
 
         // Trcking Id To be ==> First 3 Letter Of User  + current year + current month + current day + unique number (Matched Previous Appointment).
-        const first3DigitName = isUserExist?.firstName?.slice(0, 3).toUpperCase();
+        const first3DigitName = patientInfo?.firstName?.slice(0, 3).toUpperCase();
         const year = moment().year();
         const month = (moment().month() + 1).toString().padStart(2, '0');
         const day = (moment().dayOfYear()).toString().padStart(2, '0');
@@ -96,12 +97,10 @@ const createAppointment = async (user: any, payload: any): Promise<Appointments 
             country:appointment?.patient?.country
         }
         const replacementObj = appointmentObj;
-        const firstName = appointment?.firstName;
-        const lastName = appointment?.lastName;
         const subject = `Appointment Confirm With Dr ${appointment?.doctor?.firstName + ' ' + appointment?.doctor?.lastName} at ${appointment.scheduleDate} + ' ' + ${appointment.scheduleTime}`
         const fromMail = "ujjalzaman+doctor@gmail.com"
         const toMail = `${appointment.email + ',' + appointment.doctor?.email}`;
-        EmailtTransporter({ pathName, replacementObj, firstName, lastName, fromMail, toMail, subject })
+        EmailtTransporter({ pathName, replacementObj, fromMail, toMail, subject })
         return appointment;
     });
     return result;
@@ -109,8 +108,9 @@ const createAppointment = async (user: any, payload: any): Promise<Appointments 
 
 const createAppointmentByUnAuthenticateUser = async (payload: any): Promise<Appointments | null> => {
     const { patientInfo, payment } = payload;
-    patientInfo['patientId'] = patientInfo.patientId && patientInfo.patientId;
-
+    if(patientInfo.patientId){
+        patientInfo['patientId'] = patientInfo.patientId;
+    }
     const result = await prisma.$transaction(async (tx) => {
         const previousAppointment = await tx.appointments.findFirst({
             orderBy: { createdAt: 'desc' },
@@ -157,12 +157,10 @@ const createAppointmentByUnAuthenticateUser = async (payload: any): Promise<Appo
         }
         const pathName = path.join(__dirname, '../../../../template/meeting.html')
         const replacementObj = appointmentObj;
-        const firstName = appointment?.firstName;
-        const lastName = appointment?.lastName;
         const subject = `Appointment Confirm With at ${appointment.scheduleDate} + ' ' + ${appointment.scheduleTime}`
         const fromMail = "ujjalzaman+doctor@gmail.com"
         const toMail = `${appointment.email}`;
-        EmailtTransporter({ pathName, replacementObj, firstName, lastName, fromMail, toMail, subject })
+        EmailtTransporter({ pathName, replacementObj, fromMail, toMail, subject })
         return appointment;
     })
 
