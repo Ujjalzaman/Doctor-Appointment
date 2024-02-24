@@ -9,7 +9,6 @@ import * as path from 'path';
 const createAppointment = async (payload: any): Promise<Appointments | null | any> => {
 
     const { patientInfo, payment } = payload;
-    
     if(patientInfo.patientId){
         const isUserExist = await prisma.patient.findUnique({
             where: {
@@ -109,8 +108,16 @@ const createAppointment = async (payload: any): Promise<Appointments | null | an
 const createAppointmentByUnAuthenticateUser = async (payload: any): Promise<Appointments | null> => {
     const { patientInfo, payment } = payload;
     if(patientInfo.patientId){
-        patientInfo['patientId'] = patientInfo.patientId;
+        const isUserExist = await prisma.patient.findUnique({
+            where: {
+                id: patientInfo.patientId
+            }
+        })
+        if (!isUserExist) {
+            patientInfo['patientId'] = null
+        }
     }
+
     const result = await prisma.$transaction(async (tx) => {
         const previousAppointment = await tx.appointments.findFirst({
             orderBy: { createdAt: 'desc' },
