@@ -40,13 +40,12 @@ const DoctorProfileSetting = () => {
         const obj = data
         const newObj = { ...obj, ...selectValue };
         date && (newObj['dob'] = date);
-        newObj["services"] = selectedItems.join(',');
+        newObj["services"] = Array.isArray(selectedItems) ? selectedItems.join(',') : null;
         const changedValue = Object.fromEntries(Object.entries(newObj).filter(([key, value]) => value !== ''));
         const formData = new FormData();
         selectedImage && formData.append('file', file);
         const changeData = JSON.stringify(changedValue);
         formData.append('data', changeData)
-
         updateDoctor({ data: formData, id: userId })
     };
 

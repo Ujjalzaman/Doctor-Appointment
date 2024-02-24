@@ -15,6 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+app.get('/favicon.ico', (req: Request, res: Response) => {
+    res.status(204).end();
+})
+
 app.get('/', (req: Request, res: Response) => {
     res.send(config.clientUrl)
 })
