@@ -151,7 +151,7 @@ const DoctorBooking = () => {
             scheduleDate: selectedDate,
             scheduleTime: selectTime,
             doctorId: doctorId,
-            patientId: role !== '' && role === 'patient' ? data.id : undefined,
+            patientId: role !== '' && role === 'patient' ? patientId : undefined,
         }
         obj.payment = {
             paymentType: selectValue.paymentType,
