@@ -62,7 +62,7 @@ const SearchDoctor = () => {
     if (!isLoading && !isError && doctorsData.length > 0) content =
         <>
             {
-                doctorsData && doctorsData.map((item, id) => (
+                doctorsData && doctorsData?.map((item, id) => (
                     <SearchContent key={id + item.id} data={item} />
                 ))
             }

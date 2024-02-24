@@ -53,7 +53,7 @@ const SearchContent = ({ data }) => {
                             </ul>
                         </div>
                         {
-                            services.map((item, id) => (
+                            services?.map((item, id) => (
                                 <Tag key={id + 51}>{item}</Tag>
 
                             ))

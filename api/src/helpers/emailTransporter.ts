@@ -7,14 +7,12 @@ import { Transporter } from './Transporter';
 type IEmailProps = {
     pathName: string;
     replacementObj: any,
-    firstName?: string | null,
-    lastName?: string | null,
     fromMail: string,
     toMail: string,
     subject: string,
 }
 
-export const EmailtTransporter = ({pathName,replacementObj,firstName, lastName, fromMail, toMail, subject }:IEmailProps) =>{  
+export const EmailtTransporter = ({pathName,replacementObj, fromMail, toMail, subject }:IEmailProps) =>{  
   
     const readHtmlFile = (path:string, callback: Function) =>{
         fs.readFile(path, {encoding: 'utf-8'}, function(err, html){

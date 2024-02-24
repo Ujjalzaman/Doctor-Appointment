@@ -5,7 +5,7 @@ import { AppointmentService } from "./appointment.service";
 import { Appointments, Patient } from "@prisma/client";
 
 const createAppointment = catchAsync(async (req: Request, res: Response) => {
-    const result = await AppointmentService.createAppointment(req.user, req.body);
+    const result = await AppointmentService.createAppointment(req.body);
     sendResponse(res, {
         statusCode: 200,
         message: 'Successfully Appointment Created !!',
