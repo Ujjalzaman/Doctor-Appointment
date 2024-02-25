@@ -1,0 +1,44 @@
+# Setup Documentation
+
+## Clone The Project
+git clone https://github.com/Ujjalzaman/Doctor-Appointment.git
+
+### Install Frontend
+cd Doctor-Appointment
+- npm install
+- npm start
+
+### Install Backend
+cd api
+- npm install
+
+### Setup Database
+1. Rename .env.example to .env (remove .example).
+2. Create a PostgreSQL Database (Railway if you don't have one installed locally):
+   - Create an account at https://railway.app/.
+   - Navigate to the New Section > Database > Add PostgreSQL.
+   - Select your created database and go to the Variables tab.
+   - Copy DATABASE_PRIVATE_URL.
+   - Paste the database URL into the .env file.
+
+### Install Prisma
+- npm install -g prisma
+- npx prisma generate
+- npx prisma migrate dev
+
+### Setup Google App Password (For Email Notification)
+1. Go to Google Account settings at https://myaccount.google.com/security?hl=en.
+2. Navigate to Security > 2-Step Verification.
+3. Scroll to the bottom of the page and find App passwords.
+4. Select your project name and copy the generated password.
+5. Paste the app password into .env as EMAIL_PASS.
+
+### Setup Cloudinary to Upload Image
+1. Create a Cloudinary Account at https://cloudinary.com/.
+2. Login to your Cloudinary Account and copy all the credentials (e.g., Cloud name, API key, API secret).
+3. Paste those credentials into the .env file.
+
+### Start Backend
+npm start
+
+Happy coding! 🚀
