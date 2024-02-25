@@ -2,6 +2,7 @@
 Preview Website
 https://dental-doctor-ujjal.netlify.app/
 
+### To Setup Project Follow `project_setup.txt` documentation
 
 ## About The Project
 The `DoctorOnCall` System facilitates patients in scheduling appointments with preferred doctors or Emergency Appointments set up via an online platform.
