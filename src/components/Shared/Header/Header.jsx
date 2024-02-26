@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './index.css';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import TopHeader from '../TopHeader/TopHeader';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import img from '../../../images/logo.png';
 import avatar from '../../../images/avatar.jpg';
 import { Button, Popover, message } from 'antd';
@@ -10,6 +10,7 @@ import { loggedOut } from '../../../service/auth.service';
 import { FaBars } from "react-icons/fa";
 
 const Header = () => {
+    const navigate = useNavigate();
     const { authChecked, data } = useAuthCheck();
     const [isLoggedIn, setIsLogged] = useState(false);
     const [show, setShow] = useState(true);
@@ -35,6 +36,7 @@ const Header = () => {
         loggedOut();
         message.success("Successfully Logged Out")
         setIsLogged(false)
+        navigate('/')
     }
 
 
