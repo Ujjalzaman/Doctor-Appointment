@@ -41,7 +41,7 @@ const SignIn = ({ handleResponse }) => {
         }
         if (isSuccess) {
             message.success('Successfully Logged in');
-            navigate("/")
+            navigate('/')
         }
     }, [isError, error, isSuccess, navigate])
 
