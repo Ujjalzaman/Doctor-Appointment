@@ -1,9 +1,7 @@
-import { createContext } from 'react';
 import './App.css';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './components/Home/Home/Home';
 import SignInForm from './components/Login/SignInForm';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import DoctorBooking from './components/Booking/DoctorBooking/DoctorBooking';
 import BookingSuccess from './components/Booking/BookingSuccess';
 import BookingInvoice from './components/Booking/BookingInvoice/BookingInvoice';
@@ -42,63 +40,57 @@ import TreatmentEdit from './components/Doctor/Treatment/TreatmentEdit';
 import ViewAppointment from './components/Doctor/Appointments/ViewAppointment';
 import ForgotPassword from './components/Login/ForgotPassword';
 import Dashboard from './components/Doctor/Dashboard/Dashboard';
-
-const router = createBrowserRouter([
-  { path: '/', element: <Home /> },
-  { path: '/blog', element: <Blog /> },
-  { path: '/blog/:id', element: <BlogDetails /> },
-  { path: '/contact', element: <Contact /> },
-  { path: '/about', element: <About /> },
-  { path: '/service', element: <Service /> },
-  { path: '/login', element: <SignInForm /> },
-  { path: '/reset-password/:userId/:uniqueString', element: <ForgotPassword /> },
-  { path: '/appointment', element: <AppointmentPage /> },
-  {path: '/track-appointment', element: <TrackAppointment/>},
-
-  { path: '/doctors', element: <SearchDoctor /> },
-  { path: '/doctors/profile/:id', element: <DoctorProfile /> },
-
-  { path: '/dashboard', element: <Dashboard /> },
-  { path: '/dashboard/my-patients', element: <MyPatients /> },
-  { path: '/dashboard/reviews', element: <Reviews /> },
-  { path: '/dashboard/schedule', element: <Schedule /> },
-  { path: '/dashboard/appointments', element: <Appointments /> },
-  { path: '/dashboard/appointments/:id', element: <ViewAppointment /> },
-  { path: '/dashboard/prescription', element: <Prescription /> },
-  { path: '/dashboard/prescription/:id', element: <PrescriptionView /> },
-  { path: '/dashboard/appointment/treatment/:id', element: <Treatment /> },
-  { path: '/dashboard/appointment/treatment/edit/:id', element: <TreatmentEdit /> },
-
-  { path: '/dashboard/change-password', element: <ChangePassword /> },
-  { path: '/dashboard/profile-setting', element: <ProfileSetting /> },
-  { path: '/dashboard/favourite', element: <PatientFavouriteDoctor /> },
-  { path: '/dashboard/invoices', element: <DoctorInvoice /> },
-  { path: '/dashboard/blogs', element: <Blogs /> },
-  { path: '/dashboard/blogs/:id', element: <BlogsEdit /> },
-  { path: '/dashboard/blogs/create', element: <AddBlog /> },
-
-  { path: '/booking/:doctorId', element: <DoctorBooking /> },
-  { path: '/booking/success/:id', element: <BookingSuccess /> },
-  { path: '/booking/invoice/:id', element: <BookingInvoice /> },
-
-  // Dashboard
-  { path: '/admin/dashboard', element: <AdminDashboard /> },
-  { path: '/admin/appointments', element: <AdminAppointments /> },
-  { path: '/admin/doctors', element: <Doctors /> },
-  { path: '/admin/patients', element: <Patients /> },
-  { path: '/admin/profile', element: <Profile /> },
-  { path: '/admin/reviews', element: <AdminReviews /> },
-  { path: '/admin/transaction', element: <Transactions /> },
-  { path: '/admin/specialites', element: <Specialites /> },
-
-  // { path: '/appointment', element: <PrivateRoute><AppointMent /></PrivateRoute> },
-])
+import PrivateOutlet from './components/Shared/PrivateOutlet';
 
 function App() {
   return (
-    <div>
-      <RouterProvider router={router} />
-    </div>
+    <Router>
+      <Routes>
+        <Route element={<PrivateOutlet />}>
+          <Route path='/dashboard/blogs' element={<Blogs />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/dashboard/my-patients' element={<MyPatients />} />
+          <Route path='/dashboard/reviews' element={<Reviews />} />
+          <Route path='/dashboard/schedule' element={<Schedule />} />
+          <Route path='/dashboard/appointments' element={<Appointments />} />
+          <Route path='/dashboard/appointments/:id' element={<ViewAppointment />} />
+          <Route path='/dashboard/prescription' element={<Prescription />} />
+          <Route path='/dashboard/prescription/:id' element={<PrescriptionView />} />
+          <Route path='/dashboard/appointment/treatment/:id' element={<Treatment />} />
+          <Route path='/dashboard/appointment/treatment/edit/:id' element={<TreatmentEdit />} />
+          <Route path='/dashboard/change-password' element={<ChangePassword />} />
+          <Route path='/dashboard/profile-setting' element={<ProfileSetting />} />
+          <Route path='/dashboard/favourite' element={<PatientFavouriteDoctor />} />
+          <Route path='/dashboard/invoices' element={<DoctorInvoice />} />
+        </Route>
+        <Route path='/login' element={<SignInForm />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/blog' element={<Blog />} />
+        <Route path='/blog/:id' element={<BlogDetails />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/service' element={<Service />} />
+        <Route path='/reset-password/:userId/:uniqueString' element={<ForgotPassword />} />
+        <Route path='/appointment' element={<AppointmentPage />} />
+        <Route path='/track-appointment' element={<TrackAppointment />} />
+        <Route path='/doctors' element={<SearchDoctor />} />
+        <Route path='/doctors/profile/:id' element={<DoctorProfile />} />
+        <Route path='/dashboard/blogs/:id' element={<BlogsEdit />} />
+        <Route path='/dashboard/blogs/create' element={<AddBlog />} />
+        <Route path='/booking/:doctorId' element={<DoctorBooking />} />
+        <Route path='/booking/success/:id' element={<BookingSuccess />} />
+        <Route path='/booking/invoice/:id' element={<BookingInvoice />} />
+        {/* Admin Dashboard  */}
+        <Route path='/admin/dashboard' element={<AdminDashboard />} />
+        <Route path='/admin/appointments' element={<AdminAppointments />} />
+        <Route path='/admin/doctors' element={<Doctors />} />
+        <Route path='/admin/patients' element={<Patients />} />
+        <Route path='/admin/profile' element={<Profile />} />
+        <Route path='/admin/reviews' element={<AdminReviews />} />
+        <Route path='/admin/transaction' element={<Transactions />} />
+        <Route path='/admin/specialites' element={<Specialites />} />
+      </Routes>
+    </Router >
   );
 }
 export default App;
