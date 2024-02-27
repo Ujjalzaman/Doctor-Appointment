@@ -47,78 +47,52 @@ Before getting started with the DoctorOnCall System, ensure that you have the fo
 To begin using the DoctorOnCall System, follow these simple steps:
 ### The front-end and Backend code are in the same directory, with the Backend API located at the ./api directory
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/Ujjalzaman/repo_name.git
-   ```
- ### Install Front-End
+```
+# Setup Documentation
 
-  ```sh
-   npm install
-   ```
-* Start Client
-  ```sh
-    npm start
-   ```
-  Access the project in your web browser by navigating to `http://localhost:3000` or another specified URL
+## Clone The Project
+git clone https://github.com/Ujjalzaman/Doctor-Appointment.git
 
-* To Build The Front-end
-   ```sh
-    npm run build
-   ```
-* Setting up the Environment for Client-Side:
-  >> Create Environment Files:
-     * In the Project root directory create two environment files: `.env.development` and `.env.production`.
-     * For Development Environment (env.development):
-       ```sh
-        REACT_APP_NODE_ENV=development
-        REACT_APP_API_BASE_URL=http://localhost:5000/api/v1
-       ```
-     * For Production Environment (env.production):
-       ```sh
-        REACT_APP_NODE_ENV=production
-        REACT_APP_API_BASE_URL=http://example.com/api/v1
-       ```
+### Install Frontend
+cd Doctor-Appointment
+- npm install
+- npm start
 
 ### Install Backend
-To set up an Express API in the "./api" directory of a project, you can follow these steps:
- ##### Navigate to the /api directory:
+cd api
+- npm install
 
- 1.  Install Dependencies:
-   ```sh
-   npm install
-   ```
-2.  Database Setup
-  ```
-   Ensure that your Postgresql database is running. If not, create one locally or use a railway or render database.
-   ```
-3. Run the Backend:
-   ```sh
-    npm start
-   ```
-4. Setting up the Environment for Backend:
-  Create Environment Files:
-     * In the /api directory root level create the `.env` file
-    Make Sure to create setup `database_url`
-       ```sh
-        DATABASE_URL=YOUR DATABASE URL
-        JWT=W16aQUoCDwHm8AAAAadWpqYWx6YW1hbkBERVNLVE9QLUlLNkVITkUBdfdf
-        PORT=5000
-        NODE_ENV=development
-        JWT_SCRET=f9Hr6v38sK2nA5xGt4wDcR7uJ1mZlP0b
-        JWT_EXPIRED_IN=30d
-        JWT_REFRESH_SECRET=f9Hr6v38sK2nA5xGt4wDcR7uJ1mZlP0b
-        JWT_SCRET_SALT_ROUND=10
-        DOCTOR_PASS=@doctor123
-        PATIENT_PASS=@patient
-        CLOUND_NAME=YOUR_CLOUD_NAME
-        API_KEY=YOUR_CLOUDINARY_API_KEY
-        API_SECRET=YOUR_CLOUDINARY_API_SECRET
-        EMAIL_PASS=YOUR_EMAIL_APP_PASSWORD
-       ```
+### Setup Database
+1. Rename .env.example to .env (remove .example).
+2. Create a PostgreSQL Database (Railway if you don't have one installed locally):
+   - Create an account at https://railway.app/.
+   - Navigate to the New Section > Database > Add PostgreSQL.
+   - Select your created database and go to the Variables tab.
+   - Copy DATABASE_PRIVATE_URL.
+   - Paste the database URL into the .env file.
 
-   5. Verify Backend Installation:
-   Once the backend server is running, you can verify its installation by accessing the defined endpoints through a tool like Postman or by integrating it with the frontend application.
+### Install Prisma
+- npm install -g prisma
+- npx prisma generate
+- npx prisma migrate dev
+
+### Setup Google App Password (For Email Notification)
+1. Go to Google Account settings at https://myaccount.google.com/security?hl=en.
+2. Navigate to Security > 2-Step Verification.
+3. Scroll to the bottom of the page and find App passwords.
+4. Select your project name and copy the generated password.
+5. Paste the app password into .env as EMAIL_PASS.
+
+### Setup Cloudinary to Upload Image
+1. Create a Cloudinary Account at https://cloudinary.com/.
+2. Login to your Cloudinary Account and copy all the credentials (e.g., Cloud name, API key, API secret).
+3. Paste those credentials into the .env file.
+
+### Start Backend
+npm start
+
+Happy coding! 🚀
+```
 
 Note: These are general instructions for setting up an Express API, and the specific implementation details may vary depending on your project's requirements. Before starting, make sure to read the project's documentation or readme file to obtain any specific instructions or requirements.
 
@@ -137,13 +111,13 @@ Portfolio: [https://ujjalzaman-b6c8a.web.app/](https://ujjalzaman-b6c8a.web.app/
 **Frontend Technology Stack:** 
 - **React** : A JavaScript library for building user interfaces, offering a component-based architecture for creating interactive UIs.
 - **Redux Toolkit:** A state management library for React applications, providing predictable state management with a single source of truth.
-- **Ant Design: ** A UI library for React applications, offering a set of customizable and pre-designed components.
+- **Ant Design:** A UI library for React applications, offering a set of customizable and pre-designed components.
 - **React Hook Form:** A library for managing form state and validation in React applications, providing a simple and intuitive API.
 - **Axios**: A promise-based HTTP client for making HTTP requests, used for interacting with backend APIs.
 
 **Back-End:** 
 - **Express.js:** A web application framework for Node.js, used for building robust APIs and web applications
-- TypeScript: A superset of JavaScript that adds static typing, enhancing code quality and maintainability.
+- **TypeScript:** A superset of JavaScript that adds static typing, enhancing code quality and maintainability.
 - **Prisma**: A modern database toolkit for Node.js and TypeScript, used for database access and management.
 
  
