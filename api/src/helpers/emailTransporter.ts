@@ -11,40 +11,32 @@ type IEmailProps = {
     toMail: string,
     subject: string,
 }
+export const EmailtTransporter = async({pathName,replacementObj, fromMail, toMail, subject }:IEmailProps) =>{  
+    const html = await readHtmlFile(pathName);
+    const template = handlebars.compile(html);
+    const htmlToSend = template(replacementObj);
+    
+    const mailOptions = {
+        from: `<${fromMail}>`,
+        to: toMail,
+        subject: subject,
+        html: htmlToSend
+    };
 
-export const EmailtTransporter = ({pathName,replacementObj, fromMail, toMail, subject }:IEmailProps) =>{  
-  
-    const readHtmlFile = (path:string, callback: Function) =>{
-        fs.readFile(path, {encoding: 'utf-8'}, function(err, html){
-            if(err){
-                callback(err);
-            }else{
-                callback(null, html)
-            }
-        })
+    try {
+        await Transporter.sendMail(mailOptions);
+    } catch (error) {
+        console.log(error);
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Unable to send Email !");
     }
+};
 
-    readHtmlFile(`${pathName}`, function(err:any, html:any){
-        if(err){
-            console.log(err);
-            return;
-        }
-        const template = handlebars.compile(html);
-        const htmlToSend = template(replacementObj);
-        var mailOptions = {
-            from: `<${fromMail}>`,
-            to: toMail,
-            subject: subject,
-            html: htmlToSend
-        };
-
-        Transporter.sendMail(mailOptions, function (error: any, info: any) {
-            if (error) {
-                console.log(error)
-                throw new ApiError(httpStatus.NO_CONTENT, "Unable to send message !")
-            } else {
-                return
-            }
-        });
-    })
+const readHtmlFile = async(path:string): Promise<string> =>{
+    try {
+        const html = await fs.promises.readFile(path, {encoding: 'utf-8'});
+        return html
+    } catch (error) {
+        console.log("Error Reading html file", error);
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Unable to read HTML file")
+    }
 }

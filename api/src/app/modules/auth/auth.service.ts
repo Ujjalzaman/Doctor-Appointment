@@ -72,7 +72,7 @@ const VerificationUser = async (user: any): Promise<ILginResponse> => {
     return { accessToken, user: { role, userId } }
 }
 
-const ResetPassword = async (payload: any): Promise<{ message: string }> => {
+const resetPassword = async (payload: any): Promise<{ message: string }> => {
     const { email } = payload;
     const isUserExist = await prisma.auth.findUnique({
         where: { email: email }
@@ -80,49 +80,52 @@ const ResetPassword = async (payload: any): Promise<{ message: string }> => {
     if (!isUserExist) {
         throw new ApiError(httpStatus.NOT_FOUND, "User is not Exist !");
     }
-    if (isUserExist) {
-        const clientUrl = `${config.clientUrl}/reset-password/`
-        const uniqueString = uuidv4() + isUserExist.id;
-        const uniqueStringHashed = await bcrypt.hashSync(uniqueString, 12);
-        const encodedUniqueStringHashed = uniqueStringHashed.replace(/\//g, '-');
+    const clientUrl = `${config.clientUrl}/reset-password/`
+    const uniqueString = uuidv4() + isUserExist.id;
+    const uniqueStringHashed = await bcrypt.hashSync(uniqueString, 12);
+    const encodedUniqueStringHashed = uniqueStringHashed.replace(/\//g, '-');
 
-        const resetLink = clientUrl + isUserExist.id + '/' + encodedUniqueStringHashed;
-        const currentTime = moment();
-        const expiresTime = moment(currentTime).add(4, 'hours');
+    const resetLink = clientUrl + isUserExist.id + '/' + encodedUniqueStringHashed;
+    const currentTime = moment();
+    const expiresTime = moment(currentTime).add(4, 'hours');
 
-        await prisma.$transaction(async (tx) => {
-
-            //Check if the forgotPassword record exists before attempting reset
-            const existingForgotPassword = await tx.forgotPassword.findUnique({
-                where: { id: isUserExist.id }
-            });
-            if (existingForgotPassword) {
-                await tx.forgotPassword.delete({
-                    where: { id: isUserExist.id }
-                })
-            }
-
-            const forgotPassword = await tx.forgotPassword.create({
-                data: {
-                    userId: isUserExist.id,
-                    expiresAt: expiresTime.toDate(),
-                    uniqueString: resetLink
-                }
-            });
-            if (forgotPassword) {
-                const pathName = path.join(__dirname, '../../../../template/resetPassword.html')
-                const obj = {
-                    link: resetLink
-                };
-                const replacementObj = obj;
-                const subject = "Request to Reset Password";
-                const fromMail = "ujjalzaman+doctor@gmail.com"
-                const toMail = isUserExist.email;
-                EmailtTransporter({ pathName, replacementObj, fromMail, toMail, subject })
-            }
-            return forgotPassword;
+    await prisma.$transaction(async (tx) => {
+        //Check if the forgotPassword record exists before attempting reset
+        const existingForgotPassword = await tx.forgotPassword.findUnique({
+            where: { id: isUserExist.id }
         });
-    }
+        if (existingForgotPassword) {
+            await tx.forgotPassword.delete({
+                where: { id: isUserExist.id }
+            })
+        }
+
+        const forgotPassword = await tx.forgotPassword.create({
+            data: {
+                userId: isUserExist.id,
+                expiresAt: expiresTime.toDate(),
+                uniqueString: resetLink
+            }
+        });
+        
+        if (forgotPassword) {
+            const pathName = path.join(__dirname, '../../../../template/resetPassword.html')
+            const obj = {
+                link: resetLink
+            };
+            const subject = "Request to Reset Password";
+            const fromMail = "ujjalzaman+doctor@gmail.com"
+            const toMail = isUserExist.email;
+            try {
+                await EmailtTransporter({ pathName, replacementObj: obj, fromMail, toMail, subject })
+            } catch (error) {
+                console.log("Error reset password email", error);
+                throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Unable to send reset email!")
+            }
+        }
+        return forgotPassword;
+    });
+
 
     return {
         message: "Password Reset Successfully !!"
@@ -175,6 +178,6 @@ const PassworResetConfirm = async (payload: any): Promise<any> => {
 export const AuthService = {
     loginUser,
     VerificationUser,
-    ResetPassword,
+    resetPassword,
     PassworResetConfirm
 }
