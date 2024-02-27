@@ -25,8 +25,8 @@ const Login = catchAsync(async (req: Request, res: Response) => {
         data: result,
     })
 })
-const ResetPassword = catchAsync(async (req: Request, res: Response) => {
-    const result = await AuthService.ResetPassword(req.body);
+const resetPassword = catchAsync(async (req: Request, res: Response) => {
+    const result = await AuthService.resetPassword(req.body);
     sendResponse(res, {
         statusCode: 200,
         message: 'Successfully Passwrod Reset!!',
@@ -102,6 +102,6 @@ export const AuthController = {
     VerifyUser,
     Verified,
     VerficationExpired,
-    ResetPassword,
+    resetPassword,
     PasswordResetConfirm
 }
