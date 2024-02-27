@@ -2,18 +2,20 @@ import { useEffect, useState } from 'react';
 import './index.css';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import TopHeader from '../TopHeader/TopHeader';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import img from '../../../images/logo.png';
 import avatar from '../../../images/avatar.jpg';
-import { Button, Popover, message } from 'antd';
+import { Button, message } from 'antd';
 import { loggedOut } from '../../../service/auth.service';
-import { FaBars } from "react-icons/fa";
+import HeaderNav from './HeaderNav';
 
 const Header = () => {
     const navigate = useNavigate();
     const { authChecked, data } = useAuthCheck();
     const [isLoggedIn, setIsLogged] = useState(false);
     const [show, setShow] = useState(true);
+    const [open, setOpen] = useState(false);
+
     // const lastScrollRef = useRef(0);
     const handleScroll = () => {
         const currentScroll = window.scrollY;
@@ -63,29 +65,8 @@ const Header = () => {
                     <Link to={'/'} className="logo me-auto">
                         <img src={img} alt="" className="img-fluid" />
                     </Link>
-
-                    <nav id="navbar" className="navbar order-last order-lg-0">
-                        <ul>
-                            <li><NavLink to={'/'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""} >Home</NavLink></li>
-                            <li><NavLink to={'/about'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""}>About</NavLink></li>
-                            <li><NavLink to={'/service'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""}>Service</NavLink></li>
-                            <li><NavLink to={'/doctors'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""}>Doctors</NavLink></li>
-                            <li><NavLink to={'/contact'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""}>Contact</NavLink></li>
-                            <li><NavLink to={'/blog'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""}>Blog</NavLink></li>
-                            {!isLoggedIn && <li><Link to={'/login'} className="nav-link scrollto">Login</Link></li>}
-                        </ul>
-                        {isLoggedIn &&
-                            <div>
-                                <Popover content={content}>
-                                    <div className='profileImage'>
-                                        <img src={data?.img ? data?.img : avatar} alt="" className="profileImage shadow img-fluid" />
-                                    </div>
-                                </Popover>
-                            </div>
-                        }
-                        <FaBars className='mobile-nav-toggle' />
-                    </nav>
-
+                    <HeaderNav isLoggedIn={isLoggedIn} data={data}
+                        avatar={avatar} content={content} open={open} setOpen={setOpen} />
                     <Link to={'/appointment'} className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span> Appointment</Link>
                 </div>
             </header>
