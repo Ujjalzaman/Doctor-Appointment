@@ -77,4 +77,8 @@
     #hero {
       height: 60vh;
     }
+    #hero .btn-get-started {
+      font-size: 12px;
+      padding: 8px 10px;
+    }
   }

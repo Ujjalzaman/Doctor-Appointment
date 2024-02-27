@@ -172,9 +172,6 @@
     }
 }
 
-/**
-  * Mobile Navigation 
-  */
 .mobile-nav-toggle {
     color: #2c4964;
     font-size: 28px;
@@ -182,10 +179,7 @@
     display: none;
     line-height: 0;
     transition: 0.5s;
-}
-
-.mobile-nav-toggle.bi-x {
-    color: #fff;
+    margin-left: 5px;
 }
 
 @media (max-width: 991px) {
@@ -193,97 +187,9 @@
         display: block;
     }
 
-    .navbar ul {
+    #navbar ul {
         display: none;
     }
-}
-
-.navbar-mobile {
-    position: fixed;
-    overflow: hidden;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background: rgba(28, 47, 65, 0.9);
-    transition: 0.3s;
-    z-index: 999;
-}
-
-.navbar-mobile .mobile-nav-toggle {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-}
-
-.navbar-mobile ul {
-    display: block;
-    position: absolute;
-    top: 55px;
-    right: 15px;
-    bottom: 15px;
-    left: 15px;
-    padding: 10px 0;
-    background-color: #fff;
-    overflow-y: auto;
-    transition: 0.3s;
-}
-
-.navbar-mobile>ul>li {
-    padding: 0;
-}
-
-.navbar-mobile a,
-.navbar-mobile a:focus {
-    padding: 10px 20px;
-    font-size: 15px;
-    color: #2c4964;
-    border: none;
-}
-
-.navbar-mobile a:hover,
-.navbar-mobile .active,
-.navbar-mobile li:hover>a {
-    color: #1977cc;
-}
-
-.navbar-mobile .getstarted,
-.navbar-mobile .getstarted:focus {
-    margin: 15px;
-}
-
-.navbar-mobile .dropdown ul {
-    position: static;
-    display: none;
-    margin: 10px 20px;
-    padding: 10px 0;
-    z-index: 99;
-    opacity: 1;
-    visibility: visible;
-    background: #fff;
-    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-}
-
-.navbar-mobile .dropdown ul li {
-    min-width: 200px;
-}
-
-.navbar-mobile .dropdown ul a {
-    padding: 10px 20px;
-}
-
-.navbar-mobile .dropdown ul a i {
-    font-size: 12px;
-}
-
-.navbar-mobile .dropdown ul a:hover,
-.navbar-mobile .dropdown ul .active:hover,
-.navbar-mobile .dropdown ul li:hover>a {
-    color: #1977cc;
-}
-
-.navbar-mobile .dropdown>.dropdown-active {
-    display: block;
 }
 
 .appointment-btn {
@@ -308,4 +214,25 @@
         margin: 0 15px 0 0;
         padding: 6px 18px;
     }
+}
+
+.mobile-menu-nav {
+    list-style: none;
+    font-size: 1.2rem;
+    color: #1977cc !important;
+}
+.mobile-menu-nav .icon{
+    font-size: 1.3rem;
+    margin-right: 15px;
+
+}
+.mobile-menu-nav li{
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.mobile-menu-nav li a{
+    padding: 5px;
+}
+.ant-drawer-body{
+    background-color: #d2d2ff;
 }
