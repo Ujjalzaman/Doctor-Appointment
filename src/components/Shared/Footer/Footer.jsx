@@ -10,7 +10,7 @@ const Footer = () => {
 			<div className="footer-top">
 				<div className="container-fluid">
 					<div className="row">
-						<div className="col-lg-3 col-md-6">
+						<div className="col-6 col-md-6 col-lg-3">
 							<div className="footer-widget footer-about">
 								<div className="footer-logo">
 									<Link to={'/'}>
@@ -18,12 +18,12 @@ const Footer = () => {
 									</Link>
 								</div>
 								<div className="footer-about-content">
-									<p className='form-text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<p className='form-text' style={{maxWidth:200}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
 								</div>
 							</div>
 						</div>
 
-						<div className="col-lg-3 col-md-6">
+						<div className="col-6 col-md-6 col-lg-3">
 							<div className="footer-widget footer-menu">
 								<h2 className="footer-title">For Patients</h2>
 								<ul>
@@ -36,7 +36,7 @@ const Footer = () => {
 							</div>
 						</div>
 
-						<div className="col-lg-3 col-md-6">
+						<div className="col-6 col-md-6 col-lg-3">
 
 							<div className="footer-widget footer-menu">
 								<h2 className="footer-title">For Doctors</h2>
@@ -49,9 +49,9 @@ const Footer = () => {
 							</div>
 						</div>
 
-						<div className="col-lg-3 col-md-6">
+						<div className="col-6 col-md-6 col-lg-3">
 							<div className="footer-widget footer-contact">
-								<h2 className="footer-title">Contact Us</h2>
+								<h2 className="footer-title mt-3 mt-md-0">Contact Us</h2>
 								<div className="footer-contact-info">
 									<div className="footer-address">
 										<span><i className="fas fa-map-marker-alt"></i></span>
@@ -86,7 +86,7 @@ const Footer = () => {
 							</div>
 							<div className="col-md-6 col-lg-6">
 								<div className="copyright-menu">
-									<ul className="policy-menu d-flex gap-2">
+									<ul className="policy-menu d-flex gap-2 justify-content-center">
 										<Link to={'/'} className='text-white'>Terms and Conditions</Link>
 										<Link to={'/'} className='text-white'>Policy</Link>
 									</ul>

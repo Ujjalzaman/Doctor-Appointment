@@ -13,7 +13,7 @@ const SearchContent = ({ data }) => {
             <div className='d-flex p-3 justify-content-between'>
                 <div className='d-flex gap-3'>
                     <div className='doc-img-fluid d-flex align-items-center'>
-                        { data?.img && <img src={data?.img} className="img-fluid" alt="User Image" />}
+                        { data?.img && <img src={data?.img} className="" alt="User Image" />}
                     </div>
                     <div className="doc-info">
                         <h5 className='mb-0'><Link to={`/doctors/profile/${data?.id}`}>Dr. {data?.firstName + ' ' + data?.lastName}</Link></h5>

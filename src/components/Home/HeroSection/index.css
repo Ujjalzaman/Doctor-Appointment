@@ -73,8 +73,8 @@
     }
   }
   
-  @media (max-height: 600px) {
+  @media (max-width: 600px) {
     #hero {
-      height: 110vh;
+      height: 60vh;
     }
   }

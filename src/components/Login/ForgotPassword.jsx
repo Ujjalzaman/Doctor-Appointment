@@ -52,7 +52,7 @@ const ForgotPassword = () => {
                                 </Form.Item>
 
                                 <Form.Item>
-                                    <Button type="primary" htmlType="submit" loading={isLoading}>
+                                    <Button type="primary" disabled={isLoading} htmlType="submit" loading={isLoading}>
                                         Submit
                                     </Button>
                                 </Form.Item>

@@ -18,7 +18,7 @@ const ClinicAndSpecialities = () => {
 
 				<div className="row justify-content-center">
 					<div className="col-md-9">
-						<div className="specialities-slider slider d-flex justify-content-center align-items-center gap-5">
+						<div className="specialities-slider d-flex justify-content-center align-items-center gap-5">
 							<div className="speicality-item text-center">
 								<div className="speicality-img">
 									<img src={img1} className="img-fluid" alt="" />
