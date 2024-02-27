@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const InfoPage = () => {
     return (
-        <section id="why-us" className="why-us">
+        <section className="why-us mt-5 mt-md-0">
             <div className="container">
 
                 <div className="row">

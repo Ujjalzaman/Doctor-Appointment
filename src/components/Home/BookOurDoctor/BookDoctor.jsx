@@ -96,7 +96,7 @@ const BookDoctor = () => {
 		<section className="section-doctor container">
 			<div className="container-fluid">
 				<div className="row">
-					<div className="col-lg-3 col-md-3 col-sm-12">
+					<div className="col-12 col-md-3 col-lg-3">
 						<div className='mb-2 section-title text-center'>
 							<h2>Book Our Doctor</h2>
 							<p className='m-0 text-secondary'>Lorem ipsum dolor sit.</p>
@@ -104,19 +104,26 @@ const BookDoctor = () => {
 						<div className="form-text">
 							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.</p>
 							<p>Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover  Various versions have evolved over the years, sometimes</p>
-							<Link to={'/doctors'} className='more-btn'>See More</Link>
+							<div className='text-center text-md-start my-3 my-md-0'>
+								<Link to={'/doctors'} className='more-btn text-center text-md-start'>See More</Link>
+							</div>
 						</div>
 					</div>
-					<div className="col-lg-9 col-md-9 col-sm-12">
+					<div className="col-12 col-md-9 col-lg-9">
 						<div className="d-flex justify-content-center align-items-center gap-3 border-0">
 							<Swiper
 								spaceBetween={10}
-								slidesPerView={3}
+								slidesPerView={1}
 								modules={[Navigation, Autoplay]}
 								navigation={true}
 								loop={true}
 								centeredSlides={true}
 								autoplay={{ delay: 5000, disableOnInteraction: false }}
+								breakpoints={{
+									640: { slidesPerView: 2 },
+									768: { slidesPerView: 2},
+									1024: { slidesPerView: 3},
+								}}
 							>
 								{content}
 							</Swiper>
