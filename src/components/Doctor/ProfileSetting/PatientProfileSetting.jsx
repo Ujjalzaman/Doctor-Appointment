@@ -49,9 +49,9 @@ const PatientProfileSetting = () => {
     }
 
     const onSubmit = (data) => {
-        const obj = data
+        const obj = data;
         const newObj = { ...obj, ...selectValue };
-        date && (newObj['dob'] = date);
+        date && (newObj['dateOfBirth'] = date);
         const changedValue = Object.fromEntries(Object.entries(newObj).filter(([key, value]) => value !== ''));
         const formData = new FormData();
         selectedImage && formData.append('file', file);
@@ -93,13 +93,13 @@ const PatientProfileSetting = () => {
                     <div className="col-md-6">
                         <div className="form-group mb-2 card-label">
                             <label>Email <span className="text-danger">*</span></label>
-                            <input defaultValue={data?.email} {...register("email")} className="form-control" />
+                            <input defaultValue={data?.email} disabled className="form-control" />
                         </div>
                     </div>
 
                     <div className="col-md-6">
                         <div className="form-group mb-2 card-label">
-                            <label>Date of Birth {moment(data?.dob).format('LL')}</label>
+                            <label>Date of Birth {moment(data?.dateOfBirth).format('LL')}</label>
                             <DatePicker onChange={onChange} format={"YYYY-MM-DD"} style={{ width: '100%', padding: '6px' }} />
                         </div>
                     </div>

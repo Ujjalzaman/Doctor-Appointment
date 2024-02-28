@@ -5,6 +5,7 @@ import httpStatus from "http-status";
 import moment from 'moment';
 import { EmailtTransporter } from "../../../helpers/emailTransporter";
 import * as path from 'path';
+import config from "../../../config";
 
 const createAppointment = async (payload: any): Promise<Appointments | null | any> => {
 
@@ -97,9 +98,8 @@ const createAppointment = async (payload: any): Promise<Appointments | null | an
         }
         const replacementObj = appointmentObj;
         const subject = `Appointment Confirm With Dr ${appointment?.doctor?.firstName + ' ' + appointment?.doctor?.lastName} at ${appointment.scheduleDate} + ' ' + ${appointment.scheduleTime}`
-        const fromMail = "ujjalzaman+doctor@gmail.com"
         const toMail = `${appointment.email + ',' + appointment.doctor?.email}`;
-        EmailtTransporter({ pathName, replacementObj, fromMail, toMail, subject })
+        EmailtTransporter({ pathName, replacementObj, toMail, subject })
         return appointment;
     });
     return result;
@@ -164,10 +164,10 @@ const createAppointmentByUnAuthenticateUser = async (payload: any): Promise<Appo
         }
         const pathName = path.join(__dirname, '../../../../template/meeting.html')
         const replacementObj = appointmentObj;
-        const subject = `Appointment Confirm With at ${appointment.scheduleDate} + ' ' + ${appointment.scheduleTime}`
-        const fromMail = "ujjalzaman+doctor@gmail.com"
+        const subject = `Appointment Confirm at ${appointment.scheduleDate} ${appointment.scheduleTime}`
+
         const toMail = `${appointment.email}`;
-        EmailtTransporter({ pathName, replacementObj, fromMail, toMail, subject })
+        EmailtTransporter({ pathName, replacementObj, toMail, subject })
         return appointment;
     })
 

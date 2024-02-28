@@ -114,10 +114,9 @@ const resetPassword = async (payload: any): Promise<{ message: string }> => {
                 link: resetLink
             };
             const subject = "Request to Reset Password";
-            const fromMail = "ujjalzaman+doctor@gmail.com"
             const toMail = isUserExist.email;
             try {
-                await EmailtTransporter({ pathName, replacementObj: obj, fromMail, toMail, subject })
+                await EmailtTransporter({ pathName, replacementObj: obj, toMail, subject })
             } catch (error) {
                 console.log("Error reset password email", error);
                 throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Unable to send reset email!")

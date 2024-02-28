@@ -3,21 +3,21 @@ import handlebars from 'handlebars';
 import ApiError from '../errors/apiError';
 import httpStatus from 'http-status';
 import { Transporter } from './Transporter';
+import config from '../config';
 
 type IEmailProps = {
     pathName: string;
     replacementObj: any,
-    fromMail: string,
     toMail: string,
     subject: string,
 }
-export const EmailtTransporter = async({pathName,replacementObj, fromMail, toMail, subject }:IEmailProps) =>{  
+export const EmailtTransporter = async({pathName,replacementObj, toMail, subject }:IEmailProps) =>{  
     const html = await readHtmlFile(pathName);
     const template = handlebars.compile(html);
     const htmlToSend = template(replacementObj);
     
     const mailOptions = {
-        from: `<${fromMail}>`,
+        from: `<${config.adminEmail}>`,
         to: toMail,
         subject: subject,
         html: htmlToSend

@@ -31,10 +31,9 @@ const sendVerificationEmail = async (data: Doctor) => {
         const pathName = path.join(__dirname, '../../../../template/verify.html',)
         const obj = {link: url};
         const subject = "Email Verification"
-        const fromMail = "ujjalzaman+doctor@gmail.com"
         const toMail = data.email;
         try{
-            await EmailtTransporter({pathName, replacementObj: obj, fromMail, toMail, subject})
+            await EmailtTransporter({pathName, replacementObj: obj, toMail, subject})
         }catch(err){
             console.log(err);
             throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Unable to send email !');

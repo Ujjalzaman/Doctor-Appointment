@@ -9,11 +9,10 @@ import moment from 'moment';
 import { Button } from 'antd';
 
 const TrackDetailPage = ({ data, setShowInfo }) => {
-  console.log(data)
   const patinetFirstName = data?.patient?.firstName ? data?.patient?.firstName : data?.firstName;
   const patinetLastName = data?.patient?.lastName ? data?.patient?.lastName : data?.lastName
-  const doctorFirstName = data?.patient?.firstName ? data?.patient?.firstName : 'Not Setup yet'
-  const doctorLastName = data?.patient?.lastName ? data?.patient?.lastName : ''
+  const doctorFirstName = data?.doctor?.firstName ? data?.doctor?.firstName : 'Not Setup yet'
+  const doctorLastName = data?.doctor?.lastName ? data?.doctor?.lastName : ''
   return (
     <>
       <div className="container mb-2" style={{ marginTop: '8rem' }}>

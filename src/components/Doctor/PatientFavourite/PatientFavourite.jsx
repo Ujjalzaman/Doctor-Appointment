@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import { useGetFavouriteQuery, useRemoveFavouriteMutation } from '../../../redux/api/favouriteApi';
 import { useEffect } from 'react';
-import { message } from 'antd';
+import { Empty, message } from 'antd';
 import { FaLocationArrow, FaCheckCircle, FaBookmark, FaDollarSign, FaClock } from "react-icons/fa";
 import StarRatings from 'react-star-ratings';
 import './index.css';
@@ -27,7 +27,7 @@ const PatientFavouriteDoctor = () => {
 
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
-    if (!isLoading && !isError && data?.length === 0) content = <div>Empty</div>
+    if (!isLoading && !isError && data?.length === 0) content = <Empty/>
     if (!isLoading && !isError && data?.length > 0) content =
         <>
             {data && data?.map((item) => (
