@@ -61,7 +61,7 @@ const ViewAppointment = () => {
                                 <img src={data?.doctor?.img} alt="" style={{ border: '2px solid #ffbc21', width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', objectPosition: 'top' }} />
                             </div>
                             <div>
-                                <h4 className="mb-1">{data?.doctor?.firstName && data?.doctor?.firstName + ' ' + data?.doctor?.lastName && data?.doctor?.lastName}</h4>
+                                <h4 className="mb-1">{data?.doctor?.firstName && data?.doctor?.lastName ? `${data.doctor.firstName} ${data.doctor.lastName}` : (data?.doctor?.firstName || data?.doctor?.lastName)}</h4>
                                 <p className="mb-1">{data?.doctor?.specialization}</p>
                                 <p className="mb-1 form-text">{data?.doctor?.designation}</p>
                                 <p className="mb-1 form-text">{data?.doctor?.college}</p>
