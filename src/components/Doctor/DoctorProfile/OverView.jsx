@@ -17,7 +17,7 @@ const OverView = () => {
                 <VerticalTimeline>
                     <VerticalTimelineElement
                         className="vertical-timeline-element--work"
-                        contentStyle={{ background: '#2e81c4', color: '#fff' }}
+                        contentStyle={{ background: '#2e81c4', color: '#000' }}
                         contentArrowStyle={{ borderRight: '7px solid  #2e81c4' }}
                         date="2011 - 2000"
                         iconStyle={{ background: '#2e81c4', color: '#fff' }}
@@ -33,7 +33,7 @@ const OverView = () => {
 
                     <VerticalTimelineElement
                         className="vertical-timeline-element--work"
-                        contentStyle={{ background: '#2e81c4', color: '#fff' }}
+                        contentStyle={{ background: '#2e81c4', color: '#000' }}
                         contentArrowStyle={{ borderRight: '7px solid  #2e81c4' }}
                         date="2003 - 2005"
                         iconStyle={{ background: '#2e81c4', color: '#fff' }}
@@ -55,7 +55,7 @@ const OverView = () => {
                 <VerticalTimeline>
                     <VerticalTimelineElement
                         className="vertical-timeline-element--work"
-                        contentStyle={{ background: '#2e81c4', color: '#fff' }}
+                        contentStyle={{ background: '#2e81c4', color: '#000' }}
                         contentArrowStyle={{ borderRight: '7px solid  #2e81c4' }}
                         date="2010 - Present (5 years)"
                         iconStyle={{ background: '#2e81c4', color: '#fff' }}
@@ -70,7 +70,7 @@ const OverView = () => {
 
                     <VerticalTimelineElement
                         className="vertical-timeline-element--work"
-                        contentStyle={{ background: '#2e81c4', color: '#fff' }}
+                        contentStyle={{ background: '#2e81c4', color: '#000' }}
                         contentArrowStyle={{ borderRight: '7px solid  #2e81c4' }}
                         date="2007 - 2010 (3 years)"
                         iconStyle={{ background: '#2e81c4', color: '#fff' }}
@@ -85,7 +85,7 @@ const OverView = () => {
 
                     <VerticalTimelineElement
                         className="vertical-timeline-element--work"
-                        contentStyle={{ background: '#2e81c4', color: '#fff' }}
+                        contentStyle={{ background: '#2e81c4', color: '#000' }}
                         contentArrowStyle={{ borderRight: '7px solid  #2e81c4' }}
                         date="2005 - 2007 (2 years)"
                         iconStyle={{ background: '#2e81c4', color: '#fff' }}
@@ -108,7 +108,7 @@ const OverView = () => {
                 <VerticalTimeline>
                     <VerticalTimelineElement
                         className="vertical-timeline-element--work"
-                        contentStyle={{ background: '#2e81c4', color: '#fff' }}
+                        contentStyle={{ background: '#2e81c4', color: '#000' }}
                         contentArrowStyle={{ borderRight: '7px solid  #2e81c4' }}
                         date="July 2019"
                         iconStyle={{ background: '#2e81c4', color: '#fff' }}
@@ -121,7 +121,7 @@ const OverView = () => {
 
                     <VerticalTimelineElement
                         className="vertical-timeline-element--work"
-                        contentStyle={{ background: '#2e81c4', color: '#fff' }}
+                        contentStyle={{ background: '#2e81c4', color: '#000' }}
                         contentArrowStyle={{ borderRight: '7px solid  #2e81c4' }}
                         date="March 2011"
                         iconStyle={{ background: '#2e81c4', color: '#fff' }}
@@ -134,7 +134,7 @@ const OverView = () => {
 
                     <VerticalTimelineElement
                         className="vertical-timeline-element--work"
-                        contentStyle={{ background: '#2e81c4', color: '#fff' }}
+                        contentStyle={{ background: '#2e81c4', color: '#00' }}
                         contentArrowStyle={{ borderRight: '7px solid  #2e81c4' }}
                         date="March 2011"
                         iconStyle={{ background: '#2e81c4', color: '#fff' }}

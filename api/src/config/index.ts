@@ -20,5 +20,7 @@ export default {
         key: process.env.API_KEY,
         secret: process.env.API_SECRET
     },
-    emailPass: process.env.EMAIL_PASS
+    emailPass: process.env.EMAIL_PASS,
+    adminEmail: process.env.ADMIN_EMAIL,
+    gmail_app_Email: process.env.GMAIL_APP_EMAIL,
 }

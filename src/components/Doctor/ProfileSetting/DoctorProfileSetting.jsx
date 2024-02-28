@@ -38,6 +38,7 @@ const DoctorProfileSetting = () => {
 
     const onSubmit = (data) => {
         const obj = data
+        obj.price && obj.price.toString();
         const newObj = { ...obj, ...selectValue };
         date && (newObj['dob'] = date);
         newObj["services"] = Array.isArray(selectedItems) ? selectedItems.join(',') : null;
@@ -205,8 +206,8 @@ const DoctorProfileSetting = () => {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="form-group mb-2 card-label">
-                                        <label>Address Line</label>
-                                        <input defaultValue={data?.price} {...register("price")} className="form-control" />
+                                        <label>30 Min Fee</label>
+                                        <input defaultValue={data?.price} {...register("price")} type='number' className="form-control" />
                                     </div>
                                 </div>
                             </div>
