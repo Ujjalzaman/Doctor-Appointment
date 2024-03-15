@@ -132,6 +132,7 @@ const createAppointmentByUnAuthenticateUser = async (payload: any): Promise<Appo
         const day = (moment().dayOfYear()).toString().padStart(2, '0');
         const trackingId = 'UNU' + year + month + day + lastDigit || '0001';
         patientInfo['trackingId'] = trackingId;
+        patientInfo['doctorId'] = config.defaultAdminDoctor
 
         const appointment = await tx.appointments.create({
             data: patientInfo,
