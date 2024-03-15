@@ -23,4 +23,5 @@ export default {
     emailPass: process.env.EMAIL_PASS,
     adminEmail: process.env.ADMIN_EMAIL,
     gmail_app_Email: process.env.GMAIL_APP_EMAIL,
+    defaultAdminDoctor: process.env.DEFULT_ADMIN_DOCTOR
 }

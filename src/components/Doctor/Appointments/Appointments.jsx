@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import DashboardLayout from '../DashboardLayout/DashboardLayout'
 import img from '../../../images/doc/doctor 3.jpg';
 import './Appointments.css';
