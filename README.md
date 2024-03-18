@@ -1,6 +1,7 @@
 # Doctor Appointment - Full Stack Appointment Website
-Preview Website
-https://dental-doctor-ujjal.netlify.app/
+
+[![YouTube](https://img.shields.io/badge/Watch_Demo_on-YouTube-red?logo=youtube)](https://youtu.be/L6cgb7I-Ap4)&nbsp;&nbsp;&nbsp;&nbsp;[![Preview](https://img.shields.io/badge/Preview_on-Netlify-brightgreen?logo=netlify)](https://dental-doctor-ujjal.netlify.app/)&nbsp;&nbsp;&nbsp;&nbsp;[![Live Preview](https://img.shields.io/badge/Live_Preview-Netlify-blue?logo=netlify)](https://dental-doctor-ujjal.netlify.app/)
+
 
 ##### To Setup Project Follow `project_setup.txt` documentation
 
