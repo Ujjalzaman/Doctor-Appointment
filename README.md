@@ -1,9 +1,7 @@
 # Doctor Appointment - Full Stack Appointment Website
+Preview Website
+https://dental-doctor-ujjal.netlify.app/
 
-[![YouTube](https://img.shields.io/badge/Watch_Demo_on-YouTube-red?logo=youtube)](https://youtu.be/L6cgb7I-Ap4)&nbsp;&nbsp;&nbsp;&nbsp;[![Preview](https://img.shields.io/badge/Preview_on-Netlify-brightgreen?logo=netlify)](https://dental-doctor-ujjal.netlify.app/)&nbsp;&nbsp;&nbsp;&nbsp;[![Live Preview](https://img.shields.io/badge/Live_Preview-Netlify-blue?logo=netlify)](https://dental-doctor-ujjal.netlify.app/)
-
-
-##### To Setup Project Follow `project_setup.txt` documentation
 
 ## About The Project
 The `DoctorOnCall` System facilitates patients in scheduling appointments with preferred doctors or Emergency Appointments set up via an online platform.
@@ -95,7 +93,7 @@ npm start
 Happy coding! 🚀
 ```
 
-Note: Please note that these are general instructions for setting up an Express API, and the specific implementation details may vary depending on your project's requirements. Before starting, make sure to read the project's documentation or readme file to obtain any specific instructions or requirements.
+Note: These are general instructions for setting up an Express API, and the specific implementation details may vary depending on your project's requirements. Before starting, make sure to read the project's documentation or readme file to obtain any specific instructions or requirements.
 
  
  This system offers a comprehensive and dynamic platform for managing doctor appointments, treatments, and patient interactions while maintaining high standards of code quality and user experience.
