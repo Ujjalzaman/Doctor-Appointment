@@ -142,7 +142,5 @@ Wait for the project's maintainers to review your pull request and provide feedb
 Thank you for considering this project. If you have any questions, please do not hesitate to contact me.
 
 
-## Contact
-Ujjalzaman - [@email](gmail.com) - ujjalzaman@gmail.com
-
-Portfolio: [https://ujjalzaman-b6c8a.web.app/](https://ujjalzaman-b6c8a.web.app/)
+## Contact Me
+Portfolio: [https://ujjalzaman.netlify.app/](https://ujjalzaman.netlify.app/)
