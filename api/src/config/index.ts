@@ -23,5 +23,7 @@ export default {
     emailPass: process.env.EMAIL_PASS,
     adminEmail: process.env.ADMIN_EMAIL,
     gmail_app_Email: process.env.GMAIL_APP_EMAIL,
-    defaultAdminDoctor: process.env.DEFULT_ADMIN_DOCTOR
+    defaultAdminDoctor: process.env.DEFULT_ADMIN_DOCTOR,
+    backendLiveUrl: process.env.BACKEND_LIVE_URL,
+    backendLocalUrl: process.env.BACKEND_LOCAL_URL
 }

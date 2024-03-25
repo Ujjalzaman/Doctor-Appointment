@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "start": "node ./dist/server.js",
     "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "build": "tsc && copyfiles -u 1 template/* dist/template",
     "lint:fix": "eslint . --fix",
@@ -32,10 +33,7 @@
     "moment": "^2.29.4",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.9",
-    "uuid": "^9.0.1",
-    "winston": "^3.10.0",
-    "winston-daily-rotate-file": "^4.7.1",
-    "zod": "^3.21.4"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -47,7 +45,6 @@
     "@types/multer": "^1.4.11",
     "@types/node": "^20.10.1",
     "@types/nodemailer": "^6.4.14",
-    "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.44.0",
@@ -56,7 +53,6 @@
     "npm": "^9.8.0",
     "prettier": "^3.0.0",
     "prisma": "^5.6.0",
-    "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.2"
   },

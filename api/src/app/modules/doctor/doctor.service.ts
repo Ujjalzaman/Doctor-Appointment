@@ -12,10 +12,11 @@ import { CloudinaryHelper } from "../../../helpers/uploadHelper";
 import moment from "moment";
 import { EmailtTransporter } from "../../../helpers/emailTransporter";
 import * as path from "path";
+import config from "../../../config";
 const { v4: uuidv4 } = require('uuid');
 
 const sendVerificationEmail = async (data: Doctor) => {
-    const currentUrl = process.env.NODE_ENV === 'production' ? 'https://doctor-on-call-backend.vercel.app/api/v1/auth/' : 'http://localhost:5000/api/v1/auth/';
+    const currentUrl = process.env.NODE_ENV === 'production' ? config.backendLiveUrl : config.backendLocalUrl;
     const uniqueString = uuidv4() + data.id;
     const uniqueStringHashed = await bcrypt.hashSync(uniqueString, 12);
     const url = `${currentUrl}user/verify/${data.id}/${uniqueString}`
