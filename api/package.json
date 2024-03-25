@@ -23,6 +23,7 @@
     "body-parser": "^1.19.0",
     "cloudinary": "^1.41.3",
     "cookie-parser": "^1.4.6",
+    "copyfiles": "^2.4.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -33,7 +34,10 @@
     "moment": "^2.29.4",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.9",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "winston": "^3.10.0",
+    "winston-daily-rotate-file": "^4.7.1",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
