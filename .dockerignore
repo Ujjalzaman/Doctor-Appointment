@@ -1,0 +1,4 @@
+/node_modules
+/.pnp
+.pnp.js
+api/logs/winston
