@@ -21,7 +21,7 @@ const Dashboard = () => {
                     }
                     {role === 'doctor' &&
                         <div className="col-md-12 rounded" style={{ background: '#f8f9fa' }}>
-                            <h5 className="text-title">Appointments</h5>
+                            <h5 className="text-title py-3">Appointments</h5>
                             <DashboardPage />
                         </div>
                     }

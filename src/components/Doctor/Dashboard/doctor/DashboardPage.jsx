@@ -3,7 +3,7 @@ import img from '../../../../images/avatar.jpg';
 import { FaEye, FaCheck, FaTimes, FaBriefcaseMedical } from "react-icons/fa";
 import { useGetDoctorAppointmentsQuery, useUpdateAppointmentMutation } from '../../../../redux/api/appointmentApi';
 import moment from 'moment';
-import { Button, message } from 'antd';
+import { Button, Tag, message } from 'antd';
 import CustomTable from '../../../UI/component/CustomTable';
 import { Tabs } from 'antd';
 import { Link } from 'react-router-dom';
@@ -44,12 +44,17 @@ const DashboardPage = () => {
             key: '1',
             width: 100,
             render: function (data) {
+                const fullName = `${data?.patient?.firstName ?? ''} ${data?.patient?.lastName ?? ''}`;
+                const patientName = fullName.trim() || "Un Patient";
+                const imgdata = data?.patient?.img ? data?.patient?.img : img
                 return <>
                     <div className="table-avatar">
                         <a className="avatar avatar-sm mr-2 d-flex gap-2">
-                            <img className="avatar-img rounded-circle" src={img} alt="" />
+                            <img className="avatar-img rounded-circle" src={imgdata} alt="" />
                             <div>
-                                <p className='p-0 m-0 text-nowrap'>{data?.patient?.firstName + ' ' + data?.patient?.lastName}</p>
+                                <p className='p-0 m-0 text-nowrap'>
+                                    {patientName}
+                                </p>
                                 <p className='p-0 m-0'>{data?.patient?.designation}</p>
                             </div>
                         </a>
@@ -72,7 +77,9 @@ const DashboardPage = () => {
             key: '4',
             width: 100,
             render: function (data) {
-                return <div>{data?.status}</div>
+                return (
+                    <Tag color="#87d068" className='text-uppercase'>{data?.status}</Tag>
+                )
             }
         },
         {
@@ -97,8 +104,8 @@ const DashboardPage = () => {
                         {
                             data?.status === 'pending' &&
                             <>
-                                <Button type="primary" icon={<FaCheck />} size="medium" onClick={() => updatedApppointmentStatus(data, 'accept')}>Accept</Button>
-                                <Button type='primary' icon={<FaTimes />} danger onClick={() => updatedApppointmentStatus(data, 'cancel')}>Cancel</Button>
+                                <Button type="primary" icon={<FaCheck />} size="small" onClick={() => updatedApppointmentStatus(data, 'accept')}>Accept</Button>
+                                <Button type='primary' icon={<FaTimes />} size='small' danger onClick={() => updatedApppointmentStatus(data, 'cancel')}>Cancel</Button>
                             </>
                         }
                     </div>

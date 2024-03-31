@@ -1,7 +1,7 @@
 import React from 'react';
 import './Reviews.css';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
-import img from '../../../images/doc/doctor 3.jpg';
+import img from '../../../images/avatar.jpg';
 import { useGetDoctorReviewsQuery } from '../../../redux/api/reviewsApi';
 import { FaRegThumbsUp } from "react-icons/fa";
 import moment from 'moment';
@@ -10,12 +10,11 @@ import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import { Empty } from 'antd';
 
 const Reviews = () => {
-    const {data: loginInfo} = useAuthCheck();
+    const { data: loginInfo } = useAuthCheck();
     const { data, isError, isLoading } = useGetDoctorReviewsQuery(loginInfo?.id);
-
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
-    if (!isLoading && !isError && data?.length === 0) content = <Empty/>
+    if (!isLoading && !isError && data?.length === 0) content = <Empty />
     if (!isLoading && !isError && data?.length > 0) content =
         <>
             {
@@ -24,10 +23,10 @@ const Reviews = () => {
                         <div className='d-flex gap-3 justify-content-between'>
                             <div className='d-flex gap-4'>
                                 <div className='review-img'>
-                                    <img className="" alt="" src={img} />
+                                    <img className="" alt="" src={data?.patient?.img ? data?.patient?.img : img} />
                                 </div>
                                 <div>
-                                    <h5 className="text-nowrap">{item?.patient?.firstName + ' ' + item?.patient?.lastName}</h5>
+                                    <h5 className="text-nowrap text-capitalize">{item?.patient?.firstName + ' ' + item?.patient?.lastName}</h5>
                                     <p className="text-success"><FaRegThumbsUp /> {item?.isRecommended ? 'I recommend the doctor' : 'I do not recommend the doctor'}</p>
                                 </div>
                             </div>

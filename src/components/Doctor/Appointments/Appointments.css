@@ -43,4 +43,6 @@
     font-weight: 600;
     color: #757575;
     margin-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
 }

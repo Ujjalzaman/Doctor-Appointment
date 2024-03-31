@@ -1,5 +1,5 @@
 import React from 'react';
-import img from '../../../images/doc/doctor 3.jpg';
+import img from '../../../images/avatar.jpg';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import { useGetDoctorPatientsQuery } from '../../../redux/api/appointmentApi';
 import moment from 'moment';
@@ -8,6 +8,10 @@ import { FaClock, FaEnvelope, FaLocationArrow, FaPhoneAlt } from "react-icons/fa
 import { Empty } from 'antd';
 
 const MyPatients = () => {
+    const getInitPatientName = (item) => {
+        const fullName = `${item?.firstName ?? ''} ${item?.lastName ?? ''}`;
+        return fullName.trim() || "Private Patient";
+    }
     const { data, isLoading, isError } = useGetDoctorPatientsQuery();
     let content = null;
     if (!isLoading && isError) content = <div>Something Went Wrong !</div>
@@ -18,10 +22,10 @@ const MyPatients = () => {
                 <div className="w-100 mb-3 rounded p-3 text-center" style={{ background: '#f8f9fa' }}>
                     <div className="">
                         <Link to={'/'} className="my-3 patient-img">
-                            <img src={img} alt="" />
+                            <img src={data?.patient?.img ? data?.patient?.img : img} alt="" />
                         </Link>
                         <div className="patients-info mt-4">
-                            <h5>{item?.firstName + ' ' + item?.lastName}</h5>
+                            <h5>{getInitPatientName(item)}</h5>
                             <div className="info">
                                 <p><FaClock className='icon' /> {moment(item?.appointmentTime).format("MMM Do YY")} </p>
                                 <p><FaLocationArrow className='icon' /> {item?.address}</p>

@@ -33,7 +33,7 @@ const ViewAppointment = () => {
 
                     <div style={{ fontWeight: 500 }}>
                         {data?.patientType &&
-                            <p className='mb-1'>Patient Type : <Tag bordered={false} color="processing">{data?.patientType}</Tag></p>}
+                        <p className='mb-1'>Patient Type : <Tag bordered={false} color="processing">{data?.patientType}</Tag></p>}
                         <p className='mb-1'>Current Status:  <Tag bordered={false} color="orange">{data?.status}</Tag></p>
                         <p className='mb-1'>Payment : <Tag bordered={false} color="success">{data?.paymentStatus}</Tag></p>
                         <p className='mb-1'>Prescription Status : <Tag bordered={false} color="green">{data?.prescriptionStatus}</Tag></p>
