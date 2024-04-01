@@ -72,7 +72,7 @@ cd api
    - Create an account at https://railway.app/.
    - Navigate to the New Section > Database > Add PostgreSQL.
    - Select your created database and go to the Variables tab.
-   - Copy DATABASE_PRIVATE_URL.
+   - Copy DATABASE_PUBLIC_URL.
    - Paste the database URL into the .env file.
 
 ### Install Prisma

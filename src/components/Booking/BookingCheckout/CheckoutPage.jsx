@@ -1,5 +1,5 @@
 import moment from 'moment';
-import img from '../../../images/doc/doctor 3.jpg';
+import img from '../../../images/avatar.jpg';
 import { Link } from 'react-router-dom';
 import './BookingCheckout.css';
 
@@ -10,6 +10,7 @@ const CheckoutPage = ({ handleChange, selectValue, isCheck, setIsChecked, data, 
     }
 
     let price = data?.price ? data.price : 60;
+    let doctorImg = data?.img ? data?.img : img
 
     const vat = (15 / 100) * (Number(price))
     return (
@@ -113,7 +114,7 @@ const CheckoutPage = ({ handleChange, selectValue, isCheck, setIsChecked, data, 
                 <div className="col-md-5 col-sm-12">
                     <div className="rounded p-3" style={{ background: "#f8f9fa" }}>
                         {data && <Link to={`/doctors/profile/${data?.id}`} className="booking-doc-img d-flex justify-content-center mb-2">
-                            <img src={img} alt="" />
+                            <img src={doctorImg} alt="" />
                         </Link>}
                         {data && <div className='doc-title-info mt-3 mb-3'>
                             <h5 className='mt-3 text-center' style={{

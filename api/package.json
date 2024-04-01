@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "start": "node ./dist/server.js",
+    "start": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "compile": "node ./dist/server.js",
     "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "build": "tsc && copyfiles -u 1 template/* dist/template",
     "lint:fix": "eslint . --fix",

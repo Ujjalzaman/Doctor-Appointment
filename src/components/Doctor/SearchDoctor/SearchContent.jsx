@@ -5,6 +5,7 @@ import StarRatings from 'react-star-ratings';
 import { Tag } from 'antd';
 import './index.css';
 import { FaLocationArrow, FaRegThumbsUp, FaDollarSign, FaComment } from "react-icons/fa";
+import { truncate } from '../../../utils/truncate';
 
 const SearchContent = ({ data }) => {
     const services = data?.services?.split(',')
@@ -45,7 +46,6 @@ const SearchContent = ({ data }) => {
                                 </li>
                                 <li>
                                     <img src={showImg} alt="Feature" style={{ maxWidth: "30px" }} />
-
                                 </li>
                                 <li>
                                     <img src={showImg} alt="Feature" style={{ maxWidth: "30px" }} />
@@ -65,8 +65,8 @@ const SearchContent = ({ data }) => {
                         <ul>
                             <li><FaRegThumbsUp />  97%</li>
                             <li><FaComment /> 4 Feedback</li>
-                            <li><FaLocationArrow /> Newyork, USA</li>
-                            <li><FaDollarSign /> $150 - $250</li>
+                            <li><FaLocationArrow />{truncate(data?.clinicAddress, 20)}</li>
+                            <li><FaDollarSign /> {data?.price ? truncate(data?.price, 4) : 60} (Per Hour)</li>
                         </ul>
                     </div>
                     <div className="clinic-booking">
