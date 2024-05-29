@@ -1,9 +1,0 @@
-.review-img{
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-}
-.review-img img{
-    object-fit: cover;
-    object-position: top;
-}

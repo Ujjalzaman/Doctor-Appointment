@@ -1,7 +1,7 @@
 # Doctor Appointment - Full Stack Appointment Website
 
-## 👨‍💻 Actively Seeking Better Opportunities
-#### 🌟 Open to vacancies, jobs, or contract roles 🚀
+## For purchases or inquiries, please contact us here.
+Contact: [https://quber.com.au/#contact](https://quber.com.au/#contact)
 
 ### Installation video
 [![YouTube](https://img.shields.io/badge/Watch_on-YouTube-red?logo=youtube)](https://youtu.be/L6cgb7I-Ap4)&nbsp;&nbsp;&nbsp;&nbsp;
@@ -149,4 +149,4 @@ Thank you for considering this project. If you have any questions, please do not
 
 
 ## Contact Me
-Portfolio: [https://ujjalzaman.netlify.app/](https://ujjalzaman.netlify.app/)
+Quber: [https://quber.com.au/](https://quber.com.au/)
