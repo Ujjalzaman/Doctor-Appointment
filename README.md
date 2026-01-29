@@ -1,7 +1,7 @@
 # Doctor Appointment - Full Stack Appointment Website
 
 ## For purchases or inquiries, please contact us here.
-Contact: [https://quber.com.au/#contact](https://quber.com.au/#contact)
+Contact: [ujjalzaman@gmail.com](ujjalzaman@gmail.com)
 
 ### Installation video
 [![YouTube](https://img.shields.io/badge/Watch_on-YouTube-red?logo=youtube)](https://youtu.be/L6cgb7I-Ap4)&nbsp;&nbsp;&nbsp;&nbsp;
