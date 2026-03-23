@@ -1,0 +1,17 @@
+.dash-card-icon{
+	text-align: center;
+    border: 6px solid #1977cc;
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #1378bb;
+}
+.dash-card-icon .icon{
+	font-size: 2.5rem;
+}
+.dash-card{
+	border-right: 1px solid #c0bebe;
+}

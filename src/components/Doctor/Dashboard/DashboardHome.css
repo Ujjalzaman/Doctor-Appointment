@@ -1,0 +1,104 @@
+.dash-home__welcome {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-bottom: 1.75rem;
+	padding: 1.5rem 1.75rem;
+	border-radius: 16px;
+	background: linear-gradient(125deg, #0f172a 0%, #1e3a5f 55%, #1977cc 100%);
+	color: #fff;
+	box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.45);
+}
+
+.dash-home__welcome--doctor {
+	background: linear-gradient(125deg, #1a2744 0%, #243b55 50%, #667eea 100%);
+}
+
+.dash-home__welcome-title {
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin: 0 0 0.35rem;
+	letter-spacing: -0.02em;
+	color: #fff;
+}
+
+.dash-home__welcome-text {
+	margin: 0;
+	opacity: 0.88;
+	font-size: 0.95rem;
+	max-width: 36rem;
+}
+
+.dash-home__welcome-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.dash-home__pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1rem;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.12);
+	color: #fff;
+	font-size: 0.88rem;
+	font-weight: 600;
+	text-decoration: none;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.dash-home__pill:hover {
+	color: #fff;
+	background: rgba(255, 255, 255, 0.22);
+	transform: translateY(-1px);
+}
+
+.dash-home__quick-card {
+	display: flex;
+	align-items: center;
+	gap: 0.85rem;
+	padding: 1rem 1.25rem;
+	height: 100%;
+	border-radius: 14px;
+	background: #fff;
+	border: 1px solid #e9ecef;
+	text-decoration: none;
+	color: inherit;
+	box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+	transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.dash-home__quick-card:hover {
+	border-color: rgba(25, 119, 204, 0.35);
+	box-shadow: 0 8px 24px rgba(25, 119, 204, 0.12);
+	transform: translateY(-2px);
+	color: inherit;
+}
+
+.dash-home__quick-icon {
+	font-size: 1.35rem;
+	color: #1977cc;
+	flex-shrink: 0;
+}
+
+.dash-home__quick-arrow {
+	margin-left: auto;
+	color: #94a3b8;
+	font-size: 0.85rem;
+}
+
+.dash-home__fav-card {
+	border-radius: 14px !important;
+	border: 1px solid #eef2f6 !important;
+}
+
+.dash-home__treatment {
+	border-radius: 14px !important;
+	background: linear-gradient(180deg, #f8fafc 0%, #fff 100%) !important;
+	border: 1px solid #e9ecef !important;
+}

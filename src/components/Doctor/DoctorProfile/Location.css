@@ -1,0 +1,194 @@
+.locations-container {
+	padding: 0;
+}
+
+.locations-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+	.locations-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1200px) {
+	.locations-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.location-card {
+	background: #fff;
+	border-radius: 16px;
+	padding: 1.75rem;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+	border: 1px solid rgba(0, 0, 0, 0.04);
+	transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.location-card:hover {
+	box-shadow: 0 8px 30px rgba(25, 119, 204, 0.12);
+	transform: translateY(-2px);
+}
+
+.location-card__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 1rem;
+	margin-bottom: 1.25rem;
+	padding-bottom: 1rem;
+	border-bottom: 2px solid #f0f0f0;
+}
+
+.location-card__name {
+	font-size: 1.2rem;
+	font-weight: 700;
+	color: #1a1a2e;
+	margin: 0 0 0.25rem 0;
+}
+
+.location-card__specialty {
+	font-size: 0.9rem;
+	color: #1977cc;
+	font-weight: 600;
+	margin: 0;
+}
+
+.location-card__price-badge {
+	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	color: #fff;
+	font-size: 1.1rem;
+	font-weight: 700;
+	padding: 10px 20px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(25, 119, 204, 0.3);
+	white-space: nowrap;
+}
+
+.location-card__info {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.location-card__info-item {
+	display: flex;
+	gap: 12px;
+	align-items: flex-start;
+}
+
+.location-card__icon {
+	color: #1977cc;
+	font-size: 1.1rem;
+	margin-top: 2px;
+	flex-shrink: 0;
+}
+
+.location-card__info-item p {
+	font-size: 0.95rem;
+	color: #374151;
+	margin: 0;
+	line-height: 1.5;
+}
+
+.location-card__directions {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 0.85rem;
+	color: #1977cc;
+	font-weight: 600;
+	margin-top: 0.5rem;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.location-card__directions:hover {
+	color: #1565a0;
+}
+
+.location-card__schedule {
+	background: #f8fafc;
+	border-radius: 12px;
+	padding: 1.25rem;
+}
+
+.location-card__schedule-title {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #1a1a2e;
+	margin: 0 0 1rem 0;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.location-card__schedule-title svg {
+	color: #1977cc;
+}
+
+.schedule-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.schedule-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.5rem 0;
+}
+
+.schedule-item--closed {
+	opacity: 0.6;
+}
+
+.schedule-days {
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: #374151;
+	min-width: 100px;
+}
+
+.schedule-times {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	text-align: right;
+}
+
+.schedule-times span {
+	font-size: 0.85rem;
+	color: #5a6c7d;
+}
+
+.schedule-closed-badge {
+	background: #fef2f2;
+	color: #dc2626;
+	padding: 2px 10px;
+	border-radius: 12px;
+	font-weight: 600;
+}
+
+@media (max-width: 575.98px) {
+	.location-card__header {
+		flex-direction: column;
+	}
+	.location-card__price-badge {
+		align-self: flex-start;
+	}
+	.schedule-item {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.schedule-times {
+		text-align: left;
+	}
+}

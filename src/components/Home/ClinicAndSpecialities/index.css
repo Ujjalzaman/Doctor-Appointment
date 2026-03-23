@@ -1,0 +1,236 @@
+.specialities-section {
+	position: relative;
+	background:
+		linear-gradient(165deg, rgba(255, 255, 255, 0.92) 0%, transparent 45%),
+		linear-gradient(180deg, #f4f7fb 0%, #e8eef5 55%, #dfe6ef 100%);
+	padding: 5.5rem 0 5rem;
+}
+
+.specialities-section::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(25, 119, 204, 0.08), transparent 55%);
+	pointer-events: none;
+}
+
+.specialities-section .container {
+	position: relative;
+	z-index: 1;
+}
+
+.specialities-header {
+	margin-bottom: 3.25rem;
+	max-width: 640px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.specialities-label {
+	display: inline-block;
+	font-size: 0.72rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.22em;
+	color: #1977cc;
+	margin-bottom: 0.65rem;
+}
+
+.specialities-header h2 {
+	font-size: clamp(1.85rem, 4vw, 2.5rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: #121826;
+	margin-bottom: 1rem;
+	line-height: 1.2;
+}
+
+.specialities-header-line {
+	display: block;
+	width: 48px;
+	height: 3px;
+	margin: 0 auto 1.25rem;
+	border-radius: 2px;
+	background: linear-gradient(90deg, transparent, #1977cc, #3291e6, transparent);
+	opacity: 0.95;
+}
+
+.specialities-lead {
+	font-size: 1.0625rem;
+	color: #4a5568;
+	margin: 0;
+	line-height: 1.65;
+	font-weight: 400;
+}
+
+.specialities-grid {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1.5rem 1.75rem;
+}
+
+.speciality-card {
+	flex: 0 0 auto;
+}
+
+.speciality-card-inner {
+	text-align: center;
+	min-width: 168px;
+	padding: 1.75rem 1.35rem 1.85rem;
+	background: linear-gradient(180deg, #ffffff 0%, #fafbfd 100%);
+	border: 1px solid rgba(255, 255, 255, 0.9);
+	border-radius: 20px;
+	box-shadow:
+		0 1px 2px rgba(15, 23, 42, 0.04),
+		0 12px 32px -8px rgba(15, 23, 42, 0.08),
+		0 0 0 1px rgba(25, 119, 204, 0.04);
+	transition:
+		transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 0.4s ease,
+		border-color 0.35s ease;
+}
+
+.speciality-card:hover .speciality-card-inner {
+	transform: translateY(-6px);
+	box-shadow:
+		0 4px 8px rgba(15, 23, 42, 0.06),
+		0 24px 48px -12px rgba(25, 119, 204, 0.2),
+		0 0 0 1px rgba(25, 119, 204, 0.1);
+	border-color: rgba(25, 119, 204, 0.14);
+}
+
+.speciality-img-wrap {
+	position: relative;
+	width: 132px;
+	height: 132px;
+	margin: 0 auto 1.15rem;
+	background: linear-gradient(145deg, #ffffff 0%, #f0f5fa 100%);
+	border-radius: 50%;
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.95),
+		0 8px 24px rgba(15, 23, 42, 0.07);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: visible;
+	transition: box-shadow 0.35s ease;
+}
+
+.speciality-img-ring {
+	position: absolute;
+	inset: -4px;
+	border-radius: 50%;
+	border: 1px solid rgba(25, 119, 204, 0.12);
+	pointer-events: none;
+	transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.speciality-card:hover .speciality-img-ring {
+	border-color: rgba(25, 119, 204, 0.28);
+	box-shadow: 0 0 0 4px rgba(25, 119, 204, 0.06);
+}
+
+.speciality-card:hover .speciality-img-wrap {
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.95),
+		0 12px 32px rgba(25, 119, 204, 0.15);
+}
+
+.speciality-img-wrap img {
+	width: 68%;
+	height: auto;
+	object-fit: contain;
+	transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.speciality-card:hover .speciality-img-wrap img {
+	transform: scale(1.06);
+}
+
+.speciality-check {
+	position: absolute;
+	bottom: 6px;
+	right: 6px;
+	width: 30px;
+	height: 30px;
+	background: linear-gradient(145deg, #1977cc 0%, #1565a0 100%);
+	color: #fff;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.68rem;
+	box-shadow:
+		0 2px 8px rgba(25, 119, 204, 0.45),
+		0 0 0 2px rgba(255, 255, 255, 0.95);
+	transition: transform 0.3s ease;
+}
+
+.speciality-card:hover .speciality-check {
+	transform: scale(1.05);
+}
+
+.speciality-name {
+	font-size: 0.98rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #1a2332;
+	margin: 0;
+	transition: color 0.35s ease;
+}
+
+.speciality-card:hover .speciality-name {
+	color: #1565a0;
+}
+
+@media (max-width: 991.98px) {
+	.specialities-section {
+		padding: 3.75rem 0 3.5rem;
+	}
+	.specialities-grid {
+		gap: 1.25rem;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.specialities-grid {
+		overflow-x: auto;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+		padding-bottom: 0.75rem;
+		margin-inline: -0.75rem;
+		padding-inline: 0.75rem;
+		-webkit-overflow-scrolling: touch;
+		scroll-snap-type: x proximity;
+	}
+	.specialities-grid::-webkit-scrollbar {
+		height: 6px;
+	}
+	.specialities-grid::-webkit-scrollbar-track {
+		background: rgba(0, 0, 0, 0.06);
+		border-radius: 3px;
+	}
+	.specialities-grid::-webkit-scrollbar-thumb {
+		background: linear-gradient(90deg, #1977cc, #3291e6);
+		border-radius: 3px;
+	}
+	.speciality-card {
+		scroll-snap-align: start;
+	}
+	.speciality-img-wrap {
+		width: 118px;
+		height: 118px;
+	}
+	.speciality-card-inner {
+		min-width: 152px;
+		padding: 1.5rem 1.1rem 1.6rem;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.specialities-header h2 {
+		font-size: 1.7rem;
+	}
+}

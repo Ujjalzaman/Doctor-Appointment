@@ -1,0 +1,59 @@
+.admin-dashboard {
+  padding: 0;
+}
+
+.dashboard-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.mt-4 {
+  margin-top: 1.5rem !important;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge--pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge--scheduled {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-badge--completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge--cancel,
+.status-badge--cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status-badge--confirmed {
+  background: #d1f2eb;
+  color: #0f6c59;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .stats-card-value {
+    font-size: 1.5rem;
+  }
+  
+  .stats-card-icon {
+    font-size: 2rem;
+  }
+}

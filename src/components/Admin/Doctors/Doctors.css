@@ -1,0 +1,61 @@
+.doctor-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.doctor-avatar {
+  flex-shrink: 0;
+}
+
+.doctor-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.doctor-name {
+  font-weight: 600;
+  color: #2c4964;
+  margin-bottom: 0.25rem;
+}
+
+.doctor-designation {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.doctor-form-image-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.image-preview-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+.small {
+  font-size: 0.875rem;
+}
+
+.ms-2 {
+  margin-left: 0.5rem;
+}

@@ -1,0 +1,80 @@
+.table-toolbar {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.stat-mini-card {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s;
+}
+
+.stat-mini-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.stat-mini-card.stat-warning {
+  border-color: #ffc107;
+  background: rgba(255, 193, 7, 0.05);
+}
+
+.stat-mini-card.stat-info {
+  border-color: #17a2b8;
+  background: rgba(23, 162, 184, 0.05);
+}
+
+.stat-mini-card.stat-success {
+  border-color: #28a745;
+  background: rgba(40, 167, 69, 0.05);
+}
+
+.stat-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #2c4964;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.appointment-details-modal h4 {
+  color: #2c4964;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.appointment-details-modal p {
+  margin-bottom: 0.75rem;
+}
+
+.fw-bold {
+  font-weight: 600;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+.small {
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .table-toolbar {
+    flex-direction: column;
+  }
+  
+  .table-toolbar > * {
+    width: 100% !important;
+  }
+}

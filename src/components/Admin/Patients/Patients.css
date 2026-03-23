@@ -1,0 +1,35 @@
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.patient-avatar {
+  flex-shrink: 0;
+}
+
+.patient-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.patient-name {
+  font-weight: 600;
+  color: #2c4964;
+  margin-bottom: 0.25rem;
+}
+
+.patient-email {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.patient-details-modal p {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.patient-details-modal strong {
+  color: #2c4964;
+  margin-right: 0.5rem;
+}

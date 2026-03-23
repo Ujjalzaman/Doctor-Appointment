@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Html</title>
+</head>
+<body>
+    <div style="width: 100%; margin: 0 auto; text-align: center;">
+        <div style="max-width: 600px;; margin-bottom: 5rem; background: #f8f9fa; display: inline-block;">
+            <div style="padding: 10px;">
+                <span style="font-size: 2.5rem; color: #28a745;">✔</span>
+                <h4 style="margin: 10px 0;">Meeting is scheduled</h4>
+                <p style="font-weight: bold; color: #007bff;">♯ Tracking Id - {{trackingId}}</p>
+            </div>
+    
+            <div style="border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin-bottom: 5px;">
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <span style="font-size: 1rem;margin-right: 5px;">👜</span><p>With Doctor</p>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <span style="font-size: 1rem;margin-right: 5px;">📅 Schedule</span><p style="margin: 0;">{{scheduleDate}}, {{scheduleTime}}</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 10px;">
+                    <span style="font-size: 1rem;margin-right: 5px;">⏰ Duration</span><p style="margin: 0;">30 Min</p>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 10px;">
+                    <span style="font-size: 1rem;margin-right: 5px;">📍 Payment Status</span><p style="margin: 0;">{{paymentStatus}}</p>
+                </div>
+        
+                <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 10px;">
+                    <span style="font-size: 1rem;">🔗 Meeting-Link </span> <a style="margin: 0;font-size: 12px;" href="https://meet.google.com/udx-kieq-sng" style="color: #007bff; text-decoration: none;">https://meet.google.com/udx-kieq-sng</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

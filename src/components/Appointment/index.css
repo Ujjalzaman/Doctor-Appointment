@@ -1,0 +1,45 @@
+.info-part p{
+    font-size: 14px;
+    color: #2c4964;
+    font-weight: 600;
+}
+.info-head-date{
+    min-height: 60px;
+    font-weight: 600;
+    color: #2c4964;
+    font-size: 16px;
+}
+.icon-box .icon{
+    color: #838080;
+    margin-top: 2px;
+}
+.select-date{
+    border: 2px solid #1977cc;
+    width: 100%;
+    cursor: pointer;
+    color: #1977cc;
+    transition: 0.6s ease-in;
+}
+
+.select-date .select-month{
+    font-size: 14px;
+    font-weight: 500;
+}
+.select-date .select-day-num{
+    font-size: 22px;
+    font-weight: 900;
+    padding: 6px 0;
+}
+
+.select-time-div h4{
+    font-size: 16px;
+}
+.info-date-card .active{
+    background-color: #1977cc;
+    color: white !important;
+}
+
+.select-date:hover{
+    background-color: #1977cc;
+    color: white !important;
+}

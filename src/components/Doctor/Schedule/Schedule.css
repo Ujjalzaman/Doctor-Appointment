@@ -1,0 +1,80 @@
+.schedule-content {
+    padding: 1rem 0;
+}
+
+.time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.time-slot-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.time-slot-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.time-icon {
+    font-size: 1.5rem;
+    opacity: 0.9;
+}
+
+.time-range {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.time-slot-editor {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.time-slot-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.time-picker-group {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.time-picker-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #495057;
+}
+
+@media (max-width: 768px) {
+    .time-slots-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .time-picker-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .time-slot-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

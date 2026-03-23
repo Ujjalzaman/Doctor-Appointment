@@ -1,0 +1,264 @@
+/* —— Track result (detail) —— */
+.track-detail-page {
+	padding-bottom: 4rem;
+}
+
+.track-detail-back {
+	margin-bottom: 1.25rem;
+}
+
+.track-detail-back .ant-btn {
+	border-radius: 10px;
+	font-weight: 600;
+}
+
+.track-detail-shell {
+	background: #fff;
+	border-radius: 24px;
+	border: 1px solid rgba(15, 23, 42, 0.06);
+	box-shadow:
+		0 1px 3px rgba(15, 23, 42, 0.04),
+		0 24px 48px -12px rgba(25, 119, 204, 0.1);
+	overflow: hidden;
+}
+
+.track-detail-hero {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1.25rem;
+	padding: 1.75rem 1.75rem 1.5rem;
+	background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fc 50%, #fff 100%);
+	border-bottom: 1px solid #eef2f6;
+}
+
+.track-detail-hero__label {
+	font-size: 0.7rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	color: #1977cc;
+	margin-bottom: 0.35rem;
+}
+
+.track-detail-hero__title {
+	font-size: 1.35rem;
+	font-weight: 700;
+	color: #0f172a;
+	margin: 0 0 0.75rem;
+	letter-spacing: -0.02em;
+}
+
+.track-detail-hero__track {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.track-detail-hero__track code {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 0.95rem;
+	font-weight: 700;
+	background: #fff;
+	padding: 0.35rem 0.75rem;
+	border-radius: 8px;
+	border: 1px solid #e2e8f0;
+}
+
+.track-detail-body {
+	padding: 1.5rem 1.75rem 2rem;
+}
+
+.track-detail-grid {
+	display: grid;
+	gap: 1rem;
+	margin-bottom: 1.75rem;
+}
+
+@media (min-width: 768px) {
+	.track-detail-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.track-detail-person {
+	display: flex;
+	gap: 1rem;
+	align-items: flex-start;
+	padding: 1.15rem 1.2rem;
+	border-radius: 16px;
+	border: 1px solid #f1f5f9;
+	background: linear-gradient(180deg, #fafbfc 0%, #fff 100%);
+}
+
+.track-detail-person--patient {
+	border-color: rgba(34, 197, 94, 0.2);
+	background: linear-gradient(180deg, #f0fdf4 0%, #fff 100%);
+}
+
+.track-detail-person--doctor {
+	border-color: rgba(25, 119, 204, 0.2);
+	background: linear-gradient(180deg, #f0f7ff 0%, #fff 100%);
+}
+
+.track-detail-avatar {
+	width: 56px;
+	height: 56px;
+	border-radius: 14px;
+	object-fit: cover;
+	object-position: top;
+	flex-shrink: 0;
+	border: 2px solid #fff;
+	box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.track-detail-avatar-fallback {
+	width: 56px;
+	height: 56px;
+	border-radius: 14px;
+	background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #64748b;
+	font-size: 1.35rem;
+	flex-shrink: 0;
+}
+
+.track-detail-person__role {
+	font-size: 0.68rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #94a3b8;
+	margin-bottom: 0.2rem;
+}
+
+.track-detail-person__name {
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: #0f172a;
+	margin: 0 0 0.35rem;
+}
+
+.track-detail-person__meta {
+	font-size: 0.85rem;
+	color: #64748b;
+	line-height: 1.5;
+	margin: 0;
+}
+
+.track-detail-schedule {
+	padding: 1.25rem 1.35rem;
+	border-radius: 16px;
+	background: #f8fafc;
+	border: 1px solid #e9ecef;
+	margin-bottom: 1.75rem;
+}
+
+.track-detail-schedule__title {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: #64748b;
+	margin-bottom: 0.85rem;
+}
+
+.track-detail-schedule__row {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.65rem;
+	font-size: 0.95rem;
+	color: #334155;
+	margin-bottom: 0.5rem;
+}
+
+.track-detail-schedule__row:last-child {
+	margin-bottom: 0;
+}
+
+.track-detail-schedule__row svg {
+	color: #1977cc;
+	margin-top: 3px;
+	flex-shrink: 0;
+}
+
+.track-detail-status-box {
+	text-align: center;
+	padding: 1rem 1.25rem;
+	border-radius: 14px;
+	background: #fffbeb;
+	border: 1px solid #fde68a;
+	margin-bottom: 1.75rem;
+}
+
+.track-detail-status-box p {
+	margin: 0.5rem 0 0;
+	font-size: 0.9rem;
+	color: #78350f;
+	line-height: 1.55;
+	max-width: 640px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Timeline v2 */
+.track-timeline {
+	display: grid;
+	gap: 0.75rem;
+}
+
+@media (min-width: 992px) {
+	.track-timeline {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.track-timeline__card {
+	padding: 1rem 1.1rem;
+	border-radius: 14px;
+	background: #fff;
+	border: 1px solid #f1f5f9;
+	box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+	height: 100%;
+}
+
+.track-timeline__card h6 {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: #94a3b8;
+	margin-bottom: 0.35rem;
+}
+
+.track-timeline__card .track-timeline__value {
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: #0f172a;
+	margin-bottom: 0.35rem;
+}
+
+.track-timeline__card p {
+	font-size: 0.8rem;
+	color: #64748b;
+	line-height: 1.45;
+	margin: 0;
+}
+
+.track-detail-section-title {
+	font-size: 1rem;
+	font-weight: 700;
+	color: #0f172a;
+	margin: 0 0 1rem;
+	text-align: center;
+}
+
+@media print {
+	.track-detail-back {
+		display: none;
+	}
+}

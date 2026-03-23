@@ -1,0 +1,244 @@
+.view-appointment-page {
+	padding: 7rem 0 4rem;
+	min-height: 100vh;
+	background: linear-gradient(180deg, #f0f7ff 0%, #f8fafc 40%, #fff 100%);
+}
+
+.view-appointment-toolbar {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 1.25rem;
+}
+
+.view-appointment-sheet {
+	max-width: 900px;
+	margin: 0 auto;
+	background: #fff;
+	border-radius: 20px;
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	box-shadow:
+		0 1px 3px rgba(15, 23, 42, 0.04),
+		0 20px 40px -12px rgba(25, 119, 204, 0.1);
+	overflow: hidden;
+}
+
+.view-appointment-sheet--a4 {
+	/* Screen preview of A4 proportions */
+	min-height: auto;
+}
+
+.view-appointment-top {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.25rem;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 1.5rem 1.75rem;
+	background: linear-gradient(135deg, #f0f7ff 0%, #e8f2fc 100%);
+	border-bottom: 1px solid #e2e8f0;
+}
+
+.view-appointment-brand {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	color: #1977cc;
+	margin-bottom: 0.35rem;
+}
+
+.view-appointment-top h1 {
+	font-size: 1.35rem;
+	font-weight: 700;
+	color: #0f172a;
+	margin: 0 0 0.5rem;
+	letter-spacing: -0.02em;
+}
+
+.view-appointment-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.view-appointment-status-grid {
+	display: grid;
+	gap: 0.4rem;
+	min-width: 200px;
+}
+
+.view-appointment-status-grid .ant-tag {
+	margin: 0;
+}
+
+.view-appointment-section {
+	padding: 1.35rem 1.75rem;
+	border-bottom: 1px solid #f1f5f9;
+}
+
+.view-appointment-section:last-of-type {
+	border-bottom: none;
+}
+
+.view-appointment-section__title {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: #64748b;
+	margin: 0 0 1rem;
+}
+
+.view-appointment-grid {
+	display: grid;
+	gap: 1rem;
+}
+
+@media (min-width: 576px) {
+	.view-appointment-grid--2 {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.view-appointment-field {
+	padding: 0.85rem 1rem;
+	border-radius: 12px;
+	background: #fafbfc;
+	border: 1px solid #f1f5f9;
+}
+
+.view-appointment-field__label {
+	font-size: 0.68rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: #94a3b8;
+	margin-bottom: 0.25rem;
+}
+
+.view-appointment-field__value {
+	font-size: 0.95rem;
+	font-weight: 600;
+	color: #1e293b;
+	margin: 0;
+	line-height: 1.45;
+}
+
+.view-appointment-field__value a {
+	color: #1977cc;
+	word-break: break-all;
+}
+
+.view-appointment-person {
+	display: flex;
+	gap: 1.15rem;
+	align-items: flex-start;
+	padding: 1rem 1.15rem;
+	border-radius: 14px;
+	background: linear-gradient(180deg, #fafbfc 0%, #fff 100%);
+	border: 1px solid #f1f5f9;
+}
+
+.view-appointment-avatar {
+	width: 88px;
+	height: 88px;
+	border-radius: 16px;
+	object-fit: cover;
+	object-position: top;
+	border: 2px solid #fff;
+	box-shadow: 0 4px 14px rgba(15, 23, 42, 0.1);
+	flex-shrink: 0;
+}
+
+.view-appointment-avatar-placeholder {
+	width: 88px;
+	height: 88px;
+	border-radius: 16px;
+	background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+	color: #1977cc;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+	flex-shrink: 0;
+}
+
+.view-appointment-person__name {
+	font-size: 1.15rem;
+	font-weight: 700;
+	color: #0f172a;
+	margin: 0 0 0.35rem;
+}
+
+.view-appointment-person__lines {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 0.88rem;
+	color: #475569;
+	line-height: 1.6;
+}
+
+.view-appointment-person__lines li {
+	margin-bottom: 0.2rem;
+}
+
+.view-appointment-reason {
+	margin-top: 1rem;
+	padding: 1rem 1.15rem;
+	border-radius: 12px;
+	background: #fffbeb;
+	border: 1px solid #fde68a;
+}
+
+.view-appointment-reason__label {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #b45309;
+	margin-bottom: 0.35rem;
+}
+
+.view-appointment-reason p {
+	margin: 0;
+	color: #78350f;
+	font-size: 0.92rem;
+	line-height: 1.5;
+}
+
+.view-appointment-loading,
+.view-appointment-error {
+	text-align: center;
+	padding: 4rem 1.5rem;
+	max-width: 480px;
+	margin: 0 auto;
+}
+
+/* Print */
+@media print {
+	.view-appointment-page {
+		padding: 0;
+		background: #fff;
+		min-height: auto;
+	}
+
+	.view-appointment-toolbar {
+		display: none !important;
+	}
+
+	.view-appointment-sheet {
+		box-shadow: none;
+		border: none;
+		border-radius: 0;
+		max-width: none;
+	}
+
+	.view-appointment-top,
+	.view-appointment-section,
+	.view-appointment-field,
+	.view-appointment-person,
+	.view-appointment-reason {
+		break-inside: avoid;
+	}
+}

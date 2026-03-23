@@ -1,0 +1,11 @@
+.amount-value {
+  font-weight: 600;
+  color: #28a745;
+  font-size: 1.05rem;
+}
+
+.tracking-id {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: #667eea;
+}

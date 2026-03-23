@@ -1,0 +1,116 @@
+.available-section {
+	padding: 5rem 0;
+	background: #fff;
+}
+
+.available-section__visual {
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.12);
+}
+
+.available-section__visual img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.available-section__header {
+	margin-bottom: 2rem;
+}
+
+.available-section__label {
+	display: inline-block;
+	font-size: 0.8rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: #1977cc;
+	margin-bottom: 0.5rem;
+}
+
+.available-section__header h2 {
+	font-size: 2rem;
+	font-weight: 700;
+	color: #1a1a2e;
+	margin-bottom: 0.5rem;
+}
+
+.available-section__lead {
+	font-size: 1rem;
+	color: #5a6c7d;
+	margin: 0;
+	line-height: 1.6;
+}
+
+.available-services-swiper-wrap {
+	position: relative;
+}
+
+.available-services-swiper {
+	padding: 0 0 2.5rem 0;
+}
+
+.available-services-swiper .swiper-button-prev,
+.available-services-swiper .swiper-button-next {
+	color: #1977cc;
+}
+
+.available-service-card {
+	background: #fff;
+	border-radius: 16px;
+	padding: 1.25rem;
+	text-align: center;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+	border: 1px solid rgba(0, 0, 0, 0.04);
+	transition: box-shadow 0.3s, transform 0.3s;
+	height: 100%;
+}
+
+.available-service-card:hover {
+	box-shadow: 0 12px 32px rgba(25, 119, 204, 0.15);
+	transform: translateY(-4px);
+}
+
+.available-service-card__img-wrap {
+	width: 100%;
+	height: 100px;
+	border-radius: 12px;
+	overflow: hidden;
+	background: #f8fafc;
+	margin: 0 auto 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.available-service-card__img-wrap img {
+	width: 90px;
+	height: 90px;
+	object-fit: cover;
+	border-radius: 50%;
+	transition: transform 0.3s;
+}
+
+.available-service-card:hover .available-service-card__img-wrap img {
+	transform: scale(1.08);
+}
+
+.available-service-card__title {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #1a1a2e;
+	margin: 0;
+}
+
+@media (max-width: 991.98px) {
+	.available-section {
+		padding: 3.5rem 0;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.available-section__header h2 {
+		font-size: 1.65rem;
+	}
+}

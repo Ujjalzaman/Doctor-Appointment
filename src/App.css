@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #05335c;
+    text-decoration: none !important;
+}
+
+a:hover {
+    color: rgb(20, 104, 177);
+    text-decoration: none;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    color: #272b41;
+    background-color: #f8f9fa;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #272b41;
+    font-weight: 500;
+}
+
+.h1,
+h1 {
+    font-size: 2.25rem;
+}
+
+.h2,
+h2 {
+    font-size: 1.875rem;
+}
+
+.h3,
+h3 {
+    font-size: 1.5rem;
+}
+
+.h4,
+h4 {
+    font-size: 1.125rem;
+}
+
+.h5,
+h5 {
+    font-size: 1rem;
+}
+
+.h6,
+h6 {
+    font-size: 0.875rem;
+}
+
+a {
+    color: #2E3842;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #09dca4;
+}
+
+a:hover,
+a:active,
+a:focus {
+    outline: none;
+    text-decoration: none;
+}
+
+.ant-radio-group {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.card-label>label {
+    background-color: #f8f9fa;
+    color: #959595;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 6px auto auto 8px;
+    padding: 0 7px;
+}
+
+.card-label>input {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .05);
+    display: block;
+    height: 50px;
+    margin-top: -13px;
+    padding: 5px 15px 0;
+    transition: border-color .3s;
+    width: 100%;
+}
+
+.btn-get-started {
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 12px 35px;
+    margin-top: 30px;
+    border-radius: 50px;
+    transition: 0.5s;
+    color: #fff;
+    background: #1977cc;
+}
+
+.btn-get-started:hover {
+    background: #3291e6;
+}
+
+.section-title h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    position: relative;
+    color: #2c4964;
+}
+
+.section-title h2::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 120px;
+    height: 1px;
+    background: #ddd;
+    bottom: 1px;
+    left: calc(50% - 60px);
+}
+
+.section-title h2::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: #1977cc;
+    bottom: 0;
+    left: calc(50% - 20px);
+}
+
+.more-btn {
+    display: inline-block;
+    border: 1px solid #3291e6;
+    padding: 6px 30px 8px 30px;
+    color: #3291e6;
+    border-radius: 50px;
+    transition: all ease-in-out 0.4s;
+}
+
+.more-btn .icon {
+    font-size: 14px;
+}
+
+.more-btn:hover {
+    color: #fff;
+    background: #3291e6;
+}
+
+.custom-blog-card:hover {
+    transform: scale(1.1);
+}
+
+.custom-blog-card {
+    transition: 0.5s ease-in;
+    max-width: 18rem;
+}
+
+.text-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #2c4964;
+}
+
+.change-photo-btn {
+    background-color: #1977cc;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 auto;
+    padding: 5px 10px;
+    position: relative;
+    transition: .6s ease-in;
+    text-align: center;
+}
+
+.change-photo-btn:hover {
+    background-color: #094b85;
+    border-radius: 50px;
+    color: #fff;
+}
+
+.change-photo-btn input.upload {
+    bottom: 0;
+    cursor: pointer;
+    filter: alpha(opacity=0);
+    left: 0;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}

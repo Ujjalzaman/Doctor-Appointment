@@ -1,0 +1,49 @@
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  color: #2c4964;
+}
+
+.doctor-reviewed {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #495057;
+}
+
+.review-details-modal .review-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.review-details-modal h4 {
+  margin: 0 0 0.5rem;
+  color: #2c4964;
+}
+
+.review-content p {
+  margin-bottom: 0.75rem;
+}
+
+.review-text,
+.reply-text {
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  color: #495057;
+  line-height: 1.6;
+}
+
+.reply-text {
+  background: #e7f3ff;
+  border-left: 3px solid #1977cc;
+}

@@ -1,0 +1,52 @@
+.appointment-tab {
+	margin-bottom: 30px;
+}
+.appointment-tab .nav-tabs {
+    background-color: #fff;
+    padding: 1.5rem;
+    border: 1px solid #f0f0f0;
+    border-radius: .25rem 0.25rem 0 0 !important;
+	border-bottom: 0;
+}
+.appointment-tab .tab-content {
+	padding-top: 0;
+}
+.appointment-tab .card {
+	border-radius: 0;
+}
+.submit-btn-bottom {
+	margin-bottom: 30px;
+}
+.card-table .card-body {
+    padding: 0;
+}
+.card-table .card-body .table > thead > tr > th {
+    border-top: 0;
+}
+.card-table .table tr td:first-child,
+.card-table .table tr th:first-child {
+    padding-left: 1.5rem;
+}
+.card-table .table tr td:last-child,
+.card-table .table tr th:last-child {
+    padding-right: 1.5rem;
+}
+.card-table .table td, .card-table .table th {
+    border-top: 1px solid #e2e5e8;
+    padding: 1rem 0.75rem;
+    white-space: nowrap;
+}
+table.table td h2.table-avatar {
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+    font-size: inherit;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+	white-space: nowrap;
+}

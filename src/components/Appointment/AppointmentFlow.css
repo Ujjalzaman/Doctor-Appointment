@@ -1,0 +1,477 @@
+/* Appointment flow – shared steps */
+.appointment-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f0f7ff 0%, #fff 20%);
+}
+
+.appointment-page .container-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8rem 1rem 6rem;
+}
+
+.appointment-step {
+  margin-top: 1.5rem;
+}
+
+.appointment-step__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2c4964;
+  margin-bottom: 0.35rem;
+}
+
+.appointment-step__subtitle {
+  font-size: 0.95rem;
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+/* Ant Steps override for appointment */
+.appointment-page .ant-steps {
+  margin-bottom: 2rem;
+}
+
+.appointment-page .ant-steps-item-title {
+  font-size: 0.9rem !important;
+}
+
+.appointment-page .ant-steps-item-process .ant-steps-item-icon {
+  background: #1977cc !important;
+  border-color: #1977cc !important;
+}
+
+.appointment-page .ant-steps-item-finish .ant-steps-item-icon {
+  background: #1977cc !important;
+  border-color: #1977cc !important;
+}
+
+.appointment-page .ant-steps-item-finish .ant-steps-item-tail::after {
+  background: #1977cc !important;
+}
+
+/* Select Doctor cards */
+.appointment-step--select-doctor .select-doctor-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #e9ecef;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.select-doctor-card--selected {
+  border-color: #1977cc !important;
+  box-shadow: 0 4px 16px rgba(25, 119, 204, 0.2);
+}
+
+.select-doctor-card__img-wrap {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #f1f3f5;
+}
+
+.select-doctor-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.select-doctor-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: #adb5bd;
+}
+
+.select-doctor-card__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2c4964;
+  margin: 0.75rem 0 0.25rem;
+}
+
+.select-doctor-card__designation {
+  font-size: 0.85rem;
+  color: #1977cc;
+  margin: 0;
+}
+
+.select-doctor-card__specialization {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin: 0.25rem 0 0;
+}
+
+/* Select Doctor – toolbar (search + filter) */
+.select-doctor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.select-doctor-search {
+  flex: 1;
+  min-width: 200px;
+  max-width: 400px;
+}
+
+.select-doctor-filter {
+  min-width: 220px;
+}
+
+/* Rich doctor list (list-style cards with full info) */
+.select-doctor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.select-doctor-list--rich .select-doctor-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.select-doctor-card--rich .select-doctor-card__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 0.25rem 0 0;
+}
+
+.select-doctor-card--rich .select-doctor-card__avatar-wrap {
+  width: 100px;
+  min-width: 100px;
+  height: 100px;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f1f3f5;
+}
+
+.select-doctor-card--rich .select-doctor-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.select-doctor-card--rich .select-doctor-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.select-doctor-card--rich .select-doctor-card__name {
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem;
+}
+
+.select-doctor-card--rich .select-doctor-card__meta {
+  font-size: 0.85rem;
+  color: #495057;
+  margin: 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.select-doctor-card--rich .select-doctor-card__meta-icon {
+  color: #1977cc;
+  flex-shrink: 0;
+  min-width: 1rem;
+}
+
+.select-doctor-card--rich .select-doctor-card__meta--specialty {
+  font-weight: 600;
+  color: #2c4964;
+}
+
+.select-doctor-card--rich .select-doctor-card__meta--muted {
+  color: #868e96;
+  font-size: 0.8rem;
+}
+
+.select-doctor-card--rich .select-doctor-card__btn {
+  margin-top: 0.5rem;
+}
+
+.select-doctor-empty {
+  margin: 2rem 0;
+}
+
+.select-doctor-pagination {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.select-doctor-pagination .ant-pagination {
+  margin: 0;
+}
+
+/* Select Date & Time */
+.appointment-step--datetime .datetime-summary {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #e9ecef;
+  margin-bottom: 1.5rem;
+}
+
+.datetime-summary__row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+.datetime-summary__row .icon {
+  color: #1977cc;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.datetime-summary__label {
+  font-weight: 600;
+  color: #2c4964;
+  min-width: 5rem;
+}
+
+.datetime-summary__value {
+  color: #495057;
+}
+
+.datetime-dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.datetime-date-card {
+  flex: 1 1 120px;
+  min-width: 100px;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.datetime-date-card:hover {
+  border-color: #1977cc;
+  background: rgba(25, 119, 204, 0.06);
+}
+
+.datetime-date-card.datetime-date-card--active {
+  border-color: #1977cc;
+  background: #1977cc;
+  color: #fff;
+}
+
+.datetime-date-card .day-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.datetime-date-card .month-year {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  margin-top: 0.25rem;
+}
+
+.datetime-date-card .weekday {
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.datetime-date-card--active .month-year,
+.datetime-date-card--active .weekday {
+  opacity: 1;
+}
+
+.datetime-times-section {
+  margin-top: 1.5rem;
+}
+
+.datetime-times-section h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2c4964;
+  margin-bottom: 0.75rem;
+}
+
+.datetime-times-section .ant-btn {
+  margin: 0 0.5rem 0.5rem 0;
+}
+
+/* Patient info form */
+.appointment-step--patient .patient-form-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.patient-form-card__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c4964;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.patient-form-card .ant-input,
+.patient-form-card .ant-select-selector {
+  border-radius: 8px;
+}
+
+.patient-form-card .ant-form-item-label > label {
+  font-weight: 500;
+  color: #495057;
+}
+
+/* Payment / Checkout */
+.appointment-step--payment .checkout-layout {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .appointment-step--payment .checkout-layout {
+    grid-template-columns: 1fr 380px;
+  }
+}
+
+.checkout-form-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  padding: 1.5rem;
+}
+
+.checkout-form-card__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c4964;
+  margin-bottom: 1rem;
+}
+
+.payment-method-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.payment-method-option {
+  flex: 1 1 140px;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.payment-method-option:hover {
+  border-color: #1977cc;
+}
+
+.payment-method-option.payment-method-option--active {
+  border-color: #1977cc;
+  background: rgba(25, 119, 204, 0.08);
+}
+
+.order-summary-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  padding: 1.5rem;
+  height: fit-content;
+}
+
+.order-summary-card .summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  color: #495057;
+}
+
+.order-summary-card .summary-row.summary-total {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c4964;
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.order-summary-card .summary-total .amount {
+  color: #1977cc;
+}
+
+/* Success modal */
+.appointment-success-modal .ant-modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.appointment-success-modal .success-icon-wrap {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.appointment-success-modal .success-icon-wrap .anticon {
+  font-size: 4rem;
+  color: #52c41a;
+}
+
+.appointment-success-modal .success-message {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c4964;
+  margin-bottom: 0.5rem;
+}
+
+.appointment-success-modal .success-sub {
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Step actions */
+.appointment-actions {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.appointment-actions .ant-btn-primary {
+  background: #1977cc;
+  border-color: #1977cc;
+}
+
+.appointment-actions .ant-btn-primary:hover {
+  background: #1565b8;
+  border-color: #1565b8;
+}
+
+.appointment-actions .ant-btn-default {
+  border-radius: 8px;
+}

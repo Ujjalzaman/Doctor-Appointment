@@ -1,0 +1,140 @@
+.services-section {
+	padding: 5rem 0;
+	background: #fff;
+}
+
+.services-header {
+	margin-bottom: 3rem;
+}
+
+.services-label {
+	display: inline-block;
+	font-size: 0.8rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: #1977cc;
+	margin-bottom: 0.5rem;
+}
+
+.services-header h2 {
+	font-size: 2.25rem;
+	font-weight: 700;
+	color: #1a1a2e;
+	margin-bottom: 0.75rem;
+}
+
+.services-lead {
+	font-size: 1.05rem;
+	color: #5a6c7d;
+	max-width: 560px;
+	margin: 0 auto;
+	line-height: 1.6;
+}
+
+.service-image-wrap {
+	position: relative;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+.service-img {
+	border-radius: 16px;
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	transition: transform 0.5s ease;
+}
+
+.service-image-wrap:hover .service-img {
+	transform: scale(1.03);
+}
+
+.service-img-1 {
+	max-height: 220px;
+	object-position: top;
+}
+
+.service-img-2 {
+	margin-top: 1rem;
+	max-height: 200px;
+	object-position: center;
+}
+
+.service-image-wrap--single .service-img {
+	max-height: 320px;
+	object-position: top;
+}
+
+.service-content-card {
+	background: linear-gradient(180deg, #f8fbff 0%, #fff 100%);
+	border: 1px solid rgba(25, 119, 204, 0.1);
+	border-radius: 16px;
+	padding: 2rem;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.service-content-icon {
+	width: 56px;
+	height: 56px;
+	border-radius: 14px;
+	background: rgba(25, 119, 204, 0.12);
+	color: #1977cc;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5rem;
+	margin-bottom: 1.25rem;
+}
+
+.service-content-card h2 {
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: #1a1a2e;
+	line-height: 1.3;
+	margin-bottom: 1rem;
+}
+
+.service-content-card p {
+	font-size: 0.95rem;
+	color: #5a6c7d;
+	line-height: 1.65;
+	margin-bottom: 1.5rem;
+}
+
+.service-cta {
+	display: inline-flex;
+	align-items: center;
+	font-weight: 600;
+	color: #1977cc;
+	text-decoration: none;
+	transition: color 0.2s, transform 0.2s;
+}
+
+.service-cta:hover {
+	color: #1565a0;
+	transform: translateX(4px);
+}
+
+@media (max-width: 991.98px) {
+	.services-section {
+		padding: 3.5rem 0;
+	}
+	.service-content-card {
+		margin-top: 0.5rem;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.services-header h2 {
+		font-size: 1.75rem;
+	}
+	.service-content-card h2 {
+		font-size: 1.5rem;
+	}
+}

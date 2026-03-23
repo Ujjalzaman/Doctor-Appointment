@@ -1,0 +1,23 @@
+.award-img {
+    height: 120px;
+    margin-bottom: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background: #eff0f3;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 15px;
+}
+.say-about {
+    position: relative;
+}
+.say-about:before {
+    width: 48%;
+    height: 100%;
+    top: 0;
+    left: 0px;
+    position: absolute;
+    content: "";
+    background: url("../../images/doc/doc4.jpg") no-repeat 50% 50%;
+}

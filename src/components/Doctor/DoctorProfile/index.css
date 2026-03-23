@@ -1,0 +1,398 @@
+.doctor-profile-page {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background: #f5f7fa;
+}
+
+.profile-content {
+	flex: 1;
+	padding-bottom: 4rem;
+}
+
+/* Hero with overlapping image */
+.doctor-hero {
+	position: relative;
+	padding: 3rem 0 8rem;
+	margin-top: -1rem;
+}
+
+.doctor-hero__bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 280px;
+	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	z-index: 0;
+}
+
+.doctor-hero .container {
+	position: relative;
+	z-index: 1;
+}
+
+.doctor-hero__content {
+	display: flex;
+	gap: 2rem;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+@media (min-width: 992px) {
+	.doctor-hero__content {
+		flex-wrap: nowrap;
+	}
+}
+
+/* Image card with overlap effect */
+.doctor-hero__image-card {
+	flex-shrink: 0;
+	margin-top: 2rem;
+}
+
+.doctor-hero__image-wrap {
+	position: relative;
+	width: 320px;
+	height: 400px;
+	border-radius: 24px;
+	overflow: hidden;
+	background: #fff;
+	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+	border: 6px solid #fff;
+}
+
+.doctor-hero__image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top;
+}
+
+.doctor-hero__image-placeholder {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+	color: #1977cc;
+	font-size: 5rem;
+}
+
+.doctor-hero__badge {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #22c55e;
+	color: #fff;
+	font-size: 0.85rem;
+	font-weight: 700;
+	padding: 10px 20px;
+	border-radius: 30px;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
+	white-space: nowrap;
+}
+
+/* Info card */
+.doctor-hero__info-card {
+	flex: 1;
+	min-width: 0;
+	background: #fff;
+	border-radius: 24px;
+	padding: 2.5rem;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+	border: 1px solid rgba(0, 0, 0, 0.06);
+	margin-top: 2rem;
+}
+
+.doctor-hero__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 2rem;
+	margin-bottom: 1.75rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 2px solid #f0f0f0;
+	flex-wrap: wrap;
+}
+
+.doctor-hero__name {
+	font-size: 2rem;
+	font-weight: 700;
+	color: #1a1a2e;
+	margin: 0 0 0.5rem 0;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.doctor-hero__verified-icon {
+	color: #22c55e;
+	font-size: 1.5rem;
+}
+
+.doctor-hero__designation {
+	font-size: 1.15rem;
+	color: #1977cc;
+	font-weight: 600;
+	margin: 0 0 0.25rem 0;
+}
+
+.doctor-hero__specialization {
+	font-size: 1rem;
+	color: #6c757d;
+	margin: 0;
+}
+
+.doctor-hero__rating-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	background: #f8fafc;
+	padding: 1rem 1.5rem;
+	border-radius: 16px;
+}
+
+.doctor-hero__rating-number {
+	font-size: 2rem;
+	font-weight: 700;
+	color: #1977cc;
+	line-height: 1;
+}
+
+.doctor-hero__reviews-count {
+	font-size: 0.8rem;
+	color: #6c757d;
+}
+
+/* Stats */
+.doctor-hero__stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 1.5rem;
+	margin-bottom: 1.75rem;
+}
+
+.doctor-hero__stat {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	background: #f8fafc;
+	padding: 1rem 1.25rem;
+	border-radius: 14px;
+}
+
+.doctor-hero__stat-icon {
+	font-size: 1.75rem;
+	color: #1977cc;
+	flex-shrink: 0;
+}
+
+.doctor-hero__stat div {
+	display: flex;
+	flex-direction: column;
+}
+
+.doctor-hero__stat strong {
+	font-size: 1.1rem;
+	color: #1a1a2e;
+	font-weight: 700;
+}
+
+.doctor-hero__stat span {
+	font-size: 0.8rem;
+	color: #6c757d;
+}
+
+/* Contact */
+.doctor-hero__contact {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin-bottom: 1.75rem;
+	padding: 1.25rem;
+	background: #f8fafc;
+	border-radius: 14px;
+}
+
+.doctor-hero__contact-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-size: 0.95rem;
+	color: #374151;
+}
+
+.doctor-hero__contact-item svg {
+	color: #1977cc;
+	font-size: 1rem;
+	flex-shrink: 0;
+}
+
+/* Actions */
+.doctor-hero__actions {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.doctor-hero__book-btn,
+.doctor-hero__chat-btn {
+	flex: 1;
+	min-width: 180px;
+	padding: 16px 32px;
+	border-radius: 14px;
+	font-weight: 600;
+	font-size: 1rem;
+	text-decoration: none;
+	text-align: center;
+	transition: all 0.2s;
+	border: none;
+	cursor: pointer;
+}
+
+.doctor-hero__book-btn {
+	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	color: #fff;
+	box-shadow: 0 8px 20px rgba(25, 119, 204, 0.35);
+}
+
+.doctor-hero__book-btn:hover {
+	color: #fff;
+	box-shadow: 0 12px 30px rgba(25, 119, 204, 0.45);
+	transform: translateY(-2px);
+}
+
+.doctor-hero__chat-btn {
+	background: #fff;
+	color: #1977cc;
+	border: 2px solid #1977cc;
+}
+
+.doctor-hero__chat-btn:hover {
+	background: #f0f7ff;
+}
+
+/* Tabs */
+.profile-tabs-wrap {
+	margin-top: -4rem;
+	padding: 0 0 2rem;
+	position: relative;
+	z-index: 2;
+}
+
+.profile-tabs-wrap .container {
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+	border: 1px solid rgba(0, 0, 0, 0.04);
+	overflow: hidden;
+	padding: 2rem;
+}
+
+.profile-tabs.ant-tabs .ant-tabs-nav {
+	margin-bottom: 2rem;
+	border-bottom: 2px solid #f0f0f0;
+}
+
+.profile-tabs.ant-tabs .ant-tabs-tab {
+	font-weight: 600;
+	font-size: 1rem;
+	padding: 12px 20px;
+}
+
+.profile-tabs.ant-tabs .ant-tabs-tab-btn:focus {
+	color: #1977cc;
+}
+
+.profile-tabs.ant-tabs .ant-tabs-ink-bar {
+	background: #1977cc;
+	height: 3px;
+}
+
+.profile-tabs.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+	color: #1977cc;
+}
+
+/* Loading / Error */
+.profile-loading {
+	padding: 4rem 0;
+}
+
+.profile-loading__card {
+	height: 320px;
+	background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+	background-size: 200% 100%;
+	border-radius: 24px;
+	animation: profileShimmer 1.2s ease-in-out infinite;
+	margin-bottom: 2rem;
+}
+
+.profile-loading__tabs {
+	height: 400px;
+	background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+	background-size: 200% 100%;
+	border-radius: 20px;
+	animation: profileShimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes profileShimmer {
+	0% { background-position: 200% 0; }
+	100% { background-position: -200% 0; }
+}
+
+.profile-error {
+	padding: 4rem 1rem;
+	text-align: center;
+}
+
+@media (max-width: 991.98px) {
+	.doctor-hero__image-wrap {
+		width: 280px;
+		height: 350px;
+	}
+	.doctor-hero__info-card {
+		padding: 2rem;
+	}
+	.doctor-hero__name {
+		font-size: 1.65rem;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.doctor-hero {
+		padding: 2rem 0 6rem;
+	}
+	.doctor-hero__image-card {
+		width: 100%;
+	}
+	.doctor-hero__image-wrap {
+		width: 100%;
+		max-width: 320px;
+		height: 380px;
+		margin: 0 auto;
+	}
+	.doctor-hero__info-card {
+		padding: 1.5rem;
+	}
+	.doctor-hero__header {
+		flex-direction: column;
+		gap: 1rem;
+	}
+	.doctor-hero__rating-box {
+		align-self: flex-start;
+	}
+	.doctor-hero__stats {
+		grid-template-columns: 1fr;
+	}
+	.profile-tabs-wrap {
+		margin-top: -2rem;
+	}
+}

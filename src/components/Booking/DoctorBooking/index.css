@@ -1,0 +1,26 @@
+.booking-doc-img img {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    object-position: top;
+    border: 6px solid #efefef;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+.booking-doc-img a {
+    font-weight: 600;
+    color: #1977cc;
+}
+
+.booking-doc-img {
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.date-card{
+    background: #f8f9fa;
+    height: 50vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}

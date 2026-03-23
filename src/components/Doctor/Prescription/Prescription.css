@@ -1,0 +1,88 @@
+.stats-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.stat-mini-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.stat-mini-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.stat-mini-card-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.stat-mini-card-success {
+    background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
+    color: white;
+}
+
+.stat-mini-card-warning {
+    background: linear-gradient(135deg, #fa8c16 0%, #d46b08 100%);
+    color: white;
+}
+
+.stat-mini-details {
+    text-align: center;
+}
+
+.stat-mini-title {
+    font-size: 0.875rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.stat-mini-count {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .stats-mini-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.prescription-page .prescription-table-card {
+    border-radius: 14px;
+    border: 1px solid #eef2f6;
+}
+
+.prescription-expand {
+    display: grid;
+    gap: 1rem;
+    padding: 0.5rem 0 0.25rem;
+}
+
+.prescription-expand__block {
+    max-width: 720px;
+}
+
+.prescription-meds-list {
+    margin: 0.5rem 0 0;
+    padding-left: 1.1rem;
+    color: #475569;
+}
+
+.prescription-meds-list li {
+    margin-bottom: 0.35rem;
+}
+
+.prescription-faq {
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+
+.prescription-page--patient .dashboard-card-title {
+    letter-spacing: -0.02em;
+}

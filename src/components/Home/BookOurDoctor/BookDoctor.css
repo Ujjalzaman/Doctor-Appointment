@@ -1,0 +1,381 @@
+.section-doctor {
+	background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+	padding: 5rem 0;
+}
+
+.section-doctor-intro {
+	padding-right: 1rem;
+}
+
+.section-doctor-label {
+	display: inline-block;
+	font-size: 0.8rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: #1977cc;
+	margin-bottom: 0.5rem;
+}
+
+.section-doctor-intro h2 {
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: #1a1a2e;
+	margin-bottom: 0.75rem;
+}
+
+.section-doctor-lead {
+	font-size: 1rem;
+	color: #5a6c7d;
+	line-height: 1.55;
+	margin-bottom: 0.75rem;
+}
+
+.section-doctor-text {
+	font-size: 0.9rem;
+	color: #6c757d;
+	line-height: 1.6;
+	margin-bottom: 1.5rem;
+}
+
+.section-doctor-cta {
+	display: inline-block;
+	font-weight: 600;
+	color: #1977cc;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.section-doctor-cta:hover {
+	color: #1565a0;
+}
+
+/* Card */
+.book-doctor-card {
+	background: #fff;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+	border: 2px solid transparent;
+	position: relative;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	transition: box-shadow 0.3s, transform 0.3s, border-color 0.25s;
+	cursor: pointer;
+	user-select: none;
+}
+
+.book-doctor-card:hover {
+	box-shadow: 0 12px 40px rgba(25, 119, 204, 0.15);
+	transform: translateY(-4px);
+}
+
+.book-doctor-card--featured {
+	border-color: rgba(25, 119, 204, 0.2);
+	box-shadow: 0 4px 24px rgba(25, 119, 204, 0.12);
+}
+
+.book-doctor-card--selected {
+	border-color: #1977cc;
+	box-shadow:
+		0 0 0 4px rgba(25, 119, 204, 0.14),
+		0 12px 40px rgba(25, 119, 204, 0.22);
+	transform: translateY(-4px);
+}
+
+.book-doctor-card__selected-banner {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: linear-gradient(90deg, #1565a0 0%, #1977cc 60%, #3291e6 100%);
+	color: #fff;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	padding: 6px 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	z-index: 4;
+	border-radius: 0 0 14px 14px;
+}
+
+.book-doctor-card__badge {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	z-index: 2;
+	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	color: #fff;
+	font-size: 0.7rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	padding: 4px 10px;
+	border-radius: 20px;
+	box-shadow: 0 2px 8px rgba(25, 119, 204, 0.4);
+}
+
+.book-doctor-card__photo-link {
+	display: block;
+	text-decoration: none;
+}
+
+.book-doctor-card__photo {
+	position: relative;
+	height: 200px;
+	background: #e9ecef;
+	overflow: hidden;
+}
+
+.book-doctor-card__photo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top;
+	transition: transform 0.4s ease;
+}
+
+.book-doctor-card:hover .book-doctor-card__photo img {
+	transform: scale(1.05);
+}
+
+.book-doctor-card__photo-placeholder {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+	color: #1977cc;
+	font-size: 3rem;
+}
+
+.book-doctor-card__favourite {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	z-index: 2;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: #fff;
+	border: none;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+	color: #6c757d;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.book-doctor-card__favourite:hover {
+	color: #dc3545;
+	background: #fff;
+	transform: scale(1.08);
+}
+
+.book-doctor-card__body {
+	padding: 1.25rem;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.book-doctor-card__title {
+	font-size: 1.1rem;
+	font-weight: 700;
+	margin: 0 0 0.25rem 0;
+	line-height: 1.3;
+}
+
+.book-doctor-card__title a {
+	color: #1a1a2e;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.book-doctor-card__title a:hover {
+	color: #1977cc;
+}
+
+.book-doctor-card__verified {
+	color: #22c55e;
+	font-size: 1rem;
+	flex-shrink: 0;
+}
+
+.book-doctor-card__speciality {
+	font-size: 0.85rem;
+	color: #6c757d;
+	margin: 0 0 0.5rem 0;
+	line-height: 1.4;
+	min-height: 2.4em;
+}
+
+.book-doctor-card__rating {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-bottom: 0.75rem;
+}
+
+.book-doctor-card__reviews {
+	font-size: 0.8rem;
+	color: #6c757d;
+}
+
+.book-doctor-card__info {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 1rem 0;
+	font-size: 0.85rem;
+	color: #5a6c7d;
+	line-height: 1.6;
+}
+
+.book-doctor-card__info li {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 4px;
+}
+
+.book-doctor-card__info li svg {
+	flex-shrink: 0;
+	color: #1977cc;
+	width: 14px;
+}
+
+.book-doctor-card--selected .book-doctor-card__body {
+	padding-bottom: 2.75rem;
+}
+
+.book-doctor-card__actions {
+	display: flex;
+	gap: 8px;
+	margin-top: auto;
+	padding-top: 0.5rem;
+}
+
+.book-doctor-card__btn {
+	flex: 1;
+	text-align: center;
+	padding: 10px 14px;
+	font-size: 0.9rem;
+	font-weight: 600;
+	border-radius: 10px;
+	text-decoration: none;
+	transition: all 0.2s;
+}
+
+.book-doctor-card__btn--outline {
+	background: #fff;
+	color: #1977cc;
+	border: 2px solid #1977cc;
+}
+
+.book-doctor-card__btn--outline:hover {
+	background: #1977cc;
+	color: #fff;
+}
+
+.book-doctor-card__btn--primary {
+	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	color: #fff;
+	border: 2px solid transparent;
+}
+
+.book-doctor-card__btn--primary:hover {
+	background: #1565a0;
+	color: #fff;
+	box-shadow: 0 4px 14px rgba(25, 119, 204, 0.4);
+}
+
+/* Skeleton */
+.book-doctor-card--skeleton .book-doctor-card__photo {
+	background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+	background-size: 200% 100%;
+	animation: skeleton 1.2s ease-in-out infinite;
+}
+
+.book-doctor-card--skeleton .book-doctor-card__name,
+.book-doctor-card--skeleton .book-doctor-card__meta,
+.book-doctor-card--skeleton .book-doctor-card__actions {
+	height: 20px;
+	background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+	background-size: 200% 100%;
+	border-radius: 4px;
+	animation: skeleton 1.2s ease-in-out infinite;
+}
+
+.book-doctor-card--skeleton .book-doctor-card__meta {
+	width: 70%;
+	margin-top: 8px;
+}
+
+.book-doctor-card--skeleton .book-doctor-card__actions {
+	width: 100%;
+	margin-top: 16px;
+	height: 44px;
+}
+
+@keyframes skeleton {
+	0% { background-position: 200% 0; }
+	100% { background-position: -200% 0; }
+}
+
+.book-doctor-error,
+.book-doctor-empty {
+	text-align: center;
+	padding: 3rem 1rem;
+	color: #6c757d;
+}
+
+.book-doctor-swiper-wrap {
+	position: relative;
+}
+
+.book-doctor-swiper {
+	padding: 0 0 2.5rem 0;
+}
+
+.book-doctor-swiper .swiper-button-prev,
+.book-doctor-swiper .swiper-button-next {
+	color: #1977cc;
+}
+
+.book-doctor-swiper .swiper-button-prev::after,
+.book-doctor-swiper .swiper-button-next::after {
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+@media (max-width: 991.98px) {
+	.section-doctor {
+		padding: 3.5rem 0;
+	}
+	.section-doctor-intro {
+		text-align: center;
+		padding-right: 0;
+	}
+	.section-doctor-cta {
+		margin-bottom: 1rem;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.book-doctor-card__photo {
+		height: 180px;
+	}
+	.book-doctor-card__body {
+		padding: 1rem;
+	}
+}

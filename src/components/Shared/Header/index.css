@@ -1,0 +1,330 @@
+.nav-popover h5{
+    font-size: 18px;
+    margin-bottom: 0;
+}
+.nav-popover a{
+    margin: 0 0;
+}
+
+.profileImage img{
+    height: 30px;
+    border-radius: 50%;
+    width: 30px;
+    object-fit: cover;
+    object-position: top;
+    margin-left: 11px;
+    border: 2px #1977cc solid;
+    cursor: pointer;
+}
+.hideTopHeader{
+    display: none !important;
+    transition: 1s!important;
+}
+.stickyHeader{
+    top: 0 !important;
+    transition: 1ms!important;
+}
+#header {
+    background: #fff;
+    transition: all 0.5s;
+    z-index: 997;
+    top: 40px;
+    box-shadow: 0px 2px 15px rgba(25, 119, 204, 0.1);
+}
+
+#header.header-scrolled {
+    top: 0;
+}
+
+#header .logo {
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: "Poppins", sans-serif;
+}
+
+#header .logo a {
+    color: #2c4964;
+}
+
+#header .logo img {
+    max-height: 40px;
+}
+
+
+.navbar {
+    padding: 0;
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.navbar>ul>li {
+    position: relative;
+    white-space: nowrap;
+    padding: 8px 0 8px 20px;
+}
+
+.navbar a,
+.navbar a:focus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #2c4964;
+    white-space: nowrap;
+    transition: 0.3s;
+    border-bottom: 2px solid #fff;
+    padding: 5px 2px;
+}
+
+.navbar a i,
+.navbar a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+}
+
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover>a {
+    color: #1977cc;
+    border-color: #1977cc;
+}
+
+.navbar .dropdown ul {
+    display: block;
+    position: absolute;
+    left: 20px;
+    top: calc(100% + 30px);
+    margin: 0;
+    padding: 10px 0;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    background: #fff;
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+    transition: 0.3s;
+}
+
+.navbar .dropdown ul li {
+    min-width: 200px;
+}
+
+.navbar .dropdown ul a {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: none;
+    color: #082744;
+    border: none;
+}
+
+.navbar .dropdown ul a i {
+    font-size: 12px;
+}
+
+.navbar .dropdown ul a:hover,
+.navbar .dropdown ul .active:hover,
+.navbar .dropdown ul li:hover>a {
+    color: #1977cc;
+}
+
+.navbar .dropdown:hover>ul {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+}
+
+.navbar .dropdown .dropdown ul {
+    top: 0;
+    left: calc(100% - 30px);
+    visibility: hidden;
+}
+
+.navbar .dropdown .dropdown:hover>ul {
+    opacity: 1;
+    top: 0;
+    left: 100%;
+    visibility: visible;
+}
+
+@media (max-width: 1366px) {
+    .navbar .dropdown .dropdown ul {
+        left: -90%;
+    }
+
+    .navbar .dropdown .dropdown:hover>ul {
+        left: -100%;
+    }
+}
+
+.mobile-nav-toggle {
+    color: #2c4964;
+    font-size: 28px;
+    cursor: pointer;
+    display: none;
+    line-height: 0;
+    transition: 0.5s;
+    margin-left: 5px;
+}
+
+@media (max-width: 991px) {
+    .mobile-nav-toggle {
+        display: block;
+    }
+
+    #navbar ul {
+        display: none;
+    }
+}
+
+.appointment-btn {
+    margin-left: 25px;
+    background: #1977cc;
+    color: #fff;
+    border-radius: 50px;
+    padding: 8px 25px;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.appointment-btn:hover {
+    background: #166ab5;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .appointment-btn {
+        margin: 0 15px 0 0;
+        padding: 6px 18px;
+    }
+}
+
+.mobile-menu-nav {
+    list-style: none;
+    font-size: 1.2rem;
+    color: #1977cc !important;
+}
+.mobile-menu-nav .icon{
+    font-size: 1.3rem;
+    margin-right: 15px;
+
+}
+.mobile-menu-nav li{
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.mobile-menu-nav li a{
+    padding: 5px;
+}
+.ant-drawer-body{
+    background-color: #d2d2ff;
+}
+
+/* User menu popover (hover) — role + profile */
+.header-user-popover .ant-popover-inner {
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(25, 119, 204, 0.15);
+    overflow: hidden;
+}
+
+.header-user-popover .ant-popover-title {
+    margin: 0;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(25, 119, 204, 0.12);
+    background: linear-gradient(135deg, #f8fbff 0%, #eef6fc 100%);
+}
+
+.header-user-popover .ant-popover-inner-content {
+    padding: 12px 14px 14px;
+}
+
+.nav-popover-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-popover-role {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    line-height: 1.2;
+}
+
+.nav-popover-role--patient {
+    color: #0d6efd;
+    background: rgba(13, 110, 253, 0.1);
+    border: 1px solid rgba(13, 110, 253, 0.2);
+}
+
+.nav-popover-role--doctor {
+    color: #0a7a6a;
+    background: rgba(10, 122, 106, 0.1);
+    border: 1px solid rgba(10, 122, 106, 0.22);
+}
+
+.nav-popover-role--admin {
+    color: #5b21b6;
+    background: rgba(91, 33, 182, 0.1);
+    border: 1px solid rgba(91, 33, 182, 0.22);
+}
+
+.nav-popover-role--demo {
+    color: #92400e;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-size: 10px;
+}
+
+.nav-popover-body .nav-popover-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: #2c4964;
+    word-break: break-word;
+}
+
+.nav-popover-email {
+    word-break: break-all;
+}
+
+.nav-popover-dashboard-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1977cc;
+}
+
+.nav-popover-dashboard-link:hover {
+    color: #125a9a;
+    text-decoration: underline;
+}
+
+.profileImage:focus-visible {
+    outline: 2px solid #1977cc;
+    outline-offset: 2px;
+    border-radius: 50%;
+}

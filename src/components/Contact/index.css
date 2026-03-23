@@ -1,0 +1,25 @@
+.info .icon {
+    margin-top: 2px;
+    font-size: 22px;
+    color: #1977cc;
+    padding: 5px;
+    background: #d6e9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+}
+.contact .info h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #2c4964;
+}
+.contact .info p {
+    font-size: 14px;
+    color: #4b7dab;
+}
+.contact .appointment-btn {
+    border: 0 !important;
+}
