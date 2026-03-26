@@ -19,9 +19,9 @@
     "dotenv": "^16.4.5",
     "jwt-decode": "^4.0.0",
     "moment": "^2.30.1",
-    "react": "^19.0.0",
+    "react": "18.2.0",
     "react-bootstrap": "^2.10.2",
-    "react-dom": "^19.0.0",
+    "react-dom": "18.2.0",
     "react-easy-crop": "^5.5.6",
     "react-hook-form": "^7.54.2",
     "react-hot-toast": "^2.4.1",
@@ -37,10 +37,6 @@
     "swiper": "^11.1.14",
     "uuidv4": "^6.2.13",
     "web-vitals": "^1.1.0"
-  },
-  "overrides": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
