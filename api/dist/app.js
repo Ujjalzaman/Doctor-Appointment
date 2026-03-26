@@ -24,15 +24,31 @@ app.get('/', (req, res) => {
 });
 app.use('/api/v1', routes_1.default);
 app.use((err, req, res, next) => {
+    if (res.headersSent) {
+        return next(err);
+    }
+    console.error('[api error]', req.method, req.originalUrl, err);
     if (err instanceof apiError_1.default) {
-        res.status(err.statusCode).json({ success: false, message: err.message });
+        return res
+            .status(err.statusCode)
+            .json({ success: false, message: err.message });
     }
-    else {
-        res.status(http_status_1.default.NOT_FOUND).json({
-            success: false,
-            message: 'Something Went Wrong',
-        });
+    const e = err;
+    const statusCode = typeof e.statusCode === 'number' && e.statusCode >= 400 && e.statusCode < 600
+        ? e.statusCode
+        : http_status_1.default.INTERNAL_SERVER_ERROR;
+    const body = {
+        success: false,
+        message: config_1.default.showErrorDetails
+            ? e.message || String(err)
+            : 'Something Went Wrong',
+    };
+    if (config_1.default.showErrorDetails && e.stack) {
+        body.stack = e.stack;
     }
-    next();
+    if (config_1.default.showErrorDetails && e.name) {
+        body.error = e.name;
+    }
+    return res.status(statusCode).json(body);
 });
 exports.default = app;
